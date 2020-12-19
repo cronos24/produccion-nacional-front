@@ -2,8 +2,14 @@
     height: 70%;
 }
 
-.row {
+a {
+    text-decoration: none;
+}
+
+mat-toolbar-row.sub-header {
     background-color: white;
+    height: 110px;
+    padding: 20px;
 }
 
 .spacer {

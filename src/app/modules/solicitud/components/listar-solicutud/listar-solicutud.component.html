@@ -1,0 +1,22 @@
+<p-table [value]="solicitudes" styleClass="table">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let column of columns">
+                <span class="body --primary-color">{{column.header}}</span>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-solicitud>
+        <tr>
+            <td *ngFor="let column of columns">
+                {{solicitud[column.field]}}
+            </td>
+            <td>                
+                <mat-icon svgIcon="adjunto"></mat-icon>
+            </td>
+            <td *ngIf="solicitud['anexo']">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

@@ -1,0 +1,17 @@
+$font-monserrat: "Montserrat";
+$font-worksans: "Work Sans";
+
+$dark-primary-color: #004884;
+$primary-color: #3366cc;
+$light-primary-color: #e6effd;
+$primary-color-text: #4b4b4b;
+$secondary-color-text: #bababa;
+$secondary-color-text: #bababa;
+$tertiary-color-text: #ffffff;
+
+$text-colors: (
+    dark-primary: dark-primary-color,
+    primary-color: $primary-color,
+    primary-color-text: $primary-color-text,
+    tertiary: $tertiary-color-text,
+);

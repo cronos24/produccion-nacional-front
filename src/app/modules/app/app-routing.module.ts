@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './components/app/app.component';
-
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: AppComponent },
+  { path: '', redirectTo: 'solicitud', pathMatch: 'full' },
+  { path: 'solicitud', loadChildren: () => import('../solicitud/solicitud.module').then((module) => module.SolicitudModule) },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
@@ -13,4 +11,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
