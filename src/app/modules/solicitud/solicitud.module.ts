@@ -6,16 +6,33 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ListarSolicutudComponent } from './components/listar-solicutud/listar-solicutud.component';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
+import { FormularioSolicitudComponent } from './components/formulario-solicitud/formulario-solicitud.component';
+
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { CheckboxModule } from 'primeng/checkbox';
+
+import { AccordionModule } from 'primeng/accordion';
+
+
 
 @NgModule({
   declarations: [
-    ListarSolicutudComponent
+    ListarSolicutudComponent,
+    FormularioSolicitudComponent,
+    FormularioSolicitudComponent
   ],
   imports: [
     CommonModule,
     SolicitudRoutingModule,
     TableModule,
-    SharedModule
+    SharedModule,
+    CardModule,
+    InputTextModule,
+    FormsModule,
+    CheckboxModule,
+    AccordionModule
   ]
 })
 export class SolicitudModule { }

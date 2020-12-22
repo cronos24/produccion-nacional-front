@@ -1,0 +1,240 @@
+<p-card>
+
+  <div class="p-grid">
+
+    <div class="p-col-6">
+
+      Indique si esta solicitud es una renovación de un registro vigente:
+
+      <p-checkbox name="si" value="true" inputId="check-si"></p-checkbox>
+      <label for="si">Si</label>
+
+    </div>
+
+    <div class="p-col-6">
+
+      <div class="p-field">
+        <label for="numberRegistro">Número de Registro a Renovar:</label>
+        <input type="text" pInputText placeholder="Digite el número de registro a renovar (201905010000001)">
+      </div>
+
+    </div>
+
+    <div class="p-col-10">
+      <div>Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y así generar un número
+        interno
+        consecutivo de control.</div>
+    </div>
+    <div class="p-col-2">
+      <button> CREAR BORRADOR </button>
+
+    </div>
+
+  </div>
+
+
+</p-card>
+
+<p-card>
+
+  <div>
+    Tipo de formulario
+  </div>
+
+  <div class="p-grid">
+
+    <div class="p-col-4">
+
+      <div class="p-field-checkbox">
+        <p-checkbox name="check-one" value="true"></p-checkbox>
+        <label for="check-one">Registro de Producción Nacional</label>
+      </div>
+
+    </div>
+
+    <div class="p-col-4">
+
+      <div class="p-field-checkbox">
+        <p-checkbox name="check-two" value="true"></p-checkbox>
+        <label for="check-two">Programa de Fomento a la Industria Automotriz</label>
+      </div>
+
+    </div>
+
+    <div class="p-col-4">
+
+      <div>
+        <p-checkbox name="check-three" value="true"></p-checkbox>
+        <label for="check-three">Programa de Régimen de Transformación o Ensamble planillas A y B</label>
+      </div>
+
+    </div>
+
+  </div>
+</p-card>
+
+
+<p-card>
+
+  <div>
+    Estado del registro actual para el nuevo producto
+  </div>
+
+  <div class="p-grid">
+
+    <div class="p-col-4">
+
+      <div class="p-field">
+        <label for="numberRadicado">Número de Radicado</label>
+        <input type="text" pInputText placeholder="Número de Radicado">
+      </div>
+
+    </div>
+
+    <div class="p-col-4">
+
+      <div class="p-field">
+        <label for="actualizacion">Última actualización</label>
+        <input type="text" pInputText placeholder="Última actualización">
+      </div>
+
+    </div>
+
+    <div class="p-col-4">
+
+      <div class="p-field">
+        <label for="actualizacion">Estado</label>
+        <input type="text" pInputText placeholder="Estado">
+      </div>
+
+    </div>
+
+  </div>
+</p-card>
+
+<p-accordion>
+
+  <p-accordionTab header="1. IDENTIFICACIÓN DE LA EMPRESA">
+
+    <div class="p-grid">
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label for="numberRegistro">1.1 Número de Identificación Tributaria N.I.T:</label>
+          <input type="text" pInputText>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label for="numberRegistro">1.2 Razón social:</label>
+          <input type="text" pInputText>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label for="numberRegistro">1.3 Nombre Contacto de la Empresa:</label>
+          <input type="text" pInputText>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label for="numberRegistro">1.4 Correo Electrónico:</label>
+          <input type="text" pInputText>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-col-3">
+          <div class="p-field">
+            <label for="numberRegistro">1.5 Teléfono Contacto:</label>
+            <input type="text" pInputText>
+          </div>
+        </div>
+        <div class="p-col-9">
+          <div class="p-field">
+            <label for="numberRegistro">1.5 Teléfono Contacto:</label>
+            <input type="text" pInputText>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    Plantas de producción
+    <hr>
+    <div class="p-grid">
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label for="numberRegistro">1.6 Deprtamento Planta de Producción</label>
+          <input type="text" pInputText>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label for="numberRegistro">1.7 Ciudad Planta de Produccion</label>
+          <input type="text" pInputText>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label for="numberRegistro">1.8 Dirección Planta de Producción</label>
+          <input type="text" pInputText>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <button>AGREGAR</button>
+      </div>
+
+    </div>
+
+  </p-accordionTab>
+
+  <p-accordionTab header="2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)">
+
+  </p-accordionTab>
+
+  <p-accordionTab header="3. CRITERIOS PARA EL REGISTRO">
+
+  </p-accordionTab>
+
+</p-accordion>
+
+<p-card>
+
+  <div class="p-grid">
+
+    <div class="p-col-12">
+      Únicamente archivos con extensión pdf de tamaño máximo de 5MB.
+    </div>
+
+    <div class="p-col-3">
+      <input type="file" id="myfile" name="myfile" multiple>
+    </div>
+
+    <div class="p-col-3">
+      <input type="text" pInputText placeholder="Descripción (Máximo 50 caracteres)">
+    </div>
+
+    <div class="p-col-6">
+      <button>SUBIR ANEXO</button>
+    </div>
+
+    <div class="p-col-12">
+      Antes de anexar algún archivo, porfavor guarde sus cambios para no perderlos
+    </div>
+
+    <div class="p-col-12">
+      <button>FIRMAR Y RADICAR SOLICITUD</button>
+      <button>GUARDAR BORRADOR</button>
+      <button>VER SOLICITUDES</button>
+    </div>
+
+  </div>
+</p-card>
