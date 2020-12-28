@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { SharedModule } from '../shared/shared.module';
 
 import { ListarSolicutudComponent } from './components/listar-solicutud/listar-solicutud.component';
+import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 
 @NgModule({
@@ -16,6 +17,9 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     SolicitudRoutingModule,
     TableModule,
     SharedModule
+  ],
+  providers: [
+    SolicitudService
   ]
 })
 export class SolicitudModule { }

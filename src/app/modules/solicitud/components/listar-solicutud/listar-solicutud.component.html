@@ -10,11 +10,11 @@
             </div>
         </div>
     </div>
-    <p-table [value]="solicitudes">
+    <p-table [value]="solicitudes" [paginator]="true" [rows]="paginacion.registrosPorPagina">
         <ng-template pTemplate="header">
             <tr>
                 <th *ngFor="let column of columns">
-                    <span class="body --dark-primary-color">{{column.header}}</span>
+                    <span class="body --dark-primary-color">{{column.value}}</span>
                 </th>
                 <th>
                     <span class="body --dark-primary-color">Archivo PDF</span>
@@ -39,7 +39,7 @@
         <ng-template pTemplate="body" let-solicitud>
             <tr>
                 <td *ngFor="let column of columns">
-                    {{solicitud[column.field]}}
+                    {{solicitud[column.key]}}
                 </td>
                 <td class="center">
                     <mat-icon svgIcon="pdf-positivo"></mat-icon>
