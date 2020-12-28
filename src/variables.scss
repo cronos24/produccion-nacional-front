@@ -6,12 +6,15 @@ $primary-color: #3366cc;
 $light-primary-color: #e6effd;
 $primary-color-text: #4b4b4b;
 $secondary-color-text: #bababa;
-$secondary-color-text: #bababa;
 $tertiary-color-text: #ffffff;
+$danger-color-text: #A80521;
+$no-color: #00000000;
 
 $text-colors: (
-    dark-primary: dark-primary-color,
+    dark-primary: $dark-primary-color,
     primary-color: $primary-color,
     primary-color-text: $primary-color-text,
     tertiary: $tertiary-color-text,
+    danger-color: $danger-color-text,
+    no-color: $no-color
 );

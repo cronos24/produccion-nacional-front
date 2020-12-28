@@ -4,29 +4,31 @@
 
     <div class="p-col-6">
 
-      Indique si esta solicitud es una renovación de un registro vigente:
-
-      <p-checkbox name="si" value="true" inputId="check-si"></p-checkbox>
-      <label for="si">Si</label>
-
+      <p class="field">
+        Indique si esta solicitud es una renovación de un registro vigente:
+        <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+        <label for="si" class="checker-text"><i></i> Si</label>
+      </p>
     </div>
 
     <div class="p-col-6">
 
       <div class="p-field">
-        <label for="numberRegistro">Número de Registro a Renovar:</label>
-        <input type="text" pInputText placeholder="Digite el número de registro a renovar (201905010000001)">
+        <label for="numberRegistro" class="field">Número de Registro a Renovar:</label>
+        <input type="text" class="caption" pInputText
+          placeholder="Digite el número de registro a renovar (201905010000001)">
       </div>
 
     </div>
 
     <div class="p-col-10">
-      <div>Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y así generar un número
+      <div class="form-warning">Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y
+        así generar un número
         interno
         consecutivo de control.</div>
     </div>
     <div class="p-col-2">
-      <button> CREAR BORRADOR </button>
+      <button class="button-content"> CREAR BORRADOR </button>
 
     </div>
 
@@ -38,35 +40,32 @@
 <p-card>
 
   <div>
-    Tipo de formulario
+    <h3 class="headline-m">Tipo de formulario</h3>
   </div>
 
   <div class="p-grid">
 
     <div class="p-col-4">
 
-      <div class="p-field-checkbox">
-        <p-checkbox name="check-one" value="true"></p-checkbox>
-        <label for="check-one">Registro de Producción Nacional</label>
-      </div>
+      <p-radioButton class="headline-xs" name="groupname" value="val1" label="Registro de Producción Nacional">
+      </p-radioButton>
+
+    </div>
+
+
+    <div class="p-col-4">
+
+      <p-radioButton class="headline-xs" name="groupname" value="val2"
+        label="Programa de Fomento a la Industria Automotriz">
+      </p-radioButton>
 
     </div>
 
     <div class="p-col-4">
 
-      <div class="p-field-checkbox">
-        <p-checkbox name="check-two" value="true"></p-checkbox>
-        <label for="check-two">Programa de Fomento a la Industria Automotriz</label>
-      </div>
-
-    </div>
-
-    <div class="p-col-4">
-
-      <div>
-        <p-checkbox name="check-three" value="true"></p-checkbox>
-        <label for="check-three">Programa de Régimen de Transformación o Ensamble planillas A y B</label>
-      </div>
+      <p-radioButton name="groupname" value="val3" class="headline-xs"
+        label="Programa de Régimen de Transformación o Ensamble planillas A y B">
+      </p-radioButton>
 
     </div>
 
@@ -77,7 +76,8 @@
 <p-card>
 
   <div>
-    Estado del registro actual para el nuevo producto
+    <h3 class="headline-m">Estado del registro actual para el nuevo producto</h3>
+
   </div>
 
   <div class="p-grid">
@@ -85,8 +85,8 @@
     <div class="p-col-4">
 
       <div class="p-field">
-        <label for="numberRadicado">Número de Radicado</label>
-        <input type="text" pInputText placeholder="Número de Radicado">
+        <label class="field" for="numberRadicado">Número de Radicado</label>
+        <input type="text" class="caption" pInputText placeholder="Número de Radicado">
       </div>
 
     </div>
@@ -94,8 +94,8 @@
     <div class="p-col-4">
 
       <div class="p-field">
-        <label for="actualizacion">Última actualización</label>
-        <input type="text" pInputText placeholder="Última actualización">
+        <label class="field" for="actualizacion">Última actualización</label>
+        <input type="text" class="caption" pInputText placeholder="Última actualización">
       </div>
 
     </div>
@@ -103,8 +103,8 @@
     <div class="p-col-4">
 
       <div class="p-field">
-        <label for="actualizacion">Estado</label>
-        <input type="text" pInputText placeholder="Estado">
+        <label class="field" for="actualizacion">Estado</label>
+        <input type="text" class="caption" pInputText placeholder="Estado">
       </div>
 
     </div>
@@ -112,7 +112,7 @@
   </div>
 </p-card>
 
-<p-accordion>
+<p-accordion class="accordion">
 
   <p-accordionTab header="1. IDENTIFICACIÓN DE LA EMPRESA">
 
@@ -120,87 +120,366 @@
 
       <div class="p-col-6">
         <div class="p-field">
-          <label for="numberRegistro">1.1 Número de Identificación Tributaria N.I.T:</label>
-          <input type="text" pInputText>
+          <label class="field">1.1 Número de Identificación Tributaria N.I.T:</label>
+          <input type="text" class="caption" pInputText>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
       <div class="p-col-6">
         <div class="p-field">
-          <label for="numberRegistro">1.2 Razón social:</label>
-          <input type="text" pInputText>
+          <label class="field">1.2 Razón social:</label>
+          <input type="text" class="caption" pInputText>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
       <div class="p-col-6">
         <div class="p-field">
-          <label for="numberRegistro">1.3 Nombre Contacto de la Empresa:</label>
-          <input type="text" pInputText>
+          <label class="field">1.3 Nombre Contacto de la Empresa:</label>
+          <input type="text" class="caption" pInputText>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
       <div class="p-col-6">
         <div class="p-field">
-          <label for="numberRegistro">1.4 Correo Electrónico:</label>
-          <input type="text" pInputText>
+          <label class="field">1.4 Correo Electrónico:</label>
+          <input type="text" class="caption" pInputText>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
       <div class="p-col-6">
-        <div class="p-col-3">
-          <div class="p-field">
-            <label for="numberRegistro">1.5 Teléfono Contacto:</label>
-            <input type="text" pInputText>
-          </div>
-        </div>
-        <div class="p-col-9">
-          <div class="p-field">
-            <label for="numberRegistro">1.5 Teléfono Contacto:</label>
-            <input type="text" pInputText>
-          </div>
+        <div class="p-field">
+          <label class="field">1.5 Teléfono de contacto:</label>
+          <input type="text" class="caption" pInputText>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
     </div>
 
-    Plantas de producción
+    <h5 class="headline-s">Plantas de producción</h5>
     <hr>
     <div class="p-grid">
 
       <div class="p-col-6">
         <div class="p-field">
-          <label for="numberRegistro">1.6 Deprtamento Planta de Producción</label>
-          <input type="text" pInputText>
+          <label class="field">1.6 Departamento Planta de Producción</label>
+        </div>
+        <div class="p-field">
+          <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment" optionLabel="name"></p-dropdown>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
       <div class="p-col-6">
         <div class="p-field">
-          <label for="numberRegistro">1.7 Ciudad Planta de Produccion</label>
-          <input type="text" pInputText>
+          <label class="field">1.7 Ciudad Planta de Produccion</label>
+
+          <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
       <div class="p-col-6">
         <div class="p-field">
-          <label for="numberRegistro">1.8 Dirección Planta de Producción</label>
-          <input type="text" pInputText>
+          <label class="field">1.8 Dirección Planta de Producción</label>
+          <input type="text" class="caption" pInputText>
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
         </div>
       </div>
 
       <div class="p-col-6">
-        <button>AGREGAR</button>
+        <button class="button-content" style="margin-top:30px">NUEVA</button>
+      </div>
+
+    </div>
+
+    <hr>
+
+
+
+  </p-accordionTab>
+
+  <p-accordionTab header="2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)">
+
+    <div class="p-grid">
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">2.1 Subpartida Arancelaria:</label>
+          <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment" optionLabel="name"
+            placeholder="Subpartida"></p-dropdown>
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
+      </div>
+
+      <div class="p-col-6" *ngIf="true">
+        <div class="p-field">
+          <label class="field">2.1.1 Código Numérico Único (CUN):</label>
+          <p-dropdown [options]="codigos" [(ngModel)]="selectedCodigo" optionLabel="name"></p-dropdown>
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">2.2 Nombre Comercial:</label>
+          <input type="text" class="caption" pInputText placeholder="Nombre Comercial">
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">2.3 Nombre Técnico:</label>
+          <input type="text" class="caption" pInputText placeholder="Nombre Técnico">
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">2.4 Unidad Comercial:</label>
+          <p-dropdown [options]="unidades" [(ngModel)]="selectedUnidad" optionLabel="name" placeholder="Unidad">
+          </p-dropdown>
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
+      </div>
+
+      <div class="p-col-6" *ngIf="true">
+        <div class="p-field">
+          <label class="field">2.5 Tecnología:</label>
+          <div>
+            <textarea pInputTextarea></textarea>
+            <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
+              tooltipPosition="top" class="textImg">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="p-col-12" *ngIf="true">
+        <div class="p-field">
+          <label class="field">2.6 Número de motoparte:</label>
+          <div>
+            <textarea pInputTextarea class="longDescription"
+              placeholder="Ingrese las referencias separadas por coma y solo use caracteres alfanuméricos."></textarea>
+            <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
+              tooltipPosition="top" class="textImg">
+          </div>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">2.7 Sector Económico:</label>
+          <p-dropdown [options]="sectores" [(ngModel)]="selectedSector" optionLabel="name"
+            placeholder="Sector Económico"></p-dropdown>
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">2.8 Tamaño de la Empresa:</label>
+          <p-dropdown [options]="empresas" [(ngModel)]="selectedEmpresa" optionLabel="name"
+            placeholder="Sector Económico"></p-dropdown>
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">2.9 Unidades Producidas por Año:</label>
+          <p-inputNumber placeholder="Unidades Producidas por Año"> </p-inputNumber>
+          <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+            pTooltip="Enter your username" tooltipPosition="top">
+        </div>
       </div>
 
     </div>
 
   </p-accordionTab>
 
-  <p-accordionTab header="2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)">
+  <p-accordionTab header="3. CRITERIOS PARA EL REGISTRO">
+
+    <div class="p-grid">
+
+      <div class="p-col-12">
+        <p class="headline-xs">Seleccionar el criterio bajo el cual se califica como productor de bienes nacionales, en
+          concordancia con los
+          criterios establecidos en los artìculos 2º al 6º del Decreto 2680 de 2009 del Ministerio de Comercio,
+          Industria y Turismo.
+        </p>
+      </div>
+
+      <div class="p-col-6">
+        <p class="field labeled">
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
+          <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+          <label for="si" class="checker-text"> 3.1. Bienes Totalmente Obtenidos. </label>
+        </p>
+      </div>
+
+      <div class="p-col-6">
+        <p class="field labeled">
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
+          <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+          <label for="si" class="checker-text"><i></i> 3.2. Bienes Elaborados Exclusivamente Con Materias Nacionales.
+          </label>
+        </p>
+      </div>
+
+      <div class="p-col-6">
+        <p class="field labeled">
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
+          <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+          <label for="si" class="checker-text"><i></i> 3.3. Porcentaje Mìno Valor Agredado Nacional. </label>
+        </p>
+      </div>
+
+      <div class="p-col-6">
+        <p class="field labeled">
+          <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username" tooltipPosition="top">
+          <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+          <label for="si" class="checker-text"><i></i> 3.4. Proceso Productivo Sustancial. </label>
+        </p>
+      </div>
+
+      <div class="p-col-6" *ngIf="true">
+        <button class="button-content">DECRETO 2680 DE 2009</button>
+      </div>
+
+      <div class="p-col-6" *ngIf="true">
+        <button class="button-content">Decreto 1122 de 2019</button>
+      </div>
+
+      <div class="p-col-6">
+        <p class="headline-xs">Bienes obtenidos por transformación sustancial</p>
+      </div>
+    </div>
+
+
+    <div>
+      <h3 class="headline-s">Origen de los insumos</h3>
+      <p class="headline-xs">Favor Seleccione el origen de los insumos como lo presenta en la planilla A-RTE.</p>
+
+
+      <div class="p-grid">
+
+        <div class="p-col-4">
+          <p class="field">
+            <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+            <label for="si" class="checker-text"><i></i> 100% Nacional </label>
+          </p>
+        </div>
+
+        <div class="p-col-4">
+          <p class="field">
+            <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+            <label for="si" class="checker-text"><i></i> importado por Motopartista </label>
+          </p>
+        </div>
+
+        <div class="p-col-4">
+          <p class="field">
+            <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+            <label for="si" class="checker-text"><i></i> Piezas o Insumos Importados y Suministrados por la Ensambladora
+              o Mixtos </label>
+          </p>
+        </div>
+
+
+      </div>
+
+    </div>
+
 
   </p-accordionTab>
 
-  <p-accordionTab header="3. CRITERIOS PARA EL REGISTRO">
+  <p-accordionTab header="4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL">
+
+    <p class="headline-xs">Coresponde a las materias primas, productos intermedios, partes y íezas de fabricación
+      extranjera, utilizados en
+      la elaboración del producto, ya sean importados directamente por el fabricante o adquiridos en el mercado nacional
+      importados directamente por el proveedor. </p>
+
+    <button (click)="showDialog()" class="button-content">AGREGAR INSUMOS</button>
+
+    <p-dialog [(visible)]="display">
+      <app-modal-insumos></app-modal-insumos>
+    </p-dialog>
+
+    <div class="p-grid">
+      <div class="p-col-3">
+        <button class="button-nonContent">IMPORTAR TODOS LOS REGISTROS</button>
+      </div>
+      <div class="p-col-3">
+        <button class="button-nonContent">ELIMINAR TODOS LOS REGISTROS</button>
+      </div>
+
+    </div>
+    <h4 class="headline-xs">Cargue masivo de materiales extranjeros</h4>
+
+    <hr>
+    <div class="p-grid">
+      <div class="p-col-4">
+        <a class="headline-xs"> FORMATO EN EXCEL</a>
+      </div>
+      <div class="p-col-4">
+        <input type="file" id="myfile" name="myfile" multiple>
+      </div>
+
+      <div class="p-col-4">
+        <button class="button-content">CARGA MASIVA</button>
+      </div>
+
+    </div>
+
+    <hr>
+    <label class="field"> Sumatoria de Costos de Materiales importados(COP)</label>
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">4.9 Valor Total CIF (COP): </label>
+          <p-inputNumber placeholder="----.--"> </p-inputNumber>
+        </div>
+      </div>
+
+      <div class="p-col-6">
+        <div class="p-field">
+          <label class="field">4.10 Valor Total Planta (COP): </label>
+          <p-inputNumber placeholder="----.--"> </p-inputNumber>
+        </div>
+      </div>
+
+      <div class="p-col-4">
+        <button class="button-content">GUARDAR</button>
+      </div>
+
+    </div>
+
+
+  </p-accordionTab>
+
+  <p-accordionTab header=" ">
+
+    <div class="p-grid">
+      <div class="p-col-6">
+
+
+      </div>
+    </div>
 
   </p-accordionTab>
 
@@ -211,7 +490,7 @@
   <div class="p-grid">
 
     <div class="p-col-12">
-      Únicamente archivos con extensión pdf de tamaño máximo de 5MB.
+      <p class="headline-xs-danger">Únicamente archivos con extensión pdf de tamaño máximo de 5MB.</p>
     </div>
 
     <div class="p-col-3">
@@ -219,21 +498,21 @@
     </div>
 
     <div class="p-col-3">
-      <input type="text" pInputText placeholder="Descripción (Máximo 50 caracteres)">
+      <textarea pInputTextarea placeholder="Descripción (Máximo 50 caracteres)"></textarea>
     </div>
 
     <div class="p-col-6">
-      <button>SUBIR ANEXO</button>
+      <button class="button-content">SUBIR ANEXO</button>
     </div>
 
     <div class="p-col-12">
-      Antes de anexar algún archivo, porfavor guarde sus cambios para no perderlos
+      <p class="headline-xs">Antes de anexar algún archivo, porfavor guarde sus cambios para no perderlos</p>
     </div>
 
     <div class="p-col-12">
-      <button>FIRMAR Y RADICAR SOLICITUD</button>
-      <button>GUARDAR BORRADOR</button>
-      <button>VER SOLICITUDES</button>
+      <button class="button-content">FIRMAR Y RADICAR SOLICITUD</button>
+      <button class="button-content">GUARDAR BORRADOR</button>
+      <button class="button-content">VER SOLICITUDES</button>
     </div>
 
   </div>
