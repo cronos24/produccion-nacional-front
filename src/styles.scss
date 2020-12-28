@@ -162,6 +162,36 @@ body {
   }
 }
 
+button {
+  font-family: $font-worksans;
+  font-weight: 500;
+  font-size: 15px;
+  color: $tertiary-color-text;
+
+  outline: none;
+  border: none;
+  border-radius: 25px;
+
+  user-select: none;
+
+  padding: 0px 16px;
+
+  line-height: 36px;
+}
+
+button:enabled {
+  cursor: pointer;
+  background-color: $primary-color;
+}
+
+button:disabled {
+  background-color: $secondary-color-text;
+}
+
+button:enabled:hover {
+  background-color: $dark-primary-color;
+}
+
 @media only screen and (min-width: 1280px) {
   .container {
     margin-left: 74px;
