@@ -7,6 +7,8 @@ $light-primary-color: #e6effd;
 $primary-color-text: #4b4b4b;
 $secondary-color-text: #bababa;
 $tertiary-color-text: #ffffff;
+$danger-color-text: #A80521;
+$no-color: #00000000;
 
 $primary-color-icon: #3772ff;
 $secondary-color-icon: #3772ff;
@@ -16,4 +18,6 @@ $text-colors: (
     primary-color: $primary-color,
     primary-color-text: $primary-color-text,
     tertiary: $tertiary-color-text,
+    danger-color: $danger-color-text,
+    no-color: $no-color
 );

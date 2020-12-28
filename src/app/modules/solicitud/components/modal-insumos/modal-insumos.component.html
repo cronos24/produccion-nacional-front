@@ -1,0 +1,97 @@
+<div>
+
+  <p class="headline-xs">AGREGAR MATERIAL EXTRANJERO IMPORTADO DIRECTAMENTE O ADQUIRIDO EN EL MERCADO NACIONAL</p>
+
+  <div class="p-grid">
+
+    <div class="p-col-10">
+      <div class="p-field">
+        <label class="field">4.1 Nombre Técnico:</label>
+        <input type="text" pInputText />
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field">4.2 Subpartida:</label>
+        <p-dropdown [options]="subpartidas" [(ngModel)]="selectedSubpartida" optionLabel="name"></p-dropdown>
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field"># Descripción de subpartida</label>
+      </div>
+    </div>
+
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field">4.3 Pais Origen:</label>
+        <p-dropdown [options]="subpartidas" [(ngModel)]="selectedSubpartida" optionLabel="name"></p-dropdown>
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field">4.4 País Procedencia:</label>
+        <p-dropdown [options]="subpartidas" [(ngModel)]="selectedSubpartida" optionLabel="name"></p-dropdown>
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field">4.5 Unidad de Medida:</label>
+        <p-dropdown [options]="subpartidas" [(ngModel)]="selectedSubpartida" optionLabel="name"></p-dropdown>
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field">4.6 Cantidad:</label>
+        <p-inputNumber> </p-inputNumber>
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field">4.7 Valor CIF (Col $):</label>
+        <p-inputNumber> </p-inputNumber>
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-5">
+      <div class="p-field">
+        <label class="field">4.8 Valor Planta (Col $):</label>
+        <p-inputNumber> </p-inputNumber>
+        <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+          pTooltip="Enter your username" tooltipPosition="top">
+      </div>
+    </div>
+
+    <div class="p-col-6">
+      <button class="button-nonContent">CANCELAR</button>
+      <button class="button-content">GUARDAR</button>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
