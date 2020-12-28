@@ -13,13 +13,7 @@ export class ListarSolicutudComponent {
     { field: 'color', header: 'Responsable' },
     { field: 'color', header: 'Programa' },
     { field: 'color', header: 'Fecha de actuacion' },
-    { field: 'color', header: 'Estado' },
-    { field: 'color', header: 'Archivo PDF' },
-    { field: 'color', header: 'Carta de respuesta' },
-    { field: 'color', header: 'Eliminar borrador' },
-    { field: 'color', header: 'Generar copia de borrador' },
-    { field: 'color', header: 'Cancelar registro' },
-    { field: 'anexos', header: 'Ver anexos' }
+    { field: 'color', header: 'Estado' }
   ];
 
   public solicitudes: any[] = [

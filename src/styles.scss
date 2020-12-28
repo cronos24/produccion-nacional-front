@@ -158,6 +158,17 @@ body {
 
 @each $colorName, $color in $text-colors {
   .--#{$colorName} {
-     color: $color;
+    color: $color;
   }
+}
+
+@media only screen and (min-width: 1280px) {
+  .container {
+    margin-left: 74px;
+    margin-right: 74px;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
 }

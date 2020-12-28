@@ -13,8 +13,21 @@ export class AppComponent {
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry) {
     this.matIconRegistry.addSvgIcon(
-      'adjunto',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/adjunto.png'));
+      'carta-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/carta-positivo.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'papelera-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/papelera-positivo.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'menos-circular-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/menos-circular-positivo.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'adjunto-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/adjunto-positivo.svg')
+    );
   }
 
 }
