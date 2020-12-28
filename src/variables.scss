@@ -9,7 +9,7 @@ $secondary-color-text: #bababa;
 $tertiary-color-text: #ffffff;
 
 $text-colors: (
-    dark-primary-color: dark-primary-color,
+    dark-primary-color: $dark-primary-color,
     primary-color: $primary-color,
     primary-color-text: $primary-color-text,
     tertiary: $tertiary-color-text,

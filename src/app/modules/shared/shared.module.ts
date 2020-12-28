@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-
 
 @NgModule({
   declarations: [],
   imports: [
-    MatIconModule,
-    MatButtonModule
+    MatIconModule
   ],
   exports: [
-    MatIconModule,
-    MatButtonModule
+    MatIconModule
   ],
   providers: [
   ]
