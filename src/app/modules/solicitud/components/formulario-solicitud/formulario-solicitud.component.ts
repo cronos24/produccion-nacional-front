@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario-solicitud',
@@ -37,10 +38,16 @@ export class FormularioSolicitudComponent implements OnInit {
 
   display: boolean = false;
 
+  myForm: FormGroup;
 
-  constructor() { }
+
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
+
+    this.buildForm();
 
     this.departments = [
       { name: 'Cundinamarca', code: 'NY' },
@@ -87,6 +94,23 @@ export class FormularioSolicitudComponent implements OnInit {
 
 
   }
+
+  buildForm() {
+    this.myForm = this.fb.group({
+      tipo_formulario: [undefined, []],
+      nit: [undefined, []],
+      razon_social: [undefined, []],
+      nombre_empresa: [undefined, []],
+      correo_electronico: [undefined, []],
+      indicativo_telefono: [undefined, []],
+      telefono_contacto: [undefined, []],
+      departamento_produccion: [undefined, []],
+      ciudad_produccion: [undefined, []],
+      direccion_produccion: [undefined, []],
+      plantas: [, []],
+    });
+  }
+
 
   showDialog() {
     this.display = true;

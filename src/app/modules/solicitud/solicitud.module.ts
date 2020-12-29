@@ -11,7 +11,7 @@ import { ModalInsumosComponent } from './components/modal-insumos/modal-insumos.
 
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AccordionModule } from 'primeng/accordion';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -41,7 +41,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     TooltipModule,
     DropdownModule,
     DialogModule,
-    InputNumberModule
+    InputNumberModule,
+    ReactiveFormsModule
   ]
 })
 export class SolicitudModule { }
