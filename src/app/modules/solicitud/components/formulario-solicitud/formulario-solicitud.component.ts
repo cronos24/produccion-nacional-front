@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SolicitudService } from '../../services/solicitud.service';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-formulario-solicitud',
@@ -48,12 +49,22 @@ export class FormularioSolicitudComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private solicitudService: SolicitudService
+    private solicitudService: SolicitudService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
 
     this.buildForm();
+
+    this.route.params.subscribe( params => {
+      if(Object.keys(params).length == 0){
+
+      }else {
+        this.getSolicitud(params.id);
+      }
+    });
+
 
     this.myForm.valueChanges.subscribe(console.log)
 
@@ -132,7 +143,7 @@ export class FormularioSolicitudComponent implements OnInit {
       unidad_anho: [undefined, []],
     });
 
-    this.getSolicitud();
+
 
   }
 
@@ -149,8 +160,8 @@ export class FormularioSolicitudComponent implements OnInit {
     //this.solicitudes = [];
   }
 
-  getSolicitud(){
-    this.solicitudService.getSolicitud(4).subscribe(resp=>{
+  getSolicitud(id: number){
+    this.solicitudService.getSolicitud(id).subscribe(resp=>{
       debugger;
       this.myForm.patchValue({
         nombre_empresa: resp.respuesta.empresaContactoNombre,

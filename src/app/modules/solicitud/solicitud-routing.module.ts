@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'listar', pathMatch: 'full' },
   { path: 'listar', component: ListarSolicutudComponent },
   { path: 'formulario', component: FormularioSolicitudComponent },
+  { path: 'formulario/:id', component: FormularioSolicitudComponent },
   { path: 'crear', component: ListarSolicutudComponent }
 ];
 
