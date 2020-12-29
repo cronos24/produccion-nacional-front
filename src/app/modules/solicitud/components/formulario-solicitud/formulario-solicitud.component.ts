@@ -111,6 +111,12 @@ export class FormularioSolicitudComponent implements OnInit {
       { name: 'codigo 4', code: 'IST' }
     ];
 
+    this.subpartidas = [
+      { name: 'subpartida 1', code: 'NY' },
+      { name: 'subpartida 2', code: 'RM' },
+      { name: 'subpartida 3', code: 'LDN' },
+      { name: 'subpartida 4', code: 'IST' }
+    ];
 
   }
 

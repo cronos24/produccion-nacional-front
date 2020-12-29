@@ -270,7 +270,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.1 Subpartida Arancelaria:</label>
-            <p-dropdown [options]="departments" optionLabel="name" placeholder="Subpartida"
+            <p-dropdown [options]="subpartidas" optionLabel="name" placeholder="Subpartida"
               formControlName="subpartida"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -491,10 +491,10 @@
       </p-dialog>
 
       <div class="p-grid">
-        <div class="p-col-3">
+        <div class="p-col-4">
           <button class="button-nonContent">IMPORTAR TODOS LOS REGISTROS</button>
         </div>
-        <div class="p-col-3">
+        <div class="p-col-4">
           <button class="button-nonContent">ELIMINAR TODOS LOS REGISTROS</button>
         </div>
 
