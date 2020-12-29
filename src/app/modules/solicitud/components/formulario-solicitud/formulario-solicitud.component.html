@@ -201,7 +201,7 @@
         </div>
 
         <div class="p-col-6">
-          <button class="button-content" style="margin-top:30px">AGREGAR</button>
+          <button class="button-content" style="margin-top:30px">NUEVA</button>
         </div>
 
       </div>
@@ -266,7 +266,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.1 Subpartida Arancelaria:</label>
-            <p-dropdown [options]="departments"  optionLabel="name"
+            <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment" optionLabel="name"
               placeholder="Subpartida"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -276,7 +276,7 @@
         <div class="p-col-6" *ngIf="true">
           <div class="p-field">
             <label class="field">2.1.1 Código Numérico Único (CUN):</label>
-            <p-dropdown [options]="codigos"  optionLabel="name"></p-dropdown>
+            <p-dropdown [options]="codigos" [(ngModel)]="selectedCodigo" optionLabel="name"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -303,7 +303,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.4 Unidad Comercial:</label>
-            <p-dropdown [options]="unidades" optionLabel="name" placeholder="Unidad">
+            <p-dropdown [options]="unidades" [(ngModel)]="selectedUnidad" optionLabel="name" placeholder="Unidad">
             </p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -337,7 +337,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.7 Sector Económico:</label>
-            <p-dropdown [options]="sectores"  optionLabel="name"
+            <p-dropdown [options]="sectores" [(ngModel)]="selectedSector" optionLabel="name"
               placeholder="Sector Económico"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -347,7 +347,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.8 Tamaño de la Empresa:</label>
-            <p-dropdown [options]="empresas" optionLabel="name"
+            <p-dropdown [options]="empresas" [(ngModel)]="selectedEmpresa" optionLabel="name"
               placeholder="Sector Económico"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">

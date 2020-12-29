@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { SharedModule } from '../shared/shared.module';
 
 import { ListarSolicutudComponent } from './components/listar-solicutud/listar-solicutud.component';
+import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { FormularioSolicitudComponent } from './components/formulario-solicitud/formulario-solicitud.component';
 import { ModalInsumosComponent } from './components/modal-insumos/modal-insumos.component';
@@ -43,6 +44,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     DialogModule,
     InputNumberModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    SolicitudService
   ]
 })
 export class SolicitudModule { }

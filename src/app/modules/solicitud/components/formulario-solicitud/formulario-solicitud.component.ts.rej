@@ -1,0 +1,12 @@
+diff a/src/app/modules/solicitud/components/formulario-solicitud/formulario-solicitud.component.ts b/src/app/modules/solicitud/components/formulario-solicitud/formulario-solicitud.component.ts	(rejected hunks)
+@@ -40,6 +40,10 @@
+ 
+   myForm: FormGroup;
+ 
++  solicitudes: any[] = [];
++
++  busqueda: string;
++
+ 
+   constructor(
+     private fb: FormBuilder,

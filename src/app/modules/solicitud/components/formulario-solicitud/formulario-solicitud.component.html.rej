@@ -1,0 +1,10 @@
+diff a/src/app/modules/solicitud/components/formulario-solicitud/formulario-solicitud.component.html b/src/app/modules/solicitud/components/formulario-solicitud/formulario-solicitud.component.html	(rejected hunks)
+@@ -303,7 +303,7 @@
+         <div class="p-col-6">
+           <div class="p-field">
+             <label class="field">2.4 Unidad Comercial:</label>
+-            <p-dropdown [options]="unidades" [(ngModel)]="selectedUnidad" optionLabel="name" placeholder="Unidad">
++            <p-dropdown [options]="unidades" optionLabel="name" placeholder="Unidad">
+             </p-dropdown>
+             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+               pTooltip="Enter your username" tooltipPosition="top">

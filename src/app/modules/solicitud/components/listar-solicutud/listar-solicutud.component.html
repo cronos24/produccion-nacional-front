@@ -1,22 +1,65 @@
-<p-table [value]="solicitudes" styleClass="table">
-    <ng-template pTemplate="header">
-        <tr>
-            <th *ngFor="let column of columns">
-                <span class="body --primary-color">{{column.header}}</span>
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-solicitud>
-        <tr>
-            <td *ngFor="let column of columns">
-                {{solicitud[column.field]}}
-            </td>
-            <td>                
-                <mat-icon svgIcon="adjunto"></mat-icon>
-            </td>
-            <td *ngIf="solicitud['anexo']">
-                <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+<div class="table">
+    <div class="title">
+        <h3 class="headline-m">Borradores y/o solicitudes existentes</h3>
+        <div class="sub-title">
+            <button>CREAR NUEVO REGISTRO</button>
+            <span class="spacer"></span>
+            <div class="input-group">
+                <input placeholder="Buscar" />
+                <mat-icon svgIcon="buscar-circular-negativo"></mat-icon>
+            </div>
+        </div>
+    </div>
+    <p-table [value]="solicitudes" [paginator]="true" [rows]="paginacion.registrosPorPagina">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let column of columns">
+                    <span class="body --dark-primary-color">{{column.value}}</span>
+                </th>
+                <th>
+                    <span class="body --dark-primary-color">Archivo PDF</span>
+                </th>
+                <th>
+                    <span class="body --dark-primary-color">Carta de respuesta</span>
+                </th>
+                <th>
+                    <span class="body --dark-primary-color">Eliminar borrador</span>
+                </th>
+                <th>
+                    <span class="body --dark-primary-color">Generar copia de borrador</span>
+                </th>
+                <th>
+                    <span class="body --dark-primary-color">Cancelar registro</span>
+                </th>
+                <th>
+                    <span class="body --dark-primary-color">Ver anexos</span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-solicitud>
+            <tr>
+                <td *ngFor="let column of columns">
+                    {{solicitud[column.key]}}
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="pdf-positivo"></mat-icon>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="carta-positivo"></mat-icon>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="copiar-positivo"></mat-icon>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="menos-circular-positivo"></mat-icon>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="adjunto-positivo"></mat-icon>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

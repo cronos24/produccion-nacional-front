@@ -10,8 +10,11 @@ $tertiary-color-text: #ffffff;
 $danger-color-text: #A80521;
 $no-color: #00000000;
 
+$primary-color-icon: #3772ff;
+$secondary-color-icon: #3772ff;
+
 $text-colors: (
-    dark-primary: $dark-primary-color,
+    dark-primary-color: $dark-primary-color,
     primary-color: $primary-color,
     primary-color-text: $primary-color-text,
     tertiary: $tertiary-color-text,

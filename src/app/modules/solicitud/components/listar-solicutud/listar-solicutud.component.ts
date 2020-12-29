@@ -1,31 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IPaginacion } from 'src/app/interfaces/paginacion.interface';
+import { IRespuesta } from 'src/app/interfaces/respuesta.interface';
+
+import { ISolicitud } from '../../interfaces/solicitud.interface';
+import { SolicitudService } from '../../services/solicitud.service';
 
 @Component({
   selector: 'app-listar-solicutud',
   templateUrl: './listar-solicutud.component.html',
   styleUrls: ['./listar-solicutud.component.scss']
 })
-export class ListarSolicutudComponent {
-  public columns = [
-    { field: 'radicado', header: 'Radicado' },
-    { field: 'year', header: 'Fecha radicacion' },
-    { field: 'brand', header: 'Nombre comercial' },
-    { field: 'color', header: 'Responsable' },
-    { field: 'color', header: 'Programa' },
-    { field: 'color', header: 'Fecha de actuacion' },
-    { field: 'color', header: 'Estado' },
-    { field: 'color', header: 'Archivo PDF' },
-    { field: 'color', header: 'Carta de respuesta' },
-    { field: 'color', header: 'Eliminar borrador' },
-    { field: 'color', header: 'Generar copia de borrador' },
-    { field: 'color', header: 'Cancelar registro' },
-    { field: 'anexos', header: 'Ver anexos' }
-  ];
+export class ListarSolicutudComponent implements OnInit {
+  public columns: {
+    key: string;
+    value: string;
+  }[] = [
+      { key: 'radicado', value: 'Radicado' },
+      { key: 'year', value: 'Fecha radicacion' },
+      { key: 'brand', value: 'Nombre comercial' },
+      { key: 'color', value: 'Responsable' },
+      { key: 'color', value: 'Programa' },
+      { key: 'color', value: 'Fecha de actuacion' },
+      { key: 'color', value: 'Estado' }
+    ];
 
-  public solicitudes: any[] = [
-    {
-      radicado: 123456
-    }
-  ];
+  public solicitudes: ISolicitud[] = [];
+
+  public paginacion: IPaginacion = {
+    pagina: 1,
+    registrosPorPagina: 10
+  };
+
+  public constructor(private solicitudService: SolicitudService) { }
+
+  public ngOnInit(): void {
+    this.solicitudService.get({ paginacion: this.paginacion }).subscribe((respuesta: IRespuesta<ISolicitud>): void => {
+      this.solicitudes = respuesta.data;
+    });
+  }
 
 }
