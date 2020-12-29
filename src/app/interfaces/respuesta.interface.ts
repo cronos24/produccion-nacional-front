@@ -1,6 +1,10 @@
-import { IPaginacion } from './paginacion.interface';
+import { IPagina } from './pagina.interface';
 
 export interface IRespuesta<T> {
-    data: T[];
-    paginacion: IPaginacion;
+    codigo: number;
+    mensaje: string;
+    respuesta: {
+        solicitudes: T;
+        pagina: IPagina;
+    };
 }

@@ -5,7 +5,8 @@ import { ListarSolicutudComponent } from './components/listar-solicutud/listar-s
 
 const routes: Routes = [
   { path: '', redirectTo: 'listar', pathMatch: 'full' },
-  { path: 'listar', component: ListarSolicutudComponent }
+  { path: 'listar', component: ListarSolicutudComponent },
+  { path: 'crear', component: ListarSolicutudComponent }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 
 import { SharedModule } from '../shared/shared.module';
@@ -16,6 +17,7 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     CommonModule,
     SolicitudRoutingModule,
     TableModule,
+    PaginatorModule,
     SharedModule
   ],
   providers: [

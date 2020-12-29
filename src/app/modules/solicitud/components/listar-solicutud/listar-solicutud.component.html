@@ -2,19 +2,41 @@
     <div class="title">
         <h3 class="headline-m">Borradores y/o solicitudes existentes</h3>
         <div class="sub-title">
-            <button>CREAR NUEVO REGISTRO</button>
+            <button [routerLink]="'/solicitud/crear'">CREAR NUEVO REGISTRO</button>
             <span class="spacer"></span>
             <div class="input-group">
-                <input placeholder="Buscar" />
+                <input placeholder="Buscar" type="text" [(ngModel)]="busqueda" (ngModelChange)="onBuscar()" />
                 <mat-icon svgIcon="buscar-circular-negativo"></mat-icon>
             </div>
         </div>
     </div>
-    <p-table [value]="solicitudes" [paginator]="true" [rows]="paginacion.registrosPorPagina">
+    <p-table [value]="solicitudes" [customSort]="true" (sortFunction)="onSort($event)">
         <ng-template pTemplate="header">
             <tr>
-                <th *ngFor="let column of columns">
-                    <span class="body --dark-primary-color">{{column.value}}</span>
+                <th pSortableColumn="radicado">
+                    <span class="body --dark-primary-color">Radicado<p-sortIcon field="radicado"></p-sortIcon></span>
+                </th>
+                <th pSortableColumn="auditoria.fechaCreacion">
+                    <span class="body --dark-primary-color">Fecha radicacion<p-sortIcon field="auditoria.fechaCreacion">
+                        </p-sortIcon></span>
+                </th>
+                <th pSortableColumn="productoNombreComercial">
+                    <span class="body --dark-primary-color">Nombre comercial<p-sortIcon field="productoNombreComercial">
+                        </p-sortIcon></span>
+                </th>
+                <th pSortableColumn="responsable">
+                    <span class="body --dark-primary-color">Responsable<p-sortIcon field="responsable"></p-sortIcon>
+                    </span>
+                </th>
+                <th pSortableColumn="programaId">
+                    <span class="body --dark-primary-color">Programa<p-sortIcon field="programaId"></p-sortIcon></span>
+                </th>
+                <th pSortableColumn="fechaActucion">
+                    <span class="body --dark-primary-color">Fecha de actuacion<p-sortIcon field="fechaActucion">
+                        </p-sortIcon></span>
+                </th>
+                <th pSortableColumn="estado">
+                    <span class="body --dark-primary-color">Estado<p-sortIcon field="estado"></p-sortIcon></span>
                 </th>
                 <th>
                     <span class="body --dark-primary-color">Archivo PDF</span>
@@ -38,8 +60,26 @@
         </ng-template>
         <ng-template pTemplate="body" let-solicitud>
             <tr>
-                <td *ngFor="let column of columns">
-                    {{solicitud[column.key]}}
+                <td>
+                    {{solicitud['radicado']}}
+                </td>
+                <td>
+                    {{solicitud['auditoria']['fechaCreacion']}}
+                </td>
+                <td>
+                    {{solicitud['productoNombreComercial']}}
+                </td>
+                <td>
+                    {{solicitud['responsable']}}
+                </td>
+                <td>
+                    {{solicitud['programaId']}}
+                </td>
+                <td>
+                    {{solicitud['fechaActucion']}}
+                </td>
+                <td>
+                    {{solicitud['estado']}}
                 </td>
                 <td class="center">
                     <mat-icon svgIcon="pdf-positivo"></mat-icon>
@@ -62,4 +102,9 @@
             </tr>
         </ng-template>
     </p-table>
+    <div *ngIf="solicitudes.length==0">
+        <p class="content body-uno">No se encontraron registros coincidentes</p>
+    </div>
+    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5"
+        (onPageChange)="onPageChange($event)"></p-paginator>
 </div>
