@@ -7,7 +7,8 @@ import { ListarSolicutudComponent } from './components/listar-solicutud/listar-s
 const routes: Routes = [
   { path: '', redirectTo: 'listar', pathMatch: 'full' },
   { path: 'listar', component: ListarSolicutudComponent },
-  { path: 'formulario', component: FormularioSolicitudComponent }
+  { path: 'formulario', component: FormularioSolicitudComponent },
+  { path: 'crear', component: ListarSolicutudComponent }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ServicioGeneral } from 'src/app/classes/servicio-general';
 
+import { ServicioGeneral } from '../../../classes/servicio-general';
 import { ISolicitud } from '../interfaces/solicitud.interface';
 
 @Injectable()

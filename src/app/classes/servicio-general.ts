@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { IPaginacion } from '../interfaces/paginacion.interface';
+import { IPagina } from '../interfaces/pagina.interface';
 import { IRespuesta } from '../interfaces/respuesta.interface';
 
 export abstract class ServicioGeneral<T> {
@@ -27,16 +27,20 @@ export abstract class ServicioGeneral<T> {
     }
 
     public get(options?: {
-        queryParams?: Map<string, string>,
-        paginacion?: IPaginacion
+        queryParams?: { [key: string]: string },
+        pagina?: IPagina,
+        sort?: { [key: string]: string }
     }): Observable<IRespuesta<T[]>> {
         let httpParams: HttpParams = new HttpParams();
 
         if (options.queryParams) {
             httpParams = this.addQueryParams(httpParams, options.queryParams);
         }
-        if (options.paginacion) {
-            httpParams = this.addQueryParams(httpParams, options.paginacion);
+        if (options.pagina) {
+            httpParams = this.addQueryParams(httpParams, options.pagina);
+        }
+        if (options.sort) {
+            httpParams = this.addQueryParams(httpParams, options.sort);
         }
 
         return this.httpClient.get<IRespuesta<T[]>>(this.url, { params: httpParams });
@@ -44,7 +48,9 @@ export abstract class ServicioGeneral<T> {
 
     private addQueryParams(httpParams: HttpParams, object: object): HttpParams {
         Object.keys(object).forEach((key: string): void => {
-            httpParams = httpParams.append(key, object[key]);
+            if (object[key]) {
+                httpParams = httpParams.append(key, object[key]);
+            }
         });
 
         return httpParams;

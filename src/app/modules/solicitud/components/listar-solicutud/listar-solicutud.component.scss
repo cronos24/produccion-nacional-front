@@ -14,7 +14,12 @@
     }
     tr {
         > th {
+            align-items: center;
             background-color: $light-primary-color;
+            > span {
+                display: flex;
+                align-items: center;
+            }
         }
         > td.center {
             text-align: center;
@@ -33,5 +38,51 @@
         margin-bottom: 4px;
         width: 32px;
         height: 32px;
+    }
+}
+
+.content {
+    padding: 16px;
+}
+
+::ng-deep {
+    .p-paginator {
+        .p-paginator-pages {
+            .p-paginator-page {
+                color: $dark-primary-color;
+                border-radius: 5px;
+            }
+            .p-paginator-page:not(.p-highlight):hover {
+                color: $dark-primary-color;
+                background-color: $light-primary-color;
+            }
+            .p-paginator-page.p-highlight {
+                color: $tertiary-color-text;
+                background-color: $primary-color;
+            }
+        }
+    }
+
+    .p-paginator .p-paginator-first,
+    .p-paginator .p-paginator-prev,
+    .p-paginator .p-paginator-next,
+    .p-paginator .p-paginator-last {
+        border-radius: 5px;
+    }
+}
+
+@media only screen and (min-width: 1224px) {
+    tr {
+        > th {
+            padding: 8px;
+        }
+    }
+}
+
+@media only screen and (min-width: 1824px) {
+    tr {
+        > th {
+            padding: 14px;
+        }
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IPaginacion } from 'src/app/interfaces/paginacion.interface';
-import { IRespuesta } from 'src/app/interfaces/respuesta.interface';
 
+import { IPagina } from '../../../../interfaces/pagina.interface';
+import { IRespuesta } from '../../../../interfaces/respuesta.interface';
 import { ISolicitud } from '../../interfaces/solicitud.interface';
 import { SolicitudService } from '../../services/solicitud.service';
 
@@ -11,31 +11,51 @@ import { SolicitudService } from '../../services/solicitud.service';
   styleUrls: ['./listar-solicutud.component.scss']
 })
 export class ListarSolicutudComponent implements OnInit {
-  public columns: {
-    key: string;
-    value: string;
-  }[] = [
-      { key: 'radicado', value: 'Radicado' },
-      { key: 'year', value: 'Fecha radicacion' },
-      { key: 'brand', value: 'Nombre comercial' },
-      { key: 'color', value: 'Responsable' },
-      { key: 'color', value: 'Programa' },
-      { key: 'color', value: 'Fecha de actuacion' },
-      { key: 'color', value: 'Estado' }
-    ];
 
   public solicitudes: ISolicitud[] = [];
 
-  public paginacion: IPaginacion = {
+  public busqueda: string;
+  public pagina: IPagina = {
     pagina: 1,
-    registrosPorPagina: 10
+    registrosPorPagina: 8
   };
+  public sort: { [key: string]: string };
 
   public constructor(private solicitudService: SolicitudService) { }
 
   public ngOnInit(): void {
-    this.solicitudService.get({ paginacion: this.paginacion }).subscribe((respuesta: IRespuesta<ISolicitud>): void => {
-      this.solicitudes = respuesta.data;
+    this.getSolicitudes();
+  }
+
+  public onBuscar(): void {
+    this.getSolicitudes();
+  }
+
+  public onSort(event: {
+    sortField: string;
+    sortOrder: number;
+  }): void {
+    this.sort = {
+      ordenamientoCampo: event.sortField,
+      ordenamientoDireccion: event.sortOrder === 1 ? 'ASC' : 'DESC'
+    };
+    this.getSolicitudes();
+  }
+
+  public onPageChange(event: {
+    page: number
+  }): void {
+    if (this.pagina.pagina !== event.page + 1) {
+      this.pagina.pagina = event.page + 1;
+      this.getSolicitudes();
+    }
+  }
+
+  public getSolicitudes(): void {
+    this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
+      this.solicitudes.pop();
+      this.solicitudes = respuesta.respuesta.solicitudes;
+      // this.pagina = respuesta.respuesta.pagina;
     });
   }
 
