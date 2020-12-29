@@ -1,4 +1,5 @@
 <form [formGroup]="myForm">
+  <!--
   <p-card>
 
     <div class="p-grid">
@@ -37,7 +38,7 @@
 
 
   </p-card>
-
+-->
   <p-card>
 
     <div>
@@ -87,7 +88,7 @@
 
         <div class="p-field">
           <label class="field" for="numberRadicado">Número de Radicado</label>
-          <input type="text" class="caption" pInputText placeholder="Número de Radicado">
+          <input type="text" class="caption" pInputText placeholder="Número de Radicado" formControlName="numero_radicado">
         </div>
 
       </div>
@@ -96,7 +97,7 @@
 
         <div class="p-field">
           <label class="field" for="actualizacion">Última actualización</label>
-          <input type="text" class="caption" pInputText placeholder="Última actualización">
+          <input type="text" class="caption" pInputText placeholder="Última actualización" formControlName="fecha_actualizacion">
         </div>
 
       </div>
@@ -104,8 +105,8 @@
       <div class="p-col-4">
 
         <div class="p-field">
-          <label class="field" for="actualizacion">Estado</label>
-          <input type="text" class="caption" pInputText placeholder="Estado">
+          <label class="field" for="actualizacion" >Estado</label>
+          <input type="text" class="caption" pInputText placeholder="Estado" formControlName="estado">
         </div>
 
       </div>
@@ -175,7 +176,8 @@
             <label class="field">1.6 Departamento Planta de Producción</label>
           </div>
           <div class="p-field">
-            <p-dropdown [options]="departments" optionLabel="name"></p-dropdown>
+            <p-dropdown [options]="departments" optionLabel="name" formControlName="departamento_produccion">
+            </p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
               tooltipPosition="top">
           </div>
@@ -185,7 +187,7 @@
           <div class="p-field">
             <label class="field">1.7 Ciudad Planta de Produccion</label>
 
-            <p-dropdown [options]="cities" optionLabel="name"></p-dropdown>
+            <p-dropdown [options]="cities" optionLabel="name" formControlName="ciudad_produccion"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
               tooltipPosition="top">
           </div>
@@ -201,7 +203,7 @@
         </div>
 
         <div class="p-col-6">
-          <button class="button-content" style="margin-top:30px">NUEVA</button>
+          <button class="button-content" style="margin-top:30px" (click)="pushPlanta()">AGREGAR</button>
         </div>
 
       </div>
@@ -211,49 +213,51 @@
 
       <div class="table">
         <div class="title">
-            <h3 class="headline-m">Borradores y/o solicitudes existentes</h3>
-            <div class="sub-title">
-                <button [routerLink]="'/solicitud/crear'">CREAR NUEVO REGISTRO</button>
-                <span class="spacer"></span>
-                <div class="input-group">
-                    <input placeholder="Buscar" type="text" (ngModelChange)="onBuscar()" />
-                    <!--<mat-icon svgIcon="buscar-circular-negativo"></mat-icon>-->
-                </div>
+          <h3 class="headline-m">Borradores y/o solicitudes existentes</h3>
+          <div class="sub-title">
+            <span class="spacer"></span>
+            <div class="input-group">
+              <input placeholder="Buscar" type="text" (ngModelChange)="onBuscar()" />
+              <!--<mat-icon svgIcon="buscar-circular-negativo"></mat-icon>-->
             </div>
+          </div>
         </div>
-        <p-table [value]="solicitudes" [customSort]="true">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="departamento">
-                        <span class="body --dark-primary-color">Departamento<p-sortIcon field="departamento"></p-sortIcon></span>
-                    </th>
-                    <th pSortableColumn="ciudad">
-                        <span class="body --dark-primary-color">Ciudad<p-sortIcon field="ciudad">
-                            </p-sortIcon></span>
-                    </th>
-                    <th pSortableColumn="direccion">
-                        <span class="body --dark-primary-color">Dirección<p-sortIcon field="direccion">
-                            </p-sortIcon></span>
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-solicitud>
-                <tr>
-                    <td>
-                        {{solicitud['departamento']}}
-                    </td>
-                    <td>
-                        {{solicitud['ciudad']}}
-                    </td>
-                    <td>
-                        {{solicitud['direccion']}}
-                    </td>
+        <p-table [value]="plantas" [customSort]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="departamento">
+                <span class="body --dark-primary-color">Departamento<p-sortIcon field="departamento"></p-sortIcon>
+                  </span>
+              </th>
+              <th pSortableColumn="ciudad">
+                <span class="body --dark-primary-color">Ciudad<p-sortIcon field="ciudad">
+                  </p-sortIcon></span>
+              </th>
+              <th pSortableColumn="direccion">
+                <span class="body --dark-primary-color">Dirección<p-sortIcon field="direccion">
+                  </p-sortIcon></span>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-solicitud>
+            <tr>
+              <td>
+                {{solicitud['departamento']}}
+              </td>
+              <td>
+                {{solicitud['ciudad']}}
+              </td>
+              <td>
+                {{solicitud['direccion']}}
+              </td>
 
-                </tr>
-            </ng-template>
+            </tr>
+          </ng-template>
         </p-table>
 
-    </div>
+        <button>GUARDAR</button>
+
+      </div>
 
 
 
@@ -266,8 +270,8 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.1 Subpartida Arancelaria:</label>
-            <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment" optionLabel="name"
-              placeholder="Subpartida"></p-dropdown>
+            <p-dropdown [options]="departments" optionLabel="name" placeholder="Subpartida"
+              formControlName="subpartida"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -276,7 +280,7 @@
         <div class="p-col-6" *ngIf="true">
           <div class="p-field">
             <label class="field">2.1.1 Código Numérico Único (CUN):</label>
-            <p-dropdown [options]="codigos" [(ngModel)]="selectedCodigo" optionLabel="name"></p-dropdown>
+            <p-dropdown [options]="codigos" optionLabel="name" formControlName="cun"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -285,7 +289,8 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.2 Nombre Comercial:</label>
-            <input type="text" class="caption" pInputText placeholder="Nombre Comercial">
+            <input type="text" class="caption" pInputText placeholder="Nombre Comercial"
+              formControlName="nombre_comercial">
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -294,7 +299,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.3 Nombre Técnico:</label>
-            <input type="text" class="caption" pInputText placeholder="Nombre Técnico">
+            <input type="text" class="caption" pInputText placeholder="Nombre Técnico" formControlName="nombre_tecnico">
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -303,7 +308,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.4 Unidad Comercial:</label>
-            <p-dropdown [options]="unidades" [(ngModel)]="selectedUnidad" optionLabel="name" placeholder="Unidad">
+            <p-dropdown [options]="unidades" optionLabel="name" placeholder="Unidad" formControlName="unidad_comercial">
             </p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -314,7 +319,7 @@
           <div class="p-field">
             <label class="field">2.5 Tecnología:</label>
             <div>
-              <textarea pInputTextarea></textarea>
+              <textarea pInputTextarea formControlName="tecnologia"></textarea>
               <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
                 tooltipPosition="top" class="textImg">
             </div>
@@ -327,7 +332,8 @@
             <label class="field">2.6 Número de motoparte:</label>
             <div>
               <textarea pInputTextarea class="longDescription"
-                placeholder="Ingrese las referencias separadas por coma y solo use caracteres alfanuméricos."></textarea>
+                placeholder="Ingrese las referencias separadas por coma y solo use caracteres alfanuméricos."
+                formControlName="numero_motoparte"></textarea>
               <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
                 tooltipPosition="top" class="textImg">
             </div>
@@ -337,8 +343,8 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.7 Sector Económico:</label>
-            <p-dropdown [options]="sectores" [(ngModel)]="selectedSector" optionLabel="name"
-              placeholder="Sector Económico"></p-dropdown>
+            <p-dropdown [options]="sectores" optionLabel="name" placeholder="Sector Económico"
+              formControlName="sector_economico"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -347,8 +353,8 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.8 Tamaño de la Empresa:</label>
-            <p-dropdown [options]="empresas" [(ngModel)]="selectedEmpresa" optionLabel="name"
-              placeholder="Sector Económico"></p-dropdown>
+            <p-dropdown [options]="empresas" optionLabel="name" placeholder="Sector Económico"
+              formControlName="tamano_empresa"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -357,13 +363,14 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.9 Unidades Producidas por Año:</label>
-            <p-inputNumber placeholder="Unidades Producidas por Año"> </p-inputNumber>
+            <p-inputNumber placeholder="Unidades Producidas por Año" formControlName="unidad_anho"> </p-inputNumber>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
         </div>
 
       </div>
+      <button>GUARDAR</button>
 
     </p-accordionTab>
 

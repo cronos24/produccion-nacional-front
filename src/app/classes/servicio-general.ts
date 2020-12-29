@@ -50,4 +50,9 @@ export abstract class ServicioGeneral<T> {
         return httpParams;
     }
 
+    public getSolicitud(id_solicitud: number): Observable<any> {
+
+      return this.httpClient.get<any>(this.url + '/' + id_solicitud);
+    }
+
 }

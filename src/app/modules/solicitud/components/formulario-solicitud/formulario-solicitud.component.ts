@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SolicitudService } from '../../services/solicitud.service';
 
 @Component({
   selector: 'app-formulario-solicitud',
@@ -40,28 +41,35 @@ export class FormularioSolicitudComponent implements OnInit {
 
   myForm: FormGroup;
 
+  plantas: any[] = [];
+
+  busqueda: string;
+
 
   constructor(
     private fb: FormBuilder,
+    private solicitudService: SolicitudService
   ) { }
 
   ngOnInit(): void {
 
     this.buildForm();
 
+    this.myForm.valueChanges.subscribe(console.log)
+
     this.departments = [
-      { name: 'Cundinamarca', code: 'NY' },
+      { name: 'Amazonas', code: 'NY' },
       { name: 'Antioquia', code: 'RM' },
-      { name: 'Otro', code: 'LDN' },
+      { name: 'Cundinamarca', code: 'LDN' },
       { name: 'Boyaca', code: 'IST' }
     ];
 
     this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
+      { name: 'Bogota', code: 'NY' },
+      { name: 'Medellin', code: 'RM' },
+      { name: 'Cali', code: 'LDN' },
+      { name: 'Barranquilla', code: 'IST' },
+      { name: 'Tunja', code: 'PRS' }
     ];
 
     this.unidades = [
@@ -98,6 +106,9 @@ export class FormularioSolicitudComponent implements OnInit {
   buildForm() {
     this.myForm = this.fb.group({
       tipo_formulario: [undefined, []],
+      numero_radicado: [undefined, []],
+      fecha_actualizacion: [undefined, []],
+      estado: [undefined, []],
       nit: [undefined, []],
       razon_social: [undefined, []],
       nombre_empresa: [undefined, []],
@@ -108,12 +119,57 @@ export class FormularioSolicitudComponent implements OnInit {
       ciudad_produccion: [undefined, []],
       direccion_produccion: [undefined, []],
       plantas: [, []],
+
+      subpartida: [undefined, []],
+      cun: [undefined, []],
+      nombre_comercial: [undefined, []],
+      nombre_tecnico: [undefined, []],
+      unidad_comercial: [undefined, []],
+      tecnologia: [undefined, []],
+      numero_motoparte: [undefined, []],
+      sector_economico: [undefined, []],
+      tamano_empresa: [undefined, []],
+      unidad_anho: [undefined, []],
     });
+
+    this.getSolicitud();
+
   }
 
 
   showDialog() {
     this.display = true;
   }
+
+  onBuscar(): void {
+    this.getSolicitudes();
+  }
+
+  getSolicitudes(): void {
+    //this.solicitudes = [];
+  }
+
+  getSolicitud(){
+    this.solicitudService.getSolicitud(4).subscribe(resp=>{
+      debugger;
+      this.myForm.patchValue({
+        nombre_empresa: resp.respuesta.empresaContactoNombre,
+        numero_radicado: resp.respuesta.radicado,
+        nombre_comercial: resp.respuesta.productoNombreComercial,
+        fecha_actualizacion: resp.respuesta.fechaActuacionFormateada,
+        estado: resp.respuesta.estado
+      })
+    })
+  }
+
+  pushPlanta() {
+    this.plantas.push(
+      {"departamento": this.myForm.controls.departamento_produccion.value.name,
+       "ciudad": this.myForm.controls.ciudad_produccion.value.name,
+       "direccion": this.myForm.controls.direccion_produccion.value}
+      )
+      console.log(this.plantas)
+  }
+
 
 }

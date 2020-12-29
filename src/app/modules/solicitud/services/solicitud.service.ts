@@ -14,4 +14,5 @@ export class SolicitudService extends ServicioGeneral<ISolicitud> {
     this.buildUrl();
   }
 
+
 }
