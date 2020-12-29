@@ -70,3 +70,19 @@
         border-radius: 5px;
     }
 }
+
+@media only screen and (min-width: 1224px) {
+    tr {
+        > th {
+            padding: 8px;
+        }
+    }
+}
+
+@media only screen and (min-width: 1824px) {
+    tr {
+        > th {
+            padding: 14px;
+        }
+    }
+}

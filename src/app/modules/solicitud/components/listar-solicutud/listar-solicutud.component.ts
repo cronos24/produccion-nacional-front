@@ -17,10 +17,9 @@ export class ListarSolicutudComponent implements OnInit {
   public busqueda: string;
   public pagina: IPagina = {
     pagina: 1,
-    registrosPorPagina: 2
+    registrosPorPagina: 8
   };
-  public sort: { [key: string]: string } = {
-  };
+  public sort: { [key: string]: string };
 
   public constructor(private solicitudService: SolicitudService) { }
 
@@ -33,24 +32,18 @@ export class ListarSolicutudComponent implements OnInit {
   }
 
   public onSort(event: {
-    data: any[];
-    mode: string;
-    field: string;
-    order: number;
+    sortField: string;
+    sortOrder: number;
   }): void {
     this.sort = {
-      ordenamientoCampo: event.field,
-      ordenamientoDireccion: event.order === 1 ? 'ASC' : 'DESC'
+      ordenamientoCampo: event.sortField,
+      ordenamientoDireccion: event.sortOrder === 1 ? 'ASC' : 'DESC'
     };
-    console.log(event);
     this.getSolicitudes();
   }
 
   public onPageChange(event: {
-    first: number,
-    rows: number,
-    page: number,
-    pageCount: number;
+    page: number
   }): void {
     if (this.pagina.pagina !== event.page + 1) {
       this.pagina.pagina = event.page + 1;
@@ -59,8 +52,8 @@ export class ListarSolicutudComponent implements OnInit {
   }
 
   public getSolicitudes(): void {
-    this.solicitudes = [];
     this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
+      this.solicitudes.pop();
       this.solicitudes = respuesta.respuesta.solicitudes;
       // this.pagina = respuesta.respuesta.pagina;
     });

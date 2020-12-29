@@ -10,76 +10,80 @@
             </div>
         </div>
     </div>
-    <p-table [value]="solicitudes" [customSort]="true" (sortFunction)="onSort($event)">
+    <p-table [value]="solicitudes" [customSort]="true" [lazy]="true" (onLazyLoad)="onSort($event)">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="radicado">
-                    <span class="body --dark-primary-color">Radicado<p-sortIcon field="radicado"></p-sortIcon></span>
+                    <span class="headline-s --dark-primary-color">Radicado<p-sortIcon field="radicado"></p-sortIcon>
+                    </span>
                 </th>
-                <th pSortableColumn="auditoria.fechaCreacion">
-                    <span class="body --dark-primary-color">Fecha radicacion<p-sortIcon field="auditoria.fechaCreacion">
+                <th pSortableColumn="fechaCreacion">
+                    <span class="headline-s --dark-primary-color">Fecha radicacion<p-sortIcon field="fechaCreacion">
                         </p-sortIcon></span>
                 </th>
                 <th pSortableColumn="productoNombreComercial">
-                    <span class="body --dark-primary-color">Nombre comercial<p-sortIcon field="productoNombreComercial">
+                    <span class="headline-s --dark-primary-color">Nombre comercial<p-sortIcon
+                            field="productoNombreComercial">
                         </p-sortIcon></span>
                 </th>
                 <th pSortableColumn="responsable">
-                    <span class="body --dark-primary-color">Responsable<p-sortIcon field="responsable"></p-sortIcon>
+                    <span class="headline-s --dark-primary-color">Responsable<p-sortIcon field="responsable">
+                        </p-sortIcon>
                     </span>
                 </th>
                 <th pSortableColumn="programaId">
-                    <span class="body --dark-primary-color">Programa<p-sortIcon field="programaId"></p-sortIcon></span>
+                    <span class="headline-s --dark-primary-color">Programa<p-sortIcon field="programaId"></p-sortIcon>
+                    </span>
                 </th>
-                <th pSortableColumn="fechaActucion">
-                    <span class="body --dark-primary-color">Fecha de actuacion<p-sortIcon field="fechaActucion">
+                <th pSortableColumn="fechaActuacion">
+                    <span class="headline-s --dark-primary-color">Fecha de actuacion<p-sortIcon field="fechaActuacion">
                         </p-sortIcon></span>
                 </th>
                 <th pSortableColumn="estado">
-                    <span class="body --dark-primary-color">Estado<p-sortIcon field="estado"></p-sortIcon></span>
+                    <span class="headline-s --dark-primary-color">Estado<p-sortIcon field="estado"></p-sortIcon></span>
                 </th>
                 <th>
-                    <span class="body --dark-primary-color">Archivo PDF</span>
+                    <span class="headline-s --dark-primary-color">Archivo PDF</span>
                 </th>
                 <th>
-                    <span class="body --dark-primary-color">Carta de respuesta</span>
+                    <span class="headline-s --dark-primary-color">Carta de respuesta</span>
                 </th>
                 <th>
-                    <span class="body --dark-primary-color">Eliminar borrador</span>
+                    <span class="headline-s --dark-primary-color">Eliminar borrador</span>
                 </th>
                 <th>
-                    <span class="body --dark-primary-color">Generar copia de borrador</span>
+                    <span class="headline-s --dark-primary-color">Generar copia de borrador</span>
                 </th>
                 <th>
-                    <span class="body --dark-primary-color">Cancelar registro</span>
+                    <span class="headline-s --dark-primary-color">Cancelar registro</span>
                 </th>
                 <th>
-                    <span class="body --dark-primary-color">Ver anexos</span>
+                    <span class="headline-s --dark-primary-color">Ver<br/>anexos</span>
                 </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-solicitud>
             <tr>
                 <td>
-                    {{solicitud['radicado']}}
+                    <p class="body-uno">{{solicitud['radicado']}}</p>
                 </td>
                 <td>
-                    {{solicitud['auditoria']['fechaCreacion']}}
+                    <p class="body-uno">{{solicitud['auditoria']['fechaCreacionFormateada']}}</p>
                 </td>
                 <td>
-                    {{solicitud['productoNombreComercial']}}
+                    <p class="body-uno">{{solicitud['productoNombreComercial']}}</p>
                 </td>
                 <td>
-                    {{solicitud['responsable']}}
+                    <p class="body-uno">{{solicitud['responsable']}}</p>
                 </td>
                 <td>
-                    {{solicitud['programaId']}}
+                    <p class="body-uno">{{solicitud['programaId']}}</p>
                 </td>
                 <td>
-                    {{solicitud['fechaActucion']}}
+                    <p class="body-uno">{{solicitud['fechaActuacionFormateada']}}</p>
                 </td>
                 <td>
-                    {{solicitud['estado']}}
+                    <p class="body-uno">{{solicitud['estado']}}</p>
                 </td>
                 <td class="center">
                     <mat-icon svgIcon="pdf-positivo"></mat-icon>
