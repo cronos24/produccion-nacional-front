@@ -175,7 +175,7 @@
             <label class="field">1.6 Departamento Planta de Producción</label>
           </div>
           <div class="p-field">
-            <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment" optionLabel="name"></p-dropdown>
+            <p-dropdown [options]="departments" optionLabel="name"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
               tooltipPosition="top">
           </div>
@@ -185,7 +185,7 @@
           <div class="p-field">
             <label class="field">1.7 Ciudad Planta de Produccion</label>
 
-            <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+            <p-dropdown [options]="cities" optionLabel="name"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
               tooltipPosition="top">
           </div>
@@ -201,12 +201,59 @@
         </div>
 
         <div class="p-col-6">
-          <button class="button-content" style="margin-top:30px">NUEVA</button>
+          <button class="button-content" style="margin-top:30px">AGREGAR</button>
         </div>
 
       </div>
 
       <hr>
+
+
+      <div class="table">
+        <div class="title">
+            <h3 class="headline-m">Borradores y/o solicitudes existentes</h3>
+            <div class="sub-title">
+                <button [routerLink]="'/solicitud/crear'">CREAR NUEVO REGISTRO</button>
+                <span class="spacer"></span>
+                <div class="input-group">
+                    <input placeholder="Buscar" type="text" (ngModelChange)="onBuscar()" />
+                    <!--<mat-icon svgIcon="buscar-circular-negativo"></mat-icon>-->
+                </div>
+            </div>
+        </div>
+        <p-table [value]="solicitudes" [customSort]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="departamento">
+                        <span class="body --dark-primary-color">Departamento<p-sortIcon field="departamento"></p-sortIcon></span>
+                    </th>
+                    <th pSortableColumn="ciudad">
+                        <span class="body --dark-primary-color">Ciudad<p-sortIcon field="ciudad">
+                            </p-sortIcon></span>
+                    </th>
+                    <th pSortableColumn="direccion">
+                        <span class="body --dark-primary-color">Dirección<p-sortIcon field="direccion">
+                            </p-sortIcon></span>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-solicitud>
+                <tr>
+                    <td>
+                        {{solicitud['departamento']}}
+                    </td>
+                    <td>
+                        {{solicitud['ciudad']}}
+                    </td>
+                    <td>
+                        {{solicitud['direccion']}}
+                    </td>
+
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
 
 
 
@@ -219,7 +266,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.1 Subpartida Arancelaria:</label>
-            <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment" optionLabel="name"
+            <p-dropdown [options]="departments"  optionLabel="name"
               placeholder="Subpartida"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -229,7 +276,7 @@
         <div class="p-col-6" *ngIf="true">
           <div class="p-field">
             <label class="field">2.1.1 Código Numérico Único (CUN):</label>
-            <p-dropdown [options]="codigos" [(ngModel)]="selectedCodigo" optionLabel="name"></p-dropdown>
+            <p-dropdown [options]="codigos"  optionLabel="name"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
           </div>
@@ -256,7 +303,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.4 Unidad Comercial:</label>
-            <p-dropdown [options]="unidades" [(ngModel)]="selectedUnidad" optionLabel="name" placeholder="Unidad">
+            <p-dropdown [options]="unidades" optionLabel="name" placeholder="Unidad">
             </p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -290,7 +337,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.7 Sector Económico:</label>
-            <p-dropdown [options]="sectores" [(ngModel)]="selectedSector" optionLabel="name"
+            <p-dropdown [options]="sectores"  optionLabel="name"
               placeholder="Sector Económico"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">
@@ -300,7 +347,7 @@
         <div class="p-col-6">
           <div class="p-field">
             <label class="field">2.8 Tamaño de la Empresa:</label>
-            <p-dropdown [options]="empresas" [(ngModel)]="selectedEmpresa" optionLabel="name"
+            <p-dropdown [options]="empresas" optionLabel="name"
               placeholder="Sector Económico"></p-dropdown>
             <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
               pTooltip="Enter your username" tooltipPosition="top">

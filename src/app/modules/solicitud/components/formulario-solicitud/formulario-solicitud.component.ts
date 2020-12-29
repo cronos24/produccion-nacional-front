@@ -40,6 +40,10 @@ export class FormularioSolicitudComponent implements OnInit {
 
   myForm: FormGroup;
 
+  solicitudes: any[] = [];
+
+  busqueda: string;
+
 
   constructor(
     private fb: FormBuilder,
@@ -114,6 +118,15 @@ export class FormularioSolicitudComponent implements OnInit {
 
   showDialog() {
     this.display = true;
+  }
+
+  public onBuscar(): void {
+    this.getSolicitudes();
+  }
+
+  getSolicitudes(): void {
+    this.solicitudes = [];
+
   }
 
 }
