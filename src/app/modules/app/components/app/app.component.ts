@@ -12,6 +12,11 @@ export class AppComponent {
   public constructor(
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry) {
+
+    this.matIconRegistry.addSvgIcon(
+      'informacion-circular-negativo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/informacion-circular-negativo.svg')
+    );
     this.matIconRegistry.addSvgIcon(
       'buscar-circular-negativo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/buscar-circular-negativo.svg')

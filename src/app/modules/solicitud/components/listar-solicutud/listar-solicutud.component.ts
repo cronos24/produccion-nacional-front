@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { IPagina } from '../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../interfaces/respuesta.interface';
 import { ISolicitud } from '../../interfaces/solicitud.interface';
 import { SolicitudService } from '../../services/solicitud.service';
+import { SolicitudRequerimientoComponent } from '../solicitud-requerimiento/solicitud-requerimiento.component';
 
 @Component({
   selector: 'app-listar-solicutud',
@@ -21,9 +23,12 @@ export class ListarSolicutudComponent implements OnInit {
   };
   public sort: { [key: string]: string };
 
-  public constructor(private solicitudService: SolicitudService) { }
+  public constructor(
+    private dialog: MatDialog,
+    private solicitudService: SolicitudService) { }
 
   public ngOnInit(): void {
+    this.openDialog();
     this.getSolicitudes();
   }
 
@@ -51,11 +56,25 @@ export class ListarSolicutudComponent implements OnInit {
     }
   }
 
-  public getSolicitudes(): void {
+  private getSolicitudes(): void {
     this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
       this.solicitudes.pop();
       this.solicitudes = respuesta.respuesta.solicitudes;
       // this.pagina = respuesta.respuesta.pagina;
+    });
+  }
+
+  private openDialog(): void {
+    const dialogRef: MatDialogRef<SolicitudRequerimientoComponent, any> = this.dialog.open(SolicitudRequerimientoComponent, {
+      data: {
+        titulo: 'Atención',
+        descripcion: 'Las siguientes solicitudes tienen requerimientos pendientes. Por favor anexe los documentos solicitados para que la respectiva solicitud pueda ser evaluada.'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      // this.animal = result;
     });
   }
 

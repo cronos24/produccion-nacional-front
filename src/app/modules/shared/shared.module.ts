@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   exports: [
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
   ]
