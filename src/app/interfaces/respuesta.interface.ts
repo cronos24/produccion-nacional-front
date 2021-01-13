@@ -4,7 +4,6 @@ export interface IRespuesta<T> {
     codigo: number;
     mensaje: string;
     respuesta: {
-        solicitudes: T;
-        pagina: IPagina;
+        [key: string]: T | IPagina;
     };
 }

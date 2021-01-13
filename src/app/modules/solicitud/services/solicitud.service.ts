@@ -13,7 +13,7 @@ export class SolicitudService extends ServicioGeneral<ISolicitud> {
 
   public constructor(protected httpClient: HttpClient) {
     super(httpClient);
-    this.buildUrl();
+    this.url = this.buildUrl();
   }
 
   public descargarPDF(): Observable<IRespuesta<any>> {

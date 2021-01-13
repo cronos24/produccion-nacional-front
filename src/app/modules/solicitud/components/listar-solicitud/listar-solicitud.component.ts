@@ -72,7 +72,7 @@ export class ListarSolicitudComponent implements OnInit {
   private getSolicitudes(): void {
     this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
       this.solicitudes.pop();
-      this.solicitudes = respuesta.respuesta.solicitudes;
+      this.solicitudes = respuesta.respuesta.solicitudes as ISolicitud[];
       // this.pagina = respuesta.respuesta.pagina;
     });
   }

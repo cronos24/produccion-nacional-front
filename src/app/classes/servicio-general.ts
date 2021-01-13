@@ -14,8 +14,8 @@ export abstract class ServicioGeneral<T> {
     public constructor(protected httpClient: HttpClient) {
     }
 
-    public buildUrl(): void {
-        this.url = environment.CONFIGURACION_SERVICIOS['produccion-nacional'].protocol +
+    public buildUrl(): string {
+        return environment.CONFIGURACION_SERVICIOS['produccion-nacional'].protocol +
             '://' +
             environment.CONFIGURACION_SERVICIOS['produccion-nacional'].host +
             ':' +
@@ -33,13 +33,13 @@ export abstract class ServicioGeneral<T> {
     }): Observable<IRespuesta<T[]>> {
         let httpParams: HttpParams = new HttpParams();
 
-        if (options.queryParams) {
+        if (options?.queryParams) {
             httpParams = this.addQueryParams(httpParams, options.queryParams);
         }
-        if (options.pagina) {
+        if (options?.pagina) {
             httpParams = this.addQueryParams(httpParams, options.pagina);
         }
-        if (options.sort) {
+        if (options?.sort) {
             httpParams = this.addQueryParams(httpParams, options.sort);
         }
 
