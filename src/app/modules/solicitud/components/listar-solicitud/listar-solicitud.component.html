@@ -92,7 +92,7 @@
                     <p class="body-uno">{{solicitud['estado']}}</p>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="pdf-positivo"></mat-icon>
+                    <mat-icon svgIcon="pdf-positivo" (click)="onDescargarPDF()"></mat-icon>
                 </td>
                 <td class="center">
                     <mat-icon svgIcon="carta-positivo"></mat-icon>
@@ -104,7 +104,7 @@
                     <mat-icon svgIcon="copiar-positivo"></mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="menos-circular-positivo"></mat-icon>
+                    <mat-icon svgIcon="menos-circular-positivo" (click)="onCancelarSolicitud(solicitud)"></mat-icon>
                 </td>
                 <td class="center">
                     <mat-icon svgIcon="adjunto-positivo"></mat-icon>

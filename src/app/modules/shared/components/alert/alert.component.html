@@ -1,0 +1,14 @@
+<div class="alert">
+    <mat-icon svgIcon="menos-circular-positivo"></mat-icon>
+
+    <p [ngClass]="{'headline-l': true, '--error-color': data.type === 'error'}">
+        {{data.title}}
+    </p>
+    <div [ngClass]="{'body-uno': true, '--dark-primary-color': data.type === 'error'}" [innerHTML]="data.description">
+    </div>
+
+    <br />
+    <div class="button-group">
+        <button (click)="onContinuar()">{{data.acceptButton}}</button>
+    </div>
+</div>

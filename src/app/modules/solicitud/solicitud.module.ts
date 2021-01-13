@@ -1,28 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { ListarSolicutudComponent } from './components/listar-solicutud/listar-solicutud.component';
+import { CancelarSolicitudComponent } from './components/cancelar-solicitud/cancelar-solicitud.component';
+import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
+import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
-import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
-import { CancelarSolicitudComponent } from './components/cancelar-solicitud/cancelar-solicitud.component';
 
 @NgModule({
   declarations: [
-    ListarSolicutudComponent,
+    ListarSolicitudComponent,
     SolicitudRequerimientoComponent,
     CancelarSolicitudComponent
   ],
   imports: [
     CommonModule,
-    SolicitudRoutingModule,
-    TableModule,
+    FormsModule,
     PaginatorModule,
-    SharedModule
+    ReactiveFormsModule,
+    SharedModule,
+    SolicitudRoutingModule,
+    TableModule
   ],
   providers: [
     SolicitudService

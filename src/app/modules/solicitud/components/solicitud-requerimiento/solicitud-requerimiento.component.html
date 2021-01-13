@@ -1,8 +1,11 @@
 <div class="alert">
     <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
 
-    <p class="headline-l">{{data.titulo}}</p>
-    <p class="body-uno">{{data.descripcion}}</p>
+    <p class="headline-l">Atención</p>
+    <p class="body-uno">
+        Las siguientes solicitudes tienen requerimientos pendientes. Por favor anexe los documentos solicitados para que
+        la respectiva solicitud pueda ser evaluada.
+    </p>
 
     <p-table [value]="solicitudes">
         <ng-template pTemplate="header">
@@ -30,6 +33,6 @@
             </tr>
         </ng-template>
     </p-table>
-    <br/>
+    <br />
     <button (click)="onContinuar()">CONTINUAR</button>
 </div>

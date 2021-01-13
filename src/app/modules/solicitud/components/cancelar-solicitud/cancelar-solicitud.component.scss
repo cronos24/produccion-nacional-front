@@ -1,0 +1,68 @@
+@import "../../../../../variables.scss";
+
+.alert {
+    > mat-icon {
+        width: 50px;
+        height: 50px;
+    }
+    text-align: center;
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        label {
+            margin-bottom: 5px;
+        }
+        text-align: left;
+    }
+
+    > .button-group {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+textarea {
+    &.ng-invalid {
+        &.ng-dirty,
+        &.ng-touched {
+            box-shadow: 0 0 0 1px $error-color;
+            color: $error-color;
+        }
+    }
+}
+
+span.ng-invalid {
+    color: $error-color;
+}
+
+label.ng-invalid {
+    color: $error-color;
+}
+
+::ng-deep {
+    .p-message {
+        .p-message-wrapper {
+            padding: 20px 32px;
+        }
+        .p-message-summary {
+            font-family: $font-monserrat;
+            font-weight: 700;
+            font-size: 24px;
+
+            padding-left: 32px;
+        }
+        &.p-message-success {
+            box-shadow: 0 0 0 1px $sucess-color;
+            background: unset;
+            color: $sucess-color;
+
+            .p-message-icon {
+                margin: 0px;
+                width: 42px;
+                height: 42px;
+                content: url("../../../../../assets/icons/exito-circular-negativo.svg");
+            }
+        }
+    }
+}

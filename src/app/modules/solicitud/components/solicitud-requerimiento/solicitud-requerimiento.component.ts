@@ -11,10 +11,10 @@ export class SolicitudRequerimientoComponent {
   public solicitudes;
 
   public constructor(
-    public dialogRef: MatDialogRef<SolicitudRequerimientoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<SolicitudRequerimientoComponent>) { }
 
   public onContinuar(): void {
     this.dialogRef.close();
   }
+
 }

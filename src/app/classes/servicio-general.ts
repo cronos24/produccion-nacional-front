@@ -9,7 +9,7 @@ export abstract class ServicioGeneral<T> {
 
     protected path: string;
 
-    private url: string;
+    protected url: string;
 
     public constructor(protected httpClient: HttpClient) {
     }

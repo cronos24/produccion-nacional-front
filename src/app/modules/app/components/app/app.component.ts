@@ -14,6 +14,10 @@ export class AppComponent {
     private matIconRegistry: MatIconRegistry) {
 
     this.matIconRegistry.addSvgIcon(
+      'exito-circular-negativo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/exito-circular-negativo.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
       'informacion-circular-negativo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/informacion-circular-negativo.svg')
     );

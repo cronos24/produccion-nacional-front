@@ -179,6 +179,14 @@ body {
   }
 }
 
+label {
+  font-family: $font-worksans;
+  font-weight: 500;
+  font-size: 16px;
+
+  color: $primary-color-text;
+}
+
 input {
   font-family: $font-worksans;
   font-weight: 500;
@@ -206,10 +214,38 @@ input:focus {
   outline: none;
 }
 
+textarea {
+  font-family: $font-worksans;
+  font-weight: 500;
+  font-size: 16px;
+
+  color: $primary-color-text;
+
+  width: 100%;
+  height: 120px;
+  padding: 8px 16px;
+
+  border-radius: 5px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: $secondary-color-text;
+}
+
+textarea::placeholder {
+  color: $secondary-color-text;
+}
+
+textarea:focus {
+  box-shadow: 0 0 0 1px $primary-color;
+  outline: none;
+}
+
 button {
   font-family: $font-worksans;
   font-weight: 500;
   font-size: 15px;
+
   color: $tertiary-color-text;
 
   outline: none;
@@ -234,6 +270,25 @@ button:disabled {
 
 button:enabled:hover {
   background-color: $dark-primary-color;
+}
+
+button.outlined {
+  background-color: unset;
+}
+
+button.outlined:enabled {
+  box-shadow: 0 0 0 1.5pt $primary-color;
+  color: $primary-color;
+}
+
+button.outlined:disabled {
+  box-shadow: 0 0 0 1.5pt $secondary-color-text;
+  color: $secondary-color-text;
+}
+
+button:enabled:hover {
+  box-shadow: none;
+  color: $tertiary-color-text;
 }
 
 svg {

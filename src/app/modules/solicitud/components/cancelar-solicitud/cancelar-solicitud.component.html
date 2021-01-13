@@ -1,1 +1,33 @@
-<p>cancelar-solicitud works!</p>
+<div class="alert">
+    <mat-icon svgIcon="menos-circular-positivo"></mat-icon>
+
+    <p class="headline-l">Cancelación de registro</p>
+    <p class="body-uno">
+        Ingrese el motivo de la solicitud de cancelación o
+        <br />
+        cierre la ventana para desistir de la solicitud.
+    </p>
+
+    <form>
+        <div class="form-group">
+            <label for="motivo"
+                [ngClass]="{'ng-invalid': motivoFormControl.invalid && (motivoFormControl.dirty || motivoFormControl.touched)}">Motivo*</label>
+            <textarea id="motivo" [formControl]="motivoFormControl" required minlength="10"></textarea>
+
+            <div *ngIf="motivoFormControl.invalid && (motivoFormControl.dirty || motivoFormControl.touched)">
+                <span *ngIf="motivoFormControl.errors.required" class="caption ng-invalid">
+                    Motivo es requerido.
+                </span>
+                <span *ngIf="motivoFormControl.errors.minlength" class="caption ng-invalid">
+                    Ingrese una justificacion mas completa.
+                </span>
+            </div>
+        </div>
+    </form>
+
+    <br />
+    <div class="button-group">
+        <button class="outlined" (click)="onCancelar()">CANCELAR</button>
+        <button (click)="onContinuar()">CONTINUAR</button>
+    </div>
+</div>

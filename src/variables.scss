@@ -8,6 +8,9 @@ $primary-color-text: #4b4b4b;
 $secondary-color-text: #bababa;
 $tertiary-color-text: #ffffff;
 
+$sucess-color: #069169;
+$error-color: #a80521;
+
 $primary-color-icon: #3772ff;
 $secondary-color-icon: #3772ff;
 
@@ -15,5 +18,6 @@ $text-colors: (
     dark-primary-color: $dark-primary-color,
     primary-color: $primary-color,
     primary-color-text: $primary-color-text,
-    tertiary: $tertiary-color-text,
+    tertiary-color-text: $tertiary-color-text,
+    error-color: $error-color
 );

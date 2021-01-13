@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { IPagina } from '../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../interfaces/respuesta.interface';
 import { ISolicitud } from '../../interfaces/solicitud.interface';
 import { SolicitudService } from '../../services/solicitud.service';
+import { CancelarSolicitudComponent } from '../cancelar-solicitud/cancelar-solicitud.component';
 import { SolicitudRequerimientoComponent } from '../solicitud-requerimiento/solicitud-requerimiento.component';
 
 @Component({
-  selector: 'app-listar-solicutud',
-  templateUrl: './listar-solicutud.component.html',
-  styleUrls: ['./listar-solicutud.component.scss']
+  selector: 'app-listar-solicitud',
+  templateUrl: './listar-solicitud.component.html',
+  styleUrls: ['./listar-solicitud.component.scss']
 })
-export class ListarSolicutudComponent implements OnInit {
+export class ListarSolicitudComponent implements OnInit {
 
   public solicitudes: ISolicitud[] = [];
 
@@ -56,6 +57,18 @@ export class ListarSolicutudComponent implements OnInit {
     }
   }
 
+  public onDescargarPDF(): void {
+    this.solicitudService.descargarPDF().subscribe();
+  }
+
+  public onCancelarSolicitud(solicitud: ISolicitud): void {
+    this.dialog.open(CancelarSolicitudComponent, {
+      data: {
+        solicitud
+      }
+    });
+  }
+
   private getSolicitudes(): void {
     this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
       this.solicitudes.pop();
@@ -65,17 +78,7 @@ export class ListarSolicutudComponent implements OnInit {
   }
 
   private openDialog(): void {
-    const dialogRef: MatDialogRef<SolicitudRequerimientoComponent, any> = this.dialog.open(SolicitudRequerimientoComponent, {
-      data: {
-        titulo: 'Atención',
-        descripcion: 'Las siguientes solicitudes tienen requerimientos pendientes. Por favor anexe los documentos solicitados para que la respectiva solicitud pueda ser evaluada.'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
+    this.dialog.open(SolicitudRequerimientoComponent);
   }
 
 }
