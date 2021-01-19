@@ -1,0 +1,16 @@
+<div mat-dialog-title>
+  <mat-icon class="icon-img" [style]="style_icon" [svgIcon]="icon"></mat-icon>
+  <p class="title-modal" [style]="style_title">{{title_modal}}</p>
+</div>
+
+<div mat-dialog-content class="dialog-content">
+
+
+  <p class="specific" *ngIf="text_content_specific">{{text_content_specific}}</p>
+
+  <p>{{text_content}}</p>
+</div>
+<div mat-dialog-actions class="modal-action">
+  <button mat-button (click)="cancelar()" *ngIf="title_first_button">{{title_first_button}}</button>
+  <button mat-button cdkFocusInitial (click)="aceptar()" *ngIf="title_second_button">{{title_second_button}}</button>
+</div>

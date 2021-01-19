@@ -219,9 +219,7 @@ button:enabled:hover {
   background-color: $dark-primary-color;
 }
 
-svg {
-  fill: $primary-color-icon;
-}
+
 
 .container {
   margin-left: 74px;
@@ -734,11 +732,4 @@ hr {
  top: -15px;
 }
 
-.p-checkbox .p-checkbox-box {
-  top: -7px;
-}
 
-.checker-text {
-  position: relative;
-  top: -5px;
-}

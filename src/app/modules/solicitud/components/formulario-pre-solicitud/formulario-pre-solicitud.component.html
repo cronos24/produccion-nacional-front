@@ -1,0 +1,39 @@
+<form [formGroup]="myForm">
+  <p-card>
+
+    <div class="p-grid">
+
+      <div class="p-col-6">
+
+        <p class="field">
+          Indique si esta solicitud es una renovación de un registro vigente:
+          <p-checkbox name="si" binary="true" inputId="check-si" class="checker" formControlName="registro_vigente" (click)="habilitar()"></p-checkbox>
+          <label for="si" class="checker-text"><i></i> Si</label>
+        </p>
+      </div>
+
+      <div class="p-col-6">
+
+        <div class="p-field">
+          <label for="numberRegistro" class="field">Número de Registro a Renovar:</label>
+          <p-inputNumber class="caption" placeholder="Digite el número de registro a renovar (201905010000001)" formControlName="numero_registro"> </p-inputNumber>
+
+        </div>
+
+      </div>
+
+      <div class="p-col-10">
+        <div class="form-warning">Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y
+          así generar un número
+          interno
+          consecutivo de control.</div>
+      </div>
+      <div class="p-col-2">
+        <button class="button-content" (click)="crearBorrador()"> CREAR BORRADOR </button>
+      </div>
+
+    </div>
+
+
+  </p-card>
+</form>

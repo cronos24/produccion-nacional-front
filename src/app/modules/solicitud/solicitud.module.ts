@@ -21,13 +21,18 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { FormularioPreSolicitudComponent } from './components/formulario-pre-solicitud/formulario-pre-solicitud.component';
+import { ModalComponent } from './util/modal/modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     ListarSolicutudComponent,
     FormularioSolicitudComponent,
     FormularioSolicitudComponent,
-    ModalInsumosComponent
+    ModalInsumosComponent,
+    FormularioPreSolicitudComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +51,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputNumberModule,
     ReactiveFormsModule,
     PaginatorModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ],
   providers: [
     SolicitudService
