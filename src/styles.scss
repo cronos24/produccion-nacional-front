@@ -340,6 +340,12 @@ svg {
   fill: $primary-color-icon;
 }
 
+mat-icon.disabled {
+  > svg {
+    fill: $secondary-color-icon !important;
+  }
+}
+
 .container {
   margin-left: 74px;
   margin-right: 74px;
@@ -356,7 +362,7 @@ svg {
   label {
     margin-top: 10px;
     margin-bottom: 10px;
-  }  
+  }
 }
 
 .icon-group {

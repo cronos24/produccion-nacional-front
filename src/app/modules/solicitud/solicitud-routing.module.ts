@@ -5,7 +5,7 @@ import { ListarSolicitudComponent } from './components/listar-solicitud/listar-s
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'registro', pathMatch: 'full' },
+  { path: '', redirectTo: 'listar', pathMatch: 'full' },
   { path: 'listar', component: ListarSolicitudComponent },
   { path: 'registro', component: RegistroSolicitudComponent }
 ];

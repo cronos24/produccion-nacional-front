@@ -71,7 +71,7 @@
     <div class="p-grid">
         <div class="p-col">
             <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
+                <mat-icon svgIcon="informacion-circular-negativo" class="disabled"
                     matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
                 </mat-icon>
                 <label>
@@ -135,7 +135,7 @@
     <div class="p-grid">
         <div class="p-col">
             <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
+                <mat-icon svgIcon="informacion-circular-negativo" class="disabled"
                     matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
                 </mat-icon>
                 <label>
@@ -194,21 +194,23 @@
 
     <hr />
 
-    <label>Origen de los insumos</label>
-    <label>Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE</label>
+    <div class="titulo">
+        <label class="headline-l">Origen de los insumos</label>
+        <label>Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE</label>
 
-    <div class="contenido">
-        <label>
-            <input type="checkbox" />
-            100% Nacional
-        </label>
-        <label>
-            <input type="checkbox" />
-            Importado por Monopartista
-        </label>
-        <label>
-            <input type="checkbox" />
-            Piezas o Insumos Importados y Suministrados por la Ensambladora o mixtos
-        </label>
+        <div class=" contenido">
+            <label class="group">
+                <input type="checkbox" />
+                100% Nacional
+            </label>
+            <label class="group">
+                <input type="checkbox" />
+                Importado por Monopartista
+            </label>
+            <label class="group">
+                <input type="checkbox" />
+                Piezas o Insumos Importados y Suministrados por la Ensambladora o mixtos
+            </label>
+        </div>
     </div>
 </ng-template>
