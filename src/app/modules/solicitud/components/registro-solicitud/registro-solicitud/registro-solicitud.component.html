@@ -1,0 +1,61 @@
+<div class="titulo">
+    <label class="headline-l">Tipo de Formulario</label>
+    <br />
+    <div class="contenido">
+        <label>
+            <input type="checkbox" [(ngModel)]="produccionNacional"
+                (ngModelChange)="onSelectedCheckBox('produccionNacional', $event)" />
+            Registro de Produccion Nacional
+        </label>
+        <label>
+            <input type="checkbox" [(ngModel)]="fomentoIndustriaAutomotriz"
+                (ngModelChange)="onSelectedCheckBox('fomentoIndustriaAutomotriz', $event)" />
+            Programa de Fomento a la Industria Automotriz
+        </label>
+        <label>
+            <input type="checkbox" [(ngModel)]="regimenTransformacionEnsamblePlanillas"
+                (ngModelChange)="onSelectedCheckBox('regimenTransformacionEnsamblePlanillas', $event)" />
+            Programa de Regimen de Transformacion o<br />Ensamble planillas A y B
+        </label>
+    </div>
+</div>
+
+<br />
+
+<mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                1. IDENTIFICACION DE LA EMPRESA
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-datos-producto [tipoFormulario]="tipoFormulario"></app-datos-producto>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                3. CRITERIOS PARA EL REGISTRO
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-criterios-registro [tipoFormulario]="tipoFormulario"></app-criterios-registro>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-criterios-registro></app-criterios-registro>
+    </mat-expansion-panel>
+</mat-accordion>

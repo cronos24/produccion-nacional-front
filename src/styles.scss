@@ -187,7 +187,8 @@ label {
   color: $primary-color-text;
 }
 
-input {
+input[type="text"],
+input[type="number"] {
   font-family: $font-worksans;
   font-weight: 500;
   font-size: 16px;
@@ -205,13 +206,57 @@ input {
   border-color: $secondary-color-text;
 }
 
-input::placeholder {
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
   color: $secondary-color-text;
 }
 
-input:focus {
+input[type="text"]:focus,
+input[type="number"]:focus {
   box-shadow: 0 0 0 1px $primary-color;
   outline: none;
+}
+
+select {
+  font-family: $font-worksans;
+  font-weight: 500;
+  font-size: 16px;
+
+  color: $primary-color-text;
+
+  width: 100%;
+  height: 40px;
+
+  padding: 0px 16px;
+
+  border-radius: 5px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: $secondary-color-text;
+
+  cursor: pointer;
+  appearance: none;
+
+  background-image: url("/assets/icons/flecha-abajo-positivo.svg");
+
+  background-repeat: no-repeat;
+  background-position: right 16px top 50%, 0 0;
+  background-size: 12px, 100%;
+}
+
+select:focus {
+  box-shadow: 0 0 0 1px $primary-color;
+  outline: none;
+}
+
+select:disabled {
+  cursor: default;
+  background-color: $background-color;
 }
 
 textarea {
@@ -222,7 +267,7 @@ textarea {
   color: $primary-color-text;
 
   width: 100%;
-  height: 120px;
+  height: 40px;
   padding: 8px 16px;
 
   border-radius: 5px;
@@ -302,4 +347,30 @@ svg {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }  
+}
+
+.icon-group {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    width: 32px;
+    height: 32px;
+
+    margin-left: 10px;
+    margin-right: 10px;
+
+    > svg {
+      fill: $primary-color;
+    }
+  }
 }

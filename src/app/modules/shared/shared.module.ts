@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 
 import { AlertComponent } from './components/alert/alert.component';
 
@@ -11,12 +15,20 @@ import { AlertComponent } from './components/alert/alert.component';
   ],
   imports: [
     CommonModule,
+    MatDialogModule,
+    MatExpansionModule,
     MatIconModule,
-    MatDialogModule
+    MatTooltipModule,
+    MessageModule,
+    MessagesModule
   ],
   exports: [
+    MatDialogModule,
+    MatExpansionModule,
     MatIconModule,
-    MatDialogModule
+    MatTooltipModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [
   ]

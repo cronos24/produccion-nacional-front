@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
+import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'listar', pathMatch: 'full' },
+  { path: '', redirectTo: 'registro', pathMatch: 'full' },
   { path: 'listar', component: ListarSolicitudComponent },
-  { path: 'crear', component: ListarSolicitudComponent }
+  { path: 'registro', component: RegistroSolicitudComponent }
 ];
 
 @NgModule({

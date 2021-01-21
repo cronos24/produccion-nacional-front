@@ -23,6 +23,7 @@
 }
 
 textarea {
+    height: 120px;
     &.ng-invalid {
         &.ng-dirty,
         &.ng-touched {
