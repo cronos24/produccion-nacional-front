@@ -1,11 +1,13 @@
+@import "../../../../../../styles.scss";
 @import "../../../../../../variables.scss";
+
 .input-group {
     padding-top: 5%;
     flex-grow: 0.5;
-    >input {
+    > input {
         border-radius: 25px;
     }
-    >mat-icon {
+    > mat-icon {
         vertical-align: middle;
         margin-left: -37px;
         margin-bottom: 4px;
@@ -19,6 +21,10 @@
     border: 0 none;
     color: rgb(209, 208, 208);
     height: 1px;
+}
+
+.table {
+    @include table;
 }
 
 @media only screen and (min-width: 1224px) {
@@ -72,7 +78,7 @@
             line-height: 10px;
         }
         tr {
-            >th {
+            > th {
                 padding: 8px;
             }
         }
@@ -130,7 +136,7 @@
             line-height: 16px;
         }
         tr {
-            >th {
+            > th {
                 padding: 14px;
             }
         }
