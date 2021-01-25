@@ -49,6 +49,14 @@ export class AppComponent {
       'adjunto-positivo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/adjunto-positivo.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'documento',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/documento.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'informacion',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/informacion.svg')
+    );
   }
 
 }

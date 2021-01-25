@@ -16,6 +16,8 @@ import { RegistroSolicitudComponent } from './components/registro-solicitud/regi
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
+import { AdjuntarArchivoComponent } from './components/adjuntar-archivo/adjuntar-archivo.component';
+import { InformativoComponent } from './components/informativo/informativo.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     DatosProductoComponent,
     RegistroSolicitudComponent,
     CriteriosRegistroComponent,
-    ProcesoProduccionComponent
+    ProcesoProduccionComponent,
+    AdjuntarArchivoComponent,
+    InformativoComponent
   ],
   imports: [
     CommonModule,

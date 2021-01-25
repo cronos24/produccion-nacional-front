@@ -1,13 +1,12 @@
 @import "../../../../../../styles.scss";
 @import "../../../../../../variables.scss";
-
 .input-group {
     padding-top: 5%;
     flex-grow: 0.5;
-    > input {
+    >input {
         border-radius: 25px;
     }
-    > mat-icon {
+    >mat-icon {
         vertical-align: middle;
         margin-left: -37px;
         margin-bottom: 4px;
@@ -16,11 +15,44 @@
     }
 }
 
-.hr {
-    background-color: rgb(209, 208, 208);
-    border: 0 none;
-    color: rgb(209, 208, 208);
-    height: 1px;
+.colorTexto {
+    color: #004884;
+}
+
+::ng-deep.mat-dialog-container {
+    padding: 37px !important;
+}
+
+::ng-deep {
+    p-message {
+        width: 84%;
+    }
+    .p-inline-message {
+        margin: 0;
+        width: 100%;
+        .p-inline-message-wrapper {
+            padding: 20px 32px;
+        }
+        .p-inline-message-text {
+            font-family: $font-monserrat;
+            font-weight: 700;
+            font-size: 14px;
+            width: 95%;
+            padding-left: 32px;
+        }
+        &.p-inline-message-error {
+            width: 98%;
+            background: unset;
+            box-shadow: 0 0 0 1px $error-color;
+            color: $error-color;
+            .p-inline-message-icon {
+                margin: 0px;
+                width: 42px;
+                height: 42px;
+                content: url("../../../../../../assets/icons/informacion-circular-negativo-fondo-rojo.svg");
+            }
+        }
+    }
 }
 
 .table {
@@ -78,7 +110,7 @@
             line-height: 10px;
         }
         tr {
-            > th {
+            >th {
                 padding: 8px;
             }
         }
@@ -136,7 +168,7 @@
             line-height: 16px;
         }
         tr {
-            > th {
+            >th {
                 padding: 14px;
             }
         }
