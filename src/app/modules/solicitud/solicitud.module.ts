@@ -15,6 +15,9 @@ import { RegistroSolicitudComponent } from './components/registro-solicitud/regi
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
+import { CostosValorFabricaComponent } from './components/registro-solicitud/costos-valor-fabrica/costos-valor-fabrica.component';
+import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestro-solicitud.component';
+import { HeaderModule } from '../header/header.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     CancelarSolicitudComponent,
     DatosProductoComponent,
     RegistroSolicitudComponent,
-    CriteriosRegistroComponent
+    CriteriosRegistroComponent,
+    CostosValorFabricaComponent,
+    MaestroSolicitudComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +37,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     ReactiveFormsModule,
     SharedModule,
     SolicitudRoutingModule,
-    TableModule
+    TableModule,
+    HeaderModule
   ],
   providers: [
     SolicitudService

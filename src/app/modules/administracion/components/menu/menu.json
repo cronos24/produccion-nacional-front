@@ -1,0 +1,138 @@
+[
+    {
+        "label": "Opciones Generales",
+        "clases": "headline-xs",
+        "hijos": [
+            {
+                "label": "Inicio",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Salida Segura",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Cambiar Clave",
+                "clases": "item-hijo",
+                "redireccion": ""
+            }
+        ]
+    },
+    {
+        "label": "Administracion de Tablas",
+        "clases": "headline-xs",
+        "hijos": [
+            {
+                "label": "Paises",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Unidades",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Partidas",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Tipo Producto",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Productores",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Programas",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Ayudas",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Contingencia",
+                "clases": "item-hijo",
+                "redireccion": ""
+            }
+        ]
+    },
+    {
+        "label": "Administracion Funcionarios",
+        "clases": "headline-xs",
+        "hijos": [
+            {
+                "label": "Funcionarios",
+                "clases": "item-hijo",
+                "redireccion": ""
+            }
+        ]
+    },
+    {
+        "label": "Editar Productores",
+        "clases": "headline-xs",
+        "hijos": [
+            {
+                "label": "Productores",
+                "clases": "item-hijo",
+                "redireccion": ""
+            }
+        ]
+    },
+    {
+        "label": "Control de Registro",
+        "clases": "headline-xs",
+        "hijos": [
+            {
+                "label": "Revisión de Cartas",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Revisión de Solicitud",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Cancelaciones",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Aprobaciones",
+                "clases": "item-hijo",
+                "redireccion": ""
+            }
+        ]
+    },
+    {
+        "label": "Consultas",
+        "clases": "headline-xs",
+        "hijos": [
+            {
+                "label": "Consulta Registros",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Indicadores",
+                "clases": "item-hijo",
+                "redireccion": ""
+            },
+            {
+                "label": "Global",
+                "clases": "item-hijo",
+                "redireccion": ""
+            }
+        ]
+    }
+]

@@ -4,11 +4,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { HeaderComponent } from './components/header/header.component';
 import { SubHeaderComponent } from './components/sub-header/sub-header.component';
+import { HeaderAdministracionComponent } from './components/header-administracion/header-administracion.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SubHeaderComponent
+    SubHeaderComponent,
+    HeaderAdministracionComponent
+  
   ],
   imports: [
     CommonModule,
@@ -16,7 +19,9 @@ import { SubHeaderComponent } from './components/sub-header/sub-header.component
   ],
   exports: [
     HeaderComponent,
-    SubHeaderComponent
+    SubHeaderComponent,
+    HeaderAdministracionComponent
+  
   ]
 })
 export class HeaderModule { }

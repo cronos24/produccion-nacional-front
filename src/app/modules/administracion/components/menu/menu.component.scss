@@ -1,0 +1,13 @@
+.contenedor-menu {
+    background-color: #E6EFFD;
+    padding: 10px 15px;
+
+    .item-hijo {
+        margin: 10px 15px;
+        cursor: pointer;
+        :hover{
+            text-decoration: underline;
+        }
+    }
+    
+}

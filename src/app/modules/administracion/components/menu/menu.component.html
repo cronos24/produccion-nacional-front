@@ -1,0 +1,15 @@
+<div class="contenedor-menu">
+    <div *ngFor="let item of menuAdministracion;">
+        <span [class]="item.clases">
+            {{item.label}}
+        </span>
+        <ng-container *ngIf="item.hijos.length > 0">
+            <div *ngFor="let subItem of item.hijos;" [class]="subItem.clases">
+                <label>
+                    {{subItem.label}}
+                </label>
+            </div>
+        </ng-container>
+    </div>
+    <button>Consultar Funcionario</button>
+</div>
