@@ -115,6 +115,5 @@
     <div *ngIf="solicitudes.length==0">
         <p class="content body-uno">No se encontraron registros coincidentes</p>
     </div>
-    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5"
-        (onPageChange)="onPageChange($event)"></p-paginator>
+    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
 </div>
