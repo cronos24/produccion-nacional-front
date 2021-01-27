@@ -11,7 +11,7 @@ import { CancelarSolicitudComponent } from './components/cancelar-solicitud/canc
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
 import { CriteriosRegistroComponent } from './components/registro-solicitud/criterios-registro/criterios-registro.component';
 import { DatosProductoComponent } from './components/registro-solicitud/datos-producto/datos-producto.component';
-import { ProcesoProduccionComponent } from './components/registro-solicitud/proceso-produccion/proceso-produccion.component';
+
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
 import { SolicitudService } from './services/solicitud.service';
@@ -21,6 +21,7 @@ import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestr
 import { HeaderModule } from '../header/header.module';
 import { AdjuntarArchivoComponent } from './components/adjuntar-archivo/adjuntar-archivo.component';
 import { InformativoComponent } from './components/informativo/informativo.component';
+import { ProcesoProduccionComponent } from './components/registro-solicitud/proceso-produccion/proceso-produccion.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { InformativoComponent } from './components/informativo/informativo.compo
     RegistroSolicitudComponent,
     CriteriosRegistroComponent,
     CostosValorFabricaComponent,
-    MaestroSolicitudComponent
+    MaestroSolicitudComponent,
     ProcesoProduccionComponent,
     AdjuntarArchivoComponent,
     InformativoComponent
