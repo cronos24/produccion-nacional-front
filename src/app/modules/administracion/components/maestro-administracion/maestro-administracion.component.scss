@@ -1,4 +1,14 @@
-.contenedor-administracion {
+.contenedor-navegacion {
     display: grid;
     grid-template-columns: 3fr 11fr;
+}
+
+.contenedor-maestro-administracion {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.footer {
+    margin-top: auto;
 }

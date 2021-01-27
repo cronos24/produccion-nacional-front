@@ -1,10 +1,12 @@
-<app-header-administracion></app-header-administracion>
-<section class="contenedor-administracion">
-    <div>
-        <app-menu></app-menu>
-    </div>
-    <div>
-        <router-outlet></router-outlet>
-    </div>
-</section>
-<app-footer-administracion></app-footer-administracion>
+<div class="contenedor-maestro-administracion">
+    <app-header-administracion [perfil]="objetoPerfil[perfil].nombre"></app-header-administracion>
+    <section class="contenedor-navegacion">
+        <div>
+            <app-menu [objetoMenu]="menu"></app-menu>
+        </div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </section>
+    <app-footer-administracion class="footer"></app-footer-administracion>
+</div>

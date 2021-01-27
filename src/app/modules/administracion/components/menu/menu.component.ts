@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import data from './menu.json';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +6,8 @@ import data from './menu.json';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  public menuAdministracion: any = data;
+  @Input() public objetoMenu: any;
+
   constructor() { }
 
   ngOnInit(): void {
