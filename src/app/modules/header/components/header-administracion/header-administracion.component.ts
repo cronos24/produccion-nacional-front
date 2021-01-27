@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header-administracion.component.scss']
 })
 export class HeaderAdministracionComponent implements OnInit {
-  @Input() public usuario: string = 'Admin';
+  @Input() public perfil: string = 'Admin';
   constructor() { }
 
   ngOnInit(): void {

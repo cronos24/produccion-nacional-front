@@ -1,0 +1,44 @@
+.contenedor-footer {
+    display: grid;
+    grid-template-columns: 3fr 8fr 4fr;
+    background-color: #3366cc;
+    height: 215px;
+    padding: 30px;
+}
+
+.contenedor-imagenes {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #FFFFFF;
+
+    img {
+        height: 40px;
+    }
+
+    img.gov-co {
+        margin: auto;
+    }
+
+    img.marca-pais {
+        margin: 0 auto auto auto;
+    }
+}
+
+p  {
+    color: #FFFFFF;
+}
+
+a  {
+    color: #FFFFFF;
+}
+
+
+.informacion-central {
+    border-right: 1px solid #FFFFFF;
+    margin-left: 30px;
+}
+
+
+.contacto {
+    margin-left: 30px;
+}
