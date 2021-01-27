@@ -15,8 +15,53 @@
     }
 }
 
+.space-textarea {
+    padding-top: 1%;
+}
+
+.space-label {
+    padding-top: 2%;
+}
+
+.space-message {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.space-search {
+    padding-left: 60%;
+    padding-bottom: 2%;
+}
+
+.align-message {
+    display: flex;
+    align-items: center;
+}
+
+.space-button {
+    padding-bottom: 2%;
+}
+
+.align-button {
+    text-align: right;
+    padding-top: 2%;
+}
+
+span.ng-invalid {
+    color: $error-color;
+}
+
+label.ng-invalid {
+    color: $error-color;
+}
+
+.colortexto {
+    color: #004884;
+}
+
 .colorTexto {
     color: #004884;
+    text-decoration: underline;
 }
 
 ::ng-deep.mat-dialog-container {

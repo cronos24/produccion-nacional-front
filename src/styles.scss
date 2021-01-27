@@ -164,7 +164,8 @@ label {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="email"] {
     font-family: $font-worksans;
     font-weight: 500;
     font-size: 16px;
@@ -183,12 +184,14 @@ input[type="checkbox"] {
 }
 
 input[type="text"]::placeholder,
-input[type="number"]::placeholder {
+input[type="number"]::placeholder,
+input[type="email"]::placeholder {
     color: $secondary-color-text;
 }
 
 input[type="text"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="email"]:focus {
     box-shadow: 0 0 0 1px $primary-color;
     outline: none;
 }
