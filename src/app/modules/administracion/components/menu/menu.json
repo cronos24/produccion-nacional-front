@@ -30,6 +30,7 @@
             {
                 "label": "Administracion de Tablas",
                 "clases": "headline-xs",
+                "ruta": "administracionTablas",
                 "hijos": [
                     {
                         "label": "Paises",
@@ -59,7 +60,8 @@
                     {
                         "label": "Programas",
                         "clases": "item-hijo",
-                        "redireccion": ""
+                        "redireccion": "",
+                        "ruta": "listarPrograma"
                     },
                     {
                         "label": "Ayudas",

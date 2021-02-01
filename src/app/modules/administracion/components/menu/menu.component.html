@@ -6,7 +6,9 @@
         <ng-container *ngIf="item.hijos.length > 0">
             <div *ngFor="let subItem of item.hijos;" [class]="subItem.clases">
                 <label>
-                    {{subItem.label}}
+                    <a [routerLink]="['./'+ item.ruta + '/' + subItem.ruta]">
+                        {{subItem.label}}
+                    </a>
                 </label>
             </div>
         </ng-container>
