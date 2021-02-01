@@ -14,6 +14,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 
+import { HeaderModule } from '../header/header.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { AdjuntarArchivoComponent } from './components/adjuntar-archivo/adjuntar-archivo.component';
@@ -22,7 +23,9 @@ import { FormularioPreSolicitudComponent } from './components/formulario-pre-sol
 import { FormularioSolicitudComponent } from './components/formulario-solicitud/formulario-solicitud.component';
 import { InformativoComponent } from './components/informativo/informativo.component';
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
+import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestro-solicitud.component';
 import { ModalInsumosComponent } from './components/modal-insumos/modal-insumos.component';
+import { CostosValorFabricaComponent } from './components/registro-solicitud/costos-valor-fabrica/costos-valor-fabrica.component';
 import { CriteriosRegistroComponent } from './components/registro-solicitud/criterios-registro/criterios-registro.component';
 import { DatosProductoComponent } from './components/registro-solicitud/datos-producto/datos-producto.component';
 import { ProcesoProduccionComponent } from './components/registro-solicitud/proceso-produccion/proceso-produccion.component';
@@ -36,6 +39,7 @@ import { ModalComponent } from './util/modal/modal.component';
   declarations: [
     AdjuntarArchivoComponent,
     CancelarSolicitudComponent,
+    CostosValorFabricaComponent,
     CriteriosRegistroComponent,
     DatosProductoComponent,
     FormularioPreSolicitudComponent,
@@ -43,6 +47,7 @@ import { ModalComponent } from './util/modal/modal.component';
     FormularioSolicitudComponent,
     InformativoComponent,
     ListarSolicitudComponent,
+    MaestroSolicitudComponent,
     ModalComponent,
     ModalInsumosComponent,
     ProcesoProduccionComponent,
@@ -59,6 +64,7 @@ import { ModalComponent } from './util/modal/modal.component';
     DropdownModule,
     FormsModule,
     FormsModule,
+    HeaderModule,
     InputNumberModule,
     InputTextModule,
     MatDialogModule,

@@ -321,9 +321,14 @@ mat-icon.disabled {
   }
 }
 
+.mat-toolbar-single-row {
+  height: 10%;
+}
+
 .container {
   margin-left: 74px;
   margin-right: 74px;
+  height: 90%;
 }
 
 .spacer {
@@ -351,6 +356,11 @@ mat-icon.disabled {
       fill: $primary-color;
     }
   }
+}
+
+div.error-input {
+  margin: 5px 0px;
+  color: red;
 }
 
 hr {

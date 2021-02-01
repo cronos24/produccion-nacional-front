@@ -9,7 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +16,6 @@ import { AppComponent } from './components/app/app.component';
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserModule,
     HeaderModule,
     HttpClientModule,
     SharedModule
