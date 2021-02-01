@@ -1,16 +1,16 @@
 import { Component, OnInit, resolveForwardRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SolicitudService } from '../../services/solicitud.service';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from "@angular/router";
-import { DepartamentoService } from '../../services/departamento.service';
-import { SubpartidaService } from '../../services/subpartida.service';
+import { Observable } from 'rxjs';
 import { CunService } from '../../services/cun.service';
+import { DepartamentoService } from '../../services/departamento.service';
 import { SectorEconomicoService } from '../../services/sector-economico.service';
+import { SolicitudService } from '../../services/solicitud.service';
+import { SubpartidaService } from '../../services/subpartida.service';
 import { TamanhoEmpresaService } from '../../services/tamanho-empresa.service';
 import { UnidadComercialService } from '../../services/unidad-comercial.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../util/modal/modal.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-formulario-solicitud',
@@ -19,48 +19,47 @@ import { Observable } from 'rxjs';
 })
 export class FormularioSolicitudComponent implements OnInit {
 
-  departments: any[];
+  public departments: any[];
 
-  selectedDepartment: any;
+  public selectedDepartment: any;
 
-  cities: any[];
+  public cities: any[];
 
-  selectedCity: any;
+  public selectedCity: any;
 
-  subpartidas: any[];
+  public subpartidas: any[];
 
-  selectedSubpartida: any;
+  public selectedSubpartida: any;
 
-  unidades: any[];
+  public unidades: any[];
 
-  selectedUnidad: any;
+  public selectedUnidad: any;
 
-  sectores: any[];
+  public sectores: any[];
 
-  selectedSector: any;
+  public selectedSector: any;
 
-  empresas: any[];
+  public empresas: any[];
 
-  selectedEmpresa: any;
+  public selectedEmpresa: any;
 
-  codigos: any[];
+  public codigos: any[];
 
-  selectedCodigo: any;
+  public selectedCodigo: any;
 
-  display: boolean = false;
+  public display: boolean = false;
 
-  myForm: FormGroup;
+  public myForm: FormGroup;
 
-  plantas: any[] = [];
+  public plantas: any[] = [];
 
-  busqueda: string;
+  public busqueda: string;
 
-  response: any;
+  public response: any;
 
-  edit: boolean;
+  public edit: boolean;
 
-
-  constructor(
+  public constructor(
     private fb: FormBuilder,
     private solicitudService: SolicitudService,
     private departamentoService: DepartamentoService,
@@ -73,11 +72,11 @@ export class FormularioSolicitudComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-  async ngOnInit() {
+  public async ngOnInit() {
 
     await this.buildForm();
 
-    this.route.params.subscribe(async params => {
+    this.route.params.subscribe(async (params) => {
       if (Object.keys(params).length == 0) {
 
         this.edit = false;
@@ -99,21 +98,21 @@ export class FormularioSolicitudComponent implements OnInit {
         await this.getSubpartidas();
 
         if (this.edit) {
-          this.myForm.get("cun").setValue(this.codigos.find(codigo => codigo.id == this.response.cun)?.id);
-          this.myForm.get("subpartida").setValue(this.subpartidas.find(sub => sub.id == this.response.subpartida)?.id);
-          this.myForm.get("unidad_comercial").setValue(this.unidades.find(unidad => unidad.id == this.response.unidadComercial)?.id);
-          this.myForm.get("sector_economico").setValue(this.sectores.find(sector => sector.id == this.response.sectorEconomico)?.id);
-          this.myForm.get("tamanho_empresa").setValue(this.empresas.find(empresa => empresa.id == this.response.tamanhoEmpresa)?.id);
+          this.myForm.get('cun').setValue(this.codigos.find((codigo) => codigo.id == this.response.cun)?.id);
+          this.myForm.get('subpartida').setValue(this.subpartidas.find((sub) => sub.id == this.response.subpartida)?.id);
+          this.myForm.get('unidad_comercial').setValue(this.unidades.find((unidad) => unidad.id == this.response.unidadComercial)?.id);
+          this.myForm.get('sector_economico').setValue(this.sectores.find((sector) => sector.id == this.response.sectorEconomico)?.id);
+          this.myForm.get('tamanho_empresa').setValue(this.empresas.find((empresa) => empresa.id == this.response.tamanhoEmpresa)?.id);
         }
 
       }
     });
 
-    this.myForm.valueChanges.toPromise().then(console.log)
+    this.myForm.valueChanges.toPromise().then(console.log);
 
   }
 
-  async buildForm() {
+  public async buildForm() {
     this.myForm = this.fb.group({
       tipo_formulario: [undefined, []],
       numero_radicado: [undefined, []],
@@ -139,27 +138,25 @@ export class FormularioSolicitudComponent implements OnInit {
       numero_motoparte: [undefined, []],
       sector_economico: [undefined, []],
       tamanho_empresa: [undefined, []],
-      unidad_anho: [undefined, []],
+      unidad_anho: [undefined, []]
     });
 
   }
 
-
-  showDialog() {
+  public showDialog() {
     this.display = true;
   }
 
-  onBuscar(): void {
+  public onBuscar(): void {
     this.getSolicitudes();
   }
 
-  getSolicitudes(): void {
-    //this.solicitudes = [];
+  public getSolicitudes(): void {
+    // this.solicitudes = [];
   }
 
-  async getSolicitud(id: number) {
-    await this.solicitudService.getGenericById(id).toPromise().then(resp => {
-      debugger;
+  public async getSolicitud(id: number) {
+    await this.solicitudService.getGenericById(id).toPromise().then((resp) => {
       this.myForm.patchValue({
         tipo_formulario: resp.tipoFormulario,
         numero_radicado: resp.radicado,
@@ -174,44 +171,42 @@ export class FormularioSolicitudComponent implements OnInit {
 
         nombre_comercial: resp.nombreComercial,
         nombre_tecnico: resp.nombreTecnico,
-        //unidad_comercial: resp.unidadComercial,
+        // unidad_comercial: resp.unidadComercial,
         tecnologia: resp.tecnologia,
         numero_motoparte: resp.numeroMotoparte,
-        //sector_economico: resp.sectorEconomico,
-        //tamanho_empresa: resp.tamanhoEmpresa,
+        // sector_economico: resp.sectorEconomico,
+        // tamanho_empresa: resp.tamanhoEmpresa,
         unidad_anho: resp.unidadAnho
 
-      })
+      });
 
-
-      resp?.plantasProduccion?.forEach(element => {
+      resp?.plantasProduccion?.forEach((element) => {
         this.plantas.push(
           {
-            "departamentoProduccion": element.departamentoProduccion,
-            "ciudadProduccion": element.ciudadProduccion,
-            "direccionProduccion": element.direccionProduccion
+            'departamentoProduccion': element.departamentoProduccion,
+            'ciudadProduccion': element.ciudadProduccion,
+            'direccionProduccion': element.direccionProduccion
           }
-        )
+        );
       });
 
       this.response = resp;
 
-    })
-
+    });
 
   }
 
-  pushPlanta() {
+  public pushPlanta() {
     if (this.myForm.controls.departamento_produccion.value &&
       this.myForm.controls.ciudad_produccion.value &&
       this.myForm.controls.direccion_produccion.value) {
       this.plantas.push(
         {
-          "departamentoProduccion": this.myForm.controls.departamento_produccion.value,
-          "ciudadProduccion": this.myForm.controls.ciudad_produccion.value,
-          "direccionProduccion": this.myForm.controls.direccion_produccion.value
+          'departamentoProduccion': this.myForm.controls.departamento_produccion.value,
+          'ciudadProduccion': this.myForm.controls.ciudad_produccion.value,
+          'direccionProduccion': this.myForm.controls.direccion_produccion.value
         }
-      )
+      );
     } else {
       this.openDialog(
         'info-warn',
@@ -220,7 +215,7 @@ export class FormularioSolicitudComponent implements OnInit {
         'REGRESAR',
         undefined,
         undefined
-      ).subscribe(resp => {
+      ).subscribe((resp) => {
 
       });
 
@@ -228,67 +223,65 @@ export class FormularioSolicitudComponent implements OnInit {
 
   }
 
-  deletePlanta(element: any) {
+  public deletePlanta(element: any) {
 
-    const i = this.plantas.findIndex(i => i.direccionProduccion == element.direccionProduccion);
+    const i = this.plantas.findIndex((i) => i.direccionProduccion == element.direccionProduccion);
     if (i > -1) {
       this.plantas.splice(i, 1);
     }
 
   }
 
+  public async getDepartamentosCiudades() {
 
-  async getDepartamentosCiudades() {
-
-    await this.departamentoService.getGeneric().toPromise().then(resp => {
+    await this.departamentoService.getGeneric().toPromise().then((resp) => {
       this.departments = resp;
-    })
+    });
 
   }
 
-  async setCiudades(event: any) {
+  public async setCiudades(event: any) {
     this.cities = undefined;
     this.cities = event.value.ciudades;
   }
 
-  async getCun() {
-    await this.cunService.getGeneric().toPromise().then(resp => {
+  public async getCun() {
+    await this.cunService.getGeneric().toPromise().then((resp) => {
       this.codigos = resp;
 
-    })
+    });
   }
 
-  async getSubpartidas() {
-    await this.subpartidaService.getGeneric().toPromise().then(resp => {
+  public async getSubpartidas() {
+    await this.subpartidaService.getGeneric().toPromise().then((resp) => {
       this.subpartidas = resp;
 
-    })
-
+    });
 
   }
 
-  async getUnidades() {
-    await this.unidadComercialService.getGeneric().toPromise().then(resp => {
+  public async getUnidades() {
+    await this.unidadComercialService.getGeneric().toPromise().then((resp) => {
       this.unidades = resp;
 
-    })
+    });
   }
 
-  async getSectores() {
-    await this.sectorEconomicoService.getGeneric().toPromise().then(resp => {
+  public async getSectores() {
+    await this.sectorEconomicoService.getGeneric().toPromise().then((resp) => {
       this.sectores = resp;
 
-    })
+    });
   }
 
-  async getEmpresas() {
-    await this.tamanhoEmpresaService.getGeneric().toPromise().then(resp => {
+  public async getEmpresas() {
+    await this.tamanhoEmpresaService.getGeneric().toPromise().then((resp) => {
       this.empresas = resp;
 
-    })
+    });
   }
 
-  guardarParteUno() {
+  public guardarParteUno() {
 
     let parte_uno = {
       tipoFormulario: this.myForm.controls.tipo_formulario.value,
@@ -303,22 +296,22 @@ export class FormularioSolicitudComponent implements OnInit {
       indicativoTelefono: this.myForm.controls.indicativo_telefono.value,
       telefonoContacto: this.myForm.controls.telefono_contacto.value,
       plantas_produccion: this.plantas
-    }
+    };
 
     if (this.edit) {
-      this.solicitudService.put(parte_uno, this.myForm.controls.numero_radicado.value).toPromise().then(resp => {
-        //alert("Se actulizo el formulario parte 1")
+      this.solicitudService.put(parte_uno, this.myForm.controls.numero_radicado.value).toPromise().then((resp) => {
+        // alert("Se actulizo el formulario parte 1")
         this.edit = false;
-      })
+      });
     } else {
-      this.solicitudService.post(parte_uno).toPromise().then(resp => {
-        //alert("Se creo el formulario parte 1")
-      })
+      this.solicitudService.post(parte_uno).toPromise().then((resp) => {
+        // alert("Se creo el formulario parte 1")
+      });
     }
 
   }
 
-  guardarParteDos() {
+  public guardarParteDos() {
 
     let parte_dos = {
       tipoFormulario: this.myForm.controls.tipo_formulario.value,
@@ -335,32 +328,30 @@ export class FormularioSolicitudComponent implements OnInit {
       numeroMotoparte: this.myForm.controls.numero_motoparte.value,
       sectorEconomico: this.myForm.controls.sector_economico.value,
       tamanhoEmpresa: this.myForm.controls.tamanho_empresa.value,
-      unidadAnho: this.myForm.controls.unidad_anho.value,
-    }
+      unidadAnho: this.myForm.controls.unidad_anho.value
+    };
 
     if (this.edit) {
 
-      this.solicitudService.put(parte_dos, this.myForm.controls.numero_radicado.value).toPromise().then(resp => {
-        //this.openDialog()
-        //alert("Se actulizo el formulario parte 2")
+      this.solicitudService.put(parte_dos, this.myForm.controls.numero_radicado.value).toPromise().then((resp) => {
+        // this.openDialog()
+        // alert("Se actulizo el formulario parte 2")
         this.edit = false;
-      })
+      });
     } else {
-      this.solicitudService.post(parte_dos).toPromise().then(resp => {
-        //alert("Se creo el formulario parte 2")
-      })
+      this.solicitudService.post(parte_dos).toPromise().then((resp) => {
+        // alert("Se creo el formulario parte 2")
+      });
     }
   }
 
-
-  openDialog(
+  public openDialog(
     icon: string,
     title_modal: string,
     text_content: string,
     title_first_button: string,
     title_second_button: string,
-    text_content_specific: string,
-
+    text_content_specific: string
 
   ): Observable<any> {
     return new Observable((observer) => {
@@ -368,27 +359,25 @@ export class FormularioSolicitudComponent implements OnInit {
       const dialogRef = this.dialog.open(ModalComponent, {
         width: '500px',
         data: {
-          title_first_button: title_first_button,
-          title_second_button: title_second_button,
-          text_content: text_content,
-          text_content_specific: text_content_specific,
-          title_modal: title_modal,
-          icon: icon,
+          title_first_button,
+          title_second_button,
+          text_content,
+          text_content_specific,
+          title_modal,
+          icon,
         }
       });
 
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          console.log('The dialog was closed' + result)
+          console.log('The dialog was closed' + result);
           observer.next(true);
         } else {
           observer.next(false);
         }
 
       });
-    })
+    });
   }
-
-
 
 }
