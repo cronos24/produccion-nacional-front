@@ -7,6 +7,8 @@ $light-primary-color: #e6effd;
 $primary-color-text: #4b4b4b;
 $secondary-color-text: #bababa;
 $tertiary-color-text: #ffffff;
+$danger-color-text: #A80521;
+$no-color: #00000000;
 
 $sucess-color: #069169;
 $error-color: #a80521;
@@ -17,10 +19,13 @@ $secondary-color-icon: #bababa;
 $background-color: #f2f2f2;
 
 $text-colors: (
+    danger-color: $danger-color-text,
     dark-primary-color: $dark-primary-color,
-    primary-color: $primary-color,
+    error-color: $error-color
+    no-color: $no-color
     primary-color-text: $primary-color-text,
+    primary-color: $primary-color,
     secondary-color-text: $secondary-color-text,
     tertiary-color-text: $tertiary-color-text,
-    error-color: $error-color
+    tertiary: $tertiary-color-text,
 );

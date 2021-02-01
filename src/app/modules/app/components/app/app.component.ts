@@ -57,6 +57,18 @@ export class AppComponent {
       'informacion',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/informacion.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'cara-disgusto-negativo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/cara-disgusto-negativo.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'check-negativo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/check-negativo.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'eliminar-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/eliminar-positivo.svg')
+    );
   }
 
 }

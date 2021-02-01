@@ -7,53 +7,69 @@ import { IRespuesta } from '../interfaces/respuesta.interface';
 
 export abstract class ServicioGeneral<T> {
 
-    protected path: string;
+  protected path: string;
 
-    protected url: string;
+  protected url: string;
 
-    public constructor(protected httpClient: HttpClient) {
+  public constructor(protected httpClient: HttpClient) {
+  }
+
+  public buildUrl(): string {
+    return environment.CONFIGURACION_SERVICIOS['produccion-nacional'].protocol +
+      '://' +
+      environment.CONFIGURACION_SERVICIOS['produccion-nacional'].host +
+      ':' +
+      environment.CONFIGURACION_SERVICIOS['produccion-nacional'].port +
+      '/' +
+      environment.CONFIGURACION_SERVICIOS['produccion-nacional'].pathName +
+      '/' +
+      this.path;
+  }
+
+  public get(options?: {
+    queryParams?: { [key: string]: string },
+    pagina?: IPagina,
+    sort?: { [key: string]: string }
+  }): Observable<IRespuesta<T[]>> {
+    let httpParams: HttpParams = new HttpParams();
+
+    if (options?.queryParams) {
+      httpParams = this.addQueryParams(httpParams, options.queryParams);
+    }
+    if (options?.pagina) {
+      httpParams = this.addQueryParams(httpParams, options.pagina);
+    }
+    if (options?.sort) {
+      httpParams = this.addQueryParams(httpParams, options.sort);
     }
 
-    public buildUrl(): string {
-        return environment.CONFIGURACION_SERVICIOS['produccion-nacional'].protocol +
-            '://' +
-            environment.CONFIGURACION_SERVICIOS['produccion-nacional'].host +
-            ':' +
-            environment.CONFIGURACION_SERVICIOS['produccion-nacional'].port +
-            '/' +
-            environment.CONFIGURACION_SERVICIOS['produccion-nacional'].pathName +
-            '/' +
-            this.path;
-    }
+    return this.httpClient.get<IRespuesta<T[]>>(this.url, { params: httpParams });
+  }
 
-    public get(options?: {
-        queryParams?: { [key: string]: string },
-        pagina?: IPagina,
-        sort?: { [key: string]: string }
-    }): Observable<IRespuesta<T[]>> {
-        let httpParams: HttpParams = new HttpParams();
+  public getGeneric(): Observable<any> {
+    return this.httpClient.get<any>(this.url);
+  }
 
-        if (options?.queryParams) {
-            httpParams = this.addQueryParams(httpParams, options.queryParams);
-        }
-        if (options?.pagina) {
-            httpParams = this.addQueryParams(httpParams, options.pagina);
-        }
-        if (options?.sort) {
-            httpParams = this.addQueryParams(httpParams, options.sort);
-        }
+  public getGenericById(id: number): Observable<any> {
+    return this.httpClient.get<any>(this.url + '/' + id);
+  }
 
-        return this.httpClient.get<IRespuesta<T[]>>(this.url, { params: httpParams });
-    }
+  public put(solicitud: any, id: number): Observable<any> {
+    return this.httpClient.put<any>(this.url + '/' + id, solicitud);
+  }
 
-    private addQueryParams(httpParams: HttpParams, object: object): HttpParams {
-        Object.keys(object).forEach((key: string): void => {
-            if (object[key]) {
-                httpParams = httpParams.append(key, object[key]);
-            }
-        });
+  public post(solicitud: any): Observable<any> {
+    return this.httpClient.post<any>(this.url, solicitud);
+  }
 
-        return httpParams;
-    }
+  private addQueryParams(httpParams: HttpParams, object: object): HttpParams {
+    Object.keys(object).forEach((key: string): void => {
+      if (object[key]) {
+        httpParams = httpParams.append(key, object[key]);
+      }
+    });
+
+    return httpParams;
+  }
 
 }

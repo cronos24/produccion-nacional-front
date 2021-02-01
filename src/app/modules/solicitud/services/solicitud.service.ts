@@ -24,4 +24,5 @@ export class SolicitudService extends ServicioGeneral<ISolicitud> {
     return this.httpClient.post<IRespuesta<any>>('', {});
   }
 
+
 }

@@ -1,0 +1,595 @@
+<form [formGroup]="myForm">
+
+  <p-card>
+    <div>
+      <h3 class="headline-m">Tipo de formulario</h3>
+    </div>
+
+    <div class="p-grid">
+
+      <div class="p-col-4">
+
+        <p-radioButton class="headline-xs" name="tipo_formulario" value="1" label="Registro de Producción Nacional"
+          formControlName="tipo_formulario">
+        </p-radioButton>
+
+      </div>
+
+
+      <div class="p-col-4">
+
+        <p-radioButton class="headline-xs" name="tipo_formulario" value="2"
+          label="Programa de Fomento a la Industria Automotriz" formControlName="tipo_formulario">
+        </p-radioButton>
+
+      </div>
+
+      <div class="p-col-4">
+
+        <p-radioButton name="tipo_formulario" value="3" class="headline-xs"
+          label="Programa de Régimen de Transformación o Ensamble planillas A y B" formControlName="tipo_formulario">
+        </p-radioButton>
+
+      </div>
+
+    </div>
+  </p-card>
+
+
+  <p-card>
+
+    <div>
+      <h3 class="headline-m">Estado del registro actual para el nuevo producto</h3>
+
+    </div>
+
+    <div class="p-grid">
+
+      <div class="p-col-4">
+
+        <div class="p-field">
+          <label class="field" for="numberRadicado">Número de Radicado</label>
+          <input type="text" class="caption" pInputText placeholder="Número de Radicado"
+            formControlName="numero_radicado">
+        </div>
+
+      </div>
+
+      <div class="p-col-4">
+
+        <div class="p-field">
+          <label class="field" for="actualizacion">Última actualización</label>
+          <input type="text" class="caption" pInputText placeholder="Última actualización"
+            formControlName="fecha_actualizacion">
+        </div>
+
+      </div>
+
+      <div class="p-col-4">
+
+        <div class="p-field">
+          <label class="field" for="actualizacion">Estado</label>
+          <input type="text" class="caption" pInputText placeholder="Estado" formControlName="estado">
+        </div>
+
+      </div>
+
+    </div>
+  </p-card>
+
+  <p-accordion class="accordion">
+
+    <p-accordionTab header="1. IDENTIFICACIÓN DE LA EMPRESA">
+
+      <div class="p-grid">
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">1.1 Número de Identificación Tributaria N.I.T:</label>
+            <input type="text" class="caption" pInputText formControlName="nit">
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar el Número de Identificación Tributaria N.I.T. de la empresa. No se requiere dí­gito de verificación."
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">1.2 Razón social:</label>
+            <input type="text" class="caption" pInputText formControlName="razon_social">
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar la razón social de acuerdo al Certificado de Existencia y Representación Legal o Matrí­cula Mercantil registrados en el Registro único Empresarial y Social RUES."
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">1.3 Nombre Contacto de la Empresa:</label>
+            <input type="text" class="caption" pInputText formControlName="nombre_empresa">
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar el nombre de la persona que actuará como enlace entre la empresa y el Grupo de Registro de Productores de Bienes Nacionales."
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">1.4 Correo Electrónico:</label>
+            <input type="email" class="caption" pInputText formControlName="correo_electronico">
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar el correo electrónico de la persona indicada como contacto en 1.3. Es muy importante que este correo electrónico sea correctamente diligenciado, porque la respuesta a la solicitud de registro o cualquier notificación relacionada con el registro es enviada a través de dicho correo."
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field field-tel">1.5 Teléfono de contacto:</label>
+            <input type="number" class="caption caption-indicativo" pInputText formControlName="indicativo_telefono">
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Campo opcional. Digitar prefijo de la ciudad/provincia para telefonos fijos."
+              tooltipPosition="top">
+            <input type="number" min="1000000" class="caption caption-tel" pInputText
+              formControlName="telefono_contacto">
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar el número telefónico del contacto de la empresa." tooltipPosition="top">
+          </div>
+        </div>
+
+      </div>
+
+      <h5 class="headline-s">Plantas de producción</h5>
+      <hr>
+      <div class="p-grid">
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">1.6 Departamento Planta de Producción</label>
+          </div>
+          <div class="p-field">
+            <p-dropdown [options]="departments" optionLabel="name" formControlName="departamento_produccion"
+              placeholder="Seleccione" (onChange)="setCiudades($event)">
+            </p-dropdown>
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar el departamento de ubicación de la planta de producción del producto a registrar."
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">1.7 Ciudad Planta de Produccion</label>
+
+            <p-dropdown [options]="cities" placeholder="Seleccione" optionLabel="name"
+              formControlName="ciudad_produccion"></p-dropdown>
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar la ciudad de ubicación de la planta de producción del producto a registrar."
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">1.8 Dirección Planta de Producción</label>
+            <input type="text" class="caption" pInputText minlength="5" formControlName="direccion_produccion">
+            <img src="../../../../../assets/icons/info-negativo.svg"
+              pTooltip="Diligenciar la dirección de ubicación de la planta de producción del producto a registrar."
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <button class="button-content" style="margin-top:30px" (click)="pushPlanta()">AGREGAR</button>
+        </div>
+
+      </div>
+
+      <hr>
+
+
+      <div class="table">
+        <div class="title">
+          <div class="sub-title">
+
+            <span class="spacer"></span>
+            <div class="input-group">
+              <input class="input-search" placeholder="Buscar" type="text"(input)="dt1.filterGlobal($event.target.value, 'contains')" />
+              <mat-icon class="boton-buscar" svgIcon="buscar-circular-negativo"></mat-icon>
+            </div>
+          </div>
+        </div>
+        <p-table #dt1 [value]="plantas" [customSort]="true" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['departamentoProduccion.name','ciudadProduccion.name','direccionProduccion']">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="departamento">
+                <span class="body --dark-primary-color">Departamento<p-sortIcon field="departamentoProduccion.name"></p-sortIcon>
+                </span>
+              </th>
+              <th pSortableColumn="ciudad">
+                <span class="body --dark-primary-color">Ciudad<p-sortIcon field="ciudadProduccion.name">
+                  </p-sortIcon></span>
+              </th>
+              <th pSortableColumn="direccion">
+                <span class="body --dark-primary-color">Dirección<p-sortIcon field="direccionProduccion">
+                  </p-sortIcon></span>
+              </th>
+              <th>
+                <span class="body --dark-primary-color">Eliminar</span>
+            </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-solicitud>
+            <tr>
+              <td>
+                {{solicitud['departamentoProduccion']?.name}}
+              </td>
+              <td>
+                {{solicitud['ciudadProduccion']?.name}}
+              </td>
+              <td>
+                {{solicitud['direccionProduccion']}}
+              </td>
+              <td class="center">
+                <mat-icon svgIcon="eliminar-positivo" (click)="deletePlanta(solicitud)"></mat-icon>
+            </td>
+
+            </tr>
+          </ng-template>
+        </p-table>
+        <div class="flex">
+          <span class="spacer"></span>
+          <button (click)="guardarParteUno()">GUARDAR</button>
+        </div>
+      </div>
+
+
+
+    </p-accordionTab>
+
+    <p-accordionTab header="2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)">
+
+      <div class="p-grid">
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '1'
+        || myForm.controls.tipo_formulario.value == '2' || myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.1 Subpartida Arancelaria:</label>
+            <p-dropdown [options]="subpartidas" optionValue="id" optionValue="id" optionLabel="name"
+              placeholder="Seleccione" formControlName="subpartida"></p-dropdown>
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+              pTooltip="Diligenciar la subpartida arancelaria por la cual desea registrar su producto. (DECRETO 2153 de 2016 Arancel de Aduanas)." tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '2'">
+          <div class="p-field">
+            <label class="field">2.1.1 Código Numérico Único (CUN):</label>
+            <p-dropdown [options]="codigos" optionValue="id" optionLabel="name" formControlName="cun"
+              placeholder="Seleccione"></p-dropdown>
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+               tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '1'
+        || myForm.controls.tipo_formulario.value == '2' ">
+          <div class="p-field">
+            <label class="field">2.2 Nombre Comercial:</label>
+            <input type="text" class="caption" pInputText placeholder="Nombre Comercial"
+              formControlName="nombre_comercial">
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+              pTooltip="Diligenciar el nombre comercial asignado por la empresa con el cual comercializa el producto a registrar.
+              " tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '1'
+        || myForm.controls.tipo_formulario.value == '2' || myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.3 Nombre Técnico:</label>
+            <input type="text" class="caption" pInputText placeholder="Nombre Técnico" formControlName="nombre_tecnico">
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+              pTooltip="Es el nombre con el que se conoce el producto y es único por ser utilizado universalmente, el cual debe ser especí­fico con caracterí­sticas esenciales que lo identifiquen y permitan verificar la subpartida arancelaria. No incluye marcas, referencias, logos etc. Debe ir en idioma español.
+              " tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '1'
+        || myForm.controls.tipo_formulario.value == '2' || myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.4 Unidad Comercial:</label>
+            <p-dropdown [options]="unidades" optionValue="id" optionLabel="name" placeholder="Seleccione"
+              formControlName="unidad_comercial">
+            </p-dropdown>
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+              pTooltip="Se entiende como la medida en la que se comercializa el producto a registrar (unidad, kilo, tonelada, litro, etc.), teniendo en cuenta la presentación del mismo." tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6"
+          *ngIf="myForm.controls.tipo_formulario.value == '2' || myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.5 Tecnología:</label>
+            <div>
+              <textarea pInputTextarea formControlName="tecnologia"></textarea>
+              <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Diligenciar la descripción o descripciones de las motopartes tal cual como serán diligenciadas en el Aplicativo RTE, Módulo planillas A - B."
+                tooltipPosition="top" class="textImg">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="p-col-12" *ngIf="myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.6 Número de motoparte:</label>
+            <div>
+              <textarea pInputTextarea class="longDescription"
+                placeholder="Ingrese las referencias separadas por coma y solo use caracteres alfanuméricos."
+                formControlName="numero_motoparte"></textarea>
+              <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Indique el/los número(s) de la(s) motoparte(s) separada(s) por coma.
+              "
+                tooltipPosition="top" class="textImg">
+            </div>
+          </div>
+        </div>
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '1'
+        || myForm.controls.tipo_formulario.value == '2' || myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.7 Sector Económico:</label>
+            <p-dropdown [options]="sectores" optionValue="id" optionLabel="name" placeholder="Seleccione"
+              formControlName="sector_economico"></p-dropdown>
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+              tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '1'
+        || myForm.controls.tipo_formulario.value == '2' || myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.8 Tamaño de la Empresa:</label>
+            <p-dropdown [options]="empresas" optionValue="id" optionLabel="name" placeholder="Seleccione"
+              formControlName="tamanho_empresa"></p-dropdown>
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+              pTooltip="- Micro empresa: si posee menos de 10 empleados
+              - Pequeña empresa: si tiene un número entre 10 y 49 empleados.
+              - Mediana empresa: si tiene un número entre 50 y 249 empleados.
+              - Grande empresa : si posee 250 o más empleado
+              " tooltipPosition="top">
+          </div>
+        </div>
+
+        <div class="p-col-6" *ngIf="myForm.controls.tipo_formulario.value == '1'
+        || myForm.controls.tipo_formulario.value == '2' || myForm.controls.tipo_formulario.value == '3'">
+          <div class="p-field">
+            <label class="field">2.9 Unidades Producidas por Año:</label>
+            <p-inputNumber placeholder="Unidades Producidas por Año" formControlName="unidad_anho"> </p-inputNumber>
+            <img src="../../../../../assets/icons/info-negativo.svg" width="20px" height="20px"
+              pTooltip="Enter your username" tooltipPosition="top">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex">
+        <span class="spacer"></span>
+        <button (click)="guardarParteDos()">GUARDAR</button>
+      </div>
+
+    </p-accordionTab>
+
+    <p-accordionTab header="3. CRITERIOS PARA EL REGISTRO">
+
+      <div class="p-grid">
+
+        <div class="p-col-12">
+          <p class="headline-xs">Seleccionar el criterio bajo el cual se califica como productor de bienes nacionales,
+            en
+            concordancia con los
+            criterios establecidos en los artìculos 2º al 6º del Decreto 2680 de 2009 del Ministerio de Comercio,
+            Industria y Turismo.
+          </p>
+        </div>
+
+        <div class="p-col-6">
+          <p class="field labeled">
+            <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
+              tooltipPosition="top">
+            <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+            <label for="si" class="checker-text"> 3.1. Bienes Totalmente Obtenidos. </label>
+          </p>
+        </div>
+
+        <div class="p-col-6">
+          <p class="field labeled">
+            <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
+              tooltipPosition="top">
+            <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+            <label for="si" class="checker-text"><i></i> 3.2. Bienes Elaborados Exclusivamente Con Materias Nacionales.
+            </label>
+          </p>
+        </div>
+
+        <div class="p-col-6">
+          <p class="field labeled">
+            <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
+              tooltipPosition="top">
+            <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+            <label for="si" class="checker-text"><i></i> 3.3. Porcentaje Mìno Valor Agredado Nacional. </label>
+          </p>
+        </div>
+
+        <div class="p-col-6">
+          <p class="field labeled">
+            <img src="../../../../../assets/icons/info-negativo.svg" pTooltip="Enter your username"
+              tooltipPosition="top">
+            <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+            <label for="si" class="checker-text"><i></i> 3.4. Proceso Productivo Sustancial. </label>
+          </p>
+        </div>
+
+        <div class="p-col-6" *ngIf="true">
+          <button class="button-content">DECRETO 2680 DE 2009</button>
+        </div>
+
+        <div class="p-col-6" *ngIf="true">
+          <button class="button-content">Decreto 1122 de 2019</button>
+        </div>
+
+        <div class="p-col-6">
+          <p class="headline-xs">Bienes obtenidos por transformación sustancial</p>
+        </div>
+      </div>
+
+
+      <div>
+        <h3 class="headline-s">Origen de los insumos</h3>
+        <p class="headline-xs">Favor Seleccione el origen de los insumos como lo presenta en la planilla A-RTE.</p>
+
+
+        <div class="p-grid">
+
+          <div class="p-col-4">
+            <p class="field">
+              <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+              <label for="si" class="checker-text"><i></i> 100% Nacional </label>
+            </p>
+          </div>
+
+          <div class="p-col-4">
+            <p class="field">
+              <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+              <label for="si" class="checker-text"><i></i> importado por Motopartista </label>
+            </p>
+          </div>
+
+          <div class="p-col-4">
+            <p class="field">
+              <p-checkbox name="si" value="true" inputId="check-si" class="checker"></p-checkbox>
+              <label for="si" class="checker-text"><i></i> Piezas o Insumos Importados y Suministrados por la
+                Ensambladora
+                o Mixtos </label>
+            </p>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </p-accordionTab>
+
+    <p-accordionTab header="4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL">
+
+      <p class="headline-xs">Coresponde a las materias primas, productos intermedios, partes y íezas de fabricación
+        extranjera, utilizados en
+        la elaboración del producto, ya sean importados directamente por el fabricante o adquiridos en el mercado
+        nacional
+        importados directamente por el proveedor. </p>
+
+      <button (click)="showDialog()" class="button-content">AGREGAR INSUMOS</button>
+
+      <p-dialog [(visible)]="display">
+        <app-modal-insumos></app-modal-insumos>
+      </p-dialog>
+
+      <div class="p-grid">
+        <div class="p-col-4">
+          <button class="button-nonContent">IMPORTAR TODOS LOS REGISTROS</button>
+        </div>
+        <div class="p-col-4">
+          <button class="button-nonContent">ELIMINAR TODOS LOS REGISTROS</button>
+        </div>
+
+      </div>
+      <h4 class="headline-xs">Cargue masivo de materiales extranjeros</h4>
+
+      <hr>
+      <div class="p-grid">
+        <div class="p-col-4">
+          <a class="headline-xs"> FORMATO EN EXCEL</a>
+        </div>
+        <div class="p-col-4">
+          <input type="file" id="myfile" name="myfile" multiple>
+        </div>
+
+        <div class="p-col-4">
+          <button class="button-content">CARGA MASIVA</button>
+        </div>
+
+      </div>
+
+      <hr>
+      <label class="field"> Sumatoria de Costos de Materiales importados(COP)</label>
+      <div class="p-grid">
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">4.9 Valor Total CIF (COP): </label>
+            <p-inputNumber placeholder="----.--"> </p-inputNumber>
+          </div>
+        </div>
+
+        <div class="p-col-6">
+          <div class="p-field">
+            <label class="field">4.10 Valor Total Planta (COP): </label>
+            <p-inputNumber placeholder="----.--"> </p-inputNumber>
+          </div>
+        </div>
+
+        <div class="p-col-4">
+          <button class="button-content">GUARDAR</button>
+        </div>
+
+      </div>
+
+
+    </p-accordionTab>
+
+    <p-accordionTab header=" ">
+
+      <div class="p-grid">
+        <div class="p-col-6">
+
+
+        </div>
+      </div>
+
+    </p-accordionTab>
+
+  </p-accordion>
+
+  <p-card>
+
+    <div class="p-grid">
+
+      <div class="p-col-12">
+        <p class="headline-xs-danger">Únicamente archivos con extensión pdf de tamaño máximo de 5MB.</p>
+      </div>
+
+      <div class="p-col-3">
+        <input type="file" id="myfile" name="myfile" multiple>
+      </div>
+
+      <div class="p-col-3">
+        <textarea pInputTextarea placeholder="Descripción (Máximo 50 caracteres)"></textarea>
+      </div>
+
+      <div class="p-col-6">
+        <button class="button-content">SUBIR ANEXO</button>
+      </div>
+
+      <div class="p-col-12">
+        <p class="headline-xs">Antes de anexar algún archivo, porfavor guarde sus cambios para no perderlos</p>
+      </div>
+
+      <div class="p-col-12">
+        <button class="button-content">FIRMAR Y RADICAR SOLICITUD</button>
+        <button class="button-content">GUARDAR BORRADOR</button>
+        <button class="button-content">VER SOLICITUDES</button>
+      </div>
+
+    </div>
+  </p-card>
+</form>

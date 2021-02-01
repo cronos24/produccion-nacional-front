@@ -2,8 +2,8 @@ export const environment: any = {
   production: false,
   CONFIGURACION_SERVICIOS: {
     'produccion-nacional': {
-      protocol: 'http',
-      host: '3aa8b8e5a00c.ngrok.io',
+      protocol: 'https',
+      host: '6002e2b54f17c8001755847a.mockapi.io',
       port: 80,
       pathName: 'api-vuce/v1'
     }
