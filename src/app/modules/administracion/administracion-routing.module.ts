@@ -25,6 +25,10 @@ const routes: Routes = [
             canActivate: [NavegacionGuard]
           }
         ]
+      },
+      {
+        path: 'administracionTablas',
+        loadChildren: () => import('./modules/programa/programa.module').then((module) => module.ProgramaModule) 
       }
     ]
   }
