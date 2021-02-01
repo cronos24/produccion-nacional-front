@@ -296,6 +296,18 @@ button.outlined {
   background-color: unset;
 }
 
+button.btn-secundario {
+  color: #3366cc;
+  background-color: #ffffff;
+  border: 1.5px #3366cc solid;
+}
+
+button.btn-secundario:hover {
+  background-color: #e4e4e4;
+  color: #3366cc;
+}
+
+
 button.outlined:enabled {
   box-shadow: 0 0 0 1.5pt $primary-color;
   color: $primary-color;

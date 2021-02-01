@@ -34,6 +34,8 @@ import { SolicitudRequerimientoComponent } from './components/solicitud-requerim
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { ModalComponent } from './util/modal/modal.component';
+import { MaterialesExtranjerosNacionalesComponent } from './components/registro-solicitud/materiales-extranjeros-nacionales/materiales-extranjeros-nacionales.component';
+import { AgregarInsumosComponent } from './components/registro-solicitud/agregar-insumos/agregar-insumos.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ModalComponent } from './util/modal/modal.component';
     ModalInsumosComponent,
     ProcesoProduccionComponent,
     RegistroSolicitudComponent,
-    SolicitudRequerimientoComponent
+    SolicitudRequerimientoComponent,
+    MaterialesExtranjerosNacionalesComponent,
+    AgregarInsumosComponent
   ],
   imports: [
     AccordionModule,
