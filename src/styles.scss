@@ -61,6 +61,12 @@ $theme: mat-light-theme(
     > td.center {
       text-align: center;
     }
+    > td.right {
+      text-align: right;
+    }
+    > td.right {
+      text-align: left;
+    }
   }
 }
 
