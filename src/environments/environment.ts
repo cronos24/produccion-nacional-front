@@ -3,9 +3,9 @@ export const environment: any = {
   CONFIGURACION_SERVICIOS: {
     'produccion-nacional': {
       protocol: 'https',
-      host: '6002e2b54f17c8001755847a.mockapi.io',
-      port: 80,
-      pathName: 'api-vuce/v1'
+      host: '34.71.5.25',
+      port: 8080,
+      pathName: 'pn/api/v1'
     }
   }
 };
