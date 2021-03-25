@@ -1,32 +1,34 @@
 <div class="p-grid">
-    <div class="p-col">
+    <div class="p-col-12">
         <p-message severity="info"
             text="Seleccionar el criterio bajo el cual se califica como productor de bienes nacionales, en concordancia con los criterios establecidos en los artìculos 2º al 6º del Decreto 2680 de 2009 del Ministerio de Comercio, Industria y Turismo.">
         </p-message>
     </div>
 </div>
+<form [formGroup]="formularioCriterio">
 
-<ng-template #produccionNacional [ngIf]="tipoFormulario === 'produccionNacional'">
     <div class="p-grid">
         <div class="p-col">
             <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
+                <mat-icon svgIcon="informacion-circular-negativo" 
                     matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
                 </mat-icon>
                 <label>
-                    <input type="checkbox" />
-                    3.1. Bienes Totalmente Obtenidos:
+                    <input type="checkbox"
+                           formControlName="bienesTotal" />
+                    3.1 Bienes Totalmente Obtenidos
                 </label>
             </div>
         </div>
         <div class="p-col">
             <div class="icon-group">
                 <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Bienes Elaborados Exclusivamente Con Mater ias Nacionales:  Decreto 2680 del 2009 artìculo 3.">
+                    matTooltip="Porcentaje Mìnimo Valor Agregado Nacional: Decreto 2680 del 2009 artìculo 4 y 5.">
                 </mat-icon>
                 <label>
-                    <input type="checkbox" />
-                    3.2. Bienes Elaborados Exclusivamente Con Materias Nacionales:
+                    <input type="checkbox" 
+                           formControlName="porcentajeMinimo"/>
+                    3.3 Porcentaje Mínimo Valor Agredado Nacional
                 </label>
             </div>
         </div>
@@ -36,11 +38,12 @@
         <div class="p-col">
             <div class="icon-group">
                 <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Porcentaje Mìnimo Valor Agregado Nacional: Decreto 2680 del 2009 artìculo 4 y 5.">
+                    matTooltip="Bienes Elaborados Exclusivamente Con Mater ias Nacionales:  Decreto 2680 del 2009 artìculo 3.">
                 </mat-icon>
                 <label>
-                    <input type="checkbox" />
-                    3.3. Porcentaje Mìno Valor Agredado Nacional:
+                    <input type="checkbox" 
+                            formControlName="bienesElaborados"/>
+                    3.2 Bienes Elaborados Exclusivamente Con Materias Nacionales
                 </label>
             </div>
         </div>
@@ -50,69 +53,9 @@
                     matTooltip="Proceso Productivo Sustancial Decreto 2680 del 2009 artìculo 4, 6 y 7.">
                 </mat-icon>
                 <label>
-                    <input type="checkbox" />
-                    3.4. Proceso Productivo Sustancial:
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="p-grid">
-        <div class="p-col">
-            <button>Decreto 2680 de 2009</button>
-        </div>
-        <div class="p-col">
-            <p-message severity="info" text="Bienes obtenidos por transformaciòn sustancial."></p-message>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #fomentoIndustriaAutomotriz [ngIf]="tipoFormulario === 'fomentoIndustriaAutomotriz'">
-    <div class="p-grid">
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo" class="disabled"
-                    matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" disabled />
-                    3.1. Bienes Totalmente Obtenidos:
-                </label>
-            </div>
-        </div>
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Bienes Elaborados Exclusivamente Con Mater ias Nacionales:  Decreto 2680 del 2009 artìculo 3.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" />
-                    3.2. Bienes Elaborados Exclusivamente Con Materias Nacionales:
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="p-grid">
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Porcentaje Mìnimo Valor Agregado Nacional: Decreto 2680 del 2009 artìculo 4 y 5.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" />
-                    3.3. Porcentaje Mìno Valor Agredado Nacional:
-                </label>
-            </div>
-        </div>
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Proceso Productivo Sustancial Decreto 2680 del 2009 artìculo 4, 6 y 7.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" />
-                    3.4. Proceso Productivo Sustancial:
+                    <input type="checkbox"
+                           formControlName="procesoProductivo" />
+                    3.4 Proceso Productivo Sustancial
                 </label>
             </div>
         </div>
@@ -121,71 +64,7 @@
 
     <div class="p-grid">
         <div class="p-col">
-            <button>Decreto 2680 de 2009</button>
-        </div>
-        <div class="p-col">
-            <p-message severity="info" text="Bienes obtenidos por transformaciòn sustancial."></p-message>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #regimenTransformacionEnsamblePlanillas
-    [ngIf]="tipoFormulario === 'regimenTransformacionEnsamblePlanillas'">
-
-    <div class="p-grid">
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo" class="disabled"
-                    matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" disabled />
-                    3.1. Bienes Totalmente Obtenidos:
-                </label>
-            </div>
-        </div>
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Bienes Elaborados Exclusivamente Con Mater ias Nacionales:  Decreto 2680 del 2009 artìculo 3.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" />
-                    3.2. Bienes Elaborados Exclusivamente Con Materias Nacionales:
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="p-grid">
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Porcentaje Mìnimo Valor Agregado Nacional: Decreto 2680 del 2009 artìculo 4 y 5.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" />
-                    3.3. Porcentaje Mìno Valor Agredado Nacional:
-                </label>
-            </div>
-        </div>
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Proceso Productivo Sustancial Decreto 2680 del 2009 artìculo 4, 6 y 7.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" />
-                    3.4. Proceso Productivo Sustancial:
-                </label>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="p-grid">
-        <div class="p-col">
-            <button>Decreto 2680 de 2009</button>
+            <button>Decreto 2436 de 2016</button>
         </div>
         <div class="p-col">
             <p-message severity="info" text="Bienes obtenidos por transformaciòn sustancial."></p-message>
@@ -194,7 +73,7 @@
 
     <hr />
 
-    <div class="titulo">
+    <div class="titulo" *ngIf="mostrarInsumo">
         <label class="headline-l">Origen de los insumos</label>
         <label>Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE</label>
 
@@ -213,4 +92,5 @@
             </label>
         </div>
     </div>
-</ng-template>
+
+</form>
