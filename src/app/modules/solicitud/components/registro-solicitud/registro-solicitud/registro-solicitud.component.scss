@@ -1,19 +1,44 @@
 @import "../../../../../../variables.scss";
 
 .titulo {
+  display: flex;
+  flex-direction: column;
+
+  border-width: 2px;
+  border-style: solid;
+  border-color: $light-primary-color;
+  border-radius: 20px;
+
+  padding: 16px;
+
+  .contenido {
     display: flex;
-    flex-direction: column;
-
-    border-width: 2px;
-    border-style: solid;
-    border-color: $light-primary-color;
-    border-radius: 20px;
-
-    
-    padding: 16px;
-
-    .contenido {
-        display: flex;
-        justify-content: space-between;
-    }
+    justify-content: space-between;
+  }
 }
+
+mat-expansion-panel-header {
+  background: $primary-color;
+  .mat-expansion-panel-header-title {
+    color: $tertiary-color-text;
+  }
+  :active,
+  &:hover {
+    color: $tertiary-color-text;
+  }
+}
+
+.mat-expansion-panel-header.mat-expanded:focus,
+.mat-expansion-panel-header.mat-expanded:hover {
+  background: $primary-color-icon !important;
+}
+.mat-expansion-panel
+  .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled="true"]),
+.mat-expansion-panel
+  .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled="true"]),
+.mat-expansion-panel:not(.mat-expanded)
+  .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
+  background: $primary-color-icon !important;
+}
+
+

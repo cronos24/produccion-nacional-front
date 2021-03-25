@@ -313,7 +313,6 @@ button.btn-secundario:hover {
   color: #3366cc;
 }
 
-
 button.outlined:enabled {
   box-shadow: 0 0 0 1.5pt $primary-color;
   color: $primary-color;
@@ -578,22 +577,30 @@ input[type="file"]::file-selector-button:hover {
   margin-bottom: 2px;
 }
 
-.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+.p-accordion
+  .p-accordion-header:not(.p-disabled).p-highlight
+  .p-accordion-header-link {
   background-color: $primary-color;
   color: $tertiary-color-text;
 }
 
-.p-accordion .p-accordion-header:not(.p-highlight):not(.p-disabled):hover .p-accordion-header-link {
+.p-accordion
+  .p-accordion-header:not(.p-highlight):not(.p-disabled):hover
+  .p-accordion-header-link {
   background-color: $dark-primary-color;
   color: $tertiary-color-text;
 }
 
-.p-accordion .p-accordion-header:not(.p-disabled).p-highlight:hover .p-accordion-header-link {
+.p-accordion
+  .p-accordion-header:not(.p-disabled).p-highlight:hover
+  .p-accordion-header-link {
   background-color: $dark-primary-color;
   color: $tertiary-color-text;
 }
 
-.p-accordion .p-accordion-tab:not(.p-accordion-tab-active) .p-accordion-header-link:focus {
+.p-accordion
+  .p-accordion-tab:not(.p-accordion-tab-active)
+  .p-accordion-header-link:focus {
   background-color: $primary-color;
   color: $tertiary-color-text;
 }
@@ -683,4 +690,13 @@ hr {
 .textImg {
   position: relative;
   top: -15px;
+}
+
+app-registro-solicitud {
+  .mat-expansion-indicator {
+    color: $tertiary-color-text !important;
+  }
+  ::after {
+    color: $tertiary-color-text !important;
+  }
 }
