@@ -36,6 +36,11 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { ModalComponent } from './util/modal/modal.component';
 import { MaterialesExtranjerosNacionalesComponent } from './components/registro-solicitud/materiales-extranjeros-nacionales/materiales-extranjeros-nacionales.component';
 import { AgregarInsumosComponent } from './components/registro-solicitud/agregar-insumos/agregar-insumos.component';
+import { AplicacionesProductoComponent } from './components/registro-solicitud/aplicaciones-producto/aplicaciones-producto.component';
+import { CaracteristicasTecnicasComponent } from './components/registro-solicitud/caracteristicas-tecnicas/caracteristicas-tecnicas.component';
+import { CaracteristicasTransformacionComponent } from './components/registro-solicitud/caracteristicas-transformacion/caracteristicas-transformacion.component';
+import { DatosRepresentanteLegalComponent } from './components/registro-solicitud/datos-representante-legal/datos-representante-legal.component';
+import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +61,12 @@ import { AgregarInsumosComponent } from './components/registro-solicitud/agregar
     RegistroSolicitudComponent,
     SolicitudRequerimientoComponent,
     MaterialesExtranjerosNacionalesComponent,
-    AgregarInsumosComponent
+    AgregarInsumosComponent,
+    AplicacionesProductoComponent,
+    CaracteristicasTecnicasComponent,
+    CaracteristicasTransformacionComponent,
+    DatosRepresentanteLegalComponent,
+    ValorAgregadoComponent
   ],
   imports: [
     AccordionModule,

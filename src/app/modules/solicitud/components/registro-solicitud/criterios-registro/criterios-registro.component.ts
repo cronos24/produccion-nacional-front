@@ -45,7 +45,7 @@ export class CriteriosRegistroComponent {
         this.mostrarRegistro = true;
         this.mostrarRegistroNoNacional = false;
         this.mostrarRegistroNacional = true;
-      }else if (tipoFormularioCheck === 'procesoProductivoSustancial') {
+      } else if (tipoFormularioCheck === 'procesoProductivoSustancial') {
         this.bienesTotalmenteObtenidos = false;
         this.porcentajeMinimoValorAgregadoNacional = false;
         this.bienesElaboradosMateriasNacionales = false;
@@ -53,12 +53,10 @@ export class CriteriosRegistroComponent {
         this.mostrarRegistro = true;
         this.mostrarRegistroNacional = false;
         this.mostrarRegistroNoNacional = true;
-      }
-      else if (tipoFormularioCheck === 'importadoMonopartista') {
+      } else if (tipoFormularioCheck === 'importadoMonopartista') {
         this.nacional = false;
         this.suministradoEnsambladora = false;
-      }
-      else if (tipoFormularioCheck === 'suministradoEnsambladora') {
+      } else if (tipoFormularioCheck === 'suministradoEnsambladora') {
         this.nacional = false;
         this.importadoMonopartista = false;
       }
