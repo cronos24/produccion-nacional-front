@@ -19,6 +19,8 @@
 
 mat-expansion-panel-header {
   background: $primary-color;
+  border-bottom: 2px solid;
+  border-bottom-color: $tertiary-color-text;
   .mat-expansion-panel-header-title {
     color: $tertiary-color-text;
   }
@@ -40,5 +42,3 @@ mat-expansion-panel-header {
   .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
   background: $primary-color-icon !important;
 }
-
-
