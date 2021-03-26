@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-criterios-registro',
@@ -95,8 +94,7 @@ export class CriteriosRegistroComponent implements OnInit {
         this.formsupdateValueAndValidity();
       }
     );
-    console.log('Fin', this.criterio);
-  }
+   }
 
   updateFormulario(tipo: string): void {
     this.noMostrarInsumoDecreto1122();

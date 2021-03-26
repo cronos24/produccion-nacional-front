@@ -2,8 +2,9 @@
     <div class="p-col">
         <div class="form-group">
             <label>6.1 Total Costos Materiales Nacionales u/comercial (COP):</label>
+            <br>
             <div class="icon-group">
-                <input placeholder="Nombre Comercial" type="number" formControlName="valorTotalUnidadProducto" readonly />
+                <input placeholder="0,00" type="number" formControlName="valorTotalUnidadProducto" readonly />
                 <mat-icon svgIcon="informacion-circular-negativo"
                     matTooltip="Valor perteneciente al numeral 5.6 Valor Total Unidad Producto (COP).">
                 </mat-icon>
@@ -14,12 +15,14 @@
         <div class="form-group">
             <label>6.2 Otros Costos Directos de Fábrica u/comercial (No Incluye Materias Primas) (COP):</label>
             <div class="icon-group">
-                <input placeholder="Nombre Comercial" type="number" formControlName="costosDirectosFabrica"/>
+                <input placeholder="0,00" type="number" formControlName="costosDirectosFabrica"/>
                 <mat-icon svgIcon="informacion-circular-negativo"
                     matTooltip="Costos implicados en la produccion del bien que no estan diligenciados.  No incluye materiales nacionales ni extranjeros.">
                 </mat-icon>
             </div>
-            <div class="error-input" *ngIf="costosValorFabrica.costosDirectosFabrica.errors?.required || costosValorFabrica.costosDirectosFabrica.errors?.pattern">
+            <div class="error-input" *ngIf="(costosValorFabrica.costosDirectosFabrica.errors?.required && 
+                                            costosValorFabrica.costosDirectosFabrica.touched) || 
+                                            costosValorFabrica.costosDirectosFabrica.errors?.pattern">
                 El campo es invalido por las siguientes razones: <br>
                 <span *ngIf="costosValorFabrica.costosDirectosFabrica.errors?.required">
                     Es vacio o contiene caracteres invalidos.
@@ -33,13 +36,14 @@
     <div class="p-col">
         <div class="form-group">
             <label>6.3 VT Valor Transacción (Precios ex Fabrica o ex Planta) (COP):</label>
+            <br>
             <div class="icon-group">
-                <input placeholder="Nombre Comercial" type="number" formControlName="valorTransaccion"/>
+                <input placeholder="0,00" type="number" formControlName="valorTransaccion"/>
                 <mat-icon svgIcon="informacion-circular-negativo"
                     matTooltip="Debe ser mayor a la sumatoria de 4.9, 6.1, 6.2, ya que este incluye, adicionalmente, los costos indirectos de producción (por ejemplo: impuestos, publicidad, mercadeo, transporte etc.). ">
                 </mat-icon>
             </div>
-            <div class="error-input" *ngIf="costosValorFabrica.valorTransaccion.errors">
+            <div class="error-input" *ngIf="costosValorFabrica.valorTransaccion.errors && costosValorFabrica.valorTransaccion.touched ">
                 El campo es invalido por las siguientes razones: 
                 <span *ngIf="costosValorFabrica.valorTransaccion.errors?.required">
                     <br> Es vacio o contiene caracteres invalidos.
