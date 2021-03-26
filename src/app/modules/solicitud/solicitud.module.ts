@@ -41,6 +41,8 @@ import { CaracteristicasTecnicasComponent } from './components/registro-solicitu
 import { CaracteristicasTransformacionComponent } from './components/registro-solicitud/caracteristicas-transformacion/caracteristicas-transformacion.component';
 import { DatosRepresentanteLegalComponent } from './components/registro-solicitud/datos-representante-legal/datos-representante-legal.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
+import { AnexosComponent } from './components/registro-solicitud/anexos/anexos.component';
+import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { ValorAgregadoComponent } from './components/registro-solicitud/valor-ag
     CaracteristicasTecnicasComponent,
     CaracteristicasTransformacionComponent,
     DatosRepresentanteLegalComponent,
-    ValorAgregadoComponent
+    ValorAgregadoComponent,
+    AnexosComponent
   ],
   imports: [
     AccordionModule,
@@ -97,7 +100,8 @@ import { ValorAgregadoComponent } from './components/registro-solicitud/valor-ag
     TooltipModule
   ],
   providers: [
-    SolicitudService
+    SolicitudService,
+    AnexosService
   ]
 })
 export class SolicitudModule { }

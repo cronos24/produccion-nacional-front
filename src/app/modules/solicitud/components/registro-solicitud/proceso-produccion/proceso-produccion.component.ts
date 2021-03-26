@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import {AdjuntarArchivoComponent } from '../../adjuntar-archivo/adjuntar-archivo.component';
+import { AdjuntarArchivoComponent } from '../../adjuntar-archivo/adjuntar-archivo.component';
 import { InformativoComponent } from '../../informativo/informativo.component';
 
 @Component({

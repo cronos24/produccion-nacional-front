@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-valor-agregado',
@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./valor-agregado.component.scss']
 })
 export class ValorAgregadoComponent {
-
+   @Input() public valorAgreagdo: number;
 
 }

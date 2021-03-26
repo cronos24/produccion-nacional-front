@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input} from '@angular/core';
+
 
 @Component({
   selector: 'app-caracteristicas-transformacion',
@@ -7,6 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class CaracteristicasTransformacionComponent {
 
-  @Input() public tipoFormulario: string;
+  @Input() public caracteristicasTransformacionActivar: boolean;
 
 }

@@ -47,7 +47,7 @@
                 3. CRITERIOS PARA EL REGISTRO
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-criterios-registro [tipoFormulario]="tipoFormulario"></app-criterios-registro>
+        <app-criterios-registro (oncriteriocheck)="setOpcionesCheckCriteriosRegistro($event)" [tipoFormulario]="tipoFormulario"></app-criterios-registro>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -84,7 +84,7 @@
                 8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-caracteristicas-transformacion></app-caracteristicas-transformacion>
+        <app-caracteristicas-transformacion [caracteristicasTransformacionActivar]="caracteristicasTransformacionActivar">></app-caracteristicas-transformacion>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -111,7 +111,7 @@
                 11. VALOR AGREGADO NACIONAL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-valor-agregado></app-valor-agregado>
+        <app-valor-agregado [valorAgreagdo]="valorAgreagdo"></app-valor-agregado>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -123,6 +123,25 @@
         <app-datos-representante-legal></app-datos-representante-legal>
     </mat-expansion-panel>
 
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                13. ANEXOS
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-anexos></app-anexos>
+    </mat-expansion-panel>
+
 </mat-accordion>
 
+<br />
+<br />
+
+<div class="p-col">
+  <button class="button-content" style="margin-right:20px">FIRMAR Y RADICAR SOLICITUD</button>
+  <button class="button-content" style="margin-right:20px">GUARDAR BORRADOR</button>
+  <button class="button-content" style="margin-right:20px"(click)="listarSolicitud()">VER SOLICITUDES</button>
+</div>
+
+<br />
 <br />

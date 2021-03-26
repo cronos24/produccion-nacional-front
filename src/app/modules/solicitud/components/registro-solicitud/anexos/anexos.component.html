@@ -1,0 +1,90 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-message severity="info"
+            text="En esta sección se adjuntan los documentos soporte del REGISTRO DE PRODUCTOR DE BIENES NACIONALES.">
+        </p-message>
+    </div>
+</div>
+
+<div class="p-grid">
+    <div class="p-col-12">
+        <p class="headline-xs-danger">Únicamente archivos con extensión pdf de tamaño máximo de 5MB.</p>
+    </div>
+</div>
+
+<div class="p-grid">
+    <div class="p-col-3" style="margin-right:100px">
+        <input type="file" id="myfile" name="myfile" accept="application/pdf">
+    </div>
+    <div class="p-col-3">
+        <textarea pInputTextarea placeholder="Descripción (Máximo 50 caracteres)" minlength="3" maxlength="32000"></textarea>
+    </div>
+    <div class="p-col-6" style="text-align:right">
+        <button class="button-content">SUBIR ANEXO</button>
+    </div>
+</div>
+
+<div class="p-col-12">
+    <p class="headline-xs">Antes de anexar algún archivo, porfavor guarde sus cambios para no perderlos</p>
+</div>
+
+<div class="table">
+    <div class="title">
+        <div class="sub-title">
+            <div class="input-group-buscar">
+                <input placeholder="Buscar" type="text" [(ngModel)]="busqueda" (ngModelChange)="onBuscar()" />
+                <mat-icon svgIcon="buscar-circular-negativo"></mat-icon>
+            </div>
+        </div>
+    </div>
+    <p-table [value]="anexos" [customSort]="true" [lazy]="true" (onLazyLoad)="onSort($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="archivo">
+                    <span class="headline-s --dark-primary-color">
+                        Archivo<p-sortIcon field="archivo"></p-sortIcon>
+                    </span>
+                </th>
+                <th pSortableColumn="descripcion">
+                    <span class="headline-s --dark-primary-color">
+                        Descripción<p-sortIcon field="descripcion"></p-sortIcon>
+                    </span>
+                </th>
+                <th pSortableColumn="fechaPresentacion">
+                    <span class="headline-s --dark-primary-color">
+                        Fecha de presentación<p-sortIcon field="fechaPresentacion"></p-sortIcon>
+                    </span>
+                </th>
+                <th>
+                  <span class="headline-s --dark-primary-color">Eliminar</span>
+                </th>
+                <th>
+                    <span class="headline-s --dark-primary-color">Descargar</span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-anexos>
+            <tr>
+                <td>
+                    <p class="body-uno">{{anexos['archivo']}}</p>
+                </td>
+                <td>
+                    <p class="body-uno">{{anexos['descripcion']}}</p>
+                </td>
+                <td>
+                    <p class="body-uno">{{anexos['fechaPresentacion']}}</p>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="adjunto-positivo"></mat-icon>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <div *ngIf="anexos.length==0">
+        <p class="content body-uno">No se encontraron registros coincidentes</p>
+    </div>
+    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
+</div>
