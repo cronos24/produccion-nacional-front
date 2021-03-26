@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-criterios-registro',
@@ -23,9 +22,6 @@ export class CriteriosRegistroComponent implements OnInit {
   }
 
   @Output() oncriterio = new EventEmitter<any>();
-  @Output() oncriteriocheck = new EventEmitter<string>();
-
-
 
   formularioCriterio: FormGroup;
   formularioInsumo: FormGroup;
@@ -58,14 +54,14 @@ export class CriteriosRegistroComponent implements OnInit {
         if (this.inTipoFormulario == 'regimenTransformacionEnsamblePlanillas') {
           if (x) {
             this.criterioSeleccionado = "bienesElaborados"
-            this.oncriteriocheck.emit(this.criterioSeleccionado);
+            this.oncriterio.emit(this.criterioSeleccionado);
             this.activeNacional();
             this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
             this.formularioCriterio.controls.procesoProductivo.setValue(false);
             this.resetFormularioInsumo();
           } else {
             this.criterioSeleccionado = "nobienesElaborados"
-            this.oncriteriocheck.emit(this.criterioSeleccionado);
+            this.oncriterio.emit(this.criterioSeleccionado);
             if (
               this.formularioCriterio.controls.porcentajeMinimo.value ||
               this.formularioCriterio.controls.procesoProductivo.value
@@ -97,13 +93,13 @@ export class CriteriosRegistroComponent implements OnInit {
         if (this.inTipoFormulario == 'regimenTransformacionEnsamblePlanillas') {
           if (x) {
             this.criterioSeleccionado = "procesoProductivo"
-            this.oncriteriocheck.emit(this.criterioSeleccionado);
+            this.oncriterio.emit(this.criterioSeleccionado);
             this.formularioCriteriovalueChanges();
             this.formularioCriterio.controls.bienesElaborados.setValue(false);
             this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
           }else {
             this.criterioSeleccionado = "noprocesoProductivo"
-            this.oncriteriocheck.emit(this.criterioSeleccionado);
+            this.oncriterio.emit(this.criterioSeleccionado);
           }
         }
         this.formsupdateValueAndValidity();

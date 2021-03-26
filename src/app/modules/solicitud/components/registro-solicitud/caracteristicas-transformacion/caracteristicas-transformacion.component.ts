@@ -1,5 +1,5 @@
 import { Component, Input} from '@angular/core';
-
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-caracteristicas-transformacion',
@@ -9,5 +9,16 @@ import { Component, Input} from '@angular/core';
 export class CaracteristicasTransformacionComponent {
 
   @Input() public caracteristicasTransformacionActivar: boolean;
+
+  public caracteristicasTransformacionGroup: FormGroup = this.formBuilder.group({
+    descripcion: [, Validators.required],
+  });
+
+  constructor(
+    public formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+  }
 
 }

@@ -47,7 +47,7 @@
                 3. CRITERIOS PARA EL REGISTRO
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-criterios-registro (oncriteriocheck)="setOpcionesCheckCriteriosRegistro($event)" [tipoFormulario]="tipoFormulario"></app-criterios-registro>
+        <app-criterios-registro (oncriterio)="setOpcionesCheckCriteriosRegistro($event)" [tipoFormulario]="tipoFormulario"></app-criterios-registro>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -57,7 +57,6 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-materiales-extranjeros-nacionales></app-materiales-extranjeros-nacionales>
-        <app-criterios-registro></app-criterios-registro>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -111,7 +110,7 @@
                 11. VALOR AGREGADO NACIONAL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-valor-agregado [valorAgreagdo]="valorAgreagdo"></app-valor-agregado>
+        <app-valor-agregado [valorAgregado]="valorAgregado"></app-valor-agregado>
     </mat-expansion-panel>
 
     <mat-expansion-panel>

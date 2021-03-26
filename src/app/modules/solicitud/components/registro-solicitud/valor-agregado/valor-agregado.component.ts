@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-valor-agregado',
@@ -6,6 +6,29 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./valor-agregado.component.scss']
 })
 export class ValorAgregadoComponent {
-   @Input() public valorAgreagdo: number;
+
+    @Input()
+    public set valorAgregado(valor: number) {
+      this.calcularAgregadoNacional (valor)
+    }
+   @Input() public sumaMaterialesImportados: number = 10000;
+   @Input() public valorTransaccion: number = 20000;
+
+   public agregadoNacional: number;
+
+   ngOnInit(): void {
+
+  }
+
+    public calcularAgregadoNacional (valor: number){
+      if (valor === 100){
+        this.agregadoNacional = valor;
+      }else{
+        let agregado =  this.valorTransaccion - this.sumaMaterialesImportados;
+        agregado = agregado / this.valorTransaccion;
+        agregado = agregado * 100;
+        this.agregadoNacional = agregado;
+      }
+  }
 
 }

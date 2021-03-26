@@ -15,7 +15,7 @@ export class RegistroSolicitudComponent {
 
   public tipoFormulario: string;
   public caracteristicasTransformacionActivar: boolean;
-  public valorAgreagdo: number;
+  public valorAgregado: number;
 
   constructor(
     private router: Router,
@@ -31,10 +31,10 @@ export class RegistroSolicitudComponent {
         this.caracteristicasTransformacionActivar = false;
         break;
       case 'bienesElaborados':
-        this.valorAgreagdo = 100;
+        this.valorAgregado = 100;
         break;
       case 'nobienesElaborados':
-        this.valorAgreagdo = 0.00;
+        this.valorAgregado = 0.00;
         break;
     }
   }

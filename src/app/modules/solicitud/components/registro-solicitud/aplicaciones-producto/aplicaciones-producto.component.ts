@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-aplicaciones-producto',
@@ -7,5 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AplicacionesProductoComponent {
 
+  public aplicacionesProductoGroup: FormGroup = this.formBuilder.group({
+    descripcion: [, Validators.required],
+  });
+
+  constructor(
+    public formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+  }
 
 }

@@ -1,9 +1,9 @@
-<div class="p-grid">
+<div class="p-grid" [formGroup]="datosRepresentanteGroup">
   <div class="p-col">
       <div class="form-group">
           <label>Representante Legal:</label>
           <div class="icon-group">
-              <input placeholder="Nombre Representante" type="text" maxlength="3000"/>
+              <input placeholder="Nombre Representante" type="text" maxlength="3000" formControlName="nombreRepresentante"/>
               <mat-icon svgIcon="informacion-circular-negativo"
                   matTooltip="Representante legal Es quien se encuentra registrado en el Certificado de Existencia y Representación Legal para persona Jurídica o Registro Mercantil para persona Natural.">
               </mat-icon>
@@ -14,7 +14,7 @@
       <div class="form-group">
           <label>Identificación:</label>
           <div class="icon-group">
-              <input placeholder="Ingrese únicamente dígitos" type="text" type="number"/>
+              <input placeholder="Ingrese únicamente dígitos" type="text" type="number" formControlName="identificacion"/>
               <mat-icon svgIcon="informacion-circular-negativo"
                   matTooltip="Documento de identidad del representante legal.">
               </mat-icon>
@@ -28,7 +28,7 @@
       <div class="form-group">
           <label>Cargo:</label>
           <div class="icon-group">
-              <input placeholder="Cargo Representante" type="text" maxlength="3000"/>
+              <input placeholder="Cargo Representante" type="text" maxlength="3000" formControlName="cargo"/>
               <mat-icon svgIcon="informacion-circular-negativo"
                   matTooltip="Cargo que ocupa el representante legal en la empresa.">
               </mat-icon>
