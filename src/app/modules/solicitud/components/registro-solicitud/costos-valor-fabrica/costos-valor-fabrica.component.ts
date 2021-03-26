@@ -10,10 +10,12 @@ export class CostosValorFabricaComponent implements OnInit {
 
   @Input() valorTotalUnidadProducto: number = 535987;
   @Input() valorCalculadoMasCostosProduccion: number = 20000;
+
+
   public costosValorFabricaGroup: FormGroup = this.formBuilder.group({
     valorTotalUnidadProducto: [0, Validators.required],
     costosDirectosFabrica: [0, [Validators.required, Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]],
-    valorTransaccion: [0, 
+    valorTransaccion: [0,
       [
         Validators.required,
         Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/),

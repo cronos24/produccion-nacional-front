@@ -36,6 +36,13 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { ModalComponent } from './util/modal/modal.component';
 import { MaterialesExtranjerosNacionalesComponent } from './components/registro-solicitud/materiales-extranjeros-nacionales/materiales-extranjeros-nacionales.component';
 import { AgregarInsumosComponent } from './components/registro-solicitud/agregar-insumos/agregar-insumos.component';
+import { AplicacionesProductoComponent } from './components/registro-solicitud/aplicaciones-producto/aplicaciones-producto.component';
+import { CaracteristicasTecnicasComponent } from './components/registro-solicitud/caracteristicas-tecnicas/caracteristicas-tecnicas.component';
+import { CaracteristicasTransformacionComponent } from './components/registro-solicitud/caracteristicas-transformacion/caracteristicas-transformacion.component';
+import { DatosRepresentanteLegalComponent } from './components/registro-solicitud/datos-representante-legal/datos-representante-legal.component';
+import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
+import { AnexosComponent } from './components/registro-solicitud/anexos/anexos.component';
+import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +63,13 @@ import { AgregarInsumosComponent } from './components/registro-solicitud/agregar
     RegistroSolicitudComponent,
     SolicitudRequerimientoComponent,
     MaterialesExtranjerosNacionalesComponent,
-    AgregarInsumosComponent
+    AgregarInsumosComponent,
+    AplicacionesProductoComponent,
+    CaracteristicasTecnicasComponent,
+    CaracteristicasTransformacionComponent,
+    DatosRepresentanteLegalComponent,
+    ValorAgregadoComponent,
+    AnexosComponent
   ],
   imports: [
     AccordionModule,
@@ -85,7 +98,8 @@ import { AgregarInsumosComponent } from './components/registro-solicitud/agregar
     TooltipModule
   ],
   providers: [
-    SolicitudService
+    SolicitudService,
+    AnexosService
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

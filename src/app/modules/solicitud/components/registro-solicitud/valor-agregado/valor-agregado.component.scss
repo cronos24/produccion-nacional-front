@@ -1,0 +1,66 @@
+@import "../../../../../../variables.scss";
+
+.p-col {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.titulo {
+    display: flex;
+    flex-direction: column;
+
+    .contenido {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+label.group {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+::ng-deep {
+    .mat-tooltip {
+        white-space: pre-line !important;
+        color: $primary-color-text !important;
+        background-color: $background-color;
+
+        font-family: $font-worksans;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    p-message {
+        width: 100%;
+    }
+
+    .p-inline-message {
+        margin: 0;
+        width: 100%;
+        .p-inline-message-wrapper {
+            padding: 20px 32px;
+        }
+        .p-inline-message-text {
+            font-family: $font-monserrat;
+            font-weight: 700;
+            font-size: 18px;
+
+            width: 100%;
+
+            padding-left: 32px;
+        }
+        &.p-inline-message-info {
+            background: $light-primary-color;
+            color: $dark-primary-color;
+
+            .p-inline-message-icon {
+                margin: 0px;
+                width: 42px;
+                height: 42px;
+                content: url("../../../../../../assets/icons/informacion-circular-negativo-fondo-blanco.svg");
+            }
+        }
+    }
+}

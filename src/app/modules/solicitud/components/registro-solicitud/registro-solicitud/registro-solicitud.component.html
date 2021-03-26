@@ -23,20 +23,20 @@
 <br />
 
 <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel color="primary">
-        <mat-expansion-panel-header color="primary">
-            <mat-panel-title color="primary">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
                 1. IDENTIFICACION DE LA EMPRESA
             </mat-panel-title>
         </mat-expansion-panel-header>
     </mat-expansion-panel>
+
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)
             </mat-panel-title>
         </mat-expansion-panel-header>
-
         <app-datos-producto [tipoFormulario]="tipoFormulario"></app-datos-producto>
     </mat-expansion-panel>
 
@@ -46,9 +46,8 @@
                 3. CRITERIOS PARA EL REGISTRO
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-criterios-registro [tipoFormulario]="tipoFormulario"></app-criterios-registro>
+        <app-criterios-registro (oncriterio)="setOpcionesCheckCriteriosRegistro($event)" [tipoFormulario]="tipoFormulario"></app-criterios-registro>
     </mat-expansion-panel>
-
 
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -56,10 +55,9 @@
                 4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-criterios-registro></app-criterios-registro>
-        <app-materiales-extranjeros-nacionales></app-materiales-extranjeros-nacionales>
-        
+        <app-materiales-extranjeros-nacionales></app-materiales-extranjeros-nacionales>        
     </mat-expansion-panel>
+
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -77,4 +75,71 @@
         </mat-expansion-panel-header>
         <app-proceso-produccion></app-proceso-produccion>
     </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-caracteristicas-transformacion [caracteristicasTransformacionActivar]="caracteristicasTransformacionActivar">></app-caracteristicas-transformacion>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                9. CARACTERÍSTICAS TÉCNICAS DEL PRODUCTO
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-caracteristicas-tecnicas></app-caracteristicas-tecnicas>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                10. APLICACIONES DEL PRODUCTO
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-aplicaciones-producto></app-aplicaciones-producto>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                11. VALOR AGREGADO NACIONAL
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-valor-agregado [valorAgregado]="valorAgregado"></app-valor-agregado>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                12. DATOS DEL REPRESENTANTE LEGAL
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-datos-representante-legal></app-datos-representante-legal>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                13. ANEXOS
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-anexos></app-anexos>
+    </mat-expansion-panel>
+
 </mat-accordion>
+
+<br />
+<br />
+
+<div class="p-col">
+  <button class="button-content" style="margin-right:20px">FIRMAR Y RADICAR SOLICITUD</button>
+  <button class="button-content" style="margin-right:20px">GUARDAR BORRADOR</button>
+  <button class="button-content" style="margin-right:20px"(click)="listarSolicitud()">VER SOLICITUDES</button>
+</div>
+
+<br />
+<br />
