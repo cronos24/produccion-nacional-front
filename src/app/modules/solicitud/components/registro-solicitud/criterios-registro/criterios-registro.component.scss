@@ -33,7 +33,9 @@ label.group {
     }
 
     p-message {
-        width: 100%;
+        width: 100% !important;
+        margin: auto;
+        text-align: justify;
     }
 
     .p-inline-message {

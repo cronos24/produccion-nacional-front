@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AccordionModule } from 'primeng/accordion';
@@ -78,8 +78,6 @@ import { AgregarInsumosComponent } from './components/registro-solicitud/agregar
     ReactiveFormsModule,
     ReactiveFormsModule,
     SharedModule,
-    SharedModule,
-    SharedModule,
     SolicitudRoutingModule,
     SolicitudRoutingModule,
     TableModule,
@@ -88,6 +86,9 @@ import { AgregarInsumosComponent } from './components/registro-solicitud/agregar
   ],
   providers: [
     SolicitudService
+  ],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class SolicitudModule { }
