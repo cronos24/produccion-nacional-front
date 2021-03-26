@@ -10,7 +10,7 @@
     <div class="p-grid">
         <div class="p-col">
             <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo" 
+                <mat-icon svgIcon="informacion-circular-negativo" [ngClass] ="inactivoIconBienes ? 'enable': 'disabled'"
                     matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
                 </mat-icon>
                 <label>
@@ -63,34 +63,41 @@
 
 
     <div class="p-grid">
-        <div class="p-col">
-            <button>Decreto 2436 de 2016</button>
+        <div class="p-col-3">
+            <button>Decreto 2680 de 2009</button>
         </div>
-        <div class="p-col">
+        <div class="p-col-3">
+            <button *ngIf="mostrarDecreto1122">Decreto 1122 de 2019</button>
+        </div>
+        <div class="p-col-6">
             <p-message severity="info" text="Bienes obtenidos por transformaciòn sustancial."></p-message>
         </div>
     </div>
 
     <hr />
-
+</form>
+<form [formGroup] = "formularioInsumo">
     <div class="titulo" *ngIf="mostrarInsumo">
         <label class="headline-l">Origen de los insumos</label>
         <label>Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE</label>
-
+        
         <div class=" contenido">
             <label class="group">
-                <input type="checkbox" />
+                <input type="checkbox" 
+                formControlName="nacional"/>
                 100% Nacional
             </label>
             <label class="group">
-                <input type="checkbox" />
+                <input type="checkbox" 
+                formControlName="importado"/>
                 Importado por Monopartista
             </label>
             <label class="group">
-                <input type="checkbox" />
+                <input type="checkbox" 
+                formControlName="piezaInsumo"/>
                 Piezas o Insumos Importados y Suministrados por la Ensambladora o mixtos
             </label>
         </div>
     </div>
-
 </form>
+
