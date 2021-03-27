@@ -1,5 +1,9 @@
 export interface ISolicitud {
-    id?: number;
-    radicado?: string;
-    fechaRadicacion?: string;
+    productoNombreComercial: string,
+    programaId: string,
+    estado: number,
+    radicado: string,
+    auditoria: {
+        fechaCreacionFormateada
+    }
 }

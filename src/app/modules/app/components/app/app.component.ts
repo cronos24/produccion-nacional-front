@@ -24,6 +24,10 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon(
       'buscar-circular-negativo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/buscar-circular-negativo.svg')
+    );    
+    this.matIconRegistry.addSvgIcon(
+      'ver-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/ver-positivo.svg')
     );
     this.matIconRegistry.addSvgIcon(
       'pdf-positivo',

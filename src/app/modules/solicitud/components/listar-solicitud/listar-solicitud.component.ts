@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import moment from 'moment';
+import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 
 import { IPagina } from '../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../interfaces/respuesta.interface';
+import { Estado } from '../../enums/estado.enum';
 import { ISolicitud } from '../../interfaces/solicitud.interface';
 import { SolicitudService } from '../../services/solicitud.service';
 import { CancelarSolicitudComponent } from '../cancelar-solicitud/cancelar-solicitud.component';
@@ -20,17 +23,21 @@ export class ListarSolicitudComponent implements OnInit {
   public busqueda: string;
   public pagina: IPagina = {
     pagina: 1,
-    registrosPorPagina: 8
+    registrosPorPagina: 10
   };
   public sort: { [key: string]: string };
 
+  public get estado(): typeof Estado {
+    return Estado;
+  }
+
   public constructor(
+    public dialogRef: MatDialogRef<any>,
     private dialog: MatDialog,
     private solicitudService: SolicitudService) { }
 
   public ngOnInit(): void {
     this.openDialog();
-    this.getSolicitudes();
   }
 
   public onBuscar(): void {
@@ -61,18 +68,62 @@ export class ListarSolicitudComponent implements OnInit {
     this.solicitudService.descargarPDF().subscribe();
   }
 
-  public onCancelarSolicitud(solicitud: ISolicitud): void {
-    this.dialog.open(CancelarSolicitudComponent, {
-      data: {
-        solicitud
-      }
-    });
+  public onEliminarBorrador(solicitud: ISolicitud, templateRef: any): void {
+    if (solicitud.estado == this.estado['Borrador']) {
+      this.dialogRef = this.dialog.open(templateRef, { data: { ...solicitud } });
+    } else {
+      this.dialog.open(AlertComponent, {
+        data: {
+          type: 'warning',
+          title: 'Atención',
+          description: 'No es posible eliminar este registro, la solicitud respectiva ya ha sido radicada',
+          acceptButton: 'REGRESAR'
+        }
+      });
+    }
+  }
+
+  public onEliminar(): void {
+  }
+
+  public onCopiarBorrador(solicitud: ISolicitud, templateRef: any): void {
+    this.dialogRef = this.dialog.open(templateRef, { data: { ...solicitud } });
+  }
+
+  public onCopiar(): void {
+  }
+
+  public onCancelarRegistro(solicitud: ISolicitud): void {
+    if (solicitud.estado == this.estado['Aprobado']) {
+      this.dialog.open(CancelarSolicitudComponent, {
+        data: {
+          solicitud
+        }
+      });
+    }
+    else {
+      this.dialog.open(AlertComponent, {
+        data: {
+          type: 'warning',
+          title: 'Atención',
+          description: 'No es posible solicitar cancelacion del registro ya que NO ha sido aprobada',
+          acceptButton: 'REGRESAR'
+        }
+      });
+    }
   }
 
   private getSolicitudes(): void {
     this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
-      this.solicitudes.pop();
+      console.log(respuesta, 'resp');
+
       this.solicitudes = respuesta.respuesta.solicitudes as ISolicitud[];
+      this.pagina = respuesta.respuesta.pagina as IPagina;
+
+      this.solicitudes.map((solicitud) => {
+        solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').toDate();
+
+      });
       // this.pagina = respuesta.respuesta.pagina;
     });
   }

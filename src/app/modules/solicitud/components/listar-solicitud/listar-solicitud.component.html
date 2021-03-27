@@ -13,9 +13,9 @@
     <p-table [value]="solicitudes" [customSort]="true" [lazy]="true" (onLazyLoad)="onSort($event)">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="radicado">
+                <th>
                     <span class="headline-s --dark-primary-color">
-                        Radicado<p-sortIcon field="radicado"></p-sortIcon>
+                        Ver Solicitud
                     </span>
                 </th>
                 <th pSortableColumn="fechaCreacion">
@@ -26,11 +26,6 @@
                 <th pSortableColumn="productoNombreComercial">
                     <span class="headline-s --dark-primary-color">
                         Nombre comercial<p-sortIcon field="productoNombreComercial"></p-sortIcon>
-                    </span>
-                </th>
-                <th pSortableColumn="responsable">
-                    <span class="headline-s --dark-primary-color">
-                        Responsable<p-sortIcon field="responsable"></p-sortIcon>
                     </span>
                 </th>
                 <th pSortableColumn="programaId">
@@ -48,8 +43,10 @@
                         Estado<p-sortIcon field="estado"></p-sortIcon>
                     </span>
                 </th>
-                <th>
-                    <span class="headline-s --dark-primary-color">Archivo PDF</span>
+                <th pSortableColumn="radicado">
+                    <span class="headline-s --dark-primary-color">
+                        Formulario Firmado<p-sortIcon field="radicado"></p-sortIcon>
+                    </span>
                 </th>
                 <th>
                     <span class="headline-s --dark-primary-color">Carta de respuesta</span>
@@ -70,41 +67,45 @@
         </ng-template>
         <ng-template pTemplate="body" let-solicitud>
             <tr>
-                <td>
-                  <a [routerLink]="['/solicitud/formulario/'+ solicitud['id']]"><p class="body-uno">{{solicitud['radicado']}}</p></a>
+                <td class="center">
+                    <mat-icon class="pointer" svgIcon="ver-positivo"></mat-icon>
                 </td>
                 <td>
-                    <p class="body-uno">{{solicitud['auditoria']['fechaCreacionFormateada']}}</p>
+                    <p class="body-uno">{{solicitud.auditoria.fechaCreacionFormateada | date: 'dd/MM/YYYY'}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{solicitud['productoNombreComercial']}}</p>
+                    <p class="body-uno">{{solicitud.productoNombreComercial}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{solicitud['responsable']}}</p>
+                    <p class="body-uno">{{solicitud.programaId}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{solicitud['programaId']}}</p>
+                    <p class="body-uno"></p>
                 </td>
                 <td>
-                    <p class="body-uno">{{solicitud['fechaActuacionFormateada']}}</p>
-                </td>
-                <td>
-                    <p class="body-uno">{{solicitud['estado']}}</p>
+                    <p class="body-uno">{{estado[solicitud.estado]}}</p>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="pdf-positivo" (click)="onDescargarPDF()"></mat-icon>
+                    <p [ngClass]="{'body-uno': true, 'link': solicitud.estado != estado['Borrador']}">
+                        {{solicitud.radicado}}</p>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="carta-positivo"></mat-icon>
+                    <mat-icon
+                        [ngClass]="{'pointer': solicitud.estado != estado['Borrador'] && solicitud.estado != estado['En evaluacion'] && solicitud.estado != estado['En requerimiento']}"
+                        [attr.disabled]="solicitud.estado != estado['Borrador'] && solicitud.estado != estado['En evaluacion'] && solicitud.estado != estado['En requerimiento'] ? false : true"
+                        svgIcon="carta-positivo"></mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                    <mat-icon class="pointer" [attr.disabled]="solicitud.estado == estado['Borrador'] ? false : true"
+                        svgIcon="papelera-positivo" (click)="onEliminarBorrador(solicitud, eliminarTemplate)">
+                    </mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="copiar-positivo"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="copiar-positivo" (click)="onCopiarBorrador(solicitud, copiarTemplate)"></mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="menos-circular-positivo" (click)="onCancelarSolicitud(solicitud)"></mat-icon>
+                    <mat-icon class="pointer" [attr.disabled]="solicitud.estado == estado['Aprobado'] ? false : true"
+                        svgIcon="menos-circular-positivo" (click)="onCancelarRegistro(solicitud)"></mat-icon>
                 </td>
                 <td class="center">
                     <mat-icon svgIcon="adjunto-positivo"></mat-icon>
@@ -115,5 +116,32 @@
     <div *ngIf="solicitudes.length==0">
         <p class="content body-uno">No se encontraron registros coincidentes</p>
     </div>
-    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
+    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="pagina.registrosTotales"
+        (onPageChange)="onPageChange($event)"></p-paginator>
 </div>
+
+<ng-template #eliminarTemplate let-solicitud>
+    <div class="modal warning">
+        <div>
+            <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
+            <p class="body-uno">¿Seguro desea borrar este registro {{solicitud.radicado}}?</p>
+        </div>
+        <div>
+            <button class="outlined" (click)="dialogRef.close()">CANCELAR</button>
+            <button (click)="onEliminar()">CONTINUAR</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #copiarTemplate let-solicitud>
+    <div class="modal warning">
+        <div>
+            <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
+            <p class="body-uno">¿Seguro desea genear una copia de este registro {{solicitud.radicado}}?</p>
+        </div>
+        <div>
+            <button class="outlined" (click)="dialogRef.close()">CANCELAR</button>
+            <button (click)="onCopiar()">CONTINUAR</button>
+        </div>
+    </div>
+</ng-template>

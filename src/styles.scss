@@ -313,7 +313,6 @@ button.btn-secundario:hover {
   color: #3366cc;
 }
 
-
 button.outlined:enabled {
   box-shadow: 0 0 0 1.5pt $primary-color;
   color: $primary-color;
@@ -329,13 +328,18 @@ button:enabled:hover {
   color: $tertiary-color-text;
 }
 
-svg {
-  fill: $primary-color-icon;
+mat-icon {
+  &.pointer {
+    cursor: pointer;
+  }
+  > svg {
+    fill: $primary-color-icon;
+  }
 }
 
-mat-icon.disabled {
+mat-icon[disabled="true"] {
   > svg {
-    fill: $secondary-color-icon !important;
+    fill: $secondary-color-icon;
   }
 }
 
@@ -683,4 +687,47 @@ hr {
 .textImg {
   position: relative;
   top: -15px;
+}
+
+.link {
+  color: $dark-primary-color;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.modal {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  > div {
+    display: flex;
+    align-items: center;
+    > mat-icon {
+      margin-right: 20px;
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &.warning {
+    > div {
+      > mat-icon {
+        > svg {
+          fill: $warning-color;
+        }
+      }
+    }
+  }
+  &.error {
+    > svg {
+      fill: $error-color;
+    }
+  }
 }

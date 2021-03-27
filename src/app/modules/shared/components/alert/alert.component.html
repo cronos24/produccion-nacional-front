@@ -1,10 +1,11 @@
 <div class="alert">
-    <mat-icon svgIcon="menos-circular-positivo"></mat-icon>
-
-    <p [ngClass]="{'headline-l': true, '--error-color': data.type === 'error'}">
+    <mat-icon [ngClass]="data.type"
+        svgIcon="cara-disgusto-negativo"></mat-icon>
+    <p
+        [ngClass]="{'headline-xl': true, '--error-color': data.type == 'error', '--warning-color': data.type == 'warning'}">
         {{data.title}}
     </p>
-    <div [ngClass]="{'body-uno': true, '--dark-primary-color': data.type === 'error'}" [innerHTML]="data.description">
+    <div [ngClass]="{'body-uno': true, '--dark-primary-color': true}" [innerHTML]="data.description">
     </div>
 
     <br />
