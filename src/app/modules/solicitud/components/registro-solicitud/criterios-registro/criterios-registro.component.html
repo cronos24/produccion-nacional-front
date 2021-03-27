@@ -1,77 +1,67 @@
-<div class="p-grid">
+<div class="p-grid" style="padding-top:10px;">
     <div class="p-col-12">
         <p-message severity="info"
             text="Corresponde a las materias primas, productos intermedios, partes y piezas de fabricación extranjera, utilizados en la elaboración del producto, ya sean importados directamente por el fabricante o adquiridos en el mercado nacional importados directamente por el proveedor.">
         </p-message>
     </div>
 </div>
-<form [formGroup]="formularioCriterio">
 
-    <div class="p-grid">
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo" [ngClass] ="inactivoIconBienes ? 'enable': 'disabled'"
-                    matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox"
-                           formControlName="bienesTotal" />
-                    3.1 Bienes Totalmente Obtenidos
-                </label>
-            </div>
-        </div>
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Porcentaje Mìnimo Valor Agregado Nacional: Decreto 2680 del 2009 artìculo 4 y 5.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" 
-                           formControlName="porcentajeMinimo"/>
-                    3.3 Porcentaje Mínimo Valor Agredado Nacional
-                </label>
-            </div>
-        </div>
-    </div>
+<ng-container *ngIf="mostrarFormulario">
+  <form [formGroup]="formularioCriterio">
 
-    <div class="p-grid">
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Bienes Elaborados Exclusivamente Con Mater ias Nacionales:  Decreto 2680 del 2009 artìculo 3.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox" 
-                            formControlName="bienesElaborados"/>
-                    3.2 Bienes Elaborados Exclusivamente Con Materias Nacionales
-                </label>
-            </div>
-        </div>
-        <div class="p-col">
-            <div class="icon-group">
-                <mat-icon svgIcon="informacion-circular-negativo"
-                    matTooltip="Proceso Productivo Sustancial Decreto 2680 del 2009 artìculo 4, 6 y 7.">
-                </mat-icon>
-                <label>
-                    <input type="checkbox"
-                           formControlName="procesoProductivo" />
-                    3.4 Proceso Productivo Sustancial
-                </label>
-            </div>
-        </div>
-    </div>
+      <div class="p-grid">
+          <div class="p-col">
+              <div class="icon-group">
+                  <mat-icon svgIcon="informacion-circular-negativo" [ngClass] ="inactivoIconBienes ? 'enable': 'disabled'"
+                      matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2.">
+                  </mat-icon>
+                  <label>
+                      <input type="checkbox"
+                            formControlName="bienesTotal" />
+                      3.1 Bienes Totalmente Obtenidos
+                  </label>
+              </div>
+          </div>
+          <div class="p-col">
+              <div class="icon-group">
+                  <mat-icon svgIcon="informacion-circular-negativo" [ngClass] ="inactivoPorcentajeMinimo ? 'enable': 'disabled'"
+                      matTooltip="Porcentaje Mìnimo Valor Agregado Nacional: Decreto 2680 del 2009 artìculo 4 y 5.">
+                  </mat-icon>
+                  <label>
+                      <input type="checkbox"
+                            formControlName="porcentajeMinimo"/>
+                      3.3 Porcentaje Mínimo Valor Agredado Nacional
+                  </label>
+              </div>
+          </div>
+      </div>
 
-  <div class="p-grid">
-      <div class="p-col-3">
-          <button>Decreto 2680 de 2009</button>
+      <div class="p-grid">
+          <div class="p-col">
+              <div class="icon-group">
+                  <mat-icon svgIcon="informacion-circular-negativo" [ngClass] ="inactivoBienesElaborados ? 'enable': 'disabled'"
+                      matTooltip="Bienes Elaborados Exclusivamente Con Mater ias Nacionales:  Decreto 2680 del 2009 artìculo 3.">
+                  </mat-icon>
+                  <label>
+                      <input type="checkbox"
+                              formControlName="bienesElaborados"/>
+                      3.2 Bienes Elaborados Exclusivamente Con Materias Nacionales
+                  </label>
+              </div>
+          </div>
+          <div class="p-col">
+              <div class="icon-group">
+                  <mat-icon svgIcon="informacion-circular-negativo" [ngClass] ="inactivoProcesoProductivo ? 'enable': 'disabled'"
+                      matTooltip="Proceso Productivo Sustancial Decreto 2680 del 2009 artìculo 4, 6 y 7.">
+                  </mat-icon>
+                  <label>
+                      <input type="checkbox"
+                            formControlName="procesoProductivo" />
+                      3.4 Proceso Productivo Sustancial
+                  </label>
+              </div>
+          </div>
       </div>
-      <div class="p-col-3">
-          <button *ngIf="mostrarDecreto1122">Decreto 1122 de 2019</button>
-      </div>
-      <div class="p-col-6">
-          <p-message severity="info" text="Bienes obtenidos por transformaciòn sustancial."></p-message>
-      </div>
-  </div>
 
     <div class="p-grid">
         <div class="p-col-3">
@@ -85,30 +75,30 @@
         </div>
     </div>
 
-    <hr />
-</form>
-<form [formGroup] = "formularioInsumo">
-    <div class="titulo" *ngIf="mostrarInsumo">
-        <label class="headline-l">Origen de los insumos</label>
-        <label>Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE</label>
-        
-        <div class=" contenido">
-            <label class="group">
-                <input type="checkbox" 
-                formControlName="nacional"/>
-                100% Nacional
-            </label>
-            <label class="group">
-                <input type="checkbox" 
-                formControlName="importado"/>
-                Importado por Monopartista
-            </label>
-            <label class="group">
-                <input type="checkbox" 
-                formControlName="piezaInsumo"/>
-                Piezas o Insumos Importados y Suministrados por la Ensambladora o mixtos
-            </label>
-        </div>
-    </div>
-</form>
+      <hr />
+  </form>
+  <form [formGroup] = "formularioInsumo">
+      <div class="titulo" *ngIf="mostrarInsumo">
+          <label class="headline-l">Origen de los insumos</label>
+          <label>Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE</label>
 
+          <div class=" contenido">
+              <label class="group">
+                  <input type="checkbox"
+                  formControlName="nacional"/>
+                  100% Nacional
+              </label>
+              <label class="group">
+                  <input type="checkbox"
+                  formControlName="importado"/>
+                  Importado por Monopartista
+              </label>
+              <label class="group">
+                  <input type="checkbox"
+                  formControlName="piezaInsumo"/>
+                  Piezas o Insumos Importados y Suministrados por la Ensambladora o mixtos
+              </label>
+          </div>
+      </div>
+  </form>
+</ng-container>

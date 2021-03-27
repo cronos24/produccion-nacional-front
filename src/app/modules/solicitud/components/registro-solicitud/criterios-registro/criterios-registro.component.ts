@@ -7,10 +7,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./criterios-registro.component.scss'],
 })
 export class CriteriosRegistroComponent implements OnInit {
+
+  public mostrarFormulario: boolean = false;
   inTipoFormulario: string = '';
   mostrarInsumo: boolean = false;
   mostrarDecreto1122: boolean = false;
-  inactivoIconBienes: boolean = true;
+  inactivoIconBienes: boolean = false;
+  inactivoPorcentajeMinimo: boolean = false;
+  inactivoBienesElaborados: boolean = false;
+  inactivoProcesoProductivo: boolean = false;
   criterio: any;
   criterioSeleccionado: string = '';
 
@@ -28,6 +33,7 @@ export class CriteriosRegistroComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+
     this.formularioCriterio = this.fb.group({
       bienesTotal: [false],
       bienesElaborados: [false],
@@ -48,6 +54,139 @@ export class CriteriosRegistroComponent implements OnInit {
 
     this.oncriterio.emit(this.criterio);
 
+    this.formularioCriterio.controls.bienesTotal.valueChanges.subscribe(
+      (x) => {
+        if (this.inTipoFormulario == 'produccionNacional') {
+          if (x) {
+            this.criterioSeleccionado = 'bienesTotal';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriterio.controls.bienesElaborados.setValue(false);
+            this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
+            this.formularioCriterio.controls.procesoProductivo.setValue(false);
+          } else {
+            this.criterioSeleccionado = 'nobienesTotal';
+            this.oncriterio.emit(this.criterioSeleccionado);
+          }
+        }
+        this.formsupdateValueAndValidity();
+      }
+    );
+
+    this.formularioCriterio.controls.bienesElaborados.valueChanges.subscribe(
+      (x) => {
+        if (this.inTipoFormulario == 'produccionNacional') {
+          if (x) {
+            this.criterioSeleccionado = 'bienesElaborados';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriterio.controls.bienesTotal.setValue(false);
+            this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
+            this.formularioCriterio.controls.procesoProductivo.setValue(false);
+          } else {
+            this.criterioSeleccionado = 'nobienesElaborados';
+            this.oncriterio.emit(this.criterioSeleccionado);
+          }
+        }
+        this.formsupdateValueAndValidity();
+      }
+    );
+
+    this.formularioCriterio.controls.porcentajeMinimo.valueChanges.subscribe(
+      (x) => {
+        if (this.inTipoFormulario == 'produccionNacional') {
+          if (x) {
+            this.criterioSeleccionado = 'porcentajeMinimo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+            this.formularioCriterio.controls.bienesTotal.setValue(false);
+            this.formularioCriterio.controls.bienesElaborados.setValue(false);
+            this.formularioCriterio.controls.procesoProductivo.setValue(false);
+          }
+          else {
+            this.criterioSeleccionado = 'procesoProductivo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+          }
+        }
+        this.formsupdateValueAndValidity();
+      }
+    );
+
+    this.formularioCriterio.controls.procesoProductivo.valueChanges.subscribe(
+      (x) => {
+        if (this.inTipoFormulario == 'produccionNacional') {
+          if (x) {
+            this.criterioSeleccionado = 'procesoProductivo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+            this.formularioCriterio.controls.bienesTotal.setValue(false);
+            this.formularioCriterio.controls.bienesElaborados.setValue(false);
+            this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
+          } else {
+            this.criterioSeleccionado = 'noprocesoProductivo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+          }
+        }
+        this.formsupdateValueAndValidity();
+      }
+    );
+
+    this.formularioCriterio.controls.bienesElaborados.valueChanges.subscribe(
+      (x) => {
+        if (this.inTipoFormulario == 'fomentoIndustriaAutomotriz') {
+          if (x) {
+            this.criterioSeleccionado = 'bienesElaborados';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
+            this.formularioCriterio.controls.procesoProductivo.setValue(false);
+          } else {
+            this.criterioSeleccionado = 'nobienesElaborados';
+            this.oncriterio.emit(this.criterioSeleccionado);
+          }
+        }
+        this.formsupdateValueAndValidity();
+      }
+    );
+
+    this.formularioCriterio.controls.porcentajeMinimo.valueChanges.subscribe(
+      (x) => {
+        if (this.inTipoFormulario == 'fomentoIndustriaAutomotriz') {
+          if (x) {
+            this.criterioSeleccionado = 'porcentajeMinimo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+            this.formularioCriterio.controls.bienesElaborados.setValue(false);
+            this.formularioCriterio.controls.procesoProductivo.setValue(false);
+          }
+          else {
+            this.criterioSeleccionado = 'procesoProductivo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+          }
+        }
+        this.formsupdateValueAndValidity();
+      }
+    );
+
+    this.formularioCriterio.controls.procesoProductivo.valueChanges.subscribe(
+      (x) => {
+        if (this.inTipoFormulario == 'fomentoIndustriaAutomotriz') {
+          if (x) {
+            this.criterioSeleccionado = 'procesoProductivo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+            this.formularioCriterio.controls.bienesElaborados.setValue(false);
+            this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
+          } else {
+            this.criterioSeleccionado = 'noprocesoProductivo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
+          }
+        }
+        this.formsupdateValueAndValidity();
+      }
+    );
+
     this.formularioCriterio.controls.bienesElaborados.valueChanges.subscribe(
       (x) => {
         if (this.inTipoFormulario == 'regimenTransformacionEnsamblePlanillas') {
@@ -61,12 +200,6 @@ export class CriteriosRegistroComponent implements OnInit {
           } else {
             this.criterioSeleccionado = 'nobienesElaborados';
             this.oncriterio.emit(this.criterioSeleccionado);
-            if (
-              this.formularioCriterio.controls.porcentajeMinimo.value ||
-              this.formularioCriterio.controls.procesoProductivo.value
-            ) {
-              this.resetNacional();
-            }
             this.resetNacional();
           }
         }
@@ -78,9 +211,16 @@ export class CriteriosRegistroComponent implements OnInit {
       (x) => {
         if (this.inTipoFormulario == 'regimenTransformacionEnsamblePlanillas') {
           if (x) {
+            this.criterioSeleccionado = 'porcentajeMinimo';
+            this.oncriterio.emit(this.criterioSeleccionado);
             this.formularioCriteriovalueChanges();
             this.formularioCriterio.controls.bienesElaborados.setValue(false);
             this.formularioCriterio.controls.procesoProductivo.setValue(false);
+          }
+          else {
+            this.criterioSeleccionado = 'procesoProductivo';
+            this.oncriterio.emit(this.criterioSeleccionado);
+            this.formularioCriteriovalueChanges();
           }
         }
         this.formsupdateValueAndValidity();
@@ -100,14 +240,11 @@ export class CriteriosRegistroComponent implements OnInit {
             this.criterioSeleccionado = 'noprocesoProductivo';
             this.oncriterio.emit(this.criterioSeleccionado);
             this.formularioCriteriovalueChanges();
-            this.formularioCriterio.controls.bienesElaborados.setValue(false);
-            this.formularioCriterio.controls.porcentajeMinimo.setValue(false);
           }
         }
         this.formsupdateValueAndValidity();
       }
     );
-    console.log('Fin', this.criterio);
   }
 
   updateFormulario(tipo: string): void {
@@ -115,7 +252,19 @@ export class CriteriosRegistroComponent implements OnInit {
 
     switch (tipo) {
       case 'produccionNacional':
+        this.mostrarFormulario = true;
         this.inactivoIconBienes = true;
+        this.inactivoPorcentajeMinimo = true;
+        this.inactivoBienesElaborados = true;
+        this.inactivoProcesoProductivo = true;
+        this.formularioCriterio?.controls.bienesTotal.enable();
+        this.formularioCriterio?.controls.bienesTotal.setValue(false);
+        this.formularioCriterio?.controls.porcentajeMinimo.enable();
+        this.formularioCriterio?.controls.porcentajeMinimo.setValue(false);
+        this.formularioCriterio?.controls.bienesElaborados.enable();
+        this.formularioCriterio?.controls.bienesElaborados.setValue(false);
+        this.formularioCriterio?.controls.procesoProductivo.enable();
+        this.formularioCriterio?.controls.procesoProductivo.setValue(false);
         this.formularioCriterio.controls.bienesTotal.enable();
         this.formularioCriterio.controls.bienesTotal.setValue(false);
         this.resetFormularioCriterio();
@@ -124,7 +273,17 @@ export class CriteriosRegistroComponent implements OnInit {
 
         break;
       case 'fomentoIndustriaAutomotriz':
+        this.mostrarFormulario = true;
         this.inactivoIconBienes = false;
+        this.inactivoPorcentajeMinimo = true;
+        this.inactivoBienesElaborados = true;
+        this.inactivoProcesoProductivo = true;
+        this.formularioCriterio?.controls.porcentajeMinimo.enable();
+        this.formularioCriterio?.controls.porcentajeMinimo.setValue(false);
+        this.formularioCriterio?.controls.bienesElaborados.enable();
+        this.formularioCriterio?.controls.bienesElaborados.setValue(false);
+        this.formularioCriterio?.controls.procesoProductivo.enable();
+        this.formularioCriterio?.controls.procesoProductivo.setValue(false);
         this.mostrarDecreto1122 = true;
         this.resetBienesTotal();
         this.resetFormularioCriterio();
@@ -134,7 +293,17 @@ export class CriteriosRegistroComponent implements OnInit {
         break;
 
       case 'regimenTransformacionEnsamblePlanillas':
+        this.mostrarFormulario = true;
         this.inactivoIconBienes = false;
+        this.inactivoPorcentajeMinimo = true;
+        this.inactivoBienesElaborados = true;
+        this.inactivoProcesoProductivo = true;
+        this.formularioCriterio?.controls.porcentajeMinimo.enable();
+        this.formularioCriterio?.controls.porcentajeMinimo.setValue(false);
+        this.formularioCriterio?.controls.bienesElaborados.enable();
+        this.formularioCriterio?.controls.bienesElaborados.setValue(false);
+        this.formularioCriterio?.controls.procesoProductivo.enable();
+        this.formularioCriterio?.controls.procesoProductivo.setValue(false);
         this.mostrarInsumo = true;
         this.mostrarDecreto1122 = true;
         this.resetBienesTotal();
@@ -145,9 +314,9 @@ export class CriteriosRegistroComponent implements OnInit {
         break;
 
       default:
-        this.inactivoIconBienes = true;
         this.resetFormularioCriterio();
         this.resetFormularioInsumo();
+        this.disableAll();
         this.formularioCriterio?.updateValueAndValidity();
 
         break;
@@ -157,6 +326,21 @@ export class CriteriosRegistroComponent implements OnInit {
   noMostrarInsumoDecreto1122(): void {
     this.mostrarInsumo = false;
     this.mostrarDecreto1122 = false;
+  }
+
+  disableAll(): void {
+    this.inactivoIconBienes = false;
+    this.inactivoPorcentajeMinimo = false;
+    this.inactivoBienesElaborados = false;
+    this.inactivoProcesoProductivo = false;
+    this.formularioCriterio?.controls.bienesTotal.disable();
+    this.formularioCriterio?.controls.bienesTotal.setValue(false);
+    this.formularioCriterio?.controls.porcentajeMinimo.disable();
+    this.formularioCriterio?.controls.porcentajeMinimo.setValue(false);
+    this.formularioCriterio?.controls.bienesElaborados.disable();
+    this.formularioCriterio?.controls.bienesElaborados.setValue(false);
+    this.formularioCriterio?.controls.procesoProductivo.disable();
+    this.formularioCriterio?.controls.procesoProductivo.setValue(false);
   }
 
   resetBienesTotal(): void {
