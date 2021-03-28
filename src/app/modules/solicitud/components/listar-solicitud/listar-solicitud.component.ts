@@ -3,7 +3,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
-
 import { IPagina } from '../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../interfaces/respuesta.interface';
 import { Estado } from '../../enums/estado.enum';
@@ -11,6 +10,7 @@ import { ISolicitud } from '../../interfaces/solicitud.interface';
 import { SolicitudService } from '../../services/solicitud.service';
 import { CancelarSolicitudComponent } from '../cancelar-solicitud/cancelar-solicitud.component';
 import { SolicitudRequerimientoComponent } from '../solicitud-requerimiento/solicitud-requerimiento.component';
+
 
 @Component({
   selector: 'app-listar-solicitud',
@@ -173,12 +173,13 @@ export class ListarSolicitudComponent implements OnInit {
           }
         }
       });
-      // this.pagina = respuesta.respuesta.pagina;
     });
   }
 
   private openDialog(): void {
-    this.dialog.open(SolicitudRequerimientoComponent);
+    this.dialog.open(SolicitudRequerimientoComponent, {
+      width: '40%'
+    });
   }
 
 }

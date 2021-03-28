@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-solicitud-requerimiento',
@@ -12,9 +12,5 @@ export class SolicitudRequerimientoComponent {
 
   public constructor(
     public dialogRef: MatDialogRef<SolicitudRequerimientoComponent>) { }
-
-  public onContinuar(): void {
-    this.dialogRef.close();
-  }
 
 }

@@ -2,8 +2,9 @@
     <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
 
     <p class="headline-l">Atención</p>
-    <p class="body-uno">
-        Las siguientes solicitudes tienen requerimientos pendientes. Por favor anexe los documentos solicitados para que
+    <p class="body-uno --dark-primary-color">
+        Las siguientes solicitudes tienen requerimientos pendientes.<br />
+        Por favor anexe los documentos solicitados para que <br />
         la respectiva solicitud pueda ser evaluada.
     </p>
 
@@ -34,5 +35,5 @@
         </ng-template>
     </p-table>
     <br />
-    <button (click)="onContinuar()">CONTINUAR</button>
+    <button (click)="dialogRef.close()">CONTINUAR</button>
 </div>
