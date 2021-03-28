@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Work+Sans:wght@400;500&display=swap");
 @import "./variables.scss";
 @import "~@angular/material/theming";
+@import "./assets/scss/table.scss";
 @include mat-core();
 $mat-vuce: (
   50: #e6fffd,
@@ -72,28 +73,28 @@ $theme: mat-light-theme(
 
 ::ng-deep {
   .p-message {
-      .p-message-wrapper {
-          padding: 20px 32px;
-      }
-      .p-message-summary {
-          font-family: $font-monserrat;
-          font-weight: 700;
-          font-size: 24px;
+    .p-message-wrapper {
+      padding: 20px 32px;
+    }
+    .p-message-summary {
+      font-family: $font-monserrat;
+      font-weight: 700;
+      font-size: 24px;
 
-          padding-left: 32px;
-      }
-      &.p-message-success {
-          box-shadow: 0 0 0 1px $sucess-color;
-          background: unset;
-          color: $sucess-color;
+      padding-left: 32px;
+    }
+    &.p-message-success {
+      box-shadow: 0 0 0 1px $sucess-color;
+      background: unset;
+      color: $sucess-color;
 
-          .p-message-icon {
-              margin: 0px;
-              width: 42px;
-              height: 42px;
-              content: url("./assets/icons/exito-circular-negativo.svg");
-          }
+      .p-message-icon {
+        margin: 0px;
+        width: 42px;
+        height: 42px;
+        content: url("./assets/icons/exito-circular-negativo.svg");
       }
+    }
   }
 }
 
@@ -282,12 +283,13 @@ textarea {
   font-size: 16px;
   color: $primary-color-text;
   width: 100%;
-  height: 40px;
+  height: 50px;
   padding: 8px 16px;
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
   border-color: $secondary-color-text;
+  padding-left: 1%;
 }
 
 textarea::placeholder {
@@ -666,15 +668,6 @@ input[type="file"]::file-selector-button:hover {
   margin-top: -10px;
 }
 
-textarea {
-  width: 402px;
-  height: 34px;
-  border-radius: 5px;
-  padding-left: 1%;
-  font-family: $font-worksans;
-  color: $primary-color-text;
-}
-
 .longDescription {
   width: 942px;
   height: 47px;
@@ -756,5 +749,14 @@ hr {
     > svg {
       fill: $error-color;
     }
+  }
+}
+
+app-registro-solicitud {
+  .mat-expansion-indicator {
+    color: $tertiary-color-text !important;
+  }
+  ::after {
+    color: $tertiary-color-text !important;
   }
 }

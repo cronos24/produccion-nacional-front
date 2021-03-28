@@ -1,4 +1,4 @@
-<div>
+<div style="padding-top:10px;">
     <label>
         <input type="checkbox" [(ngModel)]="maquila" (ngModelChange)="onMensajeConfirmacion()" />
         <label class="colortexto">Si
@@ -164,7 +164,7 @@
 
 
         <div class="table">
-            <p-table [customSort]="true" [lazy]="true">
+            <p-table [value]="procesoProduccion" [customSort]="true" [lazy]="true" (onLazyLoad)="onSort($event)">
                 <ng-template pTemplate="header">
                     <tr>
                         <th pSortableColumn="radicado">
@@ -203,7 +203,7 @@
                             </span>
                         </th>
                         <th>
-                            <span class="headline-m --dark-primary-color">Correo<p-sortIcon field="estado"></p-sortIcon>
+                            <span class="headline-m --dark-primary-color">Correo<p-sortIcon field="correo"></p-sortIcon>
                             </span>
                         </th>
                         <th>
@@ -212,15 +212,49 @@
                         <th>
                             <span class="headline-m --dark-primary-color">Eliminar </span>
                         </th>
-
                     </tr>
                 </ng-template>
+                <ng-template pTemplate="body" let-procesoProduccion>
+                  <tr>
+                      <td>
+                          <p class="body-uno">{{procesoProduccion['radicado']}}</p>
+                      </td>
+                      <td>
+                          <p class="body-uno">{{procesoProduccion['fechaCreacion']}}</p>
+                      </td>
+                      <td>
+                          <p class="body-uno">{{procesoProduccion['productoNombreComercial']}}</p>
+                      </td>
+                      <td>
+                          <p class="body-uno">{{procesoProduccion['responsable']}}</p>
+                      </td>
+                      <td>
+                           <p class="body-uno">{{procesoProduccion['programaId']}}</p>
+                      </td>
+                      <td>
+                          <p class="body-uno">{{procesoProduccion['fechaActuacion']}}</p>
+                      </td>
+                      <td>
+                          <p class="body-uno">{{procesoProduccion['estado']}}</p>
+                      </td>
+                      <td>
+                          <p class="body-uno">{{procesoProduccion['correo']}}</p>
+                      </td>
+                      <td class="center">
+                          <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                      </td>
+                      <td class="center">
+                          <mat-icon svgIcon="adjunto-positivo"></mat-icon>
+                      </td>
+                  </tr>
+              </ng-template>
             </p-table>
+            <div *ngIf="procesoProduccion.length==0">
+              <p class="content body-uno">No se encontraron registros coincidentes</p>
+          </div>
+          <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
         </div>
 
-        <div>
-            <p class="content body-uno">No se encontraron registros coincidentes</p>
-        </div>
         <div class="align-button space-button">
             <button>ELIMINAR TODOS LOS REGISTROS</button>
         </div>

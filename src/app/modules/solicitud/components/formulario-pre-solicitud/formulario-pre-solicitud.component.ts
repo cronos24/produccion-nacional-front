@@ -38,7 +38,7 @@ export class FormularioPreSolicitudComponent implements OnInit {
   public crearBorrador() {
     console.log(this.myForm.controls.numero_registro.value);
 
-    if (this.myForm.controls.registro_vigente.value) {
+    if (!this.myForm.controls.registro_vigente.value) {
 
       if (this.myForm.controls.numero_registro.value) {
 

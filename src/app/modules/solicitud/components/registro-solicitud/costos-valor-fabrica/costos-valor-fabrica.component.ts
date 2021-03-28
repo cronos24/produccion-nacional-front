@@ -10,10 +10,12 @@ export class CostosValorFabricaComponent implements OnInit {
 
   @Input() valorTotalUnidadProducto: number = 535987;
   @Input() valorCalculadoMasCostosProduccion: number = 20000;
+
+
   public costosValorFabricaGroup: FormGroup = this.formBuilder.group({
-    valorTotalUnidadProducto: [0, Validators.required],
-    costosDirectosFabrica: [0, [Validators.required, Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]],
-    valorTransaccion: [0, 
+    valorTotalUnidadProducto: [, Validators.required],
+    costosDirectosFabrica: [, [Validators.required, Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]],
+    valorTransaccion: [, 
       [
         Validators.required,
         Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/),
@@ -25,6 +27,7 @@ export class CostosValorFabricaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.costosValorFabricaGroup.controls.valorTotalUnidadProducto.setValue( this.valorTotalUnidadProducto );
   }
 
   public get costosValorFabrica() {

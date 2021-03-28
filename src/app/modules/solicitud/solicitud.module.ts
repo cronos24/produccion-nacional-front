@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AccordionModule } from 'primeng/accordion';
@@ -24,18 +24,23 @@ import { ListarSolicitudComponent } from './components/listar-solicitud/listar-s
 import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestro-solicitud.component';
 import { ModalInsumosComponent } from './components/modal-insumos/modal-insumos.component';
 import { AgregarInsumosComponent } from './components/registro-solicitud/agregar-insumos/agregar-insumos.component';
+import { AnexosComponent } from './components/registro-solicitud/anexos/anexos.component';
+import { AplicacionesProductoComponent } from './components/registro-solicitud/aplicaciones-producto/aplicaciones-producto.component';
+import { CaracteristicasTecnicasComponent } from './components/registro-solicitud/caracteristicas-tecnicas/caracteristicas-tecnicas.component';
+import { CaracteristicasTransformacionComponent } from './components/registro-solicitud/caracteristicas-transformacion/caracteristicas-transformacion.component';
 import { CostosValorFabricaComponent } from './components/registro-solicitud/costos-valor-fabrica/costos-valor-fabrica.component';
 import { CriteriosRegistroComponent } from './components/registro-solicitud/criterios-registro/criterios-registro.component';
 import { DatosProductoComponent } from './components/registro-solicitud/datos-producto/datos-producto.component';
+import { DatosRepresentanteLegalComponent } from './components/registro-solicitud/datos-representante-legal/datos-representante-legal.component';
 import { MaterialesExtranjerosNacionalesComponent } from './components/registro-solicitud/materiales-extranjeros-nacionales/materiales-extranjeros-nacionales.component';
 import { ProcesoProduccionComponent } from './components/registro-solicitud/proceso-produccion/proceso-produccion.component';
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
+import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
+import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { ModalComponent } from './util/modal/modal.component';
-
-
 
 @NgModule({
   declarations: [
@@ -56,7 +61,13 @@ import { ModalComponent } from './util/modal/modal.component';
     RegistroSolicitudComponent,
     SolicitudRequerimientoComponent,
     MaterialesExtranjerosNacionalesComponent,
-    AgregarInsumosComponent
+    AgregarInsumosComponent,
+    AplicacionesProductoComponent,
+    CaracteristicasTecnicasComponent,
+    CaracteristicasTransformacionComponent,
+    DatosRepresentanteLegalComponent,
+    ValorAgregadoComponent,
+    AnexosComponent
   ],
   imports: [
     AccordionModule,
@@ -78,8 +89,6 @@ import { ModalComponent } from './util/modal/modal.component';
     ReactiveFormsModule,
     ReactiveFormsModule,
     SharedModule,
-    SharedModule,
-    SharedModule,
     SolicitudRoutingModule,
     SolicitudRoutingModule,
     TableModule,
@@ -91,7 +100,11 @@ import { ModalComponent } from './util/modal/modal.component';
       provide: MatDialogRef,
       useValue: {}
     },
-    SolicitudService
+    SolicitudService,
+    AnexosService
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class SolicitudModule { }

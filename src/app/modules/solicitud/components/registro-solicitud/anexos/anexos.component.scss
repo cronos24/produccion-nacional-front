@@ -1,0 +1,239 @@
+@import "../../../../../../styles.scss";
+@import "../../../../../../variables.scss";
+.input-group {
+    padding-top: 5%;
+    flex-grow: 0.5;
+    >input {
+        border-radius: 25px;
+    }
+    >mat-icon {
+        vertical-align: middle;
+        margin-left: -37px;
+        margin-bottom: 4px;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.space-textarea {
+    padding-top: 1%;
+}
+
+.space-label {
+    padding-top: 2%;
+}
+
+.space-message {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.space-search {
+    padding-left: 60%;
+    padding-bottom: 2%;
+}
+
+.align-message {
+    display: flex;
+    align-items: center;
+}
+
+.space-button {
+    padding-bottom: 2%;
+}
+
+.align-button {
+    text-align: right;
+    padding-top: 2%;
+}
+
+span.ng-invalid {
+    color: $error-color;
+}
+
+label.ng-invalid {
+    color: $error-color;
+}
+
+.colortexto {
+    color: #004884;
+}
+
+.colorTexto {
+    color: #004884;
+    text-decoration: underline;
+}
+
+::ng-deep.mat-dialog-container {
+    padding: 37px !important;
+}
+
+::ng-deep {
+    p-message {
+        width: 84%;
+    }
+    .p-inline-message {
+        margin: 0;
+        width: 100%;
+        .p-inline-message-wrapper {
+            padding: 20px 32px;
+        }
+        .p-inline-message-text {
+            font-family: $font-monserrat;
+            font-weight: 700;
+            font-size: 14px;
+            width: 95%;
+            padding-left: 32px;
+        }
+        &.p-inline-message-error {
+            width: 98%;
+            background: unset;
+            box-shadow: 0 0 0 1px $error-color;
+            color: $error-color;
+            .p-inline-message-icon {
+                margin: 0px;
+                width: 42px;
+                height: 42px;
+                content: url("../../../../../../assets/icons/informacion-circular-negativo-fondo-rojo.svg");
+            }
+        }
+    }
+}
+
+.table {
+    @include table;
+}
+
+@media only screen and (min-width: 1224px) {
+    p-table {
+        .headline-xl {
+            font-size: 24px;
+            line-height: 36px;
+        }
+        .headline-l {
+            font-size: 16px;
+            line-height: 28px;
+        }
+        .headline-m {
+            font-size: 12px;
+            line-height: 22px;
+        }
+        .headline-s {
+            font-size: 10px;
+            line-height: 19px;
+        }
+        .headline-xs {
+            font-size: 8px;
+            line-height: 16px;
+        }
+        .subtitle {
+            font-size: 10px;
+            line-height: 19px;
+        }
+        .description {
+            font-size: 12px;
+            line-height: 22px;
+        }
+        .body-uno {
+            font-size: 12px;
+            line-height: 16px;
+        }
+        .body-dos {
+            font-size: 6px;
+            line-height: 13px;
+        }
+        .button-text {
+            font-size: 7px;
+            line-height: 14px;
+        }
+        .field {
+            font-size: 8px;
+            line-height: 14px;
+        }
+        .caption {
+            font-size: 6px;
+            line-height: 10px;
+        }
+        tr {
+            >th {
+                padding: 8px;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1824px) {
+    p-table {
+        .headline-xl {
+            font-size: 30px;
+            line-height: 42px;
+        }
+        .headline-l {
+            font-size: 22px;
+            line-height: 34px;
+        }
+        .headline-m {
+            font-size: 18px;
+            line-height: 28px;
+        }
+        .headline-s {
+            font-size: 16px;
+            line-height: 25px;
+        }
+        .headline-xs {
+            font-size: 14px;
+            line-height: 22px;
+        }
+        .subtitle {
+            font-size: 16px;
+            line-height: 25px;
+        }
+        .description {
+            font-size: 18px;
+            line-height: 28px;
+        }
+        .body-uno {
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .body-dos {
+            font-size: 12px;
+            line-height: 19px;
+        }
+        .button-text {
+            font-size: 13px;
+            line-height: 20px;
+        }
+        .field {
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .caption {
+            font-size: 12px;
+            line-height: 16px;
+        }
+        tr {
+            >th {
+                padding: 14px;
+            }
+        }
+    }
+}
+
+.input-group-buscar {
+  margin: 10px;
+  margin-left: auto;
+  max-width: 30%;
+  > input {
+      border-radius: 25px;
+      height: 40px;
+      border: 1px solid #e6effd;
+  }
+  > mat-icon {
+      vertical-align: middle;
+      margin-left: -33px;
+      margin-bottom: 4px;
+      color: #3366cc;
+      margin-top: 2px;
+  }
+}
