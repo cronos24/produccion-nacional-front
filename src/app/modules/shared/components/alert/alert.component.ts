@@ -15,4 +15,15 @@ export class AlertComponent {
   public onContinuar(): void {
     this.dialogRef.close();
   }
+
+  public get icon(): string {
+    switch (this.data.type) {
+      case 'error':
+        return 'error-negativo';
+      case 'warning':
+        return 'cara-disgusto-negativo';
+      default:
+        return '';
+    }
+  }
 }

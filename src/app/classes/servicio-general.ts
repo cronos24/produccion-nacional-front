@@ -14,6 +14,14 @@ export abstract class ServicioGeneral<T> {
   public constructor(protected httpClient: HttpClient) {
   }
 
+  public buildBaseUrl(): string {
+    return environment.CONFIGURACION_SERVICIOS['produccion-nacional'].protocol +
+      '://' +
+      environment.CONFIGURACION_SERVICIOS['produccion-nacional'].host +
+      ':' +
+      environment.CONFIGURACION_SERVICIOS['produccion-nacional'].port
+  }
+
   public buildUrl(): string {
     return environment.CONFIGURACION_SERVICIOS['produccion-nacional'].protocol +
       '://' +
@@ -27,12 +35,17 @@ export abstract class ServicioGeneral<T> {
   }
 
   public get(options?: {
+    postfix?: string,
     queryParams?: { [key: string]: string },
     pagina?: IPagina,
     sort?: { [key: string]: string }
   }): Observable<IRespuesta<T[]>> {
+    let url = this.url;
     let httpParams: HttpParams = new HttpParams();
 
+    if (options?.postfix) {
+      url = this.url + options.postfix;
+    }
     if (options?.queryParams) {
       httpParams = this.addQueryParams(httpParams, options.queryParams);
     }
@@ -43,7 +56,35 @@ export abstract class ServicioGeneral<T> {
       httpParams = this.addQueryParams(httpParams, options.sort);
     }
 
-    return this.httpClient.get<IRespuesta<T[]>>(this.url, { params: httpParams });
+    return this.httpClient.get<IRespuesta<T[]>>(url, { params: httpParams });
+  }
+
+  public getById(id: number, options?: {
+    postfix?: string,
+    queryParams?: { [key: string]: string }
+  }): Observable<IRespuesta<T[]>> {
+    let url = this.url;
+    let httpParams: HttpParams = new HttpParams();
+
+    if (options?.postfix) {
+      url = this.url + options.postfix;
+    }
+    if (options?.queryParams) {
+      httpParams = this.addQueryParams(httpParams, options.queryParams);
+    }
+
+    return this.httpClient.get<IRespuesta<T[]>>(`${url}/${id}`, { params: httpParams });
+  }
+
+  public put(body: any, options?: {
+    postfix?: string
+  }): Observable<any> {
+    let url = `${this.url}/${body.id}`;
+
+    if (options?.postfix) {
+      url = this.url + options.postfix;
+    }
+    return this.httpClient.put<any>(url, body);
   }
 
   public getGeneric(): Observable<any> {
@@ -54,12 +95,29 @@ export abstract class ServicioGeneral<T> {
     return this.httpClient.get<any>(this.url + '/' + id);
   }
 
-  public put(solicitud: any, id: number): Observable<any> {
-    return this.httpClient.put<any>(this.url + '/' + id, solicitud);
+  public post(body: any, options?: {
+    postfix?: string
+  }): Observable<any> {
+    let url = this.url;
+
+    if (options?.postfix) {
+      url = this.url + options.postfix;
+    }
+    return this.httpClient.post<any>(url, body);
   }
 
-  public post(solicitud: any): Observable<any> {
-    return this.httpClient.post<any>(this.url, solicitud);
+  public patch(body: any): Observable<any> {
+    return this.httpClient.patch<any>(this.url, body);
+  }
+  public delete(id: any, options?: {
+    postfix?: string
+  }): Observable<any> {
+    let url = this.url;
+
+    if (options?.postfix) {
+      url = this.url + options.postfix;
+    }
+    return this.httpClient.delete<any>(url + '/' + id);
   }
 
   private addQueryParams(httpParams: HttpParams, object: object): HttpParams {
@@ -68,7 +126,6 @@ export abstract class ServicioGeneral<T> {
         httpParams = httpParams.append(key, object[key]);
       }
     });
-
     return httpParams;
   }
 

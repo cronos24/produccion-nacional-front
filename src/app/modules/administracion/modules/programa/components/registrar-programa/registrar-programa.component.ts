@@ -32,7 +32,7 @@ export class RegistrarProgramaComponent {
   }
 
   public onContinuar(): void {
-    if (this.motivoFormControl.valid) {
+    /*if (this.motivoFormControl.valid) {
       this.solicitudService.cancelarSolicitud().subscribe(
         (): void => {
           this.messageService.add({ severity: 'success', summary: 'Solicitud de cancelación enviada con éxito' });
@@ -49,7 +49,7 @@ export class RegistrarProgramaComponent {
         }
       );
       this.dialogRef.close();
-    }
+    }*/
   }
 
 }

@@ -65,7 +65,7 @@
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-solicitud>
+        <ng-template pTemplate="body" let-solicitud let-index="rowIndex">
             <tr>
                 <td class="center">
                     <mat-icon class="pointer" svgIcon="ver-positivo"></mat-icon>
@@ -86,7 +86,8 @@
                     <p class="body-uno">{{estado[solicitud.estado]}}</p>
                 </td>
                 <td class="center">
-                    <p [ngClass]="{'body-uno': true, 'link': solicitud.estado != estado['Borrador']}">
+                    <p [ngClass]="{'body-uno': true, 'link': solicitud.estado != estado['Borrador']}"
+                        (click)="onDescargarPDF()">
                         {{solicitud.radicado}}</p>
                 </td>
                 <td class="center">
@@ -97,18 +98,19 @@
                 </td>
                 <td class="center">
                     <mat-icon class="pointer" [attr.disabled]="solicitud.estado == estado['Borrador'] ? false : true"
-                        svgIcon="papelera-positivo" (click)="onEliminarBorrador(solicitud, eliminarTemplate)">
+                        svgIcon="papelera-positivo" (click)="onEliminarBorrador(solicitud, index, eliminarTemplate)">
                     </mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon class="pointer" svgIcon="copiar-positivo" (click)="onCopiarBorrador(solicitud, copiarTemplate)"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="copiar-positivo"
+                        (click)="onCopiarBorrador(solicitud, index, copiarTemplate)"></mat-icon>
                 </td>
                 <td class="center">
                     <mat-icon class="pointer" [attr.disabled]="solicitud.estado == estado['Aprobado'] ? false : true"
                         svgIcon="menos-circular-positivo" (click)="onCancelarRegistro(solicitud)"></mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="adjunto-positivo"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="adjunto-positivo"></mat-icon>
                 </td>
             </tr>
         </ng-template>
@@ -128,7 +130,7 @@
         </div>
         <div>
             <button class="outlined" (click)="dialogRef.close()">CANCELAR</button>
-            <button (click)="onEliminar()">CONTINUAR</button>
+            <button (click)="onEliminar(solicitud.id, solicitud.index)">CONTINUAR</button>
         </div>
     </div>
 </ng-template>
@@ -141,7 +143,7 @@
         </div>
         <div>
             <button class="outlined" (click)="dialogRef.close()">CANCELAR</button>
-            <button (click)="onCopiar()">CONTINUAR</button>
+            <button (click)="onCopiar(solicitud.id, solicitud.index)">CONTINUAR</button>
         </div>
     </div>
 </ng-template>

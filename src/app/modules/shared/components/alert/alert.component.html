@@ -1,6 +1,6 @@
 <div class="alert">
     <mat-icon [ngClass]="data.type"
-        svgIcon="cara-disgusto-negativo"></mat-icon>
+        [svgIcon]="icon"></mat-icon>
     <p
         [ngClass]="{'headline-xl': true, '--error-color': data.type == 'error', '--warning-color': data.type == 'warning'}">
         {{data.title}}

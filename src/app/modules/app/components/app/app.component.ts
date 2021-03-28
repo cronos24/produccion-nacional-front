@@ -70,8 +70,8 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/check-negativo.svg')
     );
     this.matIconRegistry.addSvgIcon(
-      'eliminar-positivo',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/eliminar-positivo.svg')
+      'error-negativo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/error-negativo.svg')
     );
   }
 

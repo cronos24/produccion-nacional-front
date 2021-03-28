@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import moment from 'moment';
+import { MessageService } from 'primeng/api';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 
 import { IPagina } from '../../../../interfaces/pagina.interface';
@@ -34,6 +35,7 @@ export class ListarSolicitudComponent implements OnInit {
   public constructor(
     public dialogRef: MatDialogRef<any>,
     private dialog: MatDialog,
+    private messageService: MessageService,
     private solicitudService: SolicitudService) { }
 
   public ngOnInit(): void {
@@ -65,12 +67,12 @@ export class ListarSolicitudComponent implements OnInit {
   }
 
   public onDescargarPDF(): void {
-    this.solicitudService.descargarPDF().subscribe();
+    //this.solicitudService.descargarPDF().subscribe();
   }
 
-  public onEliminarBorrador(solicitud: ISolicitud, templateRef: any): void {
+  public onEliminarBorrador(solicitud: ISolicitud, index: number, templateRef: any): void {
     if (solicitud.estado == this.estado['Borrador']) {
-      this.dialogRef = this.dialog.open(templateRef, { data: { ...solicitud } });
+      this.dialogRef = this.dialog.open(templateRef, { data: { index, ...solicitud } });
     } else {
       this.dialog.open(AlertComponent, {
         data: {
@@ -83,14 +85,45 @@ export class ListarSolicitudComponent implements OnInit {
     }
   }
 
-  public onEliminar(): void {
+  public onEliminar(id: number, index: number): void {
+    this.solicitudService.delete(id).subscribe(() => {
+      this.solicitudes.splice(index, 1);
+      this.messageService.add({ severity: 'success', summary: 'Borrador eliminado' });
+    }, () => {
+      this.dialog.open(AlertComponent, {
+        data: {
+          type: 'error',
+          title: 'Atención',
+          description: 'No fue posible borrar el registro, Por favor intente de nuevo mas tarde.',
+          acceptButton: 'REGRESAR'
+        }
+      });
+    });
+    this.dialogRef.close();
   }
 
-  public onCopiarBorrador(solicitud: ISolicitud, templateRef: any): void {
-    this.dialogRef = this.dialog.open(templateRef, { data: { ...solicitud } });
+  public onCopiarBorrador(solicitud: ISolicitud, index: number, templateRef: any): void {
+    this.dialogRef = this.dialog.open(templateRef, { data: { index, ...solicitud } });
   }
 
-  public onCopiar(): void {
+  public onCopiar(id: number, index: number): void {
+    this.solicitudService.post(null, { postfix: `/${id}/copiar` }).subscribe((respuesta: any) => {
+      const solicitud = respuesta.respuesta;
+      solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').toDate();
+
+      this.solicitudes.splice(index + 1, 1, solicitud);
+      this.messageService.add({ severity: 'success', summary: 'Solicitud copiada' });
+    }, () => {
+      this.dialog.open(AlertComponent, {
+        data: {
+          type: 'error',
+          title: 'Atención',
+          description: 'No fue posible copiar la solicitud, Por favor intente de nuevo mas tarde.',
+          acceptButton: 'REGRESAR'
+        }
+      });
+    });
+    this.dialogRef.close();
   }
 
   public onCancelarRegistro(solicitud: ISolicitud): void {
@@ -115,14 +148,30 @@ export class ListarSolicitudComponent implements OnInit {
 
   private getSolicitudes(): void {
     this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
-      console.log(respuesta, 'resp');
-
       this.solicitudes = respuesta.respuesta.solicitudes as ISolicitud[];
       this.pagina = respuesta.respuesta.pagina as IPagina;
+
+      let nowDate = moment(new Date());
 
       this.solicitudes.map((solicitud) => {
         solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').toDate();
 
+        if (solicitud.estado == this.estado['Borrador']) {
+          const diff = nowDate.diff(solicitud.auditoria.fechaCreacionFormateada, 'days');
+
+          if (diff > 30) {
+            this.solicitudService.delete(solicitud.id).subscribe(() => {
+              this.dialog.open(AlertComponent, {
+                data: {
+                  type: 'warning',
+                  title: 'Atención',
+                  description: `El borrador ${solicitud.radicado} ha sido eliminado por llevar mas de 30 dias creado`,
+                  acceptButton: 'REGRESAR'
+                }
+              });
+            });
+          }
+        }
       });
       // this.pagina = respuesta.respuesta.pagina;
     });

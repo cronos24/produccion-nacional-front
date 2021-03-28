@@ -41,29 +41,3 @@ label.ng-invalid {
     color: $error-color;
 }
 
-::ng-deep {
-    .p-message {
-        .p-message-wrapper {
-            padding: 20px 32px;
-        }
-        .p-message-summary {
-            font-family: $font-monserrat;
-            font-weight: 700;
-            font-size: 24px;
-
-            padding-left: 32px;
-        }
-        &.p-message-success {
-            box-shadow: 0 0 0 1px $sucess-color;
-            background: unset;
-            color: $sucess-color;
-
-            .p-message-icon {
-                margin: 0px;
-                width: 42px;
-                height: 42px;
-                content: url("../../../../../assets/icons/exito-circular-negativo.svg");
-            }
-        }
-    }
-}

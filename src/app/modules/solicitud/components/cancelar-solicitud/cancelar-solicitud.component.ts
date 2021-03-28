@@ -32,7 +32,11 @@ export class CancelarSolicitudComponent {
 
   public onContinuar(): void {
     if (this.motivoFormControl.valid) {
-      this.solicitudService.cancelarSolicitud().subscribe(
+      let solicitud = this.data.solicitud;
+      solicitud.estado = 6;
+      solicitud.anulacionMotivo = this.motivoFormControl.value;
+
+      this.solicitudService.put(this.data.solicitud).subscribe(
         (): void => {
           this.messageService.add({ severity: 'success', summary: 'Solicitud de cancelación enviada con éxito' });
         },
