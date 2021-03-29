@@ -1,47 +1,65 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
+import { FormGeneric } from '../clases/form-generic';
 
 @Component({
   selector: 'app-criterios-registro',
   templateUrl: './criterios-registro.component.html',
   styleUrls: ['./criterios-registro.component.scss'],
 })
-export class CriteriosRegistroComponent implements OnInit {
+export class CriteriosRegistroComponent extends FormGeneric {
 
-  @Input() public set tipoFormulario(tipo: string) {
-    this._tipoFormulario = tipo;
-    //this.actualizarFormulario(tipo);
-  }
-  public get tipoFormulario(): string {
-    return this._tipoFormulario;
-  }
-
-  public _tipoFormulario: string;
+  @Input() protected formGroup: FormGroup;
+  protected formGroupName: string = 'criteriosRegistro';
 
   public bienesTotalmenteObtenidos: boolean = false;
   public bienesElaboradosNacionales: boolean = false;
   public bienesPorcentajeMinimoValor: boolean = false;
   public bienesProcesoProductivo: boolean = false;
 
-  public critero: string;
+  public nacional: boolean = false;
+  public importado: boolean = false;
+  public piezaInsumo: boolean = false;
 
-  constructor() { }
+  public onSelectedCheckBox(criterio: string): void {
+    setTimeout(() => {
+      this.setChildFormGroupValue('criterio', criterio);
 
-  ngOnInit(): void { }
+      this.bienesTotalmenteObtenidos = false;
+      this.bienesElaboradosNacionales = false;
+      this.bienesPorcentajeMinimoValor = false;
+      this.bienesProcesoProductivo = false;
 
+      this[criterio] = true;
 
-  public onSelectedCheckBox(critero: string, value: boolean): void {
-    this.critero = critero;
+      if (this.getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas') {
+        this.getChildFormGroupControl('origenInsumo').setValidators([Validators.required]);
+        if (criterio == 'bienesElaboradosNacionales') {
+          this.setChildFormGroupValue('origenInsumo', 'nacional');
+          this.nacional = true;
+        } else {
+          this.nacional = false;
+          this.importado = false;
+          this.piezaInsumo = false;
+        }
+      }
+    });
+  }
 
-    this.bienesTotalmenteObtenidos = false;
-    this.bienesElaboradosNacionales = false;
-    this.bienesPorcentajeMinimoValor = false;
-    this.bienesProcesoProductivo = false;
+  public onSelectedCheckBoxOrigen(origenInsumo: string): void {
+    setTimeout(() => {
+      this.setChildFormGroupValue('origenInsumo', origenInsumo);
 
-    this[critero] = true;
+      this.nacional = false;
+      this.importado = false;
+      this.piezaInsumo = false;
+
+      this[origenInsumo] = true;
+    });
   }
 
   public onDecreto2680() {
     window.open('http://www.suin-juriscol.gov.co/viewDocument.asp?ruta=Decretos/1480087', '_blank')
   }
+
 }

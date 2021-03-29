@@ -69,7 +69,8 @@
         <ng-template pTemplate="body" let-solicitud let-index="rowIndex">
             <tr>
                 <td class="center">
-                    <mat-icon class="pointer" svgIcon="ver-positivo"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="ver-positivo"
+                        [routerLink]="'/solicitud/registro/' + solicitud.radicado"></mat-icon>
                 </td>
                 <td>
                     <p class="body-uno">{{solicitud.auditoria.fechaCreacionFormateada | date: 'dd/MM/YYYY'}}</p>

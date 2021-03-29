@@ -13,11 +13,13 @@
         <div class="icon-group">
             <mat-icon svgIcon="informacion-circular-negativo"
                 matTooltip="Bienes Totalmente Obtenidos Decreto 2680 del 2009 artìculo 2."
-                [attr.disabled]="tipoFormulario == 'fomentoIndustriaAutomotriz' || tipoFormulario == 'fomentoIndustriaAstilleros' ? true : false">
+                [attr.disabled]="getFatherFormGroupValue('tipoFormulario') != 'produccionNacional' ? true : false">
             </mat-icon>
-            <label>
+            <label class="--dark-primary-color"
+                [ngClass]="{'--primary-color-text': getFatherFormGroupValue('tipoFormulario') != 'produccionNacional'}">
                 <input type="checkbox" [(ngModel)]="bienesTotalmenteObtenidos"
-                    (ngModelChange)="onSelectedCheckBox('bienesTotalmenteObtenidos', $event)" />
+                    (ngModelChange)="onSelectedCheckBox('bienesTotalmenteObtenidos')"
+                    [disabled]="getFatherFormGroupValue('tipoFormulario') != 'produccionNacional' ? true : false" />
                 3.1 Bienes Totalmente Obtenidos
             </label>
         </div>
@@ -27,9 +29,9 @@
             <mat-icon svgIcon="informacion-circular-negativo"
                 matTooltip="Porcentaje Mìnimo Valor Agregado Nacional: Decreto 2680 del 2009 artìculo 4 y 5.">
             </mat-icon>
-            <label>
-                <input type="checkbox" [(ngModel)]="bienesElaboradosNacionales"
-                    (ngModelChange)="onSelectedCheckBox('bienesElaboradosNacionales', $event)" />
+            <label class="--dark-primary-color">
+                <input type="checkbox" [(ngModel)]="bienesPorcentajeMinimoValor"
+                    (ngModelChange)="onSelectedCheckBox('bienesPorcentajeMinimoValor')" />
                 3.3 Porcentaje Mínimo Valor Agredado Nacional
             </label>
         </div>
@@ -42,9 +44,9 @@
             <mat-icon svgIcon="informacion-circular-negativo"
                 matTooltip="Bienes Elaborados Exclusivamente Con Mater ias Nacionales:  Decreto 2680 del 2009 artìculo 3.">
             </mat-icon>
-            <label>
-                <input type="checkbox" [(ngModel)]="bienesPorcentajeMinimoValor"
-                    (ngModelChange)="onSelectedCheckBox('bienesPorcentajeMinimoValor', $event)" />
+            <label class="--dark-primary-color">
+                <input type="checkbox" [(ngModel)]="bienesElaboradosNacionales"
+                    (ngModelChange)="onSelectedCheckBox('bienesElaboradosNacionales')" />
                 3.2 Bienes Elaborados Exclusivamente Con Materias Nacionales
             </label>
         </div>
@@ -54,9 +56,9 @@
             <mat-icon svgIcon="informacion-circular-negativo"
                 matTooltip="Proceso Productivo Sustancial Decreto 2680 del 2009 artìculo 4, 6 y 7.">
             </mat-icon>
-            <label>
+            <label class="--dark-primary-color">
                 <input type="checkbox" [(ngModel)]="bienesProcesoProductivo"
-                    (ngModelChange)="onSelectedCheckBox('bienesProcesoProductivo', $event)" />
+                    (ngModelChange)="onSelectedCheckBox('bienesProcesoProductivo')" />
                 3.4 Proceso Productivo Sustancial
             </label>
         </div>
@@ -64,36 +66,40 @@
 </div>
 
 <div class="p-grid">
-    <div class="p-col-3">
+    <div class="p-col">
         <button (click)="onDecreto2680()">Decreto 2680 de 2009</button>
     </div>
-    <div class="p-col-3">
-        <button>Decreto 1122 de 2019</button>
-    </div>
-    <div class="p-col-6">
-        <p-message severity="info" text="Bienes obtenidos por transformaciòn sustancial."></p-message>
-    </div>
 </div>
-<!--
-<hr />
-<form [formGroup]="formularioInsumo">
-    <div class="titulo" *ngIf="mostrarInsumo">
+<ng-container *ngIf="getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas'">
+    <hr />
+    <div class="titulo">
         <label class="headline-l">Origen de los insumos</label>
-        <label>Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE</label>
+        <label class="--dark-primary-color">
+            Favor seleccione el origen de los insumos como lo presenta en planilla A-RTE
+        </label>
 
-        <div class=" contenido">
-            <label class="group">
-                <input type="checkbox" formControlName="nacional" />
+        <div class="contenido">
+            <label class="group --dark-primary-color"
+                [ngClass]="{'--primary-color-text': getChildFormGroupValue('criterio') == 'bienesPorcentajeMinimoValor' || getChildFormGroupValue('criterio') == 'bienesProcesoProductivo'}">
+                <input type="checkbox" [(ngModel)]="nacional"
+                    [disabled]="getChildFormGroupValue('criterio') == 'bienesPorcentajeMinimoValor' || getChildFormGroupValue('criterio') == 'bienesProcesoProductivo' ? true : false"
+                    (ngModelChange)="onSelectedCheckBoxOrigen('nacional')" />
                 100% Nacional
             </label>
-            <label class="group">
-                <input type="checkbox" formControlName="importado" />
+            <label class="group --dark-primary-color"
+                [ngClass]="{'--primary-color-text': getChildFormGroupValue('criterio') == 'bienesElaboradosNacionales'}">
+                <input type="checkbox" [(ngModel)]="importado"
+                    [disabled]="getChildFormGroupValue('criterio') == 'bienesElaboradosNacionales' ? true : false"
+                    (ngModelChange)="onSelectedCheckBoxOrigen('importado')" />
                 Importado por Monopartista
             </label>
-            <label class="group">
-                <input type="checkbox" formControlName="piezaInsumo" />
+            <label class="group --dark-primary-color"
+                [ngClass]="{'--primary-color-text': getChildFormGroupValue('criterio') == 'bienesElaboradosNacionales'}">
+                <input type="checkbox" [(ngModel)]="piezaInsumo"
+                    [disabled]="getChildFormGroupValue('criterio') == 'bienesElaboradosNacionales' ? true : false"
+                    (ngModelChange)="onSelectedCheckBoxOrigen('piezaInsumo')" />
                 Piezas o Insumos Importados y Suministrados por la Ensambladora o mixtos
             </label>
         </div>
     </div>
-</form>-->
+</ng-container>

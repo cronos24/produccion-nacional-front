@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'listar', pathMatch: 'full' },
       { path: 'listar', component: ListarSolicitudComponent },
       { path: 'pre-solicitud', component: FormularioPreSolicitudComponent },
-      { path: 'registro', component: RegistroSolicitudComponent }
+      { path: 'registro/:radicado', component: RegistroSolicitudComponent }
     ]
   }
 ];

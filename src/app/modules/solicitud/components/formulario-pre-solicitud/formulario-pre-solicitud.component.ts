@@ -37,7 +37,7 @@ export class FormularioPreSolicitudComponent {
         });
 
         this.dialogRef.afterClosed().subscribe(() => {
-          this.router.navigateByUrl('/solicitud/registro');
+          this.router.navigateByUrl(`/solicitud/registro/${respuesta.respuesta.radicado}`);
         });
       });
     }
