@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-registro-solicitud',
@@ -15,58 +13,18 @@ export class RegistroSolicitudComponent {
   public fomentoIndustriaAstilleros: boolean = false;
 
   public tipoFormulario: string = 'produccionNacional';
-  public caracteristicasTransformacionActivar: boolean;
-  public valorAgregado: number;
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor() { }
 
   public onSelectedCheckBox(tipoFormulario: string, value: boolean): void {
-    if (value) {
-      this.tipoFormulario = tipoFormulario;
+    this.tipoFormulario = tipoFormulario;
 
-      if (tipoFormulario === 'produccionNacional') {
-        this.fomentoIndustriaAutomotriz = false;
-        this.regimenTransformacionEnsamblePlanillas = false;
-        this.fomentoIndustriaAstilleros = false;
-      } else if (tipoFormulario === 'fomentoIndustriaAutomotriz') {
-        this.produccionNacional = false;
-        this.regimenTransformacionEnsamblePlanillas = false;
-        this.fomentoIndustriaAstilleros = false;
-      } else if (tipoFormulario === 'regimenTransformacionEnsamblePlanillas') {
-        this.produccionNacional = false;
-        this.fomentoIndustriaAutomotriz = false;
-        this.fomentoIndustriaAstilleros = false;
-      } else if (tipoFormulario === 'fomentoIndustriaAstilleros') {
-        this.produccionNacional = false;
-        this.fomentoIndustriaAutomotriz = false;
-        this.regimenTransformacionEnsamblePlanillas = false;
-      }
-    } else {
-      this.tipoFormulario = undefined;
-    }
-  }
+    this.produccionNacional = false;
+    this.fomentoIndustriaAutomotriz = false;
+    this.regimenTransformacionEnsamblePlanillas = false;
+    this.fomentoIndustriaAstilleros = false;
 
-  public setOpcionesCheckCriteriosRegistro(opcionCheck: string) {
-    switch (opcionCheck) {
-      case 'procesoProductivo':
-        this.caracteristicasTransformacionActivar = true;
-        break;
-      case 'noprocesoProductivo':
-        this.caracteristicasTransformacionActivar = false;
-        break;
-      case 'bienesElaborados':
-        this.valorAgregado = 100;
-        break;
-      case 'nobienesElaborados':
-        this.valorAgregado = 0.00;
-        break;
-    }
-  }
-
-  public listarSolicitud() {
-    this.router.navigate(['solicitud/listar']);
+    this[tipoFormulario] = true;
   }
 
 }

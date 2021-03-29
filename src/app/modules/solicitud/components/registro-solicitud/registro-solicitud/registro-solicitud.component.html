@@ -1,3 +1,7 @@
+<div class="header">
+    <button routerLink="/">SALIDA SEGURA</button>
+    <button routerLink="/solicitud/listar">VER SOLICITUDES</button>
+</div>
 <div class="titulo">
     <label class="headline-l">Tipo de Formulario</label>
     <br />
@@ -44,16 +48,16 @@
         </mat-expansion-panel-header>
         <app-datos-producto [tipoFormulario]="tipoFormulario"></app-datos-producto>
     </mat-expansion-panel>
-    <!--
+
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 3. CRITERIOS PARA EL REGISTRO
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-criterios-registro (oncriterio)="setOpcionesCheckCriteriosRegistro($event)" [tipoFormulario]="tipoFormulario"></app-criterios-registro>
+        <app-criterios-registro [tipoFormulario]="tipoFormulario"></app-criterios-registro>
     </mat-expansion-panel>
-
+    <!--
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -143,7 +147,6 @@
 <div class="p-col">
     <button class="button-content" style="margin-right:20px">FIRMAR Y RADICAR SOLICITUD</button>
     <button class="button-content" style="margin-right:20px">GUARDAR BORRADOR</button>
-    <button class="button-content" style="margin-right:20px" (click)="listarSolicitud()">VER SOLICITUDES</button>
 </div>
 
 <br />

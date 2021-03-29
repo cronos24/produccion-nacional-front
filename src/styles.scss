@@ -360,21 +360,6 @@ select.ng-invalid.ng-dirty.ng-touched {
   color: $error-color;
 }
 
-mat-icon {
-  &.pointer {
-    cursor: pointer;
-  }
-  > svg {
-    fill: $primary-color-icon;
-  }
-}
-
-mat-icon[disabled="true"] {
-  > svg {
-    fill: $secondary-color-icon;
-  }
-}
-
 .mat-toolbar-single-row {
   height: 10%;
 }
@@ -712,5 +697,20 @@ app-registro-solicitud {
   }
   ::after {
     color: $tertiary-color-text !important;
+  }
+}
+
+mat-icon {
+  &.pointer {
+    cursor: pointer;
+  }
+  > svg {
+    fill: $primary-color-icon;
+  }
+}
+
+mat-icon[disabled="true"] {
+  > svg {
+    fill: $secondary-color-icon;
   }
 }
