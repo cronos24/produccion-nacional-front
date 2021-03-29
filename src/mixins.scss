@@ -1,24 +1,74 @@
-@import 'variables.scss';
+@import "variables.scss";
 
 @mixin table {
     tr {
-        >th {
+        > th {
             text-align: center;
             background-color: $light-primary-color;
-            >span {
+            > span {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
             }
         }
-        >td.center {
+        > td.center {
             text-align: center;
         }
-        >td.right {
+        > td.right {
             text-align: right;
         }
-        >td.left {
+        > td.left {
             text-align: left;
+        }
+    }
+}
+
+@mixin message {
+    ::ng-deep {
+        .mat-tooltip {
+            white-space: pre-line !important;
+            color: $primary-color-text !important;
+            background-color: $background-color;
+
+            font-family: $font-worksans;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .p-message {
+            .p-message-wrapper {
+                padding: 10px 32px;
+            }
+            .p-message-summary {
+                font-family: $font-monserrat;
+                font-weight: 700;
+                font-size: 24px;
+
+                padding-left: 32px;
+            }
+            &.p-message-info {
+                background: $light-primary-color;
+                color: $dark-primary-color;
+
+                .p-message-icon {
+                    margin: 0px;
+                    width: 42px;
+                    height: 42px;
+                    content: url("./assets/icons/informacion-circular-negativo-fondo-blanco.svg");
+                }
+            }
+            &.p-message-success {
+                box-shadow: 0 0 0 1px $sucess-color;
+                background: unset;
+                color: $sucess-color;
+
+                .p-message-icon {
+                    margin: 0px;
+                    width: 42px;
+                    height: 42px;
+                    content: url("./assets/icons/exito-circular-negativo.svg");
+                }
+            }
         }
     }
 }

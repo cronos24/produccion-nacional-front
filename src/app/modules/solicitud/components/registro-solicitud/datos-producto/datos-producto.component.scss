@@ -1,3 +1,4 @@
+@import "../../../../../../mixins.scss";
 @import "../../../../../../variables.scss";
 
 :host {
@@ -15,39 +16,12 @@ textarea.doble {
     width: 100%;
 }
 
+@include message;
 ::ng-deep {
-    .mat-tooltip {
-        white-space: pre-line !important;
-        color: $primary-color-text !important;
-        background-color: $background-color;
-
-        font-family: $font-worksans;
-        font-weight: 600;
-        font-size: 16px;
-    }
-
     .p-message {
         margin: 0;
-        .p-message-wrapper {
-            padding: 20px 32px;
-        }
         .p-message-summary {
-            font-family: $font-monserrat;
-            font-weight: 700;
-            font-size: 18px;
-
-            padding-left: 32px;
-        }
-        &.p-message-info {
-            background: $light-primary-color;
-            color: $dark-primary-color;
-
-            .p-message-icon {
-                margin: 0px;
-                width: 42px;
-                height: 42px;
-                content: url("../../../../../../assets/icons/informacion-circular-negativo-fondo-blanco.svg");
-            }
+            font-size: 16px !important;
         }
     }
 }

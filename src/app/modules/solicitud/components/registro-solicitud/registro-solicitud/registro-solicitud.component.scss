@@ -18,7 +18,7 @@
 }
 
 mat-expansion-panel-header {
-  background: $primary-color;
+  background: $dark-primary-color;
   border-bottom: 2px solid;
   border-bottom-color: $tertiary-color-text;
   .mat-expansion-panel-header-title {
@@ -32,13 +32,10 @@ mat-expansion-panel-header {
 
 .mat-expansion-panel-header.mat-expanded:focus,
 .mat-expansion-panel-header.mat-expanded:hover {
-  background: $primary-color-icon !important;
+  background: $primary-color !important;
 }
-.mat-expansion-panel
-  .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled="true"]),
-.mat-expansion-panel
-  .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled="true"]),
-.mat-expansion-panel:not(.mat-expanded)
-  .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
-  background: $primary-color-icon !important;
+.mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled="true"]),
+.mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled="true"]),
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
+  background: $primary-color !important;
 }

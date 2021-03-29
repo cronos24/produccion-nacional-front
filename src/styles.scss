@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Work+Sans:wght@400;500&display=swap");
+@import "./mixins.scss";
 @import "./variables.scss";
 @import "~@angular/material/theming";
 @import "./assets/scss/table.scss";
@@ -71,30 +72,17 @@ $theme: mat-light-theme(
   }
 }
 
+@include message;
+
 ::ng-deep {
-  .p-message {
-    .p-message-wrapper {
-      padding: 20px 32px;
-    }
-    .p-message-summary {
-      font-family: $font-monserrat;
-      font-weight: 700;
-      font-size: 24px;
+  .mat-tooltip {
+    white-space: pre-line !important;
+    color: $primary-color-text !important;
+    background-color: $background-color;
 
-      padding-left: 32px;
-    }
-    &.p-message-success {
-      box-shadow: 0 0 0 1px $sucess-color;
-      background: unset;
-      color: $sucess-color;
-
-      .p-message-icon {
-        margin: 0px;
-        width: 42px;
-        height: 42px;
-        content: url("./assets/icons/exito-circular-negativo.svg");
-      }
-    }
+    font-family: $font-worksans;
+    font-weight: 600;
+    font-size: 16px;
   }
 }
 
@@ -357,6 +345,21 @@ button:enabled:hover {
   color: $tertiary-color-text;
 }
 
+input.ng-invalid.ng-dirty.ng-touched {
+  box-shadow: 0 0 0 1px $error-color;
+  color: $error-color;
+}
+
+textarea.ng-invalid.ng-dirty.ng-touched {
+  box-shadow: 0 0 0 1px $error-color;
+  color: $error-color;
+}
+
+select.ng-invalid.ng-dirty.ng-touched {
+  box-shadow: 0 0 0 1px $error-color;
+  color: $error-color;
+}
+
 mat-icon {
   &.pointer {
     cursor: pointer;
@@ -399,6 +402,7 @@ mat-icon[disabled="true"] {
   display: flex;
   align-items: center;
   mat-icon {
+    cursor: pointer;
     width: 32px;
     height: 32px;
     margin-left: 10px;
@@ -449,41 +453,6 @@ hr {
   cursor: not-allowed;
 }
 
-.button-content {
-  font-family: $font-worksans;
-  color: $tertiary-color-text;
-  background-color: $primary-color;
-  border-radius: 30px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: none;
-  border-color: $primary-color;
-  border-style: solid;
-  cursor: pointer;
-  padding: 3px 15px 3px;
-}
-
-.button-content:hover {
-  background-color: $dark-primary-color;
-  border-color: $dark-primary-color;
-}
-
-.button-content-disable {
-  font-family: $font-worksans;
-  color: $tertiary-color-text;
-  background-color: $secondary-color-text;
-  border-radius: 30px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: none;
-  border-color: $secondary-color-text;
-  border-style: none;
-  cursor: not-allowed;
-  padding: 0px 15px 0px;
-}
-
 .button-nonContent {
   font-family: $font-worksans;
   color: $primary-color;
@@ -522,17 +491,6 @@ hr {
 
 .checker-text {
   color: $dark-primary-color;
-}
-
-.form-warning {
-  background-color: rgba(255, 236, 236, 0.877);
-  font-family: $font-monserrat;
-  color: $danger-color-text;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 24px;
-  padding: 0px 15px 0px;
-  border-radius: 3px;
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -672,10 +630,6 @@ input[type="file"]::file-selector-button:hover {
   width: 942px;
   height: 47px;
   border-radius: 5px;
-}
-
-.p-col-6 {
-  width: 540px;
 }
 
 .p-field img {

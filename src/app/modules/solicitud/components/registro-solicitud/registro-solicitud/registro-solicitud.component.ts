@@ -9,18 +9,44 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class RegistroSolicitudComponent {
 
-  public produccionNacional: boolean = false;
+  public produccionNacional: boolean = true;
   public fomentoIndustriaAutomotriz: boolean = false;
   public regimenTransformacionEnsamblePlanillas: boolean = false;
+  public fomentoIndustriaAstilleros: boolean = false;
 
-  public tipoFormulario: string;
+  public tipoFormulario: string = 'produccionNacional';
   public caracteristicasTransformacionActivar: boolean;
   public valorAgregado: number;
 
   constructor(
     private router: Router,
+  ) { }
 
-  ){}
+  public onSelectedCheckBox(tipoFormulario: string, value: boolean): void {
+    if (value) {
+      this.tipoFormulario = tipoFormulario;
+
+      if (tipoFormulario === 'produccionNacional') {
+        this.fomentoIndustriaAutomotriz = false;
+        this.regimenTransformacionEnsamblePlanillas = false;
+        this.fomentoIndustriaAstilleros = false;
+      } else if (tipoFormulario === 'fomentoIndustriaAutomotriz') {
+        this.produccionNacional = false;
+        this.regimenTransformacionEnsamblePlanillas = false;
+        this.fomentoIndustriaAstilleros = false;
+      } else if (tipoFormulario === 'regimenTransformacionEnsamblePlanillas') {
+        this.produccionNacional = false;
+        this.fomentoIndustriaAutomotriz = false;
+        this.fomentoIndustriaAstilleros = false;
+      } else if (tipoFormulario === 'fomentoIndustriaAstilleros') {
+        this.produccionNacional = false;
+        this.fomentoIndustriaAutomotriz = false;
+        this.regimenTransformacionEnsamblePlanillas = false;
+      }
+    } else {
+      this.tipoFormulario = undefined;
+    }
+  }
 
   public setOpcionesCheckCriteriosRegistro(opcionCheck: string) {
     switch (opcionCheck) {
@@ -36,26 +62,6 @@ export class RegistroSolicitudComponent {
       case 'nobienesElaborados':
         this.valorAgregado = 0.00;
         break;
-    }
-  }
-
-  public onSelectedCheckBox(tipoFormulario: string, value: boolean): void {
-
-    if (value) {
-      this.tipoFormulario = tipoFormulario;
-
-      if (tipoFormulario === 'produccionNacional') {
-        this.fomentoIndustriaAutomotriz = false;
-        this.regimenTransformacionEnsamblePlanillas = false;
-      } else if (tipoFormulario === 'fomentoIndustriaAutomotriz') {
-        this.produccionNacional = false;
-        this.regimenTransformacionEnsamblePlanillas = false;
-      } else {
-        this.produccionNacional = false;
-        this.fomentoIndustriaAutomotriz = false;
-      }
-    } else {
-      this.tipoFormulario = undefined;
     }
   }
 

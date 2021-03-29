@@ -1,16 +1,25 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-datos-producto',
   templateUrl: './datos-producto.component.html',
   styleUrls: ['./datos-producto.component.scss'],
 })
-export class DatosProductoComponent implements OnInit {
-  activarCodigo: boolean = true;
-  activarTecnologia: boolean = true;
-  activarMotoparte: boolean = true;
+export class DatosProductoComponent {
+
+  @Input() public set tipoFormulario(tipo: string) {
+    this._tipoFormulario = tipo;
+    this.actualizarFormulario(tipo);
+  }
+  public get tipoFormulario(): string {
+    return this._tipoFormulario;
+  }
+
+  @Output() producto = new EventEmitter<any>();
+
+  public _tipoFormulario: string;
 
   public subpartidas: any[] = [];
 
@@ -25,87 +34,34 @@ export class DatosProductoComponent implements OnInit {
     },
   ];
 
-  @Input()
-  public set tipoFormulario(tipo: string) {
-    this.updateFormulario(tipo);
+  public formGroup: FormGroup = new FormGroup({
+    subpartida: new FormControl([null, [Validators.required]]),
+    nombreComercial: new FormControl(['', [Validators.required]]),
+    nombreTecnico: new FormControl(['', [Validators.required]]),
+    unidadComercial: new FormControl([null, [Validators.required]]),
+    sectorEconomico: new FormControl([null, [Validators.required]]),
+    tamanoEmpresa: new FormControl([null, [Validators.required]]),
+    unipadesProducidas: new FormControl(['', [Validators.required, Validators.min(0)]]),
+  });
+
+  constructor() {
   }
 
-  @Output() producto = new EventEmitter<any>();
-
-  datosProductos: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.datosProductos = this.fb.group({
-      subpartida: [null],
-      codigo: [null],
-      comercial: [''],
-      tecnico: [''],
-      unidadComercial: [null],
-      tecnologia: [''],
-      motoparte: [''],
-      sector: [null],
-      tamano: [null],
-      unidadesProducidas: [''],
-    });
-
-    this.producto.emit(this.datosProductos);
-  }
-  ngOnInit(): void {}
-
-  updateFormulario(tipoFormulario: string): void {
+  private actualizarFormulario(tipoFormulario: string): void {
     switch (tipoFormulario) {
-      case 'produccionNacional':
-        this.datosProductos.reset();
-        this.turnOnActivar(tipoFormulario);
-        this.datosProductos.updateValueAndValidity();
-
+      case 'fomentoIndustriaAutomotriz' || 'fomentoIndustriaAstilleros':
+        this.formGroup.addControl('codigoNumericoUnico', new FormControl('', [Validators.required]));
+        this.formGroup.addControl('tecnologia', new FormControl('', [Validators.required]));
         break;
-
-      case 'fomentoIndustriaAutomotriz':
-        this.datosProductos.reset();
-        this.turnOnActivar(tipoFormulario);
-        this.datosProductos.updateValueAndValidity();
-
-        break;
-
       case 'regimenTransformacionEnsamblePlanillas':
-        this.datosProductos.reset();
-        this.turnOnActivar(tipoFormulario);
-        this.datosProductos.updateValueAndValidity();
-
+        this.formGroup.addControl('descripcionMotoparte', new FormControl('', [Validators.required]));
+        this.formGroup.addControl('numeroMotoparte', new FormControl('', [Validators.required]));
         break;
-
       default:
-        this.resetActivar();
-        this.datosProductos.reset();
-        this.datosProductos.updateValueAndValidity();
-
         break;
     }
+
+    this.formGroup.reset();
   }
 
-  resetActivar(): void {
-    this.activarCodigo = true;
-    this.activarTecnologia = true;
-    this.activarMotoparte = true;
-    this.datosProductos.reset();
-  }
-
-  turnOnActivar(formulario: string): void {
-    this.activarCodigo =
-      formulario === 'produccionNacional' ||
-      formulario === 'regimenTransformacionEnsamblePlanillas'
-        ? false
-        : true;
-    this.activarTecnologia =
-      formulario === 'fomentoIndustriaAutomotriz' ||
-      formulario === 'regimenTransformacionEnsamblePlanillas'
-        ? true
-        : false;
-    this.activarMotoparte =
-      formulario === 'produccionNacional' ||
-      formulario === 'fomentoIndustriaAutomotriz'
-        ? false
-        : true;
-  }
 }

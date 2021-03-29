@@ -22,16 +22,6 @@ label.group {
 }
 
 ::ng-deep {
-    .mat-tooltip {
-        white-space: pre-line !important;
-        color: $primary-color-text !important;
-        background-color: $background-color;
-
-        font-family: $font-worksans;
-        font-weight: 600;
-        font-size: 16px;
-    }
-
     p-message {
         width: 100% !important;
         margin: auto;

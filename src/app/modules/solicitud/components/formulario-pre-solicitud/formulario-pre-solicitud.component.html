@@ -1,39 +1,35 @@
-<form [formGroup]="myForm">
-  <p-card>
-
-    <div class="p-grid">
-
-      <div class="p-col-6">
-
-        <p class="field">
-          Indique si esta solicitud es una renovación de un registro vigente:
-          <p-checkbox name="si" binary="true" inputId="check-si" class="checker" formControlName="registro_vigente" (click)="habilitar()"></p-checkbox>
-          <label for="si" class="checker-text"><i></i> Si</label>
-        </p>
+<div class="header">
+  <button routerLink="/">SALIDA SEGURA</button>
+  <button routerLink="/solicitud/listar">VER SOLICITUDES</button>
+</div>
+<p-card>
+  <div class="p-grid">
+    <div class="p-col">
+      <p class="body-uno">
+        Indique si esta solicitud es una renovación de un registro vigente:
+        <p-checkbox label="Si" [binary]="true" [(ngModel)]="renovacion"></p-checkbox>
+      </p>
+    </div>
+    <div class="p-col">
+      <div class="p-field">
+        <label for="numberRegistro" class="body-uno">Número de Registro a Renovar:</label>
+        <input type="number" placeholder="Digite el número de registro a renovar (201905010000001)"/>
       </div>
-
-      <div class="p-col-6">
-
-        <div class="p-field">
-          <label for="numberRegistro" class="field">Número de Registro a Renovar:</label>
-          <p-inputNumber class="caption" placeholder="Digite el número de registro a renovar (201905010000001)" formControlName="numero_registro"> </p-inputNumber>
-
-        </div>
-
-      </div>
-
-      <div class="p-col-10">
-        <div class="form-warning">Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-10 margin-top">
+      <div class="form-warning">
+        <p class="body-uno --error-color">
+          Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y
           así generar un número
           interno
-          consecutivo de control.</div>
+          consecutivo de control.
+        </p>
       </div>
-      <div class="p-col-2">
-        <button class="button-content" (click)="crearBorrador()"> CREAR BORRADOR </button>
-      </div>
-
     </div>
-
-
-  </p-card>
-</form>
+    <div class="p-col-2 margin-top">
+      <button (click)="crearBorrador()"> CREAR BORRADOR</button>
+    </div>
+  </div>
+</p-card>

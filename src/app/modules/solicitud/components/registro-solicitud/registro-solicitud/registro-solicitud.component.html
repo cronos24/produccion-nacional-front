@@ -17,6 +17,11 @@
                 (ngModelChange)="onSelectedCheckBox('regimenTransformacionEnsamblePlanillas', $event)" />
             Programa de Regimen de Transformacion o<br />Ensamble planillas A y B
         </label>
+        <label>
+            <input type="checkbox" [(ngModel)]="fomentoIndustriaAstilleros"
+                (ngModelChange)="onSelectedCheckBox('fomentoIndustriaAstilleros', $event)" />
+            Programa de Fomento a la<br />Industria Astilleros
+        </label>
     </div>
 </div>
 
@@ -39,7 +44,7 @@
         </mat-expansion-panel-header>
         <app-datos-producto [tipoFormulario]="tipoFormulario"></app-datos-producto>
     </mat-expansion-panel>
-
+    <!--
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -129,16 +134,16 @@
         </mat-expansion-panel-header>
         <app-anexos></app-anexos>
     </mat-expansion-panel>
-
+-->
 </mat-accordion>
 
 <br />
 <br />
 
 <div class="p-col">
-  <button class="button-content" style="margin-right:20px">FIRMAR Y RADICAR SOLICITUD</button>
-  <button class="button-content" style="margin-right:20px">GUARDAR BORRADOR</button>
-  <button class="button-content" style="margin-right:20px"(click)="listarSolicitud()">VER SOLICITUDES</button>
+    <button class="button-content" style="margin-right:20px">FIRMAR Y RADICAR SOLICITUD</button>
+    <button class="button-content" style="margin-right:20px">GUARDAR BORRADOR</button>
+    <button class="button-content" style="margin-right:20px" (click)="listarSolicitud()">VER SOLICITUDES</button>
 </div>
 
 <br />

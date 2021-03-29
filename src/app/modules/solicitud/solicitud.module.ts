@@ -18,7 +18,6 @@ import { SharedModule } from '../shared/shared.module';
 import { AdjuntarArchivoComponent } from './components/adjuntar-archivo/adjuntar-archivo.component';
 import { CancelarSolicitudComponent } from './components/cancelar-solicitud/cancelar-solicitud.component';
 import { FormularioPreSolicitudComponent } from './components/formulario-pre-solicitud/formulario-pre-solicitud.component';
-import { FormularioSolicitudComponent } from './components/formulario-solicitud/formulario-solicitud.component';
 import { InformativoComponent } from './components/informativo/informativo.component';
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
 import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestro-solicitud.component';
@@ -40,7 +39,6 @@ import { SolicitudRequerimientoComponent } from './components/solicitud-requerim
 import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
-import { ModalComponent } from './util/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -50,12 +48,9 @@ import { ModalComponent } from './util/modal/modal.component';
     CriteriosRegistroComponent,
     DatosProductoComponent,
     FormularioPreSolicitudComponent,
-    FormularioSolicitudComponent,
-    FormularioSolicitudComponent,
     InformativoComponent,
     ListarSolicitudComponent,
     MaestroSolicitudComponent,
-    ModalComponent,
     ModalInsumosComponent,
     ProcesoProduccionComponent,
     RegistroSolicitudComponent,
