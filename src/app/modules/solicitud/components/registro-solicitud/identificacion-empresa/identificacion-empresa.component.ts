@@ -115,9 +115,10 @@ export class IdentificacionEmpresaComponent implements OnInit {
 
   agregarPlanta(){
 
-    if(this.identificacionEmpresa.controls.departamentoPlanta.value == 'null'
-      || this.identificacionEmpresa.controls.direccionPlanta.value == 'null'
-      || this.identificacionEmpresa.controls.direccion.errors?.pattern){
+    if(this.identificacionEmpresa.controls.departamentoPlanta.value == null
+      || this.identificacionEmpresa.controls.direccionPlanta.value == null
+      || this.identificacionEmpresa.controls.direccion.invalid){
+
         this.openDialog(
           'info-warn',
           'Atención',
@@ -128,7 +129,7 @@ export class IdentificacionEmpresaComponent implements OnInit {
 
           });
     }else{
-
+      console.log("No errors")
     }
   }
 
