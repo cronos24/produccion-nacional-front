@@ -43,6 +43,7 @@ import { DatosRepresentanteLegalComponent } from './components/registro-solicitu
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { AnexosComponent } from './components/registro-solicitud/anexos/anexos.component';
 import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
+import { IdentificacionEmpresaComponent } from './components/registro-solicitud/identificacion-empresa/identificacion-empresa.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AnexosService } from './services/registro-solicitud/anexos/anexos.servi
     CaracteristicasTransformacionComponent,
     DatosRepresentanteLegalComponent,
     ValorAgregadoComponent,
-    AnexosComponent
+    AnexosComponent,
+    IdentificacionEmpresaComponent
   ],
   imports: [
     AccordionModule,

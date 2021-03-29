@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 
 import { IPagina } from '../../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
@@ -13,6 +14,8 @@ import { AnexosService } from '../../../services/registro-solicitud/anexos/anexo
 })
 export class AnexosComponent {
 
+  @Output() anexosInfo = new EventEmitter<any>();
+
   public anexos: ISolicitud[] = [];
 
   public busqueda: string;
@@ -22,9 +25,18 @@ export class AnexosComponent {
   };
   public sort: { [key: string]: string };
 
-  public constructor(
-    private dialog: MatDialog,
-    private anexosService: AnexosService) { }
+  anexosGroup: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.anexosGroup = this.fb.group({
+      archivo: [],
+      descripcion: ['', [Validators.maxLength(50)]],
+    });
+    this.anexosInfo.emit(this.anexosGroup);
+
+  }
+  ngOnInit(): void {}
+
 
 
   public onBuscar(): void {
@@ -51,14 +63,12 @@ export class AnexosComponent {
     }
   }
 
-
-
   private getAnexos(): void {
-    this.anexosService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
-      this.anexos.pop();
-      this.anexos = respuesta.respuesta.solicitudes as ISolicitud[];
+    //this.anexosService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
+      //this.anexos.pop();
+      //this.anexos = respuesta.respuesta.solicitudes as ISolicitud[];
       // this.pagina = respuesta.respuesta.pagina;
-    });
+    //});
   }
 
 }

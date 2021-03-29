@@ -9,9 +9,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class DatosRepresentanteLegalComponent {
 
   public datosRepresentanteGroup: FormGroup = this.formBuilder.group({
-    nombreRepresentante: [, Validators.required],
-    identificacion: [, Validators.required],
-    cargo: [, Validators.required],
+    nombreRepresentante: ['', [Validators.required, Validators.maxLength(255)]],
+    identificacion: ['', [Validators.required, Validators.maxLength(255)]],
+    cargo: ['', [Validators.required, Validators.maxLength(255)]],
   });
 
   constructor(

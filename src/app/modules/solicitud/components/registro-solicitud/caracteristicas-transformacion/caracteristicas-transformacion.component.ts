@@ -11,7 +11,7 @@ export class CaracteristicasTransformacionComponent {
   @Input() public caracteristicasTransformacionActivar: boolean;
 
   public caracteristicasTransformacionGroup: FormGroup = this.formBuilder.group({
-    descripcion: [, Validators.required],
+    descripcion: ['', [Validators.maxLength(32000)]],
   });
 
   constructor(

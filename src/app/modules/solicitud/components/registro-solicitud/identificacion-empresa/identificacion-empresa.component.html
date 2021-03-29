@@ -1,0 +1,185 @@
+<form [formGroup] = "identificacionEmpresa">
+  <div class="p-grid">
+      <div class="p-col">
+          <div class="form-group">
+              <label>Número de Identificación Tributaria N.I.T:</label>
+              <div class="icon-group">
+                  <input placeholder="16777719" type="number" formControlName = "nit" />
+                  <mat-icon svgIcon="informacion-circular-negativo"
+                      matTooltip="Diligenciar el Número de Identificación Tributaria N.I.T. de la empresa. No se requiere dígito de verificación.">
+                  </mat-icon>
+              </div>
+          </div>
+      </div>
+      <div class="p-col">
+          <div class="form-group">
+              <label>1.2 Razón social:</label>
+              <div class="icon-group">
+                  <input placeholder="JAMES OCHOA TRUJILLO" type="text" formControlName = "razonSocial"  />
+                  <mat-icon svgIcon="informacion-circular-negativo"
+                      matTooltip="Diligenciar la razón social de acuerdo al Certificado de Existencia y Representación Legal o Matrícula Mercantil registrados en el Registro único Empresarial y Social RUES.">
+                  </mat-icon>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="p-grid">
+      <div class="p-col">
+        <div class="form-group">
+            <label>1.3 Nombre Contacto de la Empresa:</label>
+            <div class="icon-group">
+                <input placeholder="Nombre Contacto" type="text" formControlName = "nombreContacto"  />
+                <mat-icon svgIcon="informacion-circular-negativo"
+                    matTooltip="Diligenciar el nombre de la persona que actuará como enlace entre la empresa y el Grupo de Registro de Productores de Bienes Nacionales.">
+                </mat-icon>
+            </div>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="form-group">
+            <label>1.4 Correo Electrónico:</label>
+            <div class="icon-group">
+                <input placeholder="usuario@dominio.com" type="text" formControlName = "correo"  />
+                <mat-icon svgIcon="informacion-circular-negativo"
+                    matTooltip="Diligenciar el correo electrónico de la persona indicada como contacto en 1.3. Es muy importante que este correo electrónico sea correctamente diligenciado, porque la respuesta a la solicitud de registro o cualquier notificación relacionada con el registro es enviada a través de dicho correo.">
+                </mat-icon>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="p-grid">
+      <div class="p-col-2">
+        <div class="form-group">
+          <label>1.5 Teléfono Contacto: </label>
+          <div class="icon-group">
+              <input placeholder="Indicativo" type="number" formControlName = "indicativo"  />
+              <mat-icon svgIcon="informacion-circular-negativo"
+                  matTooltip="Campo opcional. Digitar prefijo de la ciudad/provincia para telefonos fijos.">
+              </mat-icon>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-4">
+        <div class="form-group">
+          <br/>
+          <br/>
+          <div class="icon-group">
+            <input placeholder="Teléfono" type="number" formControlName = "telefono"  />
+            <mat-icon svgIcon="informacion-circular-negativo"
+                matTooltip="Diligenciar número telefónico del contacto de la empresa.">
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  <h2 class="titulo headline-s">Plantas de Producción</h2>
+
+  <div class="p-grid">
+      <div class="p-col">
+          <div class="form-group">
+              <label>1.6 Departamento Planta de Producción:</label>
+              <div class="icon-group">
+                <select formControlName = "departamentoPlanta" disabled>
+                    <option [ngValue]="null" disabled>Seleccione un Departamento</option>
+                    <option value="value2">value 1</option>
+                    <option value="value3">value 2</option>
+                    <option value="value3">value 3</option>
+                    <option value="value3">value 4</option>
+                </select>
+                <mat-icon svgIcon="informacion-circular-negativo"
+                  matTooltip="Diligenciar el departamento de ubicación de la planta de producción del producto a registrar.">
+              </mat-icon>
+            </div>
+          </div>
+      </div>
+      <div class="p-col">
+          <div class="form-group">
+              <label>1.7 Ciudad Planta de Producción:</label>
+              <div class="icon-group">
+                  <select formControlName = "direccionPlanta" disabled>
+                      <option [ngValue]="null" disabled>Seleccione una Ciudad</option>
+                      <option value="value2">value 1</option>
+                      <option value="value3">value 2</option>
+                      <option value="value3">value 3</option>
+                      <option value="value3">value 4</option>
+                  </select>
+                  <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la ciudad de ubicación de la planta de producción del producto a registrar."></mat-icon>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="p-grid">
+      <div class="p-col-6">
+          <div class="form-group">
+            <label>1.8 Dirección Planta de Producción:</label>
+            <div class="icon-group">
+                <input placeholder="Dirección" type="text" formControlName = "direccion"  />
+                <mat-icon svgIcon="informacion-circular-negativo"
+                    matTooltip="Diligenciar la dirección de ubicación de la planta de producción del producto a registrar.">
+                </mat-icon>
+            </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="table">
+    <div class="title">
+        <div class="space-search">
+            <div class="input-group">
+                <input placeholder="Buscar" type="text" [(ngModel)]="busqueda" (ngModelChange)="onBuscar()" />
+                <mat-icon svgIcon="buscar-circular-negativo"></mat-icon>
+            </div>
+        </div>
+    </div>
+    <p-table [value]="plantaProduccion" [customSort]="true" [lazy]="true" (onLazyLoad)="onSort($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="departamento">
+                    <span class="headline-s --dark-primary-color">
+                        Departamento<p-sortIcon field="departamento"></p-sortIcon>
+                    </span>
+                </th>
+                <th pSortableColumn="ciudad">
+                    <span class="headline-s --dark-primary-color">
+                        Ciudad<p-sortIcon field="ciudad"></p-sortIcon>
+                    </span>
+                </th>
+                <th pSortableColumn="direccion">
+                    <span class="headline-s --dark-primary-color">
+                        Dirección<p-sortIcon field="direccion"></p-sortIcon>
+                    </span>
+                </th>
+                <th>
+                  <span class="headline-s --dark-primary-color">Eliminar</span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-plantaProduccion>
+            <tr>
+                <td>
+                    <p class="body-uno">{{plantaProduccion['departamento']}}</p>
+                </td>
+                <td>
+                    <p class="body-uno">{{plantaProduccion['ciudad']}}</p>
+                </td>
+                <td>
+                    <p class="body-uno">{{plantaProduccion['direccion']}}</p>
+                </td>
+                <td class="center">
+                    <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <div *ngIf="plantaProduccion.length==0">
+        <p class="content body-uno">No se encontraron registros coincidentes</p>
+    </div>
+    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
+  </div>
+
+</form>
