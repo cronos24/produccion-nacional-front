@@ -1,56 +1,28 @@
 @import "../../../../../../variables.scss";
 
-.p-col {
-    padding: 15px;
+.p-col-6 {
     display: flex;
     align-items: center;
 }
 
-.titulo {
-    display: flex;
-    flex-direction: column;
-
-    .contenido {
-        display: flex;
-        justify-content: space-between;
-    }
+input {
+    width: fit-content;
 }
 
-label.group {
-    padding-top: 20px;
-    padding-bottom: 20px;
+label {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 ::ng-deep {
-    p-message {
-        width: 100%;
-    }
-
-    .p-inline-message {
-        margin: 0;
-        width: 100%;
-        .p-inline-message-wrapper {
-            padding: 20px 32px;
-        }
-        .p-inline-message-text {
-            font-family: $font-monserrat;
-            font-weight: 700;
-            font-size: 18px;
-
-            width: 100%;
-
-            padding-left: 32px;
-        }
-        &.p-inline-message-info {
-            background: $light-primary-color;
-            color: $dark-primary-color;
-
-            .p-inline-message-icon {
-                margin: 0px;
-                width: 42px;
-                height: 42px;
-                content: url("../../../../../../assets/icons/informacion-circular-negativo-fondo-blanco.svg");
-            }
+    mat-icon {
+        cursor: pointer;
+        width: 32px !important;
+        height: 32px !important;
+        margin-left: 10px;
+        margin-right: 10px;
+        > svg {
+            fill: $primary-color;
         }
     }
 }

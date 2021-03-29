@@ -6,16 +6,6 @@
     flex-direction: column;
 }
 
-textarea {
-    width: 100%;
-    height: 40px;
-}
-
-textarea.doble {
-    height: 80px;
-    width: 100%;
-}
-
 @include message;
 ::ng-deep {
     .p-message {

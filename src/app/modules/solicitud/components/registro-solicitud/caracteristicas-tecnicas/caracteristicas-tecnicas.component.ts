@@ -1,22 +1,15 @@
-import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormGeneric } from '../clases/form-generic';
 
 @Component({
   selector: 'app-caracteristicas-tecnicas',
   templateUrl: './caracteristicas-tecnicas.component.html',
   styleUrls: ['./caracteristicas-tecnicas.component.scss']
 })
-export class CaracteristicasTecnicasComponent {
+export class CaracteristicasTecnicasComponent extends FormGeneric{
 
-  public caracteristicasTecnicasGroup: FormGroup = this.formBuilder.group({
-    descripcion: [, Validators.required],
-  });
-
-  constructor(
-    public formBuilder: FormBuilder
-  ) { }
-
-  ngOnInit(): void {
-  }
+  @Input() protected formGroup: FormGroup;
+  protected formGroupName: string = 'caracteristicasTecnicas';
 
 }

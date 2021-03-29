@@ -1,24 +1,5 @@
-<ng-container *ngIf="!caracteristicasTransformacionActivar" [formGroup]="caracteristicasTransformacionGroup">
-    <div>
-        <div class="space-textarea">
-            <textarea formControlName="descripcion" id="motivo" placeholder="Describir de manera técnica y breve en qué consiste el cambio de las características Físicas, Químicas y Mecánicas que sufre el producto: (NOTA: No volver a digitar el mismo proceso productivo del punto 7)." minlength="3" maxlength="32000" disabled></textarea>
-        </div>
-
-        <div class="align-button">
-            <button disabled>GUARDAR</button>
-        </div>
-    </div>
- </ng-container>
-
-
- <ng-container *ngIf="caracteristicasTransformacionActivar" [formGroup]="caracteristicasTransformacionGroup">
-  <div>
-      <div class="space-textarea">
-          <textarea id="motivo" placeholder="Describir de manera técnica y breve en qué consiste el cambio de las características Físicas, Químicas y Mecánicas que sufre el producto: (NOTA: No volver a digitar el mismo proceso productivo del punto 7)." minlength="3" maxlength="32000"></textarea>
-      </div>
-
-      <div class="align-button">
-          <button>GUARDAR</button>
-      </div>
-  </div>
-</ng-container>
+<br />
+<form [formGroup]="getChildFormGroup()">
+    <textarea class="doble" formControlName="descripcion"
+        placeholder="Describir de manera técnica y breve en qué consiste el cambio de las características Físicas, Químicas y Mecánicas que sufre el producto: (NOTA: No volver a digitar el mismo proceso productivo del punto 7)."></textarea>
+</form>

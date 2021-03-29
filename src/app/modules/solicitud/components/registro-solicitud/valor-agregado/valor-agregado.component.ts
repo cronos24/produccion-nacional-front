@@ -1,34 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormGeneric } from '../clases/form-generic';
 
 @Component({
   selector: 'app-valor-agregado',
   templateUrl: './valor-agregado.component.html',
   styleUrls: ['./valor-agregado.component.scss']
 })
-export class ValorAgregadoComponent {
+export class ValorAgregadoComponent extends FormGeneric {
 
-    @Input()
-    public set valorAgregado(valor: number) {
-      this.calcularAgregadoNacional (valor)
+  @Input() protected formGroup: FormGroup;
+  protected formGroupName: string = 'valorAgregado';
+
+  public get valor() {
+    if ((this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesElaboradosNacionales') {
+      return 100;
     }
-   @Input() public sumaMaterialesImportados: number = 10000;
-   @Input() public valorTransaccion: number = 20000;
-
-   public agregadoNacional: number;
-
-   ngOnInit(): void {
-
+    return 0;
   }
-
-    public calcularAgregadoNacional (valor: number){
-      if (valor === 100){
-        this.agregadoNacional = valor;
-      }else{
-        let agregado =  this.valorTransaccion - this.sumaMaterialesImportados;
-        agregado = agregado / this.valorTransaccion;
-        agregado = agregado * 100;
-        this.agregadoNacional = agregado;
-      }
-  }
-
 }
+

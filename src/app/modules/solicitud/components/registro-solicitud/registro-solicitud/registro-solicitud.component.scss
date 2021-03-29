@@ -46,3 +46,10 @@ mat-expansion-panel-header {
 .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
   background: $primary-color !important;
 }
+
+mat-expansion-panel[disabled="true"] {
+  mat-expansion-panel-header {
+    background: $secondary-color-text;
+    cursor: default;
+  }
+}

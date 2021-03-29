@@ -271,7 +271,7 @@ textarea {
   font-size: 16px;
   color: $primary-color-text;
   width: 100%;
-  height: 50px;
+  height: 40px;
   padding: 8px 16px;
   border-radius: 5px;
   border-width: 1px;
@@ -287,6 +287,11 @@ textarea::placeholder {
 textarea:focus {
   box-shadow: 0 0 0 1px $primary-color;
   outline: none;
+}
+
+textarea.doble {
+  height: 80px;
+  width: 100%;
 }
 
 button {
@@ -533,54 +538,6 @@ input[type="file"]::file-selector-button:hover {
 .p-checkbox .p-checkbox-box:not(.p-disabled).p-focus {
   border-color: $primary-color;
   border-radius: 5px;
-}
-
-.p-radiobutton .p-radiobutton-box {
-  border-color: $primary-color;
-}
-
-.p-radiobutton .p-radiobutton-box:not(.p-disabled):hover {
-  border-color: $primary-color;
-}
-
-.p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
-  border-color: $primary-color;
-}
-
-.p-accordion .p-accordion-header .p-accordion-header-link {
-  background-color: $primary-color;
-  color: $tertiary-color-text;
-  padding: 10px;
-  margin-bottom: 2px;
-}
-
-.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
-  background-color: $primary-color;
-  color: $tertiary-color-text;
-}
-
-.p-accordion .p-accordion-header:not(.p-highlight):not(.p-disabled):hover .p-accordion-header-link {
-  background-color: $dark-primary-color;
-  color: $tertiary-color-text;
-}
-
-.p-accordion .p-accordion-header:not(.p-disabled).p-highlight:hover .p-accordion-header-link {
-  background-color: $dark-primary-color;
-  color: $tertiary-color-text;
-}
-
-.p-accordion .p-accordion-tab:not(.p-accordion-tab-active) .p-accordion-header-link:focus {
-  background-color: $primary-color;
-  color: $tertiary-color-text;
-}
-
-::placeholder {
-  font-family: $font-worksans;
-  color: $primary-color-text;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  padding-left: 0%;
 }
 
 /*Ajuste del tamaño de los input y dropdown*/

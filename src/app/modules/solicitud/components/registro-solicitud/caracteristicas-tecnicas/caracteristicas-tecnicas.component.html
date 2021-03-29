@@ -1,9 +1,5 @@
-<div [formGroup]="caracteristicasTecnicasGroup">
-  <div class="space-textarea">
-      <textarea formControlName="descripcion" id="motivo" placeholder="Diligenciar las características técnicas que identifiquen el producto." minlength="3" maxlength="32000"></textarea>
-  </div>
-
-  <div class="align-button">
-      <button>GUARDAR</button>
-  </div>
-</div>
+<br />
+<form [formGroup]="getChildFormGroup()">
+  <textarea class="doble" formControlName="descripcion"
+    placeholder="Diligenciar las características técnicas que identifiquen el producto."></textarea>
+</form>

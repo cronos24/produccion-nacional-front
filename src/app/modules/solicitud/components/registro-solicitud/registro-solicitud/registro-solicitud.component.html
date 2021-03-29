@@ -55,7 +55,7 @@
         </mat-expansion-panel-header>
         <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <!--<mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
@@ -78,14 +78,14 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-proceso-produccion></app-proceso-produccion>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
+    </mat-expansion-panel>-->
+    <mat-expansion-panel [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-caracteristicas-transformacion [caracteristicasTransformacionActivar]="caracteristicasTransformacionActivar">></app-caracteristicas-transformacion>
+        <app-caracteristicas-transformacion [formGroup]="formGroup"></app-caracteristicas-transformacion>
     </mat-expansion-panel>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -93,7 +93,7 @@
                 9. CARACTERÍSTICAS TÉCNICAS DEL PRODUCTO
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-caracteristicas-tecnicas></app-caracteristicas-tecnicas>
+        <app-caracteristicas-tecnicas [formGroup]="formGroup"></app-caracteristicas-tecnicas>
     </mat-expansion-panel>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -101,7 +101,7 @@
                 10. APLICACIONES DEL PRODUCTO
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-aplicaciones-producto></app-aplicaciones-producto>
+        <app-aplicaciones-producto [formGroup]="formGroup"></app-aplicaciones-producto>
     </mat-expansion-panel>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -109,7 +109,7 @@
                 11. VALOR AGREGADO NACIONAL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-valor-agregado [valorAgregado]="valorAgregado"></app-valor-agregado>
+        <app-valor-agregado [formGroup]="formGroup"></app-valor-agregado>
     </mat-expansion-panel>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -117,9 +117,9 @@
                 12. DATOS DEL REPRESENTANTE LEGAL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-datos-representante-legal></app-datos-representante-legal>
+        <app-datos-representante-legal [formGroup]="formGroup"></app-datos-representante-legal>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <!--<mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 13. ANEXOS
@@ -127,12 +127,12 @@
         </mat-expansion-panel-header>
         <app-anexos></app-anexos>
     </mat-expansion-panel>
-</mat-accordion>
-<br />
-<br />
-<div class="header">
-    <button (click)="onGuardar()">GUARDAR BORRADOR</button>
-    <button>FIRMAR Y RADICAR SOLICITUD</button>
-</div>
-<br />
-<br />
+</mat-accordion>-->
+    <br />
+    <br />
+    <div class="header">
+        <button (click)="onGuardar()">GUARDAR BORRADOR</button>
+        <button>FIRMAR Y RADICAR SOLICITUD</button>
+    </div>
+    <br />
+    <br />

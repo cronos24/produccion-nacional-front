@@ -59,7 +59,7 @@ export abstract class ServicioGeneral<T> {
     return this.httpClient.get<IRespuesta<T[]>>(url, { params: httpParams });
   }
 
-  public getById(id: number, options?: {
+  public getById(id: string, options?: {
     postfix?: string,
     queryParams?: { [key: string]: string }
   }): Observable<IRespuesta<T[]>> {
