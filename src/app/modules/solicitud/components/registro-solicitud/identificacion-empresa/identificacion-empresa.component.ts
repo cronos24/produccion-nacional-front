@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Message } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { IPagina } from '../../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
+import { Observable } from 'rxjs';
 import { ISolicitud } from '../../../interfaces/solicitud.interface';
+import { ModalComponent } from '../../../util/modal/modal.component';
 
 @Component({
   selector: 'app-identificacion-empresa',
@@ -32,7 +35,10 @@ export class IdentificacionEmpresaComponent implements OnInit {
 
   identificacionEmpresa: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog
+    ) {
     this.identificacionEmpresa = this.fb.group({
       nit: ['', [Validators.required, Validators.maxLength(255)]],
       razonSocial: ['', [Validators.required, Validators.maxLength(255)]],
@@ -105,6 +111,60 @@ export class IdentificacionEmpresaComponent implements OnInit {
       this.pagina.pagina = event.page + 1;
       this.getIdentificacionEmpresa();
     }
+  }
+
+  agregarPlanta(){
+
+    if(this.identificacionEmpresa.controls.departamentoPlanta.value == 'null'
+      || this.identificacionEmpresa.controls.direccionPlanta.value == 'null'
+      || this.identificacionEmpresa.controls.direccion.errors?.pattern){
+        this.openDialog(
+          'info-warn',
+          'Atención',
+          'Verifique que seleccionó departamento, ciudad e ingresó la dirección de la Planta de Producción',
+          'REGRESAR',
+          undefined,
+          undefined).subscribe((resp) => {
+
+          });
+    }else{
+
+    }
+  }
+
+  public openDialog(
+    icon: string,
+    title_modal: string,
+    text_content: string,
+    title_first_button: string,
+    title_second_button: string,
+    text_content_specific: string
+
+  ): Observable<any> {
+    return new Observable((observer) => {
+
+      const dialogRef = this.dialog.open(ModalComponent, {
+        width: '500px',
+        data: {
+          title_first_button,
+          title_second_button,
+          text_content,
+          text_content_specific,
+          title_modal,
+          icon
+        }
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          console.log('The dialog was closed' + result);
+          observer.next(true);
+        } else {
+          observer.next(false);
+        }
+
+      });
+    });
   }
 
   private getIdentificacionEmpresa(): void {

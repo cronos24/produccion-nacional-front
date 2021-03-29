@@ -27,7 +27,11 @@ export class AnexosComponent {
 
   anexosGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private anexosService: AnexosService
+
+    ) {
     this.anexosGroup = this.fb.group({
       archivo: [],
       descripcion: ['', [Validators.maxLength(50)]],
@@ -64,11 +68,11 @@ export class AnexosComponent {
   }
 
   private getAnexos(): void {
-    //this.anexosService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
-      //this.anexos.pop();
-      //this.anexos = respuesta.respuesta.solicitudes as ISolicitud[];
-      // this.pagina = respuesta.respuesta.pagina;
-    //});
+    this.anexosService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
+      this.anexos.pop();
+      this.anexos = respuesta.respuesta.solicitudes as ISolicitud[];
+       //this.pagina = respuesta.respuesta.pagina;
+    });
   }
 
 }
