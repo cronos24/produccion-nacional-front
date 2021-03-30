@@ -18,7 +18,8 @@
           <input type="file" id="myfile" name="myfile" accept="application/pdf" formControlName = "archivo" >
       </div>
       <div class="p-col-3">
-          <textarea pInputTextarea placeholder="Descripción (Máximo 50 caracteres)" minlength="3" maxlength="32000" formControlName = "descripcion" ></textarea>
+          <textarea pInputTextarea placeholder="Descripción (Máximo 50 caracteres)" minlength="3"
+          maxlength="50" formControlName = "descripcion"></textarea>
       </div>
       <div class="p-col-6" style="text-align:right">
           <button class="button-content">SUBIR ANEXO</button>
@@ -76,10 +77,10 @@
                       <p class="body-uno">{{anexos['fechaPresentacion']}}</p>
                   </td>
                   <td class="center">
-                      <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                      <mat-icon svgIcon="papelera-positivo" (click)="eliminarAnexo(anexos.id)"></mat-icon>
                   </td>
                   <td class="center">
-                      <mat-icon svgIcon="adjunto-positivo"></mat-icon>
+                      <mat-icon svgIcon="adjunto-positivo" (click)="descargarAnexo(anexos.id)"></mat-icon>
                   </td>
               </tr>
           </ng-template>

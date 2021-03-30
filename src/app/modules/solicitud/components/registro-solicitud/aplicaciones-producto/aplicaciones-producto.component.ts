@@ -9,7 +9,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class AplicacionesProductoComponent {
 
   public aplicacionesProductoGroup: FormGroup = this.formBuilder.group({
-    descripcion: ['', [Validators.maxLength(32000)]],
+    descripcion: ['', [Validators.required, Validators.maxLength(32000)]],
   });
 
   constructor(

@@ -9,6 +9,12 @@
                       matTooltip="Diligenciar el Número de Identificación Tributaria N.I.T. de la empresa. No se requiere dígito de verificación.">
                   </mat-icon>
               </div>
+              <span class="error small" *ngIf="identificacionEmpresa.controls.nit.errors?.maxLength">
+                Máximo 255 Caracteres
+              </span>
+              <span class="error small" *ngIf="identificacionEmpresa.controls.nit.errors?.required">
+                Campo Obligatorio
+              </span>
           </div>
       </div>
       <div class="p-col">
@@ -20,6 +26,12 @@
                       matTooltip="Diligenciar la razón social de acuerdo al Certificado de Existencia y Representación Legal o Matrícula Mercantil registrados en el Registro único Empresarial y Social RUES.">
                   </mat-icon>
               </div>
+              <span class="error small" *ngIf="identificacionEmpresa.controls.razonSocial.errors?.maxLength">
+                Máximo 255 Caracteres
+              </span>
+              <span class="error small" *ngIf="identificacionEmpresa.controls.razonSocial.errors?.required">
+                Campo Obligatorio
+              </span>
           </div>
       </div>
   </div>
@@ -34,6 +46,12 @@
                     matTooltip="Diligenciar el nombre de la persona que actuará como enlace entre la empresa y el Grupo de Registro de Productores de Bienes Nacionales.">
                 </mat-icon>
             </div>
+            <span class="error small" *ngIf="identificacionEmpresa.controls.nombreContacto.errors?.maxLength">
+              Máximo 255 Caracteres
+            </span>
+            <span class="error small" *ngIf="identificacionEmpresa.controls.nombreContacto.errors?.required">
+              Campo Obligatorio
+            </span>
         </div>
       </div>
       <div class="p-col">
@@ -45,6 +63,12 @@
                     matTooltip="Diligenciar el correo electrónico de la persona indicada como contacto en 1.3. Es muy importante que este correo electrónico sea correctamente diligenciado, porque la respuesta a la solicitud de registro o cualquier notificación relacionada con el registro es enviada a través de dicho correo.">
                 </mat-icon>
             </div>
+            <span class="error small" *ngIf="identificacionEmpresa.controls.correo.errors?.pattern">
+              Formato de correo Inválido
+            </span>
+            <span class="error small" *ngIf="identificacionEmpresa.controls.correo.errors?.required">
+              Campo Obligatorio
+            </span>
         </div>
       </div>
   </div>
@@ -59,6 +83,12 @@
                   matTooltip="Campo opcional. Digitar prefijo de la ciudad/provincia para telefonos fijos.">
               </mat-icon>
           </div>
+          <span class="error small" *ngIf="identificacionEmpresa.controls.indicativo.errors?.pattern">
+            Formato de indicativo Inválido, 4 digitos únicamente
+          </span>
+          <span class="error small" *ngIf="identificacionEmpresa.controls.indicativo.errors?.required">
+            Campo Obligatorio
+          </span>
         </div>
       </div>
       <div class="p-col-4">
@@ -71,6 +101,12 @@
                 matTooltip="Diligenciar número telefónico del contacto de la empresa.">
             </mat-icon>
           </div>
+          <span class="error small" *ngIf="identificacionEmpresa.controls.telefono.errors?.pattern">
+            Formato de teléfono Inválido, mínimo 7 digitos, maximo 10
+          </span>
+          <span class="error small" *ngIf="identificacionEmpresa.controls.telefono.errors?.required">
+            Campo Obligatorio
+          </span>
         </div>
       </div>
   </div>
@@ -83,7 +119,7 @@
           <div class="form-group">
               <label>1.6 Departamento Planta de Producción:</label>
               <div class="icon-group">
-                <select formControlName = "departamentoPlanta" disabled>
+                <select formControlName = "departamentoPlanta">
                     <option [ngValue]="null" disabled>Seleccione un Departamento</option>
                     <option value="value2">value 1</option>
                     <option value="value3">value 2</option>
@@ -100,7 +136,7 @@
           <div class="form-group">
               <label>1.7 Ciudad Planta de Producción:</label>
               <div class="icon-group">
-                  <select formControlName = "direccionPlanta" disabled>
+                  <select formControlName = "direccionPlanta">
                       <option [ngValue]="null" disabled>Seleccione una Ciudad</option>
                       <option value="value2">value 1</option>
                       <option value="value3">value 2</option>
@@ -123,6 +159,9 @@
                     matTooltip="Diligenciar la dirección de ubicación de la planta de producción del producto a registrar.">
                 </mat-icon>
             </div>
+            <span class="error small" *ngIf="identificacionEmpresa.controls.direccion.errors?.required">
+              Campo Obligatorio
+            </span>
           </div>
       </div>
       <div class="p-col">
@@ -180,7 +219,7 @@
                     <p class="body-uno">{{plantaProduccion['direccion']}}</p>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                    <mat-icon svgIcon="papelera-positivo" (click)="eliminarPlanta(plantaProduccion.id)"></mat-icon>
                 </td>
             </tr>
         </ng-template>

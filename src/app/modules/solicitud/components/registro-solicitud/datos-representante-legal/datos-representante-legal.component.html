@@ -8,31 +8,40 @@
                   matTooltip="Representante legal Es quien se encuentra registrado en el Certificado de Existencia y Representación Legal para persona Jurídica o Registro Mercantil para persona Natural.">
               </mat-icon>
           </div>
+          <span class="error small" *ngIf="datosRepresentanteGroup.controls.nombreRepresentante.errors?.required">
+            Campo Obligatorio
+          </span>
       </div>
   </div>
   <div class="p-col">
       <div class="form-group">
           <label>Identificación:</label>
           <div class="icon-group">
-              <input placeholder="Ingrese únicamente dígitos" type="text" type="number" formControlName="identificacion"/>
+              <input placeholder="Ingrese únicamente dígitos" type="number" formControlName="identificacion"/>
               <mat-icon svgIcon="informacion-circular-negativo"
                   matTooltip="Documento de identidad del representante legal.">
               </mat-icon>
           </div>
+          <span class="error small" *ngIf="datosRepresentanteGroup.controls.identificacion.errors?.required">
+            Campo Obligatorio
+          </span>
       </div>
   </div>
 </div>
 
-<div class="p-grid">
+<div class="p-grid" [formGroup]="datosRepresentanteGroup">
   <div class="p-col">
       <div class="form-group">
           <label>Cargo:</label>
           <div class="icon-group">
-              <input placeholder="Cargo Representante" type="text" maxlength="3000" formControlName="cargo"/>
+              <input placeholder="Cargo Representante" type="text" formControlName="cargo"/>
               <mat-icon svgIcon="informacion-circular-negativo"
                   matTooltip="Cargo que ocupa el representante legal en la empresa.">
               </mat-icon>
           </div>
+          <span class="error small" *ngIf="datosRepresentanteGroup.controls.cargo.errors?.required">
+            Campo Obligatorio
+          </span>
       </div>
   </div>
   <div class="p-col">

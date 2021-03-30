@@ -2,7 +2,9 @@
   <div class="space-textarea">
       <textarea formControlName="descripcion" id="motivo" placeholder="Diligenciar el uso y/o aplicaciones específicas del producto." minlength="3" maxlength="32000"></textarea>
   </div>
-
+  <span class="error small" *ngIf="aplicacionesProductoGroup.controls.descripcion.errors?.required">
+    Campo Obligatorio
+  </span>
   <div class="align-button">
       <button>GUARDAR</button>
   </div>

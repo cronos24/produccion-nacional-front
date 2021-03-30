@@ -44,6 +44,7 @@ import { ValorAgregadoComponent } from './components/registro-solicitud/valor-ag
 import { AnexosComponent } from './components/registro-solicitud/anexos/anexos.component';
 import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 import { IdentificacionEmpresaComponent } from './components/registro-solicitud/identificacion-empresa/identificacion-empresa.component';
+import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { IdentificacionEmpresaComponent } from './components/registro-solicitud/
   ],
   providers: [
     SolicitudService,
-    AnexosService
+    AnexosService,
+    IdentificacionEmpresaService
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

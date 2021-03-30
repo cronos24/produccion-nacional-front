@@ -30,18 +30,15 @@ export class AnexosComponent {
   constructor(
     private fb: FormBuilder,
     private anexosService: AnexosService
-
     ) {
     this.anexosGroup = this.fb.group({
       archivo: [],
-      descripcion: ['', [Validators.maxLength(50)]],
+      descripcion: ['', [Validators.required, Validators.maxLength(50)]],
     });
     this.anexosInfo.emit(this.anexosGroup);
 
   }
   ngOnInit(): void {}
-
-
 
   public onBuscar(): void {
     this.getAnexos();
@@ -65,6 +62,32 @@ export class AnexosComponent {
       this.pagina.pagina = event.page + 1;
       this.getAnexos();
     }
+  }
+
+  eliminarAnexo(id: any, index){
+    //this.anexosService.delete(id).subscribe((response: any) => {
+      //if (response.codigo == 200) {
+        //this.anexos.removeAt(index);
+      //}
+    //});
+  }
+
+  descargarAnexo(id: any){
+    this.anexosService.get().subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
+      this.anexos.pop();
+      this.anexos = respuesta.respuesta.solicitudes as ISolicitud[];
+       //this.pagina = respuesta.respuesta.pagina;
+    });
+  }
+
+  agregarAnexo(){
+    let body: any = {
+        descripcion: this.anexosGroup.controls.descripcion.value,
+        archivo: this.anexosGroup.controls.archivo.value?.archivo,
+      };
+      this.anexosService.post(body).subscribe((respuesta) => {
+        this.getAnexos();
+      });
   }
 
   private getAnexos(): void {

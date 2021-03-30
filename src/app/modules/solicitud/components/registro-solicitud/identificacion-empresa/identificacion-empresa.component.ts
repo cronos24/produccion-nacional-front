@@ -7,6 +7,7 @@ import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
 import { Observable } from 'rxjs';
 import { ISolicitud } from '../../../interfaces/solicitud.interface';
 import { ModalComponent } from '../../../util/modal/modal.component';
+import { IdentificacionEmpresaService } from '../../../services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 
 @Component({
   selector: 'app-identificacion-empresa',
@@ -37,15 +38,16 @@ export class IdentificacionEmpresaComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private identificacionEmpresaService: IdentificacionEmpresaService
     ) {
     this.identificacionEmpresa = this.fb.group({
       nit: ['', [Validators.required, Validators.maxLength(255)]],
       razonSocial: ['', [Validators.required, Validators.maxLength(255)]],
       nombreContacto: ['', [Validators.required, Validators.maxLength(255)]],
       correo: ['', [Validators.required, Validators.pattern(new RegExp(/^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?;)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$/))]],
-      indicativo: ['', [Validators.required, Validators.maxLength(4)]],
-      telefono: ['', [Validators.required, Validators.minLength(10), Validators.pattern(new RegExp(/^\d{10,11}(-\d{10,11})*$/))]],
+      indicativo: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(new RegExp(/^\d{4,4}(-\d{4,4})*$/))]],
+      telefono: ['', [Validators.required, Validators.minLength(7), Validators.pattern(new RegExp(/^\d{7,10}(-\d{7,10})*$/))]],
       departamentoPlanta: [null],
       direccionPlanta: [null],
       direccion: ['', [Validators.required, Validators.minLength(5)]],
@@ -113,6 +115,14 @@ export class IdentificacionEmpresaComponent implements OnInit {
     }
   }
 
+  eliminarPlanta(id: any, index){
+    //this.identificacionEmpresaService.delete(id).subscribe((response: any) => {
+      //if (response.codigo == 200) {
+        //this.plantaProduccion.removeAt(index);
+      //}
+    //});
+  }
+
   agregarPlanta(){
 
     if(this.identificacionEmpresa.controls.departamentoPlanta.value == null
@@ -129,7 +139,20 @@ export class IdentificacionEmpresaComponent implements OnInit {
 
           });
     }else{
-      console.log("No errors")
+      let body: any = {
+        nit: this.identificacionEmpresa.controls.nit.value,
+        razonSocial: this.identificacionEmpresa.controls.razonSocial.value,
+        nombreContacto: this.identificacionEmpresa.controls.nombreContacto.value,
+        correo: this.identificacionEmpresa.controls.correo.value,
+        indicativo: this.identificacionEmpresa.controls.indicativo.value,
+        telefono: this.identificacionEmpresa.controls.telefono.value,
+        departamentoPlanta: this.identificacionEmpresa.controls.departamentoPlanta.value,
+        direccionPlanta: this.identificacionEmpresa.controls.direccionPlanta.value,
+        direccion: this.identificacionEmpresa.controls.direccion.value
+      };
+      this.identificacionEmpresaService.post(body).subscribe((respuesta) => {
+        this.getIdentificacionEmpresa();
+      });
     }
   }
 
@@ -169,7 +192,11 @@ export class IdentificacionEmpresaComponent implements OnInit {
   }
 
   private getIdentificacionEmpresa(): void {
-    // this.pagina = respuesta.respuesta.pagina;
+    this.identificacionEmpresaService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
+      this.plantaProduccion.pop();
+      this.plantaProduccion = respuesta.respuesta.solicitudes as ISolicitud[];
+       //this.pagina = respuesta.respuesta.pagina;
+    });
   }
 
 }
