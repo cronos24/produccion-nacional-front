@@ -36,9 +36,11 @@ import { ProcesoProduccionComponent } from './components/registro-solicitud/proc
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
+import { MaterialService } from './services/material.service';
 import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
+import { MaterialesExtranjerosComponent } from './components/registro-solicitud/materiales-extranjeros/materiales-extranjeros.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     CaracteristicasTransformacionComponent,
     DatosRepresentanteLegalComponent,
     ValorAgregadoComponent,
-    AnexosComponent
+    AnexosComponent,
+    MaterialesExtranjerosComponent
   ],
   imports: [
     AccordionModule,
@@ -96,7 +99,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
       useValue: {}
     },
     SolicitudService,
-    AnexosService
+    AnexosService,
+    MaterialService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -55,7 +55,7 @@
         </mat-expansion-panel-header>
         <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
     </mat-expansion-panel>
-    <!--<mat-expansion-panel>
+    <mat-expansion-panel [disabled]="isActive(4)" [attr.disabled]="isActive(4)">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
@@ -63,7 +63,7 @@
         </mat-expansion-panel-header>
         <app-materiales-extranjeros-nacionales></app-materiales-extranjeros-nacionales>
     </mat-expansion-panel>
-      <mat-expansion-panel>
+    <!--   <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
