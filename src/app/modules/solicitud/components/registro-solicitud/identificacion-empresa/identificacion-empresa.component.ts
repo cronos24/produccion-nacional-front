@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Message } from 'primeng/api';
-import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { IPagina } from '../../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
-import { Observable } from 'rxjs';
 import { ISolicitud } from '../../../interfaces/solicitud.interface';
-import { ModalComponent } from '../../../util/modal/modal.component';
 import { IdentificacionEmpresaService } from '../../../services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 
 @Component({
@@ -167,7 +165,7 @@ export class IdentificacionEmpresaComponent implements OnInit {
   ): Observable<any> {
     return new Observable((observer) => {
 
-      const dialogRef = this.dialog.open(ModalComponent, {
+      /*const dialogRef = this.dialog.open(ModalComponent, {
         width: '500px',
         data: {
           title_first_button,
@@ -187,7 +185,7 @@ export class IdentificacionEmpresaComponent implements OnInit {
           observer.next(false);
         }
 
-      });
+      });*/
     });
   }
 
