@@ -3,3 +3,6 @@
   <textarea class="doble" formControlName="descripcion"
     placeholder="Diligenciar las características técnicas que identifiquen el producto."></textarea>
 </form>
+<span class="error small" *ngIf="getChildFormGroup().controls.descripcion.errors?.required">
+  Campo Obligatorio
+</span>

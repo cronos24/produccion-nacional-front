@@ -1,0 +1,220 @@
+@import "../../../../../../styles.scss";
+@import "../../../../../../variables.scss";
+
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
+.space-search {
+  padding-left: 60%;
+  padding-bottom: 2%;
+}
+
+textarea {
+    width: 100%;
+    height: 40px;
+}
+
+textarea.doble {
+    height: 80px;
+    width: 100%;
+}
+
+.error.small {
+  font-size: 10px;
+}
+
+.titulo {
+  border-bottom: 1px solid #bababa;
+}
+
+.input-group {
+  padding-top: 5%;
+  flex-grow: 0.5;
+  >input {
+      border-radius: 25px;
+  }
+  >mat-icon {
+      vertical-align: middle;
+      margin-left: -37px;
+      margin-bottom: 4px;
+      width: 32px;
+      height: 32px;
+  }
+}
+
+::ng-deep {
+    .mat-tooltip {
+        white-space: pre-line !important;
+        color: $primary-color-text !important;
+        background-color: $background-color;
+
+        font-family: $font-worksans;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .p-message {
+        margin: 0;
+        .p-message-wrapper {
+            padding: 20px 32px;
+        }
+        .p-message-summary {
+            font-family: $font-monserrat;
+            font-weight: 700;
+            font-size: 18px;
+
+            padding-left: 32px;
+        }
+        &.p-message-info {
+            background: $light-primary-color;
+            color: $dark-primary-color;
+
+            .p-message-icon {
+                margin: 0px;
+                width: 42px;
+                height: 42px;
+                content: url("../../../../../../assets/icons/informacion-circular-negativo-fondo-blanco.svg");
+            }
+        }
+    }
+}
+
+.table {
+  @include table;
+}
+
+@media only screen and (min-width: 1224px) {
+  p-table {
+      .headline-xl {
+          font-size: 24px;
+          line-height: 36px;
+      }
+      .headline-l {
+          font-size: 16px;
+          line-height: 28px;
+      }
+      .headline-m {
+          font-size: 12px;
+          line-height: 22px;
+      }
+      .headline-s {
+          font-size: 10px;
+          line-height: 19px;
+      }
+      .headline-xs {
+          font-size: 8px;
+          line-height: 16px;
+      }
+      .subtitle {
+          font-size: 10px;
+          line-height: 19px;
+      }
+      .description {
+          font-size: 12px;
+          line-height: 22px;
+      }
+      .body-uno {
+          font-size: 12px;
+          line-height: 16px;
+      }
+      .body-dos {
+          font-size: 6px;
+          line-height: 13px;
+      }
+      .button-text {
+          font-size: 7px;
+          line-height: 14px;
+      }
+      .field {
+          font-size: 8px;
+          line-height: 14px;
+      }
+      .caption {
+          font-size: 6px;
+          line-height: 10px;
+      }
+      tr {
+          >th {
+              padding: 8px;
+          }
+      }
+  }
+}
+
+@media only screen and (min-width: 1824px) {
+  p-table {
+      .headline-xl {
+          font-size: 30px;
+          line-height: 42px;
+      }
+      .headline-l {
+          font-size: 22px;
+          line-height: 34px;
+      }
+      .headline-m {
+          font-size: 18px;
+          line-height: 28px;
+      }
+      .headline-s {
+          font-size: 16px;
+          line-height: 25px;
+      }
+      .headline-xs {
+          font-size: 14px;
+          line-height: 22px;
+      }
+      .subtitle {
+          font-size: 16px;
+          line-height: 25px;
+      }
+      .description {
+          font-size: 18px;
+          line-height: 28px;
+      }
+      .body-uno {
+          font-size: 14px;
+          line-height: 20px;
+      }
+      .body-dos {
+          font-size: 12px;
+          line-height: 19px;
+      }
+      .button-text {
+          font-size: 13px;
+          line-height: 20px;
+      }
+      .field {
+          font-size: 14px;
+          line-height: 20px;
+      }
+      .caption {
+          font-size: 12px;
+          line-height: 16px;
+      }
+      tr {
+          >th {
+              padding: 14px;
+          }
+      }
+  }
+}
+
+.input-group-buscar {
+  margin: 10px;
+  margin-left: auto;
+  max-width: 30%;
+  > input {
+      border-radius: 25px;
+      height: 40px;
+      border: 1px solid #e6effd;
+  }
+  > mat-icon {
+      vertical-align: middle;
+      margin-left: -33px;
+      margin-bottom: 4px;
+      color: #3366cc;
+      margin-top: 2px;
+  }
+}

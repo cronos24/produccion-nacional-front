@@ -31,12 +31,14 @@ import { CostosValorFabricaComponent } from './components/registro-solicitud/cos
 import { CriteriosRegistroComponent } from './components/registro-solicitud/criterios-registro/criterios-registro.component';
 import { DatosProductoComponent } from './components/registro-solicitud/datos-producto/datos-producto.component';
 import { DatosRepresentanteLegalComponent } from './components/registro-solicitud/datos-representante-legal/datos-representante-legal.component';
+import { IdentificacionEmpresaComponent } from './components/registro-solicitud/identificacion-empresa/identificacion-empresa.component';
 import { MaterialesExtranjerosNacionalesComponent } from './components/registro-solicitud/materiales-extranjeros-nacionales/materiales-extranjeros-nacionales.component';
 import { ProcesoProduccionComponent } from './components/registro-solicitud/proceso-produccion/proceso-produccion.component';
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
 import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
+import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 
@@ -62,7 +64,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     CaracteristicasTransformacionComponent,
     DatosRepresentanteLegalComponent,
     ValorAgregadoComponent,
-    AnexosComponent
+    AnexosComponent,
+    IdentificacionEmpresaComponent
   ],
   imports: [
     AccordionModule,
@@ -96,7 +99,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
       useValue: {}
     },
     SolicitudService,
-    AnexosService
+    AnexosService,
+    IdentificacionEmpresaService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

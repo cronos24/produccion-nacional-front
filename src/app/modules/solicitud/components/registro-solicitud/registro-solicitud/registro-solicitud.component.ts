@@ -50,9 +50,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   }
 
   public onGuardar() {
-    const body = {
-      tipoFormulario: this.getFatherFormGroupValue('tipoFormulario')
-    }
+    const body = this.getBody();
     this.solicitudService.patch(body).subscribe((respuesta) => {
       console.log(respuesta, 'respuesta');
     });
@@ -109,7 +107,63 @@ export class RegistroSolicitudComponent extends FormGeneric {
     });
   }
 
+  private getBody() {
+    let solicitud: any = {};
+
+    solicitud.id = this.getFatherFormGroupValue('id');
+
+    switch (this.getFatherFormGroupValue('tipoFormulario')) {
+      case 'produccionNacional':
+        solicitud.programaId = 0;
+        break;
+      case 'fomentoIndustriaAutomotriz':
+        solicitud.programaId = 1;
+        break;
+      case 'regimenTransformacionEnsamblePlanillas':
+        solicitud.programaId = 2;
+        break;
+      case 'fomentoIndustriaAstilleros':
+        solicitud.programaId = 3;
+        break;
+      default:
+        break;
+    }
+
+    return solicitud;
+  }
+
   private setFormGroup(solicitud) {
+    this.getFatherFormGroupControl('id').setValue(solicitud.id);
+
+    switch (solicitud.programaId) {
+      case 0:
+        this.setFatherFormGroupValue('tipoFormulario', 'produccionNacional');
+        break;
+      case 1:
+        this.setFatherFormGroupValue('tipoFormulario', 'fomentoIndustriaAutomotriz');
+        break;
+      case 2:
+        this.setFatherFormGroupValue('tipoFormulario', 'regimenTransformacionEnsamblePlanillas');
+        break;
+      case 3:
+        this.setFatherFormGroupValue('tipoFormulario', 'fomentoIndustriaAstilleros');
+        break;
+      default:
+        break;
+    }
+
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['subpartida'].setValue(solicitud.productoSubpartidaId);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreComercial'].setValue(solicitud.productoNombreComercial);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreTecnico'].setValue(solicitud.productoNombreTecnico);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unidadComercial'].setValue(solicitud.productoUnidadId);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['sectorEconomico'].setValue(solicitud.productoSectorId);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tamanoEmpresa'].setValue(solicitud.empresaTamanoId);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unipadesProducidas'].setValue(solicitud.productoUnidadesProducidas);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['codigoNumericoUnico'].setValue(solicitud.productoCnuId);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tecnologia'].setValue(solicitud.productoTecnologia);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['descripcionMotoparte'].setValue(solicitud.productoMotoparteDescripcion);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['numeroMotoparte'].setValue(solicitud.productoMotoparteNumero);
+
     solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').format('DD/MM/YYYY');
     (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['fecha'].setValue(solicitud.auditoria.fechaCreacionFormateada);
   }

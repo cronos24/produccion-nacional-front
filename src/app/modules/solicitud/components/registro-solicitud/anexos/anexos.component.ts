@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 
 import { IPagina } from '../../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
@@ -13,6 +14,8 @@ import { AnexosService } from '../../../services/registro-solicitud/anexos/anexo
 })
 export class AnexosComponent {
 
+  @Output() anexosInfo = new EventEmitter<any>();
+
   public anexos: ISolicitud[] = [];
 
   public busqueda: string;
@@ -22,10 +25,20 @@ export class AnexosComponent {
   };
   public sort: { [key: string]: string };
 
-  public constructor(
-    private dialog: MatDialog,
-    private anexosService: AnexosService) { }
+  anexosGroup: FormGroup;
 
+  constructor(
+    private fb: FormBuilder,
+    private anexosService: AnexosService
+    ) {
+    this.anexosGroup = this.fb.group({
+      archivo: [],
+      descripcion: ['', [Validators.required, Validators.maxLength(50)]],
+    });
+    this.anexosInfo.emit(this.anexosGroup);
+
+  }
+  ngOnInit(): void {}
 
   public onBuscar(): void {
     this.getAnexos();
@@ -51,13 +64,37 @@ export class AnexosComponent {
     }
   }
 
+  eliminarAnexo(id: any, index){
+    //this.anexosService.delete(id).subscribe((response: any) => {
+      //if (response.codigo == 200) {
+        //this.anexos.removeAt(index);
+      //}
+    //});
+  }
 
+  descargarAnexo(id: any){
+    this.anexosService.get().subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
+      this.anexos.pop();
+      this.anexos = respuesta.respuesta.solicitudes as ISolicitud[];
+       //this.pagina = respuesta.respuesta.pagina;
+    });
+  }
+
+  agregarAnexo(){
+    let body: any = {
+        descripcion: this.anexosGroup.controls.descripcion.value,
+        archivo: this.anexosGroup.controls.archivo.value?.archivo,
+      };
+      this.anexosService.post(body).subscribe((respuesta) => {
+        this.getAnexos();
+      });
+  }
 
   private getAnexos(): void {
     this.anexosService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
       this.anexos.pop();
       this.anexos = respuesta.respuesta.solicitudes as ISolicitud[];
-      // this.pagina = respuesta.respuesta.pagina;
+       //this.pagina = respuesta.respuesta.pagina;
     });
   }
 

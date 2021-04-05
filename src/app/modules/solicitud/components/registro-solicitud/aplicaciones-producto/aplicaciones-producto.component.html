@@ -2,4 +2,7 @@
 <form [formGroup]="getChildFormGroup()">
   <textarea class="doble" formControlName="descripcion"
     placeholder="Diligenciar el uso y/o aplicaciones específicas del producto."></textarea>
+  <span *ngIf="getChildFormGroup().controls.descripcion.errors?.required">
+    Campo Obligatorio
+  </span>
 </form>
