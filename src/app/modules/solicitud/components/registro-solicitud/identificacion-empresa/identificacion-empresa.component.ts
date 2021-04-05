@@ -1,96 +1,50 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { IPagina } from '../../../../../interfaces/pagina.interface';
+import { IPagina } from 'src/app/interfaces/pagina.interface';
+import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
 import { ISolicitud } from '../../../interfaces/solicitud.interface';
 import { IdentificacionEmpresaService } from '../../../services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
+import { FormGeneric } from '../clases/form-generic';
 
 @Component({
   selector: 'app-identificacion-empresa',
   templateUrl: './identificacion-empresa.component.html',
   styleUrls: ['./identificacion-empresa.component.scss']
 })
-export class IdentificacionEmpresaComponent implements OnInit {
+export class IdentificacionEmpresaComponent extends FormGeneric {
 
+  @Input() protected formGroup: FormGroup;
+  protected formGroupName: string = 'identificacionEmpresa';
 
+  public formGroupPlantaProduccion: FormGroup;
 
-  public plantaProduccion: ISolicitud[] = [];
+  public plantas: any[] = [];
 
   public busqueda: string;
   public pagina: IPagina = {
     pagina: 1,
-    registrosPorPagina: 8
+    registrosPorPagina: 10
   };
   public sort: { [key: string]: string };
 
-  @Input()
-  public set tipoFormulario(tipo: string) {
-    this.updateFormulario(tipo);
-  }
-
-  @Output() identificacion = new EventEmitter<any>();
-
-  identificacionEmpresa: FormGroup;
-
   constructor(
-    private fb: FormBuilder,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder,
     private identificacionEmpresaService: IdentificacionEmpresaService
-    ) {
-    this.identificacionEmpresa = this.fb.group({
-      nit: ['', [Validators.required, Validators.maxLength(255)]],
-      razonSocial: ['', [Validators.required, Validators.maxLength(255)]],
-      nombreContacto: ['', [Validators.required, Validators.maxLength(255)]],
-      correo: ['', [Validators.required, Validators.pattern(new RegExp(/^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?;)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$/))]],
-      indicativo: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(new RegExp(/^\d{4,4}(-\d{4,4})*$/))]],
-      telefono: ['', [Validators.required, Validators.minLength(7), Validators.pattern(new RegExp(/^\d{7,10}(-\d{7,10})*$/))]],
-      departamentoPlanta: [null],
-      direccionPlanta: [null],
-      direccion: ['', [Validators.required, Validators.minLength(5)]],
+  ) {
+    super();
+    this.formGroupPlantaProduccion = this.formBuilder.group({
+      departamento: [null, Validators.required],
+      ciudad: [null, Validators.required],
+      direccion: ['', [Validators.required, Validators.minLength(5)]]
     });
-
-    this.identificacion.emit(this.identificacionEmpresa);
-  }
-  ngOnInit(): void {}
-
-  updateFormulario(tipoFormulario: string): void {
-    switch (tipoFormulario) {
-      case 'produccionNacional':
-        this.identificacionEmpresa.reset();
-        this.identificacionEmpresa.updateValueAndValidity();
-
-        break;
-
-      case 'fomentoIndustriaAutomotriz':
-        this.identificacionEmpresa.reset();
-        this.identificacionEmpresa.updateValueAndValidity();
-
-        break;
-
-      case 'regimenTransformacionEnsamblePlanillas':
-        this.identificacionEmpresa.reset();
-        this.identificacionEmpresa.updateValueAndValidity();
-
-        break;
-
-      default:
-        this.resetActivar();
-        this.identificacionEmpresa.reset();
-        this.identificacionEmpresa.updateValueAndValidity();
-
-        break;
-    }
-  }
-
-  resetActivar(): void {
-    this.identificacionEmpresa.reset();
-
   }
 
   public onBuscar(): void {
-    this.getIdentificacionEmpresa();
+    this.getPlantas();
   }
 
   public onSort(event: {
@@ -101,7 +55,7 @@ export class IdentificacionEmpresaComponent implements OnInit {
       ordenamientoCampo: event.sortField,
       ordenamientoDireccion: event.sortOrder === 1 ? 'ASC' : 'DESC'
     };
-    this.getIdentificacionEmpresa();
+    this.getPlantas();
   }
 
   public onPageChange(event: {
@@ -109,92 +63,58 @@ export class IdentificacionEmpresaComponent implements OnInit {
   }): void {
     if (this.pagina.pagina !== event.page + 1) {
       this.pagina.pagina = event.page + 1;
-      this.getIdentificacionEmpresa();
+      this.getPlantas();
     }
   }
 
-  eliminarPlanta(id: any, index){
-    //this.identificacionEmpresaService.delete(id).subscribe((response: any) => {
-      //if (response.codigo == 200) {
-        //this.plantaProduccion.removeAt(index);
-      //}
-    //});
-  }
-
-  agregarPlanta(){
-
-    if(this.identificacionEmpresa.controls.departamentoPlanta.value == null
-      || this.identificacionEmpresa.controls.direccionPlanta.value == null
-      || this.identificacionEmpresa.controls.direccion.invalid){
-
-        this.openDialog(
-          'info-warn',
-          'Atención',
-          'Verifique que seleccionó departamento, ciudad e ingresó la dirección de la Planta de Producción',
-          'REGRESAR',
-          undefined,
-          undefined).subscribe((resp) => {
-
-          });
-    }else{
+  public agregarPlanta(): void {
+    if (this.formGroupPlantaProduccion.valid) {
       let body: any = {
-        nit: this.identificacionEmpresa.controls.nit.value,
-        razonSocial: this.identificacionEmpresa.controls.razonSocial.value,
-        nombreContacto: this.identificacionEmpresa.controls.nombreContacto.value,
-        correo: this.identificacionEmpresa.controls.correo.value,
-        indicativo: this.identificacionEmpresa.controls.indicativo.value,
-        telefono: this.identificacionEmpresa.controls.telefono.value,
-        departamentoPlanta: this.identificacionEmpresa.controls.departamentoPlanta.value,
-        direccionPlanta: this.identificacionEmpresa.controls.direccionPlanta.value,
-        direccion: this.identificacionEmpresa.controls.direccion.value
+        solicitudId: this.getFatherFormGroupValue('id'),
+        planDepartamentoId: this.formGroupPlantaProduccion.controls.departamento.value,
+        planMunicipioId: this.formGroupPlantaProduccion.controls.ciudad.value,
+        planDireccion: this.formGroupPlantaProduccion.controls.direccion.value,
+        auditoria: {
+          usuarioCreacion: 'test'
+        }
       };
       this.identificacionEmpresaService.post(body).subscribe((respuesta) => {
-        this.getIdentificacionEmpresa();
+        this.getPlantas();
+        this.formGroupPlantaProduccion.reset();
+      });
+    } else {
+      this.dialog.open(AlertComponent, {
+        data: {
+          type: 'warning',
+          title: 'Atención',
+          description: 'Verifique que seleccionó departamento, ciudad<br/>e ingresó la dirección de la Planta de Producción',
+          acceptButton: 'REGRESAR'
+        }
       });
     }
   }
 
-  public openDialog(
-    icon: string,
-    title_modal: string,
-    text_content: string,
-    title_first_button: string,
-    title_second_button: string,
-    text_content_specific: string
-
-  ): Observable<any> {
-    return new Observable((observer) => {
-
-      /*const dialogRef = this.dialog.open(ModalComponent, {
-        width: '500px',
-        data: {
-          title_first_button,
-          title_second_button,
-          text_content,
-          text_content_specific,
-          title_modal,
-          icon
-        }
-      });
-
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          console.log('The dialog was closed' + result);
-          observer.next(true);
-        } else {
-          observer.next(false);
-        }
-
-      });*/
+  eliminarPlanta(id: any, index) {
+    this.identificacionEmpresaService.delete(id).subscribe(() => {
+      this.plantas.splice(index, 1);
     });
   }
 
-  private getIdentificacionEmpresa(): void {
-    this.identificacionEmpresaService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
-      this.plantaProduccion.pop();
-      this.plantaProduccion = respuesta.respuesta.solicitudes as ISolicitud[];
-       //this.pagina = respuesta.respuesta.pagina;
-    });
+  private getPlantas(): void {
+    this.identificacionEmpresaService.get(
+      {
+        postfix: `/solicitud/${this.getFatherFormGroupControl('id').value}`,
+        queryParams: { datoBuscado: this.busqueda },
+        sort: this.sort
+      }).subscribe((respuesta: any): void => {
+        this.plantas = respuesta.respuesta;
+        this.plantas.map((planta) => {
+          planta.departamento = planta.planDepartamentoId;
+          planta.ciudad = planta.planMunicipioId;
+          planta.direccion = planta.planDireccion;
+        });
+        //this.pagina = respuesta.respuesta.pagina;
+      });
   }
 
 }

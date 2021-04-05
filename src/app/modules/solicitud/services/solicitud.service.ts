@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { ServicioGeneral } from '../../../classes/servicio-general';
 import { ISolicitud } from '../interfaces/solicitud.interface';
 
-
 @Injectable()
 export class SolicitudService extends ServicioGeneral<ISolicitud> {
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
@@ -15,6 +15,8 @@ export class RegistroSolicitudComponent extends FormGeneric {
   public formGroup: FormGroup;
   protected formGroupName: string;
 
+  public loading: boolean = false;
+
   public produccionNacional: boolean = true;
   public fomentoIndustriaAutomotriz: boolean = false;
   public regimenTransformacionEnsamblePlanillas: boolean = false;
@@ -25,12 +27,14 @@ export class RegistroSolicitudComponent extends FormGeneric {
     private solicitudService: SolicitudService,
     private activatedRoute: ActivatedRoute) {
     super();
+    this.loading = true;
     const radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
 
     this.solicitudService.getById(radicado, {
       postfix: '/radicado'
     }).subscribe((response) => {
       this.setFormGroup(response.respuesta);
+      this.loading = false;
     });
 
     this.buildFromGroup();
@@ -59,11 +63,11 @@ export class RegistroSolicitudComponent extends FormGeneric {
   public isActive(step: number) {
     switch (step) {
       case 8:
-        return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesProcesoProductivo';  
-        case 4:
-          return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesElaboradosNacionales';
-        default:     
-      return true;
+        return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesProcesoProductivo';
+      case 4:
+        return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesElaboradosNacionales';
+      default:
+        return true;
     }
   }
 
@@ -71,7 +75,16 @@ export class RegistroSolicitudComponent extends FormGeneric {
     this.formGroup = this.formBuilder.group({
       id: [],
       tipoFormulario: ['produccionNacional', Validators.required],
+      identificacionEmpresa: this.formBuilder.group({
+        nit: ['', [Validators.required, Validators.maxLength(255)]],
+        razonSocial: ['', [Validators.required, Validators.maxLength(255)]],
+        nombreContacto: ['', [Validators.required, Validators.maxLength(255)]],
+        correo: ['', [Validators.required, Validators.pattern(new RegExp(/^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?;)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$/))]],
+        indicativo: ['', [Validators.maxLength(4), Validators.pattern(new RegExp(/^\d{4,4}(-\d{4,4})*$/))]],
+        telefono: ['', [Validators.required, Validators.minLength(7), Validators.pattern(new RegExp(/^\d{7,10}(-\d{7,10})*$/))]]
+      }),
       datosProducto: this.formBuilder.group({
+        bienFinal: [false],
         subpartida: [null, [Validators.required]],
         nombreComercial: ['', [Validators.required]],
         nombreTecnico: ['', [Validators.required]],
@@ -82,7 +95,9 @@ export class RegistroSolicitudComponent extends FormGeneric {
         codigoNumericoUnico: [''],
         tecnologia: [''],
         descripcionMotoparte: [''],
-        numeroMotoparte: ['']
+        numeroMotoparte: [''],
+        resolucion: [''],
+        programa: ['']
       }),
       criteriosRegistro: this.formBuilder.group({
         criterio: ['', Validators.required],

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { TipoProceso } from 'src/app/modelo/TipoProceso';
-import { DefinicionTabla } from 'src/app/modules/shared/components/tabla/tabla.modelo';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
 import { MaterialService } from '../../../services/material.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -24,7 +23,7 @@ export class MaterialesExtranjerosNacionalesComponent implements OnInit {
   public sort: { [key: string]: string };
 
   public busqueda: string;
-  public definicionTabla: DefinicionTabla;
+  public definicionTabla: any;
   constructor(
     private materialService: MaterialService,
     public dialog: MatDialog,

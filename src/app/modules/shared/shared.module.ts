@@ -1,23 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
-
 import { AlertComponent } from './components/alert/alert.component';
-import { TablaComponent } from './components/tabla/tabla.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AlertComponent,
-    TablaComponent
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +33,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    TablaComponent,
     MatDialogModule,
     MatExpansionModule,
     MatIconModule,
@@ -49,7 +45,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
   ],
-  schemas:[NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule {
   public static forRoot(): {
