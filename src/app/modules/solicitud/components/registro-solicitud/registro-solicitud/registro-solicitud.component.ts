@@ -59,9 +59,11 @@ export class RegistroSolicitudComponent extends FormGeneric {
   public isActive(step: number) {
     switch (step) {
       case 8:
-        return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesProcesoProductivo';
-      default:
-        return true;
+        return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesProcesoProductivo';  
+        case 4:
+          return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesElaboradosNacionales';
+        default:     
+      return true;
     }
   }
 

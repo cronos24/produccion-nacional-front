@@ -33,10 +33,12 @@ import { DatosProductoComponent } from './components/registro-solicitud/datos-pr
 import { DatosRepresentanteLegalComponent } from './components/registro-solicitud/datos-representante-legal/datos-representante-legal.component';
 import { IdentificacionEmpresaComponent } from './components/registro-solicitud/identificacion-empresa/identificacion-empresa.component';
 import { MaterialesExtranjerosNacionalesComponent } from './components/registro-solicitud/materiales-extranjeros-nacionales/materiales-extranjeros-nacionales.component';
+import { MaterialesExtranjerosComponent } from './components/registro-solicitud/materiales-extranjeros/materiales-extranjeros.component';
 import { ProcesoProduccionComponent } from './components/registro-solicitud/proceso-produccion/proceso-produccion.component';
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
+import { MaterialService } from './services/material.service';
 import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 import { SolicitudService } from './services/solicitud.service';
@@ -65,7 +67,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     DatosRepresentanteLegalComponent,
     ValorAgregadoComponent,
     AnexosComponent,
-    IdentificacionEmpresaComponent
+    IdentificacionEmpresaComponent,
+    MaterialesExtranjerosComponent
   ],
   imports: [
     AccordionModule,
@@ -100,7 +103,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     },
     SolicitudService,
     AnexosService,
-    IdentificacionEmpresaService
+    IdentificacionEmpresaService,
+    MaterialService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

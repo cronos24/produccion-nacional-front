@@ -2,7 +2,7 @@
 @import "./mixins.scss";
 @import "./variables.scss";
 @import "~@angular/material/theming";
-@import "./assets/scss/table.scss";
+
 @include mat-core();
 $mat-vuce: (
   50: #e6fffd,

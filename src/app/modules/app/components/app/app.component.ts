@@ -73,6 +73,10 @@ export class AppComponent {
       'error-negativo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/error-negativo.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'editar-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/editar-positivo.svg')
+    );
   }
 
 }
