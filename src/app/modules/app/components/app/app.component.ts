@@ -77,6 +77,10 @@ export class AppComponent {
       'editar-positivo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/editar-positivo.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'flecha-abajo-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/flecha-abajo-positivo.svg')
+    );
   }
 
 }

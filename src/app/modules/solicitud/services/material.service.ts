@@ -12,4 +12,8 @@ export class MaterialService extends ServicioGeneral<any> {
     this.url = this.buildUrl();
   }
 
+  public get formato(){
+    return '/assets/csv/ejemploNacionales.csv';
+  }
+
 }

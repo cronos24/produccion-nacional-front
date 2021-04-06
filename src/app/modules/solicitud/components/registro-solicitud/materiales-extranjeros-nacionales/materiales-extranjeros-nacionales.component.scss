@@ -15,3 +15,21 @@
 .button-group {
   display: flex;
 }
+
+.cargue-masivo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  div {
+    display: flex;
+    align-items: center;
+    label{
+      margin-left: 10px;
+    }
+    mat-icon {
+      margin-right: 10px;
+    }
+  }
+}

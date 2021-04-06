@@ -87,6 +87,34 @@
 <h2 class="headline-s">Cargue masivo de materiales extranjeros</h2>
 <hr />
 
+<div class="cargue-masivo">
+    <div (click)="downloadFormato()">
+        <mat-icon class="pointer" svgIcon="flecha-abajo-positivo"></mat-icon>
+        <label class="link">DESCARGAR FORMATO EN EXCEL</label>
+    </div>
+    <div>
+        <button class="outlined">SELECCIONAR ARCHIVO</button>
+        <label>Ningún archivo seleccionado</label>
+    </div>
+    <button>CARGA MASIVA</button>
+</div>
+<hr />
+
+<div class="p-grid">
+    <div class="p-col">
+        <div class="form-group">
+            <label>4.9 Sumatoria de costos de Materiales importados (COP): Valor Total CIF (COP):</label>
+            <input placeholder="----.--" type="number" />
+        </div>
+    </div>
+    <div class="p-col">
+        <div class="form-group">
+            <label>4.10 Valor Total Planta (COP):</label>
+            <input placeholder="----.--" type="number" />
+        </div>
+    </div>
+</div>
+
 <ng-template #eliminarTemplate let-solicitud>
     <div class="modal warning">
         <div>

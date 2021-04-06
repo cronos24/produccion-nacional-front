@@ -3,7 +3,7 @@
         <button routerLink="/">SALIDA SEGURA</button>
         <button routerLink="/solicitud/listar">VER SOLICITUDES</button>
     </div>
-    <div [appDisable]="getFatherFormGroupValue('estado') != this.estado['Borrador']">
+    <div [appDisable]="getFatherFormGroupValue('estado') != estado['Borrador']">
         <div class="titulo">
             <label class="headline-l">Tipo de Formulario</label>
             <br />

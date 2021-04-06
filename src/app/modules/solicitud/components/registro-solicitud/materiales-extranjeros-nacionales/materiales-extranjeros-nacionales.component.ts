@@ -101,6 +101,10 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     this.getMateriales();
   }
 
+  public downloadFormato(): void {
+    window.open(this.materialService.formato, "_blank");
+  }
+
   public agregarInsumo(data?: IMatExtranjerosNal): void {
     const dialogRef = this.dialog.open(MaterialesExtranjerosComponent, {
       data: data,
