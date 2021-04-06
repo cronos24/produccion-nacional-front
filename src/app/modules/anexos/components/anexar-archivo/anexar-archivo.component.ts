@@ -19,13 +19,14 @@ export class AnexarArchivoComponent {
   @Input() public labelConfirmar: string = 'SUBIR';
   @Input() public anidado: boolean = true;
   @Input() public mostrarErrorDescripcion: boolean = false;
+  @Input() public mostrarDescripcion: boolean = false;
   @Output() public adjunto: EventEmitter<any> = new EventEmitter<any>();
 
   public errorTipo: boolean = false;
   public errorTamano: boolean = false;
   public adjuntoFormGroup: FormGroup = this.formBuilder.group({
     archivo: [null, [Validators.required]],
-    descripcion: ['', [Validators.minLength(3), Validators.minLength(50)]]
+    descripcion: ['', [Validators.minLength(3), Validators.maxLength(50)]]
   })
   public archivoActual: any = {};
 
@@ -62,8 +63,11 @@ export class AnexarArchivoComponent {
       };
       this.adjunto.emit(datos);
       this.dialogRef.close(datos);
-
+      this.adjuntoFormGroup.reset();
     }
   }
 
+  public seleccionarArchivo(): void {
+    document.getElementById('input-file').click();
+  }
 }

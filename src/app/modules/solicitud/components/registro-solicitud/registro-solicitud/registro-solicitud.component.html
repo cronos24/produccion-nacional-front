@@ -127,7 +127,11 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <br>
-        <app-anexar-archivo [anidado]="false" [mostrarErrorDescripcion]="true"></app-anexar-archivo>
+        <app-anexar-archivo [anidado]="false" [mostrarDescripcion]="true"></app-anexar-archivo>
+        <br>
+        <span class="headline-xs">
+            Antes de anexar algún archivo, por favor guarde sus cambios para no perderlos
+        </span>
         <br>
         <app-tabla-anexos [anexoEmbebido]="false"></app-tabla-anexos>
     </mat-expansion-panel>

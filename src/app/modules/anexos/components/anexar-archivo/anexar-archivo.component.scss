@@ -6,19 +6,23 @@
         width: 100%;
         margin: 10px 0px;
     }
+    .no-anidado {
+        display: flex;
+        margin: 0;
+        .contenedor-input {
+            max-width: 25%;
+        }
+        .descripcion {
+            max-width: 35%;
+            display: flex;
 
+        }
+        button.subir {
+            margin: 2% 0 auto auto;
+
+        }
+    }
     .seleccionar-archivo {
-        label {
-            color: #3366cc;
-            border: 1px solid #3366cc;
-            border-radius: 25px;
-            padding: 10px;
-            cursor: pointer;
-        }
-        label:hover {
-            color: #ffffff;
-            background: #3366cc;
-        }
         input {
             visibility: hidden;
             position: absolute;
