@@ -120,15 +120,22 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-datos-representante-legal [formGroup]="formGroup"></app-datos-representante-legal>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                13. ANEXOS
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-anexos></app-anexos>
-    </mat-expansion-panel>-->
+    </mat-expansion-panel> -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        13. ANEXOS
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <br>
+                <app-anexar-archivo [anidado]="false" [mostrarDescripcion]="true"></app-anexar-archivo>
+                <br>
+                <span class="headline-xs">
+                    Antes de anexar algún archivo, por favor guarde sus cambios para no perderlos
+                </span>
+                <br>
+                <app-tabla-anexos [anexoEmbebido]="false"></app-tabla-anexos>
+            </mat-expansion-panel>
         </mat-accordion>
         <br />
         <br />

@@ -1,0 +1,44 @@
+.contenedor-adjuntos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    div {
+        width: 100%;
+        margin: 10px 0px;
+    }
+    .no-anidado {
+        display: flex;
+        margin: 0;
+        .contenedor-input {
+            max-width: 25%;
+        }
+        .descripcion {
+            max-width: 35%;
+            display: flex;
+
+        }
+        button.subir {
+            margin: 2% 0 auto auto;
+
+        }
+    }
+    .seleccionar-archivo {
+        input {
+            visibility: hidden;
+            position: absolute;
+        }
+    }
+
+    .texto-error {
+        color: #A80521;
+        font-weight: bold;
+    }
+
+    .botones {
+        display: flex;
+        justify-content: space-evenly;
+        button {
+            width: 40%;
+        }
+    }
+}

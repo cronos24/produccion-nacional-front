@@ -13,7 +13,7 @@ export class AlertComponent {
     private dialogRef: MatDialogRef<AlertComponent>) { }
 
   public onContinuar(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
   public get icon(): string {

@@ -1,0 +1,14 @@
+<div class="alert">
+    <div>
+        <mat-icon svgIcon="informacion"></mat-icon>
+        <p class="body-uno">
+          ¿Seguro desea eliminar el anexo {{data.archivo}} {{data.descripcion}}? 
+        </p>
+    </div>
+
+    <br />
+    <div class="button-group">
+        <button class="outlined" (click)="onCancelar()">Cancelar</button>
+        <button (click)="onContinuar()">Continuar</button>
+    </div>
+</div>
