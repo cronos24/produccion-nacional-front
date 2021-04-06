@@ -64,7 +64,8 @@
                     <mat-icon class="pointer" svgIcon="editar-positivo" (click)="agregarInsumo(material)"></mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon class="pointer" svgIcon="papelera-positivo" (click)="eliminarMaterial(material.id, index)"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="papelera-positivo"
+                        (click)="eliminarMaterial(material.id, index)"></mat-icon>
                 </td>
             </tr>
         </ng-template>
@@ -74,12 +75,12 @@
     </div>
 </div>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <div class="button-group">
     <span class="spacer"></span>
-    <button class="outlined" style="margin-right: 20px;" [disabled]="materiales.length==0" (click)="exportarExcel()">
+    <button class="outlined" style="margin-right: 20px;" [disabled]="materiales.length==0" (click)="downloadFile()">
         IMPORTAR TODOS LOS REGISTROS
     </button>
     <button class="outlined" [disabled]="materiales.length==0" (click)="abrirEliminarConfirmacion(eliminarTemplate)">
@@ -111,13 +112,13 @@
     <div class="p-col">
         <div class="form-group">
             <label>4.9 Sumatoria de costos de Materiales importados (COP): Valor Total CIF (COP):</label>
-            <input placeholder="----.--" type="number" />
+            <input placeholder="----.--" type="number" [(ngModel)]="sumaCif" disabled />
         </div>
     </div>
     <div class="p-col">
         <div class="form-group">
             <label>4.10 Valor Total Planta (COP):</label>
-            <input placeholder="----.--" type="number" />
+            <input placeholder="----.--" type="number" [(ngModel)]="sumaValorPlanta" disabled />
         </div>
     </div>
 </div>

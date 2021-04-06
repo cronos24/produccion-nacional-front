@@ -6,6 +6,7 @@ import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.n
 import { MaterialService } from '../../../services/material.service';
 import { FormGeneric } from '../clases/form-generic';
 import { MaterialesExtranjerosComponent } from '../materiales-extranjeros/materiales-extranjeros.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-materiales-extranjeros-nacionales',
@@ -89,6 +90,8 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
 
   public archivo: any;
   public materiales: any[] = [];
+  public sumaCif: string;
+  public sumaValorPlanta: any = 0;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -114,9 +117,7 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   }
 
   public downloadFormato(): void {
-
     window.open(this.materialService.formato, "_blank");
-
   }
 
   public agregarInsumo(data?: IMatExtranjerosNal): void {
@@ -127,25 +128,22 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        if (result.id) {
-        } else {
-          this.guardarMaterial(result);
-        }
+        this.guardarMaterial(result);
       }
     });
   }
 
-  public guardarMaterial(data: IMatExtranjerosNal): void {
-    this.materialService.post(data).subscribe(() => {
-
-    });
-  }
-
-
-  public editarMaterial(data: IMatExtranjerosNal): void {
-    this.materialService.patch(data).subscribe(() => {
-
-    });
+  public guardarMaterial(data: any): void {
+    if (data.id) {
+      this.materialService.put(data).subscribe(() => {
+        this.getMateriales();
+      });
+    } else {
+      data.solicitudId = this.getFatherFormGroupValue('id');
+      this.materialService.post(data).subscribe(() => {
+        this.getMateriales();
+      });
+    }
   }
 
   public eliminarMaterial(id, index): void {
@@ -165,18 +163,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     this.materiales = [];
   }
 
-  public exportarExcel(): void {
-    import('xlsx').then((xlsx) => {
-      const worksheet = xlsx.utils.json_to_sheet(this.materiales);
-      const workbook = { Sheets: { data: worksheet }, SheetNames: ['Materiales'] };
-      const excelBuffer: any = xlsx.write(workbook, {
-        bookType: 'xlsx',
-        type: 'array',
-      });
-      this.saveAsExcelFile(excelBuffer, 'Materiales_Exportacion');
-    });
-  }
-
   public seleccionarArchivo(): void {
     document.getElementById('input-file').click();
   }
@@ -184,8 +170,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   public subirArchivo(event: any): void {
     if (event.target.files[0].type == 'application/vnd.ms-excel') {
       this.archivo = event.target.files[0];
-    } else {
-
     }
   }
 
@@ -205,19 +189,20 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     this.archivo = null;
   }
 
-  private saveAsExcelFile(buffer: any, fileName: string): void {
-    import('file-saver').then((FileSaver) => {
-      let EXCEL_TYPE =
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-      let EXCEL_EXTENSION = '.xlsx';
-      const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE,
-      });
-      FileSaver.saveAs(
-        data,
-        fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
-      );
+  public downloadFile(): void {
+    const replacer = (key, value) => value === null ? '' : value;
+    const header = ['nombreTecnico', 'subpartidaId', 'paisOrigenId', 'paisProcedenciaId', 'unidadId', 'cantidad', 'valorCif', 'valorPlanta'];
+    const headerName = ['Nombre Tecnico', 'Subpartida', 'Pais Origen', 'Pais Procedencia', 'Unidad', 'Cantidad', 'Valor Cif', 'Valor Planta'];
+    let csv = this.materiales.map(row => {
+      return header.map(fieldName => {
+        return JSON.stringify(row[fieldName], replacer);
+      }).join(',');
     });
+    csv.unshift(headerName.join(','));
+    let csvArray = csv.join('\r\n');
+
+    var blob = new Blob([csvArray], { type: 'text/csv' });
+    saveAs(blob, "myFile.csv");
   }
 
   private getMateriales(): void {
@@ -230,6 +215,14 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
       sort: this.sort
     }).subscribe((response) => {
       this.materiales = response.respuesta.datos as any[];
+      let sumaCif = 0;
+      let sumaValorPlanta = 0;
+      this.materiales.map(material => {
+        sumaCif += material.valorCif;
+        sumaValorPlanta += material.valorPlanta;
+      })
+      this.sumaCif = sumaCif.toFixed(2);
+      this.sumaValorPlanta = sumaValorPlanta.toFixed(2);
     });
   }
 

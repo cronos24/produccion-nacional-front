@@ -26,7 +26,7 @@ export class MaterialesExtranjerosComponent implements OnInit {
     this.crearFormulario();
     if (this.data) {
       console.log(this.data);
-      
+
       this.actulizarFormulario(this.data);
     }
   }
@@ -34,6 +34,11 @@ export class MaterialesExtranjerosComponent implements OnInit {
   private crearFormulario(): void {
     this.formGroup = this.formBuilder.group({
       id: [''],
+      solicitudId: [''],
+      cargueTipoId: ['manual'],
+      cargueArchivoNombre: [''],
+      tipoId: [''],
+      auditoria: [],
       nombreTecnico: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       subpartidaId: [null, [Validators.required]],
       paisOrigenId: ['', [Validators.required]],
@@ -48,5 +53,5 @@ export class MaterialesExtranjerosComponent implements OnInit {
   private actulizarFormulario(data: IMatExtranjerosNal): void {
     this.formGroup.setValue({ ...data });
   }
-  
+
 }

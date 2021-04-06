@@ -35,15 +35,15 @@
         <div class="form-group">
           <label>4.2 Subpartida:</label>
           <div class="icon-group">
-            <input placeholder="Subpartida" type="number" formControlName="subpartida" />
+            <input placeholder="Subpartida" type="number" formControlName="subpartidaId" />
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la subpartida arancelaria por la cual 
                   desea registrar su producto (Decreto 2153 de 2016 Arancel de 
                   Aduanas)">
             </mat-icon>
           </div>
           <div
-            *ngIf="formGroup.controls.subpartida.invalid && (formGroup.controls.subpartida.dirty || formGroup.controls.subpartida.touched)">
-            <span *ngIf="formGroup.controls.subpartida.errors?.required" class="caption ng-invalid">
+            *ngIf="formGroup.controls.subpartidaId.invalid && (formGroup.controls.subpartidaId.dirty || formGroup.controls.subpartidaId.touched)">
+            <span *ngIf="formGroup.controls.subpartidaId.errors?.required" class="caption ng-invalid">
               Campo obligatorio
             </span>
           </div>
@@ -56,14 +56,14 @@
         <div class="form-group">
           <label>4.3 País Origen:</label>
           <div class="icon-group">
-            <input placeholder="País Origen" type="text" formControlName="paisOrigen" />
+            <input placeholder="País Origen" type="text" formControlName="paisOrigenId" />
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el país donde se producen los materiales 
                   extranjeros.">
             </mat-icon>
           </div>
           <div
-            *ngIf="formGroup.controls.paisOrigen.invalid && (formGroup.controls.paisOrigen.dirty || formGroup.controls.paisOrigen.touched)">
-            <span *ngIf="formGroup.controls.paisOrigen.errors?.required" class="caption ng-invalid">
+            *ngIf="formGroup.controls.paisOrigenId.invalid && (formGroup.controls.paisOrigenId.dirty || formGroup.controls.paisOrigenId.touched)">
+            <span *ngIf="formGroup.controls.paisOrigenId.errors?.required" class="caption ng-invalid">
               Campo obligatorio
             </span>
           </div>
@@ -73,15 +73,15 @@
         <div class="form-group">
           <label>4.4 País Procedencia:</label>
           <div class="icon-group">
-            <input placeholder="País Procedencia" type="text" formControlName="paisProcedencia" />
+            <input placeholder="País Procedencia" type="text" formControlName="paisProcedenciaId" />
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el país de embarque del material 
               extranjero. Si el material extranjero es comprado en Colombia, pero de 
               origen extranjero debe indicarse país de procedencia Colombia.">
             </mat-icon>
           </div>
           <div
-            *ngIf="formGroup.controls.paisProcedencia.invalid && (formGroup.controls.paisProcedencia.dirty || formGroup.controls.paisProcedencia.touched)">
-            <span *ngIf="formGroup.controls.paisProcedencia.errors?.required" class="caption ng-invalid">
+            *ngIf="formGroup.controls.paisProcedenciaId.invalid && (formGroup.controls.paisProcedenciaId.dirty || formGroup.controls.paisProcedenciaId.touched)">
+            <span *ngIf="formGroup.controls.paisProcedenciaId.errors?.required" class="caption ng-invalid">
               Campo obligatorio
             </span>
           </div>
@@ -94,7 +94,7 @@
         <div class="form-group">
           <label>4.5 Unidad de Medida:</label>
           <div class="icon-group">
-            <input placeholder="Unidad de Medida" type="text" formControlName="unidadMedida" />
+            <input placeholder="Unidad de Medida" type="text" formControlName="unidadId" />
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip=" Se entiende como la medida en la que se 
                   comercializa el producto a registrar (Ejemplo: Kilo, unidad, Tonelada, 
                   litro, etc.), teniendo en cuenta la presentación del mismo. Se debe tener 
@@ -105,8 +105,8 @@
             </mat-icon>
           </div>
           <div
-            *ngIf="formGroup.controls.unidadMedida.invalid && (formGroup.controls.unidadMedida.dirty || formGroup.controls.unidadMedida.touched)">
-            <span *ngIf="formGroup.controls.unidadMedida.errors?.required" class="caption ng-invalid">
+            *ngIf="formGroup.controls.unidadId.invalid && (formGroup.controls.unidadId.dirty || formGroup.controls.unidadId.touched)">
+            <span *ngIf="formGroup.controls.unidadId.errors?.required" class="caption ng-invalid">
               Campo obligatorio
             </span>
           </div>
