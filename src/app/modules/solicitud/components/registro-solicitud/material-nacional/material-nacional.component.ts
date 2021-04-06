@@ -1,18 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   decimalValidator,
-  mayorACeroValidator,
+  mayorACeroValidator
 } from 'src/app/modules/shared/services/validadores';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
 
 @Component({
-  selector: 'app-materiales-extranjeros',
-  templateUrl: './materiales-extranjeros.component.html',
-  styleUrls: ['./materiales-extranjeros.component.scss'],
+  selector: 'app-material-nacional',
+  templateUrl: './material-nacional.component.html',
+  styleUrls: ['./material-nacional.component.scss'],
 })
-export class MaterialesExtranjerosComponent implements OnInit {
+export class MaterialNacionalComponent implements OnInit {
 
   public formGroup: FormGroup;
 
@@ -37,15 +37,15 @@ export class MaterialesExtranjerosComponent implements OnInit {
       solicitudId: [''],
       cargueTipoId: ['manual'],
       cargueArchivoNombre: [''],
-      tipoId: ['extranjero'],
+      tipoId: ['nacional'],
+      paisOrigenId: [''],
+      paisProcedenciaId: [''],
+      valorCif: [''],
       auditoria: [],
       nombreTecnico: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       subpartidaId: [null, [Validators.required]],
-      paisOrigenId: ['', [Validators.required]],
-      paisProcedenciaId: ['', [Validators.required]],
       unidadId: ['', [Validators.required]],
       cantidad: ['', [Validators.required, mayorACeroValidator, decimalValidator(3)]],
-      valorCif: ['', [Validators.required, mayorACeroValidator, decimalValidator(2)]],
       valorPlanta: ['', [Validators.required, mayorACeroValidator, decimalValidator(2)]]
     });
   }

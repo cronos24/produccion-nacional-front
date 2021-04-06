@@ -7,16 +7,17 @@ import { MaterialService } from '../../../services/material.service';
 import { FormGeneric } from '../clases/form-generic';
 import { MaterialesExtranjerosComponent } from '../materiales-extranjeros/materiales-extranjeros.component';
 import { saveAs } from 'file-saver';
+import { MaterialNacionalComponent } from '../material-nacional/material-nacional.component';
 
 @Component({
-  selector: 'app-materiales-extranjeros-nacionales',
-  templateUrl: './materiales-extranjeros-nacionales.component.html',
-  styleUrls: ['./materiales-extranjeros-nacionales.component.scss'],
+  selector: 'app-materiales-nacionales',
+  templateUrl: './materiales-nacionales.component.html',
+  styleUrls: ['./materiales-nacionales.component.scss'],
 })
-export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
+export class MaterialesNacionalesComponent extends FormGeneric {
 
   @Input() protected formGroup: FormGroup;
-  protected formGroupName: string = 'materialesExtranjerosNacionales';
+  protected formGroupName: string = 'materialesNacionales';
 
   public columnas: any[] = [
     {
@@ -32,18 +33,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
       valor: 'subpartida',
     },
     {
-      titulo: 'País Origen',
-      pSortableColumn: 'paisOrigen',
-      sortField: 'paisOrigen',
-      valor: 'paisOrigen',
-    },
-    {
-      titulo: 'País Procedencia',
-      pSortableColumn: 'paisProcedencia',
-      sortField: 'paisProcedencia',
-      valor: 'paisProcedencia',
-    },
-    {
       titulo: 'Unidad de Medida',
       pSortableColumn: 'undMedida',
       sortField: 'undMedida',
@@ -54,12 +43,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
       pSortableColumn: 'cantidad',
       sortField: 'cantidad',
       valor: 'cantidad',
-    },
-    {
-      titulo: 'Valor CIF (COP)',
-      pSortableColumn: 'valorCif',
-      sortField: 'valorCif',
-      valor: 'valorCif',
     },
     {
       titulo: 'Valor Planta (COP)',
@@ -90,7 +73,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
 
   public archivo: any;
   public materiales: any[] = [];
-  public sumaCif: string;
   public sumaValorPlanta: any = 0;
 
   constructor(
@@ -120,8 +102,8 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     window.open(this.materialService.formato, "_blank");
   }
 
-  public agregarInsumo(data?: IMatExtranjerosNal): void {
-    const dialogRef = this.dialog.open(MaterialesExtranjerosComponent, {
+  public agregarInsumo(data?: any): void {
+    const dialogRef = this.dialog.open(MaterialNacionalComponent, {
       data: data,
       width: '100%'
     });
@@ -164,7 +146,7 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   }
 
   public seleccionarArchivo(): void {
-    document.getElementById('input-file').click();
+    document.getElementById('input-file-2').click();
   }
 
   public subirArchivo(event: any): void {
@@ -180,7 +162,7 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     formData.append('solicitudId', this.getFatherFormGroupValue('id'));
 
     this.materialService.post(formData, {
-      postfix: '/extranjeros/masivo'
+      postfix: '/nacionales/masivo'
     }).subscribe((response) => {
       console.log(response);
       this.getMateriales();
@@ -191,8 +173,8 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
 
   public downloadFile(): void {
     const replacer = (key, value) => value === null ? '' : value;
-    const header = ['nombreTecnico', 'subpartidaId', 'paisOrigenId', 'paisProcedenciaId', 'unidadId', 'cantidad', 'valorCif', 'valorPlanta'];
-    const headerName = ['Nombre Tecnico', 'Subpartida', 'Pais Origen', 'Pais Procedencia', 'Unidad', 'Cantidad', 'Valor Cif', 'Valor Planta'];
+    const header = ['nombreTecnico', 'subpartidaId', 'unidadId', 'cantidad', 'valorPlanta'];
+    const headerName = ['Nombre Tecnico', 'Subpartida', 'Unidad', 'Cantidad', 'Valor Planta'];
     let csv = this.materiales.map(row => {
       return header.map(fieldName => {
         return JSON.stringify(row[fieldName], replacer);
@@ -202,7 +184,7 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     let csvArray = csv.join('\r\n');
 
     var blob = new Blob([csvArray], { type: 'text/csv' });
-    saveAs(blob, "MaterialesExtranjeros.csv");
+    saveAs(blob, "MaterialesNacionales.csv");
   }
 
   private getMateriales(): void {
@@ -216,16 +198,13 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     }).subscribe((response) => {
       const respuesta = response.respuesta.datos as any[];
       this.materiales = [];
-      let sumaCif = 0;
       let sumaValorPlanta = 0;
       respuesta.map(material => {
-        if (material.tipoId == 'extranjero') {
+        if (material.tipoId == 'nacional') {
           this.materiales.push(material);
-          sumaCif += material.valorCif;
           sumaValorPlanta += material.valorPlanta;
         }
       })
-      this.sumaCif = sumaCif.toFixed(2);
       this.sumaValorPlanta = sumaValorPlanta.toFixed(2);
     });
   }

@@ -39,7 +39,7 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
           this.getChildFormGroupControl('resolucion').setValidators([Validators.required]);
           this.getChildFormGroupControl('programa').setValidators([Validators.required]);
           break;
-        case 'fomentoIndustriaAutomotriz' || 'fomentoIndustriaAstilleros':
+        case ('fomentoIndustriaAutomotriz' || 'fomentoIndustriaAstilleros'):
           this.getChildFormGroupControl('codigoNumericoUnico').setValidators([Validators.required]);
           this.getChildFormGroupControl('tecnologia').setValidators([Validators.required]);
           break;

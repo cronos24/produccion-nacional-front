@@ -1,0 +1,116 @@
+<h2 class="headline-s">AGREGAR MATERIAL NACIONAL</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>5.1 Nombre Técnico:</label>
+          <div class="icon-group">
+            <input placeholder="Nombre Técnico" type="text" formControlName="nombreTecnico" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el nombre con el que se conoce el material
+            nacional y es único por ser utilizado universalmente.">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.nombreTecnico.invalid && (formGroup.controls.nombreTecnico.dirty || formGroup.controls.nombreTecnico.touched)">
+            <span *ngIf="formGroup.controls.nombreTecnico.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+            <span *ngIf="formGroup.controls.nombreTecnico.errors?.minlength" class="caption ng-invalid">
+              Debe contener minimo 3
+            </span>
+            <span *ngIf="formGroup.controls.nombreTecnico.errors?.minlength" class="caption ng-invalid">
+              Debe contener maximo 100
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>5.2 Subpartida:</label>
+          <div class="icon-group">
+            <input placeholder="Subpartida" type="number" formControlName="subpartidaId" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Indicar la subpartida arancelaria NANDINA - Colombia a
+            diez(10) dígitos, del producto a registrar. Se recomienda consultar las Notas
+            Marginales por capítulos y observar las Normas de Clasificación de las
+            Mercancías del Arancel de Aduanas (Decreto 4927 del 26 de diciembre de
+            2011 del Ministerio de Comercio, Industria y Turismo y sus modificaciones)">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.subpartidaId.invalid && (formGroup.controls.subpartidaId.dirty || formGroup.controls.subpartidaId.touched)">
+            <span *ngIf="formGroup.controls.subpartidaId.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>5.3 Unidad de Medida:</label>
+          <div class="icon-group">
+            <input placeholder="Unidad de Medida" type="text" formControlName="unidadId" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Debe entenderse como la medida del material
+            nacional. (Ejemplo: Kilo, unidad, Tonelada, litro, etc. Debe ser acorde con el
+            material nacional ejemplo: si es un líquido debe ser kilo o litros, si es un sólido
+            debe ser en kilos o gramos, etc">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.unidadId.invalid && (formGroup.controls.unidadId.dirty || formGroup.controls.unidadId.touched)">
+            <span *ngIf="formGroup.controls.unidadId.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>5.4 Cantidad:</label>
+          <div class="icon-group">
+            <input placeholder="----.------" type="number" formControlName="cantidad" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo"
+              matTooltip="Consumo de material nacional.">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.cantidad.invalid && (formGroup.controls.cantidad.dirty || formGroup.controls.cantidad.touched)">
+            <span class="caption ng-invalid">
+              Formato invalido
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>5.5 Valor Planta (Col$):</label>
+          <div class="icon-group">
+            <input placeholder="----.--" type="number" formControlName="valorPlanta" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el valor de los materiales nacionales por una
+            unidad de producto teniendo en cuenta los costos de transporte, seguros, etc.">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.valorPlanta.invalid && (formGroup.controls.valorPlanta.dirty || formGroup.controls.valorPlanta.touched)">
+            <span class="caption ng-invalid">
+              Formato invalido
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="outlined" style="margin-right: 20px;" mat-dialog-close>CANCELAR</button>
+  <button [mat-dialog-close]="formGroup.value" [disabled]="!formGroup.valid" cdkFocusInitial>GUARDAR</button>
+</mat-dialog-actions>

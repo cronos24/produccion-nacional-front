@@ -57,13 +57,20 @@
                 <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
             </mat-expansion-panel>
             <mat-expansion-panel>
-                <!-- [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)"-->
-                <mat-expansion-panel-header>
+                <mat-expansion-panel-header [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
                     <mat-panel-title>
                         4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <app-materiales-extranjeros-nacionales [formGroup]="formGroup"></app-materiales-extranjeros-nacionales>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
+                    <mat-panel-title>
+                        5. MATERIALES NACIONALES
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-materiales-nacionales [formGroup]="formGroup"></app-materiales-nacionales>
             </mat-expansion-panel>
             <!--   <mat-expansion-panel>
         <mat-expansion-panel-header>

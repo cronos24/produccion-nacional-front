@@ -16,7 +16,7 @@ import { SolicitudRequerimientoComponent } from '../solicitud-requerimiento/soli
   templateUrl: './listar-solicitud.component.html',
   styleUrls: ['./listar-solicitud.component.scss']
 })
-export class ListarSolicitudComponent implements OnInit {
+export class ListarSolicitudComponent {
 
   public solicitudes: ISolicitud[] = [];
 
@@ -37,9 +37,6 @@ export class ListarSolicitudComponent implements OnInit {
     private messageService: MessageService,
     private solicitudService: SolicitudService) { }
 
-  public ngOnInit(): void {
-    this.onVerRequerimientos();
-  }
 
   public onBuscar(): void {
     this.getSolicitudes();
@@ -63,6 +60,12 @@ export class ListarSolicitudComponent implements OnInit {
       this.pagina.pagina = event.page + 1;
       this.getSolicitudes();
     }
+  }
+
+  public onVerRequerimientos(): void {
+    this.dialog.open(SolicitudRequerimientoComponent, {
+      width: '40%'
+    });
   }
 
   public onDescargarPDF(): void {
@@ -143,12 +146,6 @@ export class ListarSolicitudComponent implements OnInit {
         }
       });
     }
-  }
-
-  public onVerRequerimientos(): void {
-    this.dialog.open(SolicitudRequerimientoComponent, {
-      width: '40%'
-    });
   }
 
   private getSolicitudes(): void {

@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SolicitudRequerimientoComponent } from 'src/app/modules/solicitud/components/solicitud-requerimiento/solicitud-requerimiento.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   public constructor(
+    private dialog: MatDialog,
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry) {
 
@@ -86,5 +89,16 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/flecha-abajo-positivo.svg')
     );
   }
+  
+  ngOnInit(): void {
+    this.onVerRequerimientos();
+  }
+
+  public onVerRequerimientos(): void {
+    this.dialog.open(SolicitudRequerimientoComponent, {
+      width: '40%'
+    });
+  }
+
 
 }

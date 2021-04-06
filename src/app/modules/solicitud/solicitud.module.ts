@@ -31,8 +31,10 @@ import { CriteriosRegistroComponent } from './components/registro-solicitud/crit
 import { DatosProductoComponent } from './components/registro-solicitud/datos-producto/datos-producto.component';
 import { DatosRepresentanteLegalComponent } from './components/registro-solicitud/datos-representante-legal/datos-representante-legal.component';
 import { IdentificacionEmpresaComponent } from './components/registro-solicitud/identificacion-empresa/identificacion-empresa.component';
+import { MaterialNacionalComponent } from './components/registro-solicitud/material-nacional/material-nacional.component';
 import { MaterialesExtranjerosNacionalesComponent } from './components/registro-solicitud/materiales-extranjeros-nacionales/materiales-extranjeros-nacionales.component';
 import { MaterialesExtranjerosComponent } from './components/registro-solicitud/materiales-extranjeros/materiales-extranjeros.component';
+import { MaterialesNacionalesComponent } from './components/registro-solicitud/materiales-nacionales/materiales-nacionales.component';
 import { ProcesoProduccionComponent } from './components/registro-solicitud/proceso-produccion/proceso-produccion.component';
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
@@ -44,30 +46,33 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
 
 @NgModule({
   declarations: [
+    AgregarInsumosComponent,
+    AplicacionesProductoComponent,
     CancelarSolicitudComponent,
+    CaracteristicasTecnicasComponent,
+    CaracteristicasTransformacionComponent,
     CostosValorFabricaComponent,
     CriteriosRegistroComponent,
     DatosProductoComponent,
+    DatosRepresentanteLegalComponent,
     FormularioPreSolicitudComponent,
+    IdentificacionEmpresaComponent,
     InformativoComponent,
     ListarSolicitudComponent,
     MaestroSolicitudComponent,
+    MaterialesExtranjerosComponent,
+    MaterialesExtranjerosNacionalesComponent,
+    MaterialNacionalComponent,
+    MaterialesNacionalesComponent,
     ModalInsumosComponent,
     ProcesoProduccionComponent,
     RegistroSolicitudComponent,
     SolicitudRequerimientoComponent,
-    MaterialesExtranjerosNacionalesComponent,
-    AgregarInsumosComponent,
-    AplicacionesProductoComponent,
-    CaracteristicasTecnicasComponent,
-    CaracteristicasTransformacionComponent,
-    DatosRepresentanteLegalComponent,
     ValorAgregadoComponent,
-    IdentificacionEmpresaComponent,
-    MaterialesExtranjerosComponent
   ],
   imports: [
     AccordionModule,
+    AnexosModule,
     CardModule,
     CheckboxModule,
     CommonModule,
@@ -90,16 +95,15 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     TableModule,
     TableModule,
     TooltipModule,
-    AnexosModule
   ],
   providers: [
     {
       provide: MatDialogRef,
       useValue: {}
     },
-    SolicitudService,
     IdentificacionEmpresaService,
-    MaterialService
+    MaterialService,
+    SolicitudService,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

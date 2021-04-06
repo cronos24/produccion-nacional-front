@@ -1,10 +1,10 @@
 <div class="p-grid" style="padding-top:20px;">
     <div class="p-col-12">
-        <p-message severity="info" text="Corresponde a 
-        las materias primas, productos intermedios, partes y piezas de fabricación 
-        extranjera, utilizados en la elaboración del producto, ya sean importados 
-        directamente por el fabricante o adquiridos en el mercado nacional importados 
-        directamente por el proveedor.">
+        <p-message severity="info" text="Las materias
+        primas, productos intermedios, partes y piezas de fabricación nacional,
+        utilizados en la elaboración del producto. Los cuales se sugieren que
+        estén registrados en la base de datos de Producción Nacional o mediante
+        certificación escrita por el productor en Colombia.">
         </p-message>
     </div>
 </div>
@@ -43,19 +43,10 @@
                     <p class="body-uno">{{material['subpartidaId']}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{material['paisOrigenId']}}</p>
-                </td>
-                <td>
-                    <p class="body-uno">{{material['paisProcedenciaId']}}</p>
-                </td>
-                <td>
                     <p class="body-uno">{{material['unidadId']}}</p>
                 </td>
                 <td>
                     <p class="body-uno">{{material['cantidad']}}</p>
-                </td>
-                <td>
-                    <p class="body-uno">{{material['valorCif']}}</p>
                 </td>
                 <td>
                     <p class="body-uno">{{material['valorPlanta']}}</p>
@@ -98,7 +89,7 @@
     </div>
     <div>
         <button class="outlined" (click)="seleccionarArchivo()">SELECCIONAR ARCHIVO</button>
-        <input style="visibility: hidden; position: absolute;" type="file" id="input-file"
+        <input style="visibility: hidden; position: absolute;" type="file" id="input-file-2"
             (change)="subirArchivo($event)" accept=".csv, text/csv">
         <label>
             {{ archivo ? archivo.name : 'Ningun archivo seleccionado.'}}
@@ -111,13 +102,7 @@
 <div class="p-grid">
     <div class="p-col">
         <div class="form-group">
-            <label>4.9 Sumatoria de costos de Materiales importados (COP): Valor Total CIF (COP):</label>
-            <input placeholder="----.--" type="number" [(ngModel)]="sumaCif" disabled />
-        </div>
-    </div>
-    <div class="p-col">
-        <div class="form-group">
-            <label>4.10 Valor Total Planta (COP):</label>
+            <label>Valor total unidad producto (COP):</label>
             <input placeholder="----.--" type="number" [(ngModel)]="sumaValorPlanta" disabled />
         </div>
     </div>
