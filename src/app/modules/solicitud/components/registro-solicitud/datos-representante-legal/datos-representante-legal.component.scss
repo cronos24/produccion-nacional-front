@@ -9,11 +9,15 @@
     border-color: $light-primary-color;
     border-radius: 20px;
 
-    
+
     padding: 16px;
 
     .contenido {
         display: flex;
         justify-content: space-between;
     }
+}
+
+.error.small {
+  font-size: 10px;
 }

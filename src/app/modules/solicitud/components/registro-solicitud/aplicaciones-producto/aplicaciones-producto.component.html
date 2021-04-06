@@ -2,4 +2,9 @@
 <form [formGroup]="getChildFormGroup()">
   <textarea class="doble" formControlName="descripcion"
     placeholder="Diligenciar el uso y/o aplicaciones específicas del producto."></textarea>
+  <div *ngIf="getChildFormGroup().invalid && (getChildFormGroup().dirty || getChildFormGroup().touched)">
+    <span *ngIf="getChildFormGroup().controls.descripcion.errors.required" class="caption ng-invalid">
+      Campo Obligatorio
+    </span>
+  </div>
 </form>

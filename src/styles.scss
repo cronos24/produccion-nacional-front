@@ -2,7 +2,7 @@
 @import "./mixins.scss";
 @import "./variables.scss";
 @import "~@angular/material/theming";
-@import "./assets/scss/table.scss";
+
 @include mat-core();
 $mat-vuce: (
   50: #e6fffd,
@@ -49,42 +49,6 @@ $theme: mat-light-theme(
   )
 );
 @include angular-material-theme($theme);
-@mixin table {
-  tr {
-    > th {
-      text-align: center;
-      background-color: $light-primary-color;
-      > span {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-      }
-    }
-    > td.center {
-      text-align: center;
-    }
-    > td.right {
-      text-align: right;
-    }
-    > td.right {
-      text-align: left;
-    }
-  }
-}
-
-@include message;
-
-::ng-deep {
-  .mat-tooltip {
-    white-space: pre-line !important;
-    color: $primary-color-text !important;
-    background-color: $background-color;
-
-    font-family: $font-worksans;
-    font-weight: 600;
-    font-size: 16px;
-  }
-}
 
 html,
 body {
@@ -164,15 +128,6 @@ body {
   line-height: 21px;
 }
 
-.button-text {
-  font-family: $font-worksans;
-  color: $dark-primary-color;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: underline;
-}
-
 .field {
   font-family: $font-worksans;
   color: $primary-color-text;
@@ -200,6 +155,14 @@ label {
   font-weight: 500;
   font-size: 16px;
   color: $primary-color-text;
+}
+
+label.ng-invalid {
+  color: $error-color;
+}
+
+span.ng-invalid {
+  color: $error-color;
 }
 
 input[type="text"],
@@ -235,6 +198,11 @@ input[type="email"]:focus {
   outline: none;
 }
 
+input.ng-invalid.ng-dirty.ng-touched {
+  box-shadow: 0 0 0 1px $error-color;
+  color: $error-color;
+}
+
 select {
   font-family: $font-worksans;
   font-weight: 500;
@@ -265,6 +233,11 @@ select:disabled {
   background-color: $background-color;
 }
 
+select.ng-invalid.ng-dirty.ng-touched {
+  box-shadow: 0 0 0 1px $error-color;
+  color: $error-color;
+}
+
 textarea {
   font-family: $font-worksans;
   font-weight: 500;
@@ -292,6 +265,11 @@ textarea:focus {
 textarea.doble {
   height: 80px;
   width: 100%;
+}
+
+textarea.ng-invalid.ng-dirty.ng-touched {
+  box-shadow: 0 0 0 1px $error-color;
+  color: $error-color;
 }
 
 button {
@@ -324,17 +302,6 @@ button.outlined {
   background-color: unset;
 }
 
-button.btn-secundario {
-  color: #3366cc;
-  background-color: #ffffff;
-  border: 1.5px #3366cc solid;
-}
-
-button.btn-secundario:hover {
-  background-color: #e4e4e4;
-  color: #3366cc;
-}
-
 button.outlined:enabled {
   box-shadow: 0 0 0 1.5pt $primary-color;
   color: $primary-color;
@@ -348,21 +315,6 @@ button.outlined:disabled {
 button:enabled:hover {
   box-shadow: none;
   color: $tertiary-color-text;
-}
-
-input.ng-invalid.ng-dirty.ng-touched {
-  box-shadow: 0 0 0 1px $error-color;
-  color: $error-color;
-}
-
-textarea.ng-invalid.ng-dirty.ng-touched {
-  box-shadow: 0 0 0 1px $error-color;
-  color: $error-color;
-}
-
-select.ng-invalid.ng-dirty.ng-touched {
-  box-shadow: 0 0 0 1px $error-color;
-  color: $error-color;
 }
 
 .mat-toolbar-single-row {
@@ -391,21 +343,6 @@ select.ng-invalid.ng-dirty.ng-touched {
 .icon-group {
   display: flex;
   align-items: center;
-  mat-icon {
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    margin-left: 10px;
-    margin-right: 10px;
-    > svg {
-      fill: $primary-color;
-    }
-  }
-}
-
-div.error-input {
-  margin: 5px 0px;
-  color: red;
 }
 
 hr {
@@ -413,74 +350,6 @@ hr {
   border: 0 none;
   color: rgb(209, 208, 208);
   height: 1px;
-}
-
-.button-text {
-  font-family: $font-worksans;
-  color: $dark-primary-color;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: underline;
-  outline: none;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.button-text:hover {
-  color: $primary-color;
-}
-
-.button-text-disable {
-  font-family: $font-worksans;
-  color: $primary-color-text;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: underline;
-  outline: none;
-  text-transform: uppercase;
-  cursor: not-allowed;
-}
-
-.button-nonContent {
-  font-family: $font-worksans;
-  color: $primary-color;
-  background-color: $tertiary-color-text;
-  border-radius: 30px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: none;
-  border-color: $primary-color;
-  border-style: solid;
-  cursor: pointer;
-  padding: 3px 15px 3px;
-}
-
-.button-nonContent:hover {
-  background-color: $dark-primary-color;
-  color: $tertiary-color-text;
-  border-color: $dark-primary-color;
-}
-
-.button-nonContent-disable {
-  font-family: $font-worksans;
-  color: $tertiary-color-text;
-  background-color: $secondary-color-text;
-  border-radius: 30px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: none;
-  border-color: $secondary-color-text;
-  border-style: none;
-  cursor: not-allowed;
-  padding: 0px 15px 0px;
-}
-
-.checker-text {
-  color: $dark-primary-color;
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -540,71 +409,6 @@ input[type="file"]::file-selector-button:hover {
   border-radius: 5px;
 }
 
-/*Ajuste del tamaño de los input y dropdown*/
-.p-field {
-  margin-bottom: 0rem;
-}
-
-.p-inputtext {
-  padding-left: 2%;
-  width: 400px;
-  height: 30px;
-  font-family: $font-worksans;
-  color: $primary-color-text;
-}
-
-.p-dropdown {
-  padding: 0px;
-  display: flex;
-  border-radius: 5px;
-  height: 33px;
-  width: 400px;
-  text-overflow: initial;
-  color: $primary-color-text;
-  text-transform: uppercase;
-}
-
-.p-dropdown .p-dropdown-label {
-  margin-top: -10px;
-}
-
-.longDescription {
-  width: 942px;
-  height: 47px;
-  border-radius: 5px;
-}
-
-.p-field img {
-  width: 36px;
-  height: 20px;
-  margin-left: 0px;
-  display: -moz-inline-grid;
-}
-
-.labeled {
-  padding-left: 25px;
-}
-
-.field img {
-  width: 36px;
-  height: 20px;
-  margin-left: -30px;
-  display: -moz-inline-grid;
-}
-
-// pendiente integracion
-/*
-hr {
-  border-color: $no-color;
-  background-color: $no-color;
-}
-*/
-
-.textImg {
-  position: relative;
-  top: -15px;
-}
-
 .link {
   color: $dark-primary-color;
   cursor: pointer;
@@ -661,13 +465,41 @@ mat-icon {
   &.pointer {
     cursor: pointer;
   }
+  &:focus{
+    outline: none;
+  }
   > svg {
     fill: $primary-color-icon;
+  }
+}
+
+mat-icon.information {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  margin-right: 10px;
+  > svg {
+    fill: $primary-color;
   }
 }
 
 mat-icon[disabled="true"] {
   > svg {
     fill: $secondary-color-icon;
+  }
+}
+
+.input-group {
+  flex-grow: 0.5;
+  > input {
+      border-radius: 25px;
+  }
+  > mat-icon {
+      vertical-align: middle;
+      margin-left: -37px;
+      margin-bottom: 4px;
+      width: 32px;
+      height: 32px;
   }
 }

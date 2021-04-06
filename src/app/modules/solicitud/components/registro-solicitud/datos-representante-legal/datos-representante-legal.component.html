@@ -9,6 +9,9 @@
                         matTooltip="Representante legal Es quien se encuentra registrado en el Certificado de Existencia y Representación Legal para persona Jurídica o Registro Mercantil para persona Natural.">
                     </mat-icon>
                 </div>
+                <span class="error small" *ngIf="getChildFormGroup().controls.nombreRepresentante.errors?.required">
+                  Campo Obligatorio
+                </span>
             </div>
         </div>
         <div class="p-col">
@@ -21,6 +24,9 @@
                         matTooltip="Documento de identidad del representante legal.">
                     </mat-icon>
                 </div>
+                <span class="error small" *ngIf="getChildFormGroup().controls.identificacion.errors?.required">
+                  Campo Obligatorio
+                </span>
             </div>
         </div>
     </div>
@@ -34,6 +40,9 @@
                         matTooltip="Cargo que ocupa el representante legal en la empresa.">
                     </mat-icon>
                 </div>
+                <span class="error small" *ngIf="getChildFormGroup().controls.cargo.errors?.required">
+                  Campo Obligatorio
+                </span>
             </div>
         </div>
         <div class="p-col">

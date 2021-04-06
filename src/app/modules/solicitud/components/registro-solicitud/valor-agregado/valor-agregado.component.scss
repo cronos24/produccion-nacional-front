@@ -13,16 +13,3 @@ label {
     margin-left: 5px;
     margin-right: 5px;
 }
-
-::ng-deep {
-    mat-icon {
-        cursor: pointer;
-        width: 32px !important;
-        height: 32px !important;
-        margin-left: 10px;
-        margin-right: 10px;
-        > svg {
-            fill: $primary-color;
-        }
-    }
-}

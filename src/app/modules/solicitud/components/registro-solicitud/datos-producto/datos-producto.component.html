@@ -1,4 +1,12 @@
 <form [formGroup]="getChildFormGroup()">
+    <div class="p-grid" *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional'">
+        <div class=" p-col">
+            <label>
+                <input type="checkbox" formControlName="bienFinal" />
+                Su producto es un Bien final (Decreto 1122 de 2019 o Decreto 1156 de 2020)
+            </label>
+        </div>
+    </div>
     <div class="p-grid">
         <div class="p-col">
             <div class="form-group">
@@ -11,12 +19,12 @@
                     </select>
                     <mat-icon
                         *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' || getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas'"
-                        svgIcon="informacion-circular-negativo"
+                        class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Diligenciar la subpartida arancelaria por la cual desea registrar su producto. (DECRETO 2153 de 2016 Arancel de Aduanas).">
                     </mat-icon>
                     <mat-icon
                         *ngIf="getFatherFormGroupValue('tipoFormulario') == 'fomentoIndustriaAutomotriz' || getFatherFormGroupValue('tipoFormulario') == 'fomentoIndustriaAstilleros'"
-                        svgIcon="informacion-circular-negativo"
+                        class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Diligenciar la subpartida arancelaria correspondiente al programa PROFIA contemplado en las autorizaciones vigentes de conformidad con el dectreto 1122 del 2019 Artículo 2.2.1.14.1.3">
                     </mat-icon>
                 </div>
@@ -38,7 +46,7 @@
                         <option value="value2">Value 2</option>
                         <option value="value3">Value 3</option>
                     </select>
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Es el que asigna el Ministerio De Comercio Industria Y Turismo a cada uno de los bienes comprendidos en las subpartidas arancelarias establecidas en el artí­culo 3 del decreto 1567.">
                     </mat-icon>
                 </div>
@@ -55,7 +63,7 @@
                 <label>2.2 Nombre Comercial:</label>
                 <div class="icon-group">
                     <textarea placeholder="Nombre Comercial" type="text" formControlName="nombreComercial"></textarea>
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Diligenciar el nombre comercial asignado por la empresa con el cual comercializa el producto a registrar.">
                     </mat-icon>
                 </div>
@@ -66,7 +74,7 @@
                 <label>2.3 Nombre Técnico:</label>
                 <div class="icon-group">
                     <input placeholder="Nombre Técnico" type="text" formControlName="nombreTecnico" />
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Es el nombre con el que se conoce el producto y es único por ser utilizado universalmente, el cual debe ser especí­fico con caracterí­sticas esenciales que lo identifiquen y permitan verificar la subpartida arancelaria. No incluye marcas, referencias, logos etc. Debe ir en idioma español.">
                     </mat-icon>
                 </div>
@@ -84,7 +92,7 @@
                         <option value="value2">Value 2</option>
                         <option value="value3">Value 3</option>
                     </select>
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Se entiende como la medida en la que se comercializa el producto a registrar (unidad, kilo, tonelada, litro, etc.), teniendo en cuenta la presentación del mismo.">
                     </mat-icon>
                 </div>
@@ -96,7 +104,7 @@
                 <label>2.5 Tecnología:</label>
                 <div class="icon-group">
                     <textarea formControlName="tecnologia"></textarea>
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Indique las características tecnológicas.">
                     </mat-icon>
                 </div>
@@ -108,7 +116,7 @@
                 <label>2.5 Descripción de la(s) motoparte(s):</label>
                 <div class="icon-group">
                     <textarea placeholder="" formControlName="descripcionMotoparte"></textarea>
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Diligenciar la descripción o descripciones de las motopartes tal cual como serán diligenciadas en el Aplicativo RTE, Módulo planillas A - B.">
                     </mat-icon>
                 </div>
@@ -116,8 +124,7 @@
         </div>
     </div>
 
-    <div class="p-grid"
-        *ngIf="getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas'">
+    <div class="p-grid" *ngIf="getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas'">
         <div class="p-col-12">
             <div class="form-group">
                 <label>2.6 Número de motoparte:</label>
@@ -125,7 +132,7 @@
                     <textarea class="doble"
                         placeholder="Ingrese las referencias separadas por coma y solo use caracteres alfanuméricos."
                         formControlName="numeroMotoparte"></textarea>
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Indique el/los número(s) de la(s) motoparte(s) separada(s) por coma.">
                     </mat-icon>
                 </div>
@@ -155,7 +162,7 @@
                         <option value="value3">Mediana empresa</option>
                         <option value="value3">Grande empresa</option>
                     </select>
-                    <mat-icon svgIcon="informacion-circular-negativo" matTooltip="
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="
                     - Micro empresa: si posee menos de 10 empleados
                     - Pequeña empresa: si tiene un número entre 10 y 49 empleados.
                     - Mediana empresa: si tiene un número entre 50 y 249 empleados.
@@ -173,9 +180,24 @@
                 <div class="icon-group">
                     <input placeholder="Unidades Producidas por Año" min=0 type="number"
                         formControlName="unipadesProducidas" />
-                    <mat-icon svgIcon="informacion-circular-negativo" matTooltip="">
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="">
                     </mat-icon>
                 </div>
+            </div>
+        </div>
+        <div class="p-col-6" *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' && getChildFormGroupValue('bienFinal')">
+            <div class="form-group">
+                <label>2.10 Resolución:</label>
+                <input placeholder="Resolución" type="text" formControlName="resolucion" />
+            </div>
+        </div>
+    </div>
+
+    <div class="p-grid" *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' && getChildFormGroupValue('bienFinal')">
+        <div class="p-col-6">
+            <div class="form-group">
+                <label>2.11 Programa:</label>
+                <input placeholder="Programa" type="text" formControlName="programa" />
             </div>
         </div>
     </div>

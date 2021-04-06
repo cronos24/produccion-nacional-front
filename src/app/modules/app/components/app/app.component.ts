@@ -24,7 +24,7 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon(
       'buscar-circular-negativo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/buscar-circular-negativo.svg')
-    );    
+    );
     this.matIconRegistry.addSvgIcon(
       'ver-positivo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/ver-positivo.svg')
@@ -76,6 +76,10 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon(
       'descargar',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/descarga.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'editar-positivo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/editar-positivo.svg')
     );
   }
 
