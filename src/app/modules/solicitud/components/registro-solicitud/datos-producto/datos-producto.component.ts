@@ -1,6 +1,10 @@
+import { SUPER_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
+import { SubpartidaPorTipoService } from '../../../services/subpartida/subpartida-por-tipo.service';
+import { SubpartidaService } from '../../../services/subpartida/subpartida.service';
+import { VuceService } from '../../../services/vuce/vuce.service';
 import { FormGeneric } from '../clases/form-generic';
 
 @Component({
@@ -14,6 +18,11 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
   protected formGroupName: string = 'datosProducto';
 
   public subpartidas: any[] = [];
+
+  public constructor(private subpartidaService: SubpartidaService,
+    private subpartidaPorTipoService: SubpartidaPorTipoService) {
+    super();
+  }
 
   public messagesSubpartidaArancelaria: Message[] = [
     { severity: 'info', summary: '000 Descripcion de la subpartida' },
@@ -38,14 +47,17 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
         case 'produccionNacional':
           this.getChildFormGroupControl('resolucion').setValidators([Validators.required]);
           this.getChildFormGroupControl('programa').setValidators([Validators.required]);
+          this.obtenerSubpartidas();
           break;
         case 'fomentoIndustriaAutomotriz' || 'fomentoIndustriaAstilleros':
           this.getChildFormGroupControl('codigoNumericoUnico').setValidators([Validators.required]);
           this.getChildFormGroupControl('tecnologia').setValidators([Validators.required]);
+          this.obtenerSubpartidasFiltradas(tipoFormulario);
           break;
         case 'regimenTransformacionEnsamblePlanillas':
           this.getChildFormGroupControl('descripcionMotoparte').setValidators([Validators.required]);
           this.getChildFormGroupControl('numeroMotoparte').setValidators([Validators.required]);
+          this.obtenerSubpartidas();
           break;
         default:
           break;
@@ -53,4 +65,12 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
     });
   }
 
+  public obtenerSubpartidas(): void {
+    this.subpartidas = this.subpartidaService.getSubpartida();
+    console.log(this.subpartidas);
+  }
+
+  public obtenerSubpartidasFiltradas(tipo: string): void {
+      this.subpartidaPorTipoService.get()
+  }
 }

@@ -39,10 +39,13 @@ import { ProcesoProduccionComponent } from './components/registro-solicitud/proc
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
+import { DivipolaService } from './services/divipola/divipola.service';
 import { MaterialService } from './services/material.service';
 import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 import { SolicitudService } from './services/solicitud.service';
+import { SubpartidaPorTipoService } from './services/subpartida/subpartida-por-tipo.service';
+import { SubpartidaService } from './services/subpartida/subpartida.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 
 @NgModule({
@@ -106,7 +109,10 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     SolicitudService,
     AnexosService,
     IdentificacionEmpresaService,
-    MaterialService
+    MaterialService,
+    DivipolaService,
+    SubpartidaService,
+    SubpartidaPorTipoService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

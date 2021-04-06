@@ -6,6 +6,7 @@ import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
 import { ISolicitud } from '../../../interfaces/solicitud.interface';
+import { DivipolaService } from '../../../services/divipola/divipola.service';
 import { IdentificacionEmpresaService } from '../../../services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 import { FormGeneric } from '../clases/form-generic';
 
@@ -29,11 +30,14 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
     registrosPorPagina: 10
   };
   public sort: { [key: string]: string };
+  public departamentos: any;
+  public ciudades: any;
 
   constructor(
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private identificacionEmpresaService: IdentificacionEmpresaService
+    private identificacionEmpresaService: IdentificacionEmpresaService,
+    private divipolaService: DivipolaService
   ) {
     super();
     this.formGroupPlantaProduccion = this.formBuilder.group({
@@ -41,6 +45,8 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
       ciudad: [null, Validators.required],
       direccion: ['', [Validators.required, Validators.minLength(5)]]
     });
+    this.departamentos =  this.divipolaService.consultarDepartamentos();
+    this.ciudades = this.divipolaService.consultarCiudades();
   }
 
   public onBuscar(): void {
