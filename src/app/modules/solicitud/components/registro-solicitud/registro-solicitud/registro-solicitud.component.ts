@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
+import { Estado } from '../../../enums/estado.enum';
 import { SolicitudService } from '../../../services/solicitud.service';
 import { FormGeneric } from '../clases/form-generic';
 
@@ -22,6 +23,10 @@ export class RegistroSolicitudComponent extends FormGeneric {
   public regimenTransformacionEnsamblePlanillas: boolean = false;
   public fomentoIndustriaAstilleros: boolean = false;
 
+  public get estado(): typeof Estado {
+    return Estado;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private solicitudService: SolicitudService,
@@ -33,11 +38,10 @@ export class RegistroSolicitudComponent extends FormGeneric {
     this.solicitudService.getById(radicado, {
       postfix: '/radicado'
     }).subscribe((response) => {
+      this.buildFromGroup();
       this.setFormGroup(response.respuesta);
       this.loading = false;
     });
-
-    this.buildFromGroup();
   }
 
   public onSelectedCheckBox(tipoFormulario: string): void {
@@ -56,7 +60,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   public onGuardar() {
     const body = this.getBody();
     this.solicitudService.patch(body).subscribe((respuesta) => {
-      console.log(respuesta, 'respuesta');
+
     });
   }
 
@@ -75,6 +79,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   private buildFromGroup(): void {
     this.formGroup = this.formBuilder.group({
       id: [],
+      estado: [''],
       tipoFormulario: ['produccionNacional', Validators.required],
       identificacionEmpresa: this.formBuilder.group({
         nit: ['', [Validators.required, Validators.maxLength(255)]],
@@ -148,11 +153,65 @@ export class RegistroSolicitudComponent extends FormGeneric {
         break;
     }
 
+    solicitud.empresaNitNumero = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value;
+    solicitud.empresaRazonSocial = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['razonSocial'].value;
+    solicitud.empresaContactoNombre = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nombreContacto'].value;
+    solicitud.empresaCorreoElectronico = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['correo'].value;
+    solicitud.empresaTelefonoIndicativo = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['indicativo'].value;
+    solicitud.empresaTelefonoNumero = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['telefono'].value;
+
+    solicitud.productoBienFinal = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['bienFinal'].value;
+    solicitud.productoSubpartidaId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['subpartida'].value;
+    solicitud.productoNombreComercial = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreComercial'].value;
+    solicitud.productoNombreTecnico = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreTecnico'].value;
+    solicitud.productoUnidadId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unidadComercial'].value;
+    solicitud.productoSectorId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['sectorEconomico'].value;
+    solicitud.empresaTamanoId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tamanoEmpresa'].value;
+    solicitud.productoUnidadesProducidas = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unipadesProducidas'].value;
+    solicitud.productoCnuId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['codigoNumericoUnico'].value;
+    solicitud.productoTecnologia = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tecnologia'].value;
+    solicitud.productoMotoparteDescripcion = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['descripcionMotoparte'].value;
+    solicitud.productoMotoparteNumero = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['numeroMotoparte'].value;
+    solicitud.productoResolucion = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['resolucion'].value;
+    solicitud.productoPrograma = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['programa'].value;
+
+    switch ((this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value) {
+      case 'bienesTotalmenteObtenidos':
+        solicitud.empresaProductorCriterio = 0;
+        break;
+      case 'bienesElaboradosNacionales':
+        solicitud.empresaProductorCriterio = 1;
+        break;
+      case 'bienesPorcentajeMinimoValor':
+        solicitud.empresaProductorCriterio = 2;
+        break;
+      case 'bienesProcesoProductivo':
+        solicitud.empresaProductorCriterio = 3;
+        break;
+      default:
+        break;
+    }
+
+    switch ((this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['origenInsumo'].value) {
+      case 'nacional':
+        solicitud.empresaInsumosOrigen = 0;
+        break;
+      case 'importado':
+        solicitud.empresaInsumosOrigen = 1;
+        break;
+      case 'piezaInsumo':
+        solicitud.empresaInsumosOrigen = 2;
+        break;
+      default:
+        break;
+    }
+
     return solicitud;
   }
 
   private setFormGroup(solicitud) {
-    this.getFatherFormGroupControl('id').setValue(solicitud.id);
+    this.setFatherFormGroupValue('id', solicitud.id);
+    this.setFatherFormGroupValue('estado', solicitud.estado);
 
     switch (solicitud.programaId) {
       case 0:
@@ -170,7 +229,16 @@ export class RegistroSolicitudComponent extends FormGeneric {
       default:
         break;
     }
+    this.onSelectedCheckBox(this.getFatherFormGroupValue('tipoFormulario'));
 
+    (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].setValue(solicitud.empresaNitNumero);
+    (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['razonSocial'].setValue(solicitud.empresaRazonSocial);
+    (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nombreContacto'].setValue(solicitud.empresaContactoNombre);
+    (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['correo'].setValue(solicitud.empresaCorreoElectronico);
+    (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['indicativo'].setValue(solicitud.empresaTelefonoIndicativo);
+    (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['telefono'].setValue(solicitud.empresaTelefonoNumero);
+
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['bienFinal'].setValue(solicitud.productoBienFinal);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['subpartida'].setValue(solicitud.productoSubpartidaId);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreComercial'].setValue(solicitud.productoNombreComercial);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreTecnico'].setValue(solicitud.productoNombreTecnico);
@@ -182,6 +250,39 @@ export class RegistroSolicitudComponent extends FormGeneric {
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tecnologia'].setValue(solicitud.productoTecnologia);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['descripcionMotoparte'].setValue(solicitud.productoMotoparteDescripcion);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['numeroMotoparte'].setValue(solicitud.productoMotoparteNumero);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['resolucion'].setValue(solicitud.productoResolucion);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['programa'].setValue(solicitud.productoPrograma);
+
+    switch (solicitud.empresaProductorCriterio) {
+      case 0:
+        (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].setValue('bienesTotalmenteObtenidos');
+        break;
+      case 1:
+        (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].setValue('bienesElaboradosNacionales');
+        break;
+      case 2:
+        (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].setValue('bienesPorcentajeMinimoValor');
+        break;
+      case 3:
+        (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].setValue('bienesProcesoProductivo');
+        break;
+      default:
+        break;
+    }
+
+    switch (solicitud.empresaInsumosOrigen) {
+      case 0:
+        (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['origenInsumo'].setValue('nacional');
+        break;
+      case 1:
+        (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['origenInsumo'].setValue('importado');
+        break;
+      case 2:
+        (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['origenInsumo'].setValue('piezaInsumo');
+        break;
+      default:
+        break;
+    }
 
     solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').format('DD/MM/YYYY');
     (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['fecha'].setValue(solicitud.auditoria.fechaCreacionFormateada);

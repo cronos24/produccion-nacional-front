@@ -503,3 +503,12 @@ mat-icon[disabled="true"] {
       height: 32px;
   }
 }
+
+[disabled="true"]{
+  mat-icon {
+    pointer-events: none;
+    > svg {
+      fill: $secondary-color-icon;
+    }
+  }
+}

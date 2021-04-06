@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { FormGeneric } from '../clases/form-generic';
 
@@ -7,7 +7,7 @@ import { FormGeneric } from '../clases/form-generic';
   templateUrl: './criterios-registro.component.html',
   styleUrls: ['./criterios-registro.component.scss'],
 })
-export class CriteriosRegistroComponent extends FormGeneric {
+export class CriteriosRegistroComponent extends FormGeneric implements OnInit {
 
   @Input() protected formGroup: FormGroup;
   protected formGroupName: string = 'criteriosRegistro';
@@ -20,6 +20,11 @@ export class CriteriosRegistroComponent extends FormGeneric {
   public nacional: boolean = false;
   public importado: boolean = false;
   public piezaInsumo: boolean = false;
+
+  ngOnInit(): void {
+    this.onSelectedCheckBox(this.getChildFormGroupValue('criterio'));
+    this.onSelectedCheckBoxOrigen(this.getChildFormGroupValue('origenInsumo'));
+  }
 
   public onSelectedCheckBox(criterio: string): void {
     setTimeout(() => {

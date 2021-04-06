@@ -3,7 +3,7 @@
         <h3 class="headline-m">Borradores y/o solicitudes existentes</h3>
         <div class="sub-title">
             <button [routerLink]="'/solicitud/pre-solicitud'" style="margin-right: 20px;">CREAR NUEVO REGISTRO</button>
-            <button [routerLink]="'/solicitud/pre-solicitud'">VER REQUERIMIENTOS</button>
+            <button (click)="onVerRequerimientos()">VER REQUERIMIENTOS</button>
             <span class="spacer"></span>
             <div class="input-group">
                 <input placeholder="Buscar" type="text" [(ngModel)]="busqueda" (ngModelChange)="onBuscar()" />

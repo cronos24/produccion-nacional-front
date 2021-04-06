@@ -11,7 +11,6 @@ import { SolicitudService } from '../../services/solicitud.service';
 import { CancelarSolicitudComponent } from '../cancelar-solicitud/cancelar-solicitud.component';
 import { SolicitudRequerimientoComponent } from '../solicitud-requerimiento/solicitud-requerimiento.component';
 
-
 @Component({
   selector: 'app-listar-solicitud',
   templateUrl: './listar-solicitud.component.html',
@@ -39,7 +38,7 @@ export class ListarSolicitudComponent implements OnInit {
     private solicitudService: SolicitudService) { }
 
   public ngOnInit(): void {
-    this.openDialog();
+    this.onVerRequerimientos();
   }
 
   public onBuscar(): void {
@@ -87,7 +86,7 @@ export class ListarSolicitudComponent implements OnInit {
 
   public onEliminar(id: number, index: number): void {
     this.solicitudService.delete(id).subscribe(() => {
-      this.solicitudes.splice(index, 1);
+      this.getSolicitudes();
       this.messageService.add({ severity: 'success', summary: 'Borrador eliminado' });
     }, () => {
       this.dialog.open(AlertComponent, {
@@ -146,6 +145,12 @@ export class ListarSolicitudComponent implements OnInit {
     }
   }
 
+  public onVerRequerimientos(): void {
+    this.dialog.open(SolicitudRequerimientoComponent, {
+      width: '40%'
+    });
+  }
+
   private getSolicitudes(): void {
     this.solicitudService.get({ queryParams: { datoBuscado: this.busqueda }, pagina: this.pagina, sort: this.sort }).subscribe((respuesta: IRespuesta<ISolicitud[]>): void => {
       this.solicitudes = respuesta.respuesta.solicitudes as ISolicitud[];
@@ -173,12 +178,6 @@ export class ListarSolicitudComponent implements OnInit {
           }
         }
       });
-    });
-  }
-
-  private openDialog(): void {
-    this.dialog.open(SolicitudRequerimientoComponent, {
-      width: '40%'
     });
   }
 

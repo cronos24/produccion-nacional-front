@@ -11,10 +11,12 @@ import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
 import { AlertComponent } from './components/alert/alert.component';
+import { DisableDirective } from './directives/disable.directive';
 
 @NgModule({
   declarations: [
-    AlertComponent
+    AlertComponent,
+    DisableDirective
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { AlertComponent } from './components/alert/alert.component';
   ],
   exports: [
     FormsModule,
+    DisableDirective,
     ReactiveFormsModule,
     MatDialogModule,
     MatExpansionModule,

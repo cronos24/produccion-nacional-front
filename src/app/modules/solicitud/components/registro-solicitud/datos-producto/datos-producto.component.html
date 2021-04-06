@@ -14,8 +14,8 @@
                 <div class="icon-group">
                     <select formControlName="subpartida">
                         <option hidden [value]="null">Subpartida</option>
-                        <option value="value2">Value 2</option>
-                        <option value="value3">Value 3</option>
+                        <option value="1">Value 2</option>
+                        <option value="2">Value 3</option>
                     </select>
                     <mat-icon
                         *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' || getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas'"
@@ -89,8 +89,8 @@
                 <div class="icon-group">
                     <select formControlName="unidadComercial">
                         <option hidden [value]="null">Unidad</option>
-                        <option value="value2">Value 2</option>
-                        <option value="value3">Value 3</option>
+                        <option value="1">Value 2</option>
+                        <option value="2">Value 3</option>
                     </select>
                     <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Se entiende como la medida en la que se comercializa el producto a registrar (unidad, kilo, tonelada, litro, etc.), teniendo en cuenta la presentación del mismo.">
@@ -157,10 +157,10 @@
                 <div class="icon-group">
                     <select formControlName="tamanoEmpresa">
                         <option hidden [value]="null">Seleccione</option>
-                        <option value="value2">Micro empresa</option>
-                        <option value="value3">Pequeña empresa</option>
-                        <option value="value3">Mediana empresa</option>
-                        <option value="value3">Grande empresa</option>
+                        <option value="1">Micro empresa</option>
+                        <option value="2">Pequeña empresa</option>
+                        <option value="3">Mediana empresa</option>
+                        <option value="4">Grande empresa</option>
                     </select>
                     <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="
                     - Micro empresa: si posee menos de 10 empleados

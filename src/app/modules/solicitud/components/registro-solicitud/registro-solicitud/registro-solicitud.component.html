@@ -3,68 +3,69 @@
         <button routerLink="/">SALIDA SEGURA</button>
         <button routerLink="/solicitud/listar">VER SOLICITUDES</button>
     </div>
-    <div class="titulo">
-        <label class="headline-l">Tipo de Formulario</label>
-        <br />
-        <div class="contenido">
-            <label>
-                <input type="checkbox" [(ngModel)]="produccionNacional"
-                    (ngModelChange)="onSelectedCheckBox('produccionNacional')" />
-                Registro de Produccion Nacional
-            </label>
-            <label>
-                <input type="checkbox" [(ngModel)]="fomentoIndustriaAutomotriz"
-                    (ngModelChange)="onSelectedCheckBox('fomentoIndustriaAutomotriz')" />
-                Programa de Fomento a la Industria Automotriz
-            </label>
-            <label>
-                <input type="checkbox" [(ngModel)]="regimenTransformacionEnsamblePlanillas"
-                    (ngModelChange)="onSelectedCheckBox('regimenTransformacionEnsamblePlanillas')" />
-                Programa de Regimen de Transformacion o<br />Ensamble planillas A y B
-            </label>
-            <label>
-                <input type="checkbox" [(ngModel)]="fomentoIndustriaAstilleros"
-                    (ngModelChange)="onSelectedCheckBox('fomentoIndustriaAstilleros')" />
-                Programa de Fomento a la<br />Industria Astilleros
-            </label>
+    <div [appDisable]="getFatherFormGroupValue('estado') != this.estado['Borrador']">
+        <div class="titulo">
+            <label class="headline-l">Tipo de Formulario</label>
+            <br />
+            <div class="contenido">
+                <label>
+                    <input type="checkbox" [(ngModel)]="produccionNacional"
+                        (ngModelChange)="onSelectedCheckBox('produccionNacional')" />
+                    Registro de Produccion Nacional
+                </label>
+                <label>
+                    <input type="checkbox" [(ngModel)]="fomentoIndustriaAutomotriz"
+                        (ngModelChange)="onSelectedCheckBox('fomentoIndustriaAutomotriz')" />
+                    Programa de Fomento a la Industria Automotriz
+                </label>
+                <label>
+                    <input type="checkbox" [(ngModel)]="regimenTransformacionEnsamblePlanillas"
+                        (ngModelChange)="onSelectedCheckBox('regimenTransformacionEnsamblePlanillas')" />
+                    Programa de Regimen de Transformacion o<br />Ensamble planillas A y B
+                </label>
+                <label>
+                    <input type="checkbox" [(ngModel)]="fomentoIndustriaAstilleros"
+                        (ngModelChange)="onSelectedCheckBox('fomentoIndustriaAstilleros')" />
+                    Programa de Fomento a la<br />Industria Astilleros
+                </label>
+            </div>
         </div>
-    </div>
-    <br />
-    <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    1. IDENTIFICACION DE LA EMPRESA
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-identificacion-empresa [formGroup]="formGroup"></app-identificacion-empresa>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-datos-producto [formGroup]="formGroup"></app-datos-producto>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    3. CRITERIOS PARA EL REGISTRO
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-            <!-- [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)"-->
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-materiales-extranjeros-nacionales [formGroup]="formGroup"></app-materiales-extranjeros-nacionales>
-        </mat-expansion-panel>
-        <!--   <mat-expansion-panel>
+        <br />
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        1. IDENTIFICACION DE LA EMPRESA
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-identificacion-empresa [formGroup]="formGroup"></app-identificacion-empresa>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-datos-producto [formGroup]="formGroup"></app-datos-producto>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        3. CRITERIOS PARA EL REGISTRO
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <!-- [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)"-->
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-materiales-extranjeros-nacionales [formGroup]="formGroup"></app-materiales-extranjeros-nacionales>
+            </mat-expansion-panel>
+            <!--   <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
@@ -128,13 +129,14 @@
         </mat-expansion-panel-header>
         <app-anexos></app-anexos>
     </mat-expansion-panel>-->
-    </mat-accordion>
-    <br />
-    <br />
-    <div class="header">
-        <button (click)="onGuardar()">GUARDAR BORRADOR</button>
-        <button>FIRMAR Y RADICAR SOLICITUD</button>
+        </mat-accordion>
+        <br />
+        <br />
+        <div class="header">
+            <button (click)="onGuardar()">GUARDAR BORRADOR</button>
+            <button>FIRMAR Y RADICAR SOLICITUD</button>
+        </div>
+        <br />
+        <br />
     </div>
-    <br />
-    <br />
 </ng-container>

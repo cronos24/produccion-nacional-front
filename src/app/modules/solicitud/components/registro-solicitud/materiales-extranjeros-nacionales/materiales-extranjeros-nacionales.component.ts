@@ -151,7 +151,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   public exportarExcel(): void {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.materiales);
-      console.log("algo ewas", worksheet);
       const workbook = { Sheets: { data: worksheet }, SheetNames: ['Materiales'] };
       const excelBuffer: any = xlsx.write(workbook, {
         bookType: 'xlsx',
@@ -182,7 +181,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
         solicitudId: this.getFatherFormGroupValue('id')
       }
     }).subscribe((response) => {
-      console.log(response);
 
     });
   }
