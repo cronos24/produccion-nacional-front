@@ -1,0 +1,37 @@
+@import "./../../../../../variables.scss";
+@import "../../../../../mixins.scss";
+.table {
+    border-width: 2px;
+    border-style: solid;
+    border-color: $light-primary-color;
+    border-radius: 20px;
+    overflow: hidden;
+    > .title {
+        padding: 16px;
+        > .sub-title {
+            display: flex;
+        }
+    }
+    @include table;
+}
+
+.input-group {
+    flex-grow: 0.5;
+    > input {
+        border-radius: 25px;
+    }
+    > mat-icon {
+        vertical-align: middle;
+        margin-left: -37px;
+        margin-bottom: 4px;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.body-uno {
+    a {
+        text-decoration: underline;
+        color: #3366cc;
+    }
+}
