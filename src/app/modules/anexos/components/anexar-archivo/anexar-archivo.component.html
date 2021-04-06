@@ -11,18 +11,14 @@
         <div class="body-uno">
             {{ adjuntoFormGroup.controls.archivo.value ? archivoActual.name : 'Ningun archivo seleccionado.'}}
         </div>
-        <div class="texto-error body-uno" *ngIf="errorTamano != true">
-            Únicamente archivos con extensión pdf de tamaño máximo de 15MB
-        </div>
-        <div class="texto-error body-uno" *ngIf="errorTamano">
-            El archivo supera los 5MB.
-        </div>
+        <ng-container *ngTemplateOutlet="textoTamano"></ng-container>
+        <ng-container *ngTemplateOutlet="textoErrorTamano"></ng-container>
         <div *ngIf="data.incluirDescripcion == true" class="body-uno">
             Descripcion*
             <input type="text" formControlName="descripcion" placeholder="Descripcion(Máximo 50 caracteres)">
-            <div class="texto-error" *ngIf="mostrarErrorDescripcion">
+            <span class="caption ng-invalid" *ngIf="mostrarErrorDescripcion">
                 Este campo es requerido
-            </div>
+            </span>
         </div>
         <div *ngIf="anidado == true" class="botones">
             <button class="outlined" (click)="dialogRef.close()">CANCELAR</button>
@@ -50,16 +46,17 @@
             <div class="descripcion">
                 <div *ngIf="data.incluirDescripcion == true || mostrarDescripcion" class="body-uno" style="flex: 10;">
                     <input type="text" formControlName="descripcion" placeholder="Descripcion(Máximo 50 caracteres)">
-                    <div class="texto-error" *ngIf="mostrarErrorDescripcion">
+                    <span class="caption ng-invalid" *ngIf="mostrarErrorDescripcion">
                         Este campo es requerido
-                    </div>
+                    </span>
                 </div>
                 <div style="flex: 1;">
                     &nbsp;&nbsp;*
                 </div>
             </div>
-            <button class="subir" [disabled]="adjuntoFormGroup.invalid" (click)="adjuntarArchivo();"> SUBIR
-                ANEXO</button>
+            <button class="subir" [disabled]="adjuntoFormGroup.invalid" (click)="adjuntarArchivo();">
+                SUBIR ANEXO
+            </button>
         </div>
 
     </div>

@@ -16,7 +16,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AnexosModule } from '../anexos/anexos.module';
 import { HeaderModule } from '../header/header.module';
 import { SharedModule } from '../shared/shared.module';
-import { AdjuntarArchivoComponent } from './components/adjuntar-archivo/adjuntar-archivo.component';
 import { CancelarSolicitudComponent } from './components/cancelar-solicitud/cancelar-solicitud.component';
 import { FormularioPreSolicitudComponent } from './components/formulario-pre-solicitud/formulario-pre-solicitud.component';
 import { InformativoComponent } from './components/informativo/informativo.component';
@@ -24,7 +23,6 @@ import { ListarSolicitudComponent } from './components/listar-solicitud/listar-s
 import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestro-solicitud.component';
 import { ModalInsumosComponent } from './components/modal-insumos/modal-insumos.component';
 import { AgregarInsumosComponent } from './components/registro-solicitud/agregar-insumos/agregar-insumos.component';
-import { AnexosComponent } from './components/registro-solicitud/anexos/anexos.component';
 import { AplicacionesProductoComponent } from './components/registro-solicitud/aplicaciones-producto/aplicaciones-producto.component';
 import { CaracteristicasTecnicasComponent } from './components/registro-solicitud/caracteristicas-tecnicas/caracteristicas-tecnicas.component';
 import { CaracteristicasTransformacionComponent } from './components/registro-solicitud/caracteristicas-transformacion/caracteristicas-transformacion.component';
@@ -40,14 +38,12 @@ import { RegistroSolicitudComponent } from './components/registro-solicitud/regi
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
 import { MaterialService } from './services/material.service';
-import { AnexosService } from './services/registro-solicitud/anexos/anexos.service';
 import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 import { SolicitudService } from './services/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 
 @NgModule({
   declarations: [
-    AdjuntarArchivoComponent,
     CancelarSolicitudComponent,
     CostosValorFabricaComponent,
     CriteriosRegistroComponent,
@@ -67,7 +63,6 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     CaracteristicasTransformacionComponent,
     DatosRepresentanteLegalComponent,
     ValorAgregadoComponent,
-    AnexosComponent,
     IdentificacionEmpresaComponent,
     MaterialesExtranjerosComponent
   ],
@@ -86,7 +81,6 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     InputTextModule,
     MatDialogModule,
     PaginatorModule,
-    PaginatorModule,
     RadioButtonModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
@@ -104,7 +98,6 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
       useValue: {}
     },
     SolicitudService,
-    AnexosService,
     IdentificacionEmpresaService,
     MaterialService
   ],

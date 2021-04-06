@@ -112,7 +112,8 @@
                         svgIcon="menos-circular-positivo" (click)="onCancelarRegistro(solicitud)"></mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon class="pointer" svgIcon="adjunto-positivo"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="adjunto-positivo"
+                        [routerLink]="'/solicitud/anexos/' + solicitud.radicado"></mat-icon>
                 </td>
             </tr>
         </ng-template>

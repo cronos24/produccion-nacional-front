@@ -1,7 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
+import { IPagina } from 'src/app/interfaces/pagina.interface';
+import { Estado } from 'src/app/modules/solicitud/enums/estado.enum';
+import { SolicitudService } from 'src/app/modules/solicitud/services/solicitud.service';
+import { AnexoService } from '../../services/anexo/anexo.service';
 import { AnexarArchivoComponent } from '../anexar-archivo/anexar-archivo.component';
 import { EliminarAnexoComponent } from '../eliminar-anexo/eliminar-anexo.component';
 
@@ -10,64 +14,120 @@ import { EliminarAnexoComponent } from '../eliminar-anexo/eliminar-anexo.compone
   templateUrl: './tabla-anexos.component.html',
   styleUrls: ['./tabla-anexos.component.scss']
 })
-export class TablaAnexosComponent implements OnInit {
-  public busqueda: string;
-  public adjuntos: any = [
-    {
-      'id': '1',
-      'archivo': 'documento.pdf',
-      'descripcion': 'descripcion 1',
-      'fecha': '02/05/05'
-    }
-  ]
-
-
+export class TablaAnexosComponent {
+  
   @Input() anexoEmbebido: boolean = true;
+
+  public busqueda: string;
+  public pagina: IPagina = {
+    pagina: 0,
+    registrosPorPagina: 10
+  };
+  public sort: { [key: string]: string };
+
+  public adjuntos: any[] = [];
+  public solicitud: any;
+  public loading: boolean = false;
+
+  public get estado(): typeof Estado {
+    return Estado;
+  }
+
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<any>,
-    public messageService: MessageService
-  ) { }
+    private messageService: MessageService,
+    private anexoService: AnexoService,
+    private solicitudService: SolicitudService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    const radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
 
-  ngOnInit(): void {
+    this.loading = true;
+    this.solicitudService.getById(radicado, {
+      postfix: '/radicado'
+    }).subscribe((response) => {
+      this.solicitud = (response.respuesta as any);
+      this.getAnexos();
+      this.loading = false;
+    });
   }
 
   public onBuscar(): void {
-
+    this.getAnexos();
   }
 
-  public onSort(event: any): void {
-
+  public onSort(event: {
+    sortField: string;
+    sortOrder: number;
+  }): void {
+    if (this.solicitud.id) {
+      this.sort = {
+        ordenamientoCampo: event.sortField,
+        ordenamientoDireccion: event.sortOrder === 1 ? 'ASC' : 'DESC'
+      };
+      this.getAnexos();
+    }
   }
+
+  public onPageChange(event: {
+    page: number
+  }): void {
+    if (this.pagina.pagina !== event.page + 1) {
+      this.pagina.pagina = event.page + 1;
+      this.getAnexos();
+    }
+  }
+
+  public getAnexos(): void {
+    this.anexoService.get({
+      queryParams: {
+        solicitudId: this.solicitud.id,
+        datoBuscado: this.busqueda
+      },
+      sort: this.sort,
+      pagina: this.pagina
+    }).subscribe((respuesta) => {
+      this.adjuntos = respuesta.respuesta.datos as any[]
+    });
+  }
+
   public onEliminarAnexo(datos: any): void {
     this.dialogRef = this.dialog.open(EliminarAnexoComponent, { data: datos });
 
     this.dialogRef.afterClosed().subscribe((response: boolean) => {
       if (response) {
-        console.log(response, datos)
-        this.messageService.add({ severity: 'success', summary: 'Archivo eliminado' });
+        this.anexoService.delete(datos.id).subscribe(() => {
+          this.messageService.add({ severity: 'success', summary: 'Archivo eliminado' });
+          this.getAnexos();
+        });
       }
     });
   }
 
-  nuevoAnexo(): void {
+  public nuevoAnexo(): void {
     this.dialogRef = this.dialog.open(AnexarArchivoComponent, { data: { incluirDescripcion: true }, width: '350px' });
     this.dialogRef.afterClosed().subscribe((data: any) => {
       if (data) {
         let formData = new FormData();
-        // formData.append('file', body.archivoArrendamiento);
-        // this.adjuntosService.post(formData).subscribe(() => {
-        //   this.getSucursales();
-        // });
-        this.messageService.add({ severity: 'success', summary: 'Anexo subido con éxito' });
+        formData.append('solicitudId', this.solicitud.id);
+        formData.append('nombre', data.archivo.name);
+        formData.append('file', data.archivo);
+        this.anexoService.post(formData).subscribe(() => {
+          this.getAnexos();
+          this.messageService.add({ severity: 'success', summary: 'Anexo subido con éxito' });
+        });
       }
     })
   }
 
-  public openFile(path: string): void {
-    window.open(
-      // this.adjuntosService.getFile(path)
-      '',
-      "_blank");
+  public getPath(path: string): string {
+    return this.anexoService.getFile(path);
   }
+
+  public navigate(): void{
+    this.router.navigateByUrl('/solicitud/listar');
+  }
+
 }

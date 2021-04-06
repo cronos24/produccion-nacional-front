@@ -1,8 +1,9 @@
-<div class="table">
+<div class="table" [ngClass]="{completa: anexoEmbebido}" *ngIf="!loading">
     <div class="title">
         <h3 class="headline-m" *ngIf="anexoEmbebido">Anexos</h3>
         <div class="sub-title">
-            <button *ngIf="anexoEmbebido" (click)="nuevoAnexo()">NUEVO</button>
+            <button *ngIf="anexoEmbebido && solicitud.estado == estado['Borrador']"
+                (click)="nuevoAnexo()">NUEVO</button>
             <span class="spacer"></span>
             <div class="input-group">
                 <input placeholder="Buscar" type="text" [(ngModel)]="busqueda" (ngModelChange)="onBuscar()" />
@@ -13,19 +14,19 @@
     <p-table [value]="adjuntos" [customSort]="true" [lazy]="true" (onLazyLoad)="onSort($event)">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="archivo">
+                <th pSortableColumn="nombre">
                     <span class="headline-xs --dark-primary-color">
-                        Archivo <p-sortIcon field="archivo"></p-sortIcon>
+                        Archivo<p-sortIcon field="nombre"></p-sortIcon>
                     </span>
                 </th>
                 <th pSortableColumn="descripcion">
                     <span class="headline-xs --dark-primary-color">
-                        Descripcion <p-sortIcon field="descripcion"></p-sortIcon>
+                        Descripcion<p-sortIcon field="descripcion"></p-sortIcon>
                     </span>
                 </th>
-                <th pSortableColumn="fechaPresentacion">
+                <th pSortableColumn="fechaCreacion">
                     <span class="headline-xs --dark-primary-color">
-                        Fecha de presentación <p-sortIcon field="fechaPresentacion"></p-sortIcon>
+                        Fecha de presentación<p-sortIcon field="fechaCreacion"></p-sortIcon>
                     </span>
                 </th>
                 <th>
@@ -42,32 +43,35 @@
         </ng-template>
         <ng-template pTemplate="body" let-anexo let-index="rowIndex">
             <tr>
-                <td class="center body-uno">
-                   <a (click)="openFile()"> {{anexo.archivo}} </a> 
+                <td>
+                    <a class="link" [href]="getPath(anexo.ruta)" target="_blank">{{anexo.nombre}}</a>
                 </td>
-                <td class="center body-uno">
-                    {{anexo.descripcion}}
+                <td>
+                    <p class="body-uno">{{anexo.descripcion}}</p>
                 </td>
-                <td class="center body-uno">
-                    {{anexo.fecha}}
+                <td>
+                    <p class="body-uno">{{anexo.fechaCreacion | date:'dd/MM/yyyy' }}</p>
                 </td>
-                <td class="center body-uno">
-                    <mat-icon class="pointer" 
+                <td class="center">
+                    <mat-icon class="pointer" [attr.disabled]="solicitud.estado == estado['Borrador'] ? false : true"
                         svgIcon="papelera-positivo" (click)="onEliminarAnexo(anexo)">
                     </mat-icon>
                 </td>
-                <td class="center body-uno">
-                    
-                    <mat-icon class="pointer" 
-                        svgIcon="descargar" (click)="onDescargarAnexo(anexo)">
-                    </mat-icon>
+                <td class="center">
+                    <a [href]="getPath(anexo.ruta)" [download]="anexo.nombre" target="_blank">
+                        <mat-icon class="pointer" svgIcon="descargar">
+                        </mat-icon>
+                    </a>
                 </td>
             </tr>
         </ng-template>
     </p-table>
-    <!-- <div *ngIf="solicitudes.length==0">
+    <div *ngIf="adjuntos.length==0">
         <p class="content body-uno">No se encontraron registros coincidentes</p>
     </div>
     <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="pagina.registrosTotales"
-        (onPageChange)="onPageChange($event)"></p-paginator> -->
+        (onPageChange)="onPageChange($event)"></p-paginator>
+</div>
+<div class="buttons" *ngIf="anexoEmbebido">
+    <button class="outlined" (click)="navigate()">VOLVER</button>
 </div>

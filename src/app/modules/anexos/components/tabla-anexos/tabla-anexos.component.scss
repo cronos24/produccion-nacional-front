@@ -1,6 +1,17 @@
 @import "./../../../../../variables.scss";
 @import "../../../../../mixins.scss";
+
 .table {
+    > .title {
+        padding: 16px;
+        > .sub-title {
+            display: flex;
+        }
+    }
+    @include table;
+}
+
+.table.completa {
     border-width: 2px;
     border-style: solid;
     border-color: $light-primary-color;
@@ -15,23 +26,17 @@
     @include table;
 }
 
-.input-group {
-    flex-grow: 0.5;
-    > input {
-        border-radius: 25px;
-    }
-    > mat-icon {
-        vertical-align: middle;
-        margin-left: -37px;
-        margin-bottom: 4px;
-        width: 32px;
-        height: 32px;
+@include message;
+
+.buttons {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    button {
+        margin-left: auto;
     }
 }
 
-.body-uno {
-    a {
-        text-decoration: underline;
-        color: #3366cc;
-    }
+mat-icon[disabled="true"] {
+    pointer-events: none;
 }

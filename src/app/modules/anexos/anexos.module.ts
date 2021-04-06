@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TablaAnexosComponent } from './components/tabla-anexos/tabla-anexos.component';
-import { AnexarArchivoComponent } from './components/anexar-archivo/anexar-archivo.component';
-import { AnexosService } from '../solicitud/services/registro-solicitud/anexos/anexos.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
+import { PaginatorModule } from 'primeng/paginator';
+import { TableModule } from 'primeng/table';
+import { AnexarArchivoComponent } from './components/anexar-archivo/anexar-archivo.component';
 import { EliminarAnexoComponent } from './components/eliminar-anexo/eliminar-anexo.component';
-
-
+import { TablaAnexosComponent } from './components/tabla-anexos/tabla-anexos.component';
+import { AnexoService } from './services/anexo/anexo.service';
 
 @NgModule({
   declarations: [TablaAnexosComponent, AnexarArchivoComponent, EliminarAnexoComponent],
@@ -18,10 +19,13 @@ import { EliminarAnexoComponent } from './components/eliminar-anexo/eliminar-ane
     FormsModule,
     ReactiveFormsModule,
     TableModule,
-    MatIconModule
+    MatIconModule,
+    PaginatorModule,
+    MessageModule,
+    MessagesModule,
   ],
   providers: [
-    AnexosService,
+    AnexoService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     {
       provide: MatDialogRef,

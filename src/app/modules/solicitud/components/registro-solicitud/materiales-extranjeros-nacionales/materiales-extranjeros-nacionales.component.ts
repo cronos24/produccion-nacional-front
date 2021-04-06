@@ -102,7 +102,9 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   }
 
   public downloadFormato(): void {
+    
     window.open(this.materialService.formato, "_blank");
+
   }
 
   public agregarInsumo(data?: IMatExtranjerosNal): void {
@@ -182,8 +184,10 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   private getMateriales(): void {
     this.materialService.get({
       queryParams: {
-        solicitudId: this.getFatherFormGroupValue('id')
-      }
+        solicitudId: this.getFatherFormGroupValue('id'),
+        datoBuscado: this.busqueda
+      },
+      sort: this.sort
     }).subscribe((response) => {
 
     });

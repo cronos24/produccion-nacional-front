@@ -161,6 +161,13 @@ label.ng-invalid {
   color: $error-color;
 }
 
+a {
+  font-family: $font-worksans;
+  font-weight: 500;
+  font-size: 16px;
+  color: $primary-color-text;
+}
+
 span.ng-invalid {
   color: $error-color;
 }
@@ -465,7 +472,7 @@ mat-icon {
   &.pointer {
     cursor: pointer;
   }
-  &:focus{
+  &:focus {
     outline: none;
   }
   > svg {
@@ -493,18 +500,18 @@ mat-icon[disabled="true"] {
 .input-group {
   flex-grow: 0.5;
   > input {
-      border-radius: 25px;
+    border-radius: 25px;
   }
   > mat-icon {
-      vertical-align: middle;
-      margin-left: -37px;
-      margin-bottom: 4px;
-      width: 32px;
-      height: 32px;
+    vertical-align: middle;
+    margin-left: -37px;
+    margin-bottom: 4px;
+    width: 32px;
+    height: 32px;
   }
 }
 
-[disabled="true"]{
+[disabled="true"] {
   mat-icon {
     pointer-events: none;
     > svg {

@@ -1,9 +1,19 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ServicioGeneral } from 'src/app/classes/servicio-general';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AnexoService {
+@Injectable()
+export class AnexoService extends ServicioGeneral<any> {
 
-  constructor() { }
+  protected path: string = '/pn/api/v1/adjuntos';
+
+  public constructor(protected httpClient: HttpClient) {
+    super(httpClient);
+    this.url = this.buildBaseUrl() + this.path;
+  }
+
+  public getFile(path) {
+    return this.buildBaseUrl() + path
+  }
+
 }
