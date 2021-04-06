@@ -1,211 +1,183 @@
-<h2 mat-dialog-title>AGREGAR MATERIALES EXTRANJEROS IMPORTADO DIRECTAMENTE O ADQUIRIDO EN EL MERCADO NACIONAL</h2>
-<mat-dialog-content class="mat-typography">
-  <div class="p-grid" [formGroup]="form">
-    <div class="p-col-6">
-      <div class="form-group">
-        <label>4.1 Nombre Técnico:</label>
-        <div class="icon-group">
-          <input placeholder="Nombre Técnico" type="text" formControlName="nombreTecnico" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Es el nombre con el que se conoce el 
-          producto y es único por ser utilizado universalmente, el cual debe ser 
-          específico con características que lo identifiquen y permitan verificar la 
-          subpartida arancelaria. No incluye marcas, referencias, logos etc. Debe 
-          ir en idioma español.">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="(form.controls.nombreTecnico.errors?.required && 
-        form.controls.nombreTecnico.touched) || 
-        form.controls.nombreTecnico.errors?.minlength || 
-        form.controls.nombreTecnico.errors?.maxlength ">
-          El campo es invalido por las siguientes razones: <br>
-          <span *ngIf="form.controls.nombreTecnico.errors?.required">
-            Es vacio o contiene caracteres invalidos.
-          </span>
-          <span
-            *ngIf=" form.controls.nombreTecnico.errors?.minlength  || form.controls.nombreTecnico.errors?.maxlength">
-            Debe contener minimo 3 caracteres maximo 100
-          </span>
-        </div>
-      </div>
+<h2 class="headline-s">AGREGAR MATERIALES EXTRANJEROS IMPORTADO DIRECTAMENTE O ADQUIRIDO EN EL MERCADO NACIONAL</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
 
-      <div class="form-group">
-        <label>4.2 Subpartida:</label>
-        <div class="icon-group">
-          <input placeholder="Subpartida" type="number" formControlName="subpartida" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la subpartida arancelaria por la cual 
-              desea registrar su producto (Decreto 2153 de 2016 Arancel de 
-              Aduanas)">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="(form.controls.subpartida.errors?.required && 
-            form.controls.subpartida.touched)">
-          El campo es invalido por las siguientes razones: <br>
-          <span *ngIf="form.controls.subpartida.errors?.required">
-            Es vacio o contiene caracteres invalidos.
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>4.3 País Origen:</label>
-        <div class="icon-group">
-          <input placeholder="País Origen" type="text" formControlName="paisOrigen" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Es el país donde se producen los materiales 
-              extranjeros.">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="form.controls.paisOrigen.errors && form.controls.paisOrigen.touched ">
-          El campo es invalido por las siguientes razones:
-          <span *ngIf="form.controls.paisOrigen.errors?.required">
-            <br> Es vacio o contiene caracteres invalidos.
-          </span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>4.5 Unidad de Medida:</label>
-        <div class="icon-group">
-          <input placeholder="Unidad de Medida" type="text" formControlName="undMedida" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip=" Se entiende como la medida en la que se 
-              comercializa el producto a registrar (Ejemplo: Kilo, unidad, Tonelada, 
-              litro, etc.), teniendo en cuenta la presentación del mismo. Se debe tener 
-              en cuenta como base de cálculo para los consumos de los materiales 
-              nacionales y/o extranjeros utilizados en la fabricación del producto a 
-              registrar. Si no selecciona una de las listadas, el sistema la registrará 
-              como una nueva unidad de medida. ">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="(form.controls.undMedida.errors?.required && 
-          form.controls.undMedida.touched) || 
-          form.controls.undMedida.errors?.minlength || 
-          form.controls.undMedida.errors?.maxlength ">
-          El campo es invalido por las siguientes razones: <br>
-          <span *ngIf="form.controls.undMedida.errors?.required">
-            Es vacio o contiene caracteres invalidos.
-          </span>
-          <span *ngIf=" form.controls.undMedida.errors?.minlength  || form.controls.undMedida.errors?.maxlength">
-            Debe contener minimo 3 caracteres maximo 50
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>4.7 Valor CIF (Col$):</label>
-        <div class="icon-group">
-          <input placeholder="----.--" type="number" formControlName="valorCif" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip=" Es el valor por una unidad de producto del 
-            material importado según cantidad y se obtiene de las respectivas 
-            declaraciones de importación. Escribe el valor en pesos colombianos. 
-            Para los valores decimales se debe diligenciar coma(,) y para miles no 
-            incluir ni puntos ni comas, el sistema lo asigna automáticamente.">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="(form.controls.valorCif.errors?.required && 
-          form.controls.valorCif.touched) || 
-          form.controls.valorCif.errors?.minlength || 
-          form.controls.valorCif.errors?.maxlength ">
-          El campo es invalido por las siguientes razones: <br>
-          <span *ngIf="form.controls.valorCif.errors?.required">
-            Es vacio o contiene caracteres invalidos.
-          </span>
-          <span *ngIf=" form.controls.valorCif.errors?.minlength  || form.controls.valorCif.errors?.maxlength">
-            Debe contener minimo 3 caracteres maximo 50
-          </span>
-          <span *ngIf=" form.controls.valorCif.errors?.mayorACero ">
-            Debe ser mayor a cero
-          </span>
-          <span *ngIf=" form.controls.valorCif.errors?.decimal ">
-            debe ser número decimal con máximo {{form.controls.valorCif.errors?.decimal.cifrasDecimales}} cifras
-            decimales y {{form.controls.valorCif.errors?.decimal.digitos}} dígitos en la parte entera
-          </span>
-        </div>
-      </div>
-
-    </div>
-    <div class="p-col-6">
-      <div class="form-group">
-        <label>4.4 País Procedencia:</label>
-        <div class="icon-group">
-          <input placeholder="País Procedencia" type="text" formControlName="paisProcedencia" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Es el país de embarque del material 
-            extranjero. Si el material extranjero es comprado en Colombia, pero de 
-            origen extranjero debe indicarse país de procedencia Colombia.">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="form.controls.paisProcedencia.errors && form.controls.paisProcedencia.touched ">
-          El campo es invalido por las siguientes razones:
-          <span *ngIf="form.controls.paisProcedencia.errors?.required">
-            <br> Es vacio o contiene caracteres invalidos.
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>4.6 Cantidad:</label>
-        <div class="icon-group">
-          <input placeholder="----.---" type="number" formControlName="cantidad" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip=" Consumo de material extranjero utilizado para la 
-          producción de una unidad comercial de producto diligenciado en 2.4">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="(form.controls.cantidad.errors?.required && 
-        form.controls.cantidad.touched) || 
-        form.controls.cantidad.errors?.minlength || 
-        form.controls.cantidad.errors?.maxlength ">
-          El campo es invalido por las siguientes razones: <br>
-          <span *ngIf="form.controls.cantidad.errors?.required">
-            Es vacio o contiene caracteres invalidos.
-          </span>
-
-          <span *ngIf=" form.controls.cantidad.errors?.minlength  || form.controls.cantidad.errors?.maxlength">
-            Debe contener minimo 3 caracteres maximo 50
-          </span>
-
-          <span *ngIf=" form.controls.cantidad.errors?.mayorACero ">
-            Debe ser mayor a cero
-          </span>
-          <span *ngIf=" form.controls.cantidad.errors?.decimal ">
-            debe ser número decimal con máximo {{form.controls.cantidad.errors?.decimal.cifrasDecimales}} cifras
-            decimales y {{form.controls.cantidad.errors?.decimal.digitos}} dígitos en la parte entera
-          </span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>4.8 Valor Planta (Col$):</label>
-        <div class="icon-group">
-          <input placeholder="---.--" type="number" formControlName="valorPlanta" />
-          <mat-icon svgIcon="informacion-circular-negativo" matTooltip=" Es el valor de los materiales extranjeros 
-          por una unidad de producto teniendo en cuenta los costos de 
-          nacionalización, transporte, etc. Para que estos lleguen a la planta de 
-          producción. Para los valores decimales se debe diligenciar coma(,) y para miles no incluir ni puntos ni comas, el sistema lo asigna 
-          automáticamente. ">
-          </mat-icon>
-        </div>
-        <div class="error-input" *ngIf="(form.controls.valorPlanta.errors?.required && 
-        form.controls.valorPlanta.touched) || 
-        form.controls.valorPlanta.errors?.minlength || 
-        form.controls.valorPlanta.errors?.maxlength ">
-          El campo es invalido por las siguientes razones: <br>
-          <span *ngIf="form.controls.valorPlanta.errors?.required">
-            Es vacio o contiene caracteres invalidos.
-          </span>
-          <span *ngIf=" form.controls.valorPlanta.errors?.minlength  || form.controls.valorPlanta.errors?.maxlength">
-            Debe contener minimo 3 caracteres maximo 50
-          </span>
-          <span *ngIf=" form.controls.valorPlanta.errors?.mayorACero ">
-            Debe ser mayor a cero
-          </span>
-          <span *ngIf=" form.controls.valorPlanta.errors?.decimal ">
-            debe ser número decimal con máximo {{form.controls.valorPlanta.errors?.decimal.cifrasDecimales}} cifras
-            decimales y {{form.controls.valorPlanta.errors?.decimal.digitos}} dígitos en la parte entera
-          </span>
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.1 Nombre Técnico:</label>
+          <div class="icon-group">
+            <input placeholder="Nombre Técnico" type="text" formControlName="nombreTecnico" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el nombre con el que se conoce el 
+            producto y es único por ser utilizado universalmente, el cual debe ser 
+            específico con características que lo identifiquen y permitan verificar la 
+            subpartida arancelaria. No incluye marcas, referencias, logos etc. Debe 
+            ir en idioma español.">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.nombreTecnico.invalid && (formGroup.controls.nombreTecnico.dirty || formGroup.controls.nombreTecnico.touched)">
+            <span *ngIf="formGroup.controls.nombreTecnico.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+            <span *ngIf="formGroup.controls.nombreTecnico.errors?.minlength" class="caption ng-invalid">
+              Debe contener minimo 3
+            </span>
+            <span *ngIf="formGroup.controls.nombreTecnico.errors?.minlength" class="caption ng-invalid">
+              Debe contener maximo 100
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.2 Subpartida:</label>
+          <div class="icon-group">
+            <input placeholder="Subpartida" type="number" formControlName="subpartida" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la subpartida arancelaria por la cual 
+                  desea registrar su producto (Decreto 2153 de 2016 Arancel de 
+                  Aduanas)">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.subpartida.invalid && (formGroup.controls.subpartida.dirty || formGroup.controls.subpartida.touched)">
+            <span *ngIf="formGroup.controls.subpartida.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.3 País Origen:</label>
+          <div class="icon-group">
+            <input placeholder="País Origen" type="text" formControlName="paisOrigen" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el país donde se producen los materiales 
+                  extranjeros.">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.paisOrigen.invalid && (formGroup.controls.paisOrigen.dirty || formGroup.controls.paisOrigen.touched)">
+            <span *ngIf="formGroup.controls.paisOrigen.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.4 País Procedencia:</label>
+          <div class="icon-group">
+            <input placeholder="País Procedencia" type="text" formControlName="paisProcedencia" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el país de embarque del material 
+              extranjero. Si el material extranjero es comprado en Colombia, pero de 
+              origen extranjero debe indicarse país de procedencia Colombia.">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.paisProcedencia.invalid && (formGroup.controls.paisProcedencia.dirty || formGroup.controls.paisProcedencia.touched)">
+            <span *ngIf="formGroup.controls.paisProcedencia.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.5 Unidad de Medida:</label>
+          <div class="icon-group">
+            <input placeholder="Unidad de Medida" type="text" formControlName="unidadMedida" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip=" Se entiende como la medida en la que se 
+                  comercializa el producto a registrar (Ejemplo: Kilo, unidad, Tonelada, 
+                  litro, etc.), teniendo en cuenta la presentación del mismo. Se debe tener 
+                  en cuenta como base de cálculo para los consumos de los materiales 
+                  nacionales y/o extranjeros utilizados en la fabricación del producto a 
+                  registrar. Si no selecciona una de las listadas, el sistema la registrará 
+                  como una nueva unidad de medida. ">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.unidadMedida.invalid && (formGroup.controls.unidadMedida.dirty || formGroup.controls.unidadMedida.touched)">
+            <span *ngIf="formGroup.controls.unidadMedida.errors?.required" class="caption ng-invalid">
+              Campo obligatorio
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.6 Cantidad:</label>
+          <div class="icon-group">
+            <input placeholder="----.------" type="number" formControlName="cantidad" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip=" Consumo de material extranjero utilizado para la 
+              producción de una unidad comercial de producto diligenciado en 2.4">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.cantidad.invalid && (formGroup.controls.cantidad.dirty || formGroup.controls.cantidad.touched)">
+            <span class="caption ng-invalid">
+              Formato invalido
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="p-grid">
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.7 Valor CIF (Col$):</label>
+          <div class="icon-group">
+            <input placeholder="----.--" type="number" formControlName="valorCif" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip=" Es el valor por una unidad de producto del 
+                material importado según cantidad y se obtiene de las respectivas 
+                declaraciones de importación. Escribe el valor en pesos colombianos. 
+                Para los valores decimales se debe diligenciar coma(,) y para miles no 
+                incluir ni puntos ni comas, el sistema lo asigna automáticamente.">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.valorCif.invalid && (formGroup.controls.valorCif.dirty || formGroup.controls.valorCif.touched)">
+            <span class="caption ng-invalid">
+              Formato invalido
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-6">
+        <div class="form-group">
+          <label>4.8 Valor Planta (Col$):</label>
+          <div class="icon-group">
+            <input placeholder="---.--" type="number" formControlName="valorPlanta" />
+            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip=" Es el valor de los materiales extranjeros 
+              por una unidad de producto teniendo en cuenta los costos de 
+              nacionalización, transporte, etc. Para que estos lleguen a la planta de 
+              producción. Para los valores decimales se debe diligenciar coma(,) y para miles no incluir ni puntos ni comas, el sistema lo asigna 
+              automáticamente. ">
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="formGroup.controls.valorPlanta.invalid && (formGroup.controls.valorPlanta.dirty || formGroup.controls.valorPlanta.touched)">
+            <span class="caption ng-invalid">
+              Formato invalido
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button style="padding-right: 10px;" mat-button mat-dialog-close>Cancelar</button>
-  <button mat-button [mat-dialog-close]="form.value" [disabled]="!form.valid" cdkFocusInitial>Guardar</button>
+  <button class="outlined" style="margin-right: 20px;" mat-dialog-close>CANCELAR</button>
+  <button [mat-dialog-close]="formGroup.value" [disabled]="!formGroup.valid" cdkFocusInitial>GUARDAR</button>
 </mat-dialog-actions>

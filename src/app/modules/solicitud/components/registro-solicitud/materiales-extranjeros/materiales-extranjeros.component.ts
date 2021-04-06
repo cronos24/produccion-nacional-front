@@ -13,57 +13,38 @@ import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.n
   styleUrls: ['./materiales-extranjeros.component.scss'],
 })
 export class MaterialesExtranjerosComponent implements OnInit {
-  public form: FormGroup;
+
+  public formGroup: FormGroup;
+
   constructor(
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: IMatExtranjerosNal
+    @Inject(MAT_DIALOG_DATA) public data: IMatExtranjerosNal,
+    private formBuilder: FormBuilder
   ) {
+  }
+
+  ngOnInit(): void {
     this.crearFormulario();
-    if (data) {
-      setTimeout(() => {
-        this.actulizarFormulario(data);
-      }, 500);
+    if (this.data) {
+      this.actulizarFormulario(this.data);
     }
   }
 
-  ngOnInit(): void {}
-
   private crearFormulario(): void {
-    this.form = this.fb.group({
+    this.formGroup = this.formBuilder.group({
       id: [''],
-      nombreTecnico: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ],
-      ],
-      subpartida: ['', [Validators.required]],
+      nombreTecnico: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      subpartida: [null, [Validators.required]],
       paisOrigen: ['', [Validators.required]],
       paisProcedencia: ['', [Validators.required]],
-      undMedida: [
-        '',
-        [Validators.required, Validators.min(3), Validators.maxLength(50)],
-      ],
-      cantidad: [
-        '',
-        [Validators.required, mayorACeroValidator, decimalValidator(3)],
-      ],
-      valorCif: [
-        '',
-        [Validators.required, mayorACeroValidator, decimalValidator(2)],
-      ],
-      valorPlanta: [
-        '',
-        [Validators.required, mayorACeroValidator, decimalValidator(2)],
-      ],
-      verbo: ['POST'],
+      unidadMedida: ['', [Validators.required]],
+      cantidad: ['', [Validators.required, mayorACeroValidator, decimalValidator(3)]],
+      valorCif: ['', [Validators.required, mayorACeroValidator, decimalValidator(2)]],
+      valorPlanta: ['', [Validators.required, mayorACeroValidator, decimalValidator(2)]]
     });
   }
 
   private actulizarFormulario(data: IMatExtranjerosNal): void {
-    this.form.setValue({ ...data });
-    this.form.updateValueAndValidity();
+    this.formGroup.setValue({ ...data });
   }
+  
 }

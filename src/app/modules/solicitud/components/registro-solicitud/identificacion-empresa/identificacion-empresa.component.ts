@@ -94,7 +94,7 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
     }
   }
 
-  eliminarPlanta(id: any, index) {
+  public eliminarPlanta(id: any, index): void {
     this.identificacionEmpresaService.delete(id).subscribe(() => {
       this.plantas.splice(index, 1);
     });

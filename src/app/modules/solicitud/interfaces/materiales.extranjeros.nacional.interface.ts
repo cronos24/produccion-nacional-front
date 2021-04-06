@@ -8,5 +8,4 @@ export interface IMatExtranjerosNal {
   cantidad?: string;
   valorCif?: number;
   valorPlanta?: number;
-  verbo: 'PUT' | 'DELETE' | 'POST';
 }

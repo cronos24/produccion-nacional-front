@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
 import { SolicitudService } from '../../../services/solicitud.service';
@@ -61,11 +61,12 @@ export class RegistroSolicitudComponent extends FormGeneric {
   }
 
   public isActive(step: number) {
+    const criterio = (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value;
     switch (step) {
-      case 8:
-        return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesProcesoProductivo';
       case 4:
-        return (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value == 'bienesElaboradosNacionales';
+        return criterio && criterio != 'bienesElaboradosNacionales';
+      case 8:
+        return criterio == 'bienesProcesoProductivo';
       default:
         return true;
     }
@@ -103,6 +104,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
         criterio: ['', Validators.required],
         origenInsumo: ['']
       }),
+      materialesExtranjerosNacionales: new FormArray([], Validators.required),
       caracteristicasTransformacion: this.formBuilder.group({
         descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
       }),
