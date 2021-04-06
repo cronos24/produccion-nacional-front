@@ -1,0 +1,80 @@
+<div *ngIf="anidado">
+    <div class="alert contenedor-adjuntos" [formGroup]="adjuntoFormGroup">
+        <div class="seleccionar-archivo">
+            <label for="input-file"> SELECCIONAR ARCHIVO </label>
+            <input type="file" id="input-file" formControlName="archivo"
+                [disabled]="adjuntoFormGroup.controls.archivo.value" (change)="subirArchivo($event)"
+                accept="application/pdf">
+        </div>
+        <div class="body-uno">
+            {{ adjuntoFormGroup.controls.archivo.value ? archivoActual.name : 'Ningun archivo seleccionado.'}}
+        </div>
+        <div class="texto-error body-uno" *ngIf="errorTamano != true">
+            Únicamente archivos con extensión pdf de tamaño máximo de 15MB
+        </div>
+        <div class="texto-error body-uno" *ngIf="errorTamano">
+            El archivo supera los 5MB.
+        </div>
+        <div *ngIf="data.incluirDescripcion == true" class="body-uno">
+            Descripcion*
+            <input type="text" formControlName="descripcion" placeholder="Descripcion(Máximo 50 caracteres)">
+            <div class="texto-error" *ngIf="mostrarErrorDescripcion">
+                Este campo es requerido
+            </div>
+        </div>
+        <div *ngIf="anidado == false" class="botones">
+            <button class="cancelar" (click)="dialogRef.close()">CANCELAR</button>
+            <button [disabled]="adjuntoFormGroup.invalid" (click)="adjuntarArchivo();">{{labelConfirmar}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!anidado">
+    s
+    <div class="alert contenedor-adjuntos" [formGroup]="adjuntoFormGroup">
+        <ng-container *ngTemplateOutlet="textoTamano"></ng-container>
+        <div>
+            <div>
+                <div class="seleccionar-archivo">
+                    <label for="input-file"> SELECCIONAR ARCHIVO </label>
+                    <input type="file" id="input-file" formControlName="archivo"
+                        [disabled]="adjuntoFormGroup.controls.archivo.value" (change)="subirArchivo($event)"
+                        accept="application/pdf">
+                </div>
+                <div class="body-uno">
+                    {{ adjuntoFormGroup.controls.archivo.value ? archivoActual.name : 'Ningun archivo seleccionado.'}}
+                </div>
+                <ng-container *ngTemplateOutlet="textoErrorTamano"></ng-container>
+            </div>
+            <div>
+
+                <ng-container *ngTemplateOutlet="descripcion"></ng-container>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<ng-template #textoTamano>
+    <div class="texto-error body-uno" *ngIf="errorTamano != true">
+        Únicamente archivos con extensión pdf de tamaño máximo de 5MB
+    </div>
+</ng-template>
+
+<ng-template #textoErrorTamano>
+    <div class="texto-error body-uno" *ngIf="errorTamano">
+        El archivo supera los 5MB.
+    </div>
+</ng-template>
+
+<ng-template #descripcion>
+    <div *ngIf="data.incluirDescripcion == true || mostrarErrorDescripcion" class="body-uno">
+        Descripcion*
+        <input type="text" formControlName="descripcion" placeholder="Descripcion(Máximo 50 caracteres)">
+        <div class="texto-error" *ngIf="mostrarErrorDescripcion">
+            Este campo es requerido
+        </div>
+    </div>
+</ng-template>

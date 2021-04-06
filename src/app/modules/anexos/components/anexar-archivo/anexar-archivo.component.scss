@@ -1,0 +1,40 @@
+.contenedor-adjuntos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    div {
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+    .seleccionar-archivo {
+        label {
+            color: #3366cc;
+            border: 1px solid #3366cc;
+            border-radius: 25px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        label:hover {
+            color: #ffffff;
+            background: #3366cc;
+        }
+        input {
+            visibility: hidden;
+            position: absolute;
+        }
+    }
+
+    .texto-error {
+        color: #A80521;
+        font-weight: bold;
+    }
+
+    .botones {
+        display: flex;
+        justify-content: space-evenly;
+        button {
+            width: 40%;
+        }
+    }
+}

@@ -13,6 +13,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { AnexosModule } from '../anexos/anexos.module';
 import { HeaderModule } from '../header/header.module';
 import { SharedModule } from '../shared/shared.module';
 import { AdjuntarArchivoComponent } from './components/adjuntar-archivo/adjuntar-archivo.component';
@@ -88,7 +89,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     SolicitudRoutingModule,
     TableModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    AnexosModule
   ],
   providers: [
     {

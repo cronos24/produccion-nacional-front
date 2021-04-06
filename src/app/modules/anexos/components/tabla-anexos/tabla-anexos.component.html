@@ -1,0 +1,73 @@
+<div class="table">
+    <div class="title">
+        <h3 class="headline-m" *ngIf="anexoEmbebido">Anexos</h3>
+        <div class="sub-title">
+            <button *ngIf="anexoEmbebido" (click)="nuevoAnexo()">NUEVO</button>
+            <span class="spacer"></span>
+            <div class="input-group">
+                <input placeholder="Buscar" type="text" [(ngModel)]="busqueda" (ngModelChange)="onBuscar()" />
+                <mat-icon svgIcon="buscar-circular-negativo"></mat-icon>
+            </div>
+        </div>
+    </div>
+    <p-table [value]="adjuntos" [customSort]="true" [lazy]="true" (onLazyLoad)="onSort($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="archivo">
+                    <span class="headline-xs --dark-primary-color">
+                        Archivo <p-sortIcon field="archivo"></p-sortIcon>
+                    </span>
+                </th>
+                <th pSortableColumn="descripcion">
+                    <span class="headline-xs --dark-primary-color">
+                        Descripcion <p-sortIcon field="descripcion"></p-sortIcon>
+                    </span>
+                </th>
+                <th pSortableColumn="fechaPresentacion">
+                    <span class="headline-xs --dark-primary-color">
+                        Fecha de presentación <p-sortIcon field="fechaPresentacion"></p-sortIcon>
+                    </span>
+                </th>
+                <th>
+                    <span class="headline-xs --dark-primary-color">
+                        Eliminar
+                    </span>
+                </th>
+                <th>
+                    <span class="headline-xs --dark-primary-color">
+                        Descargar
+                    </span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-anexo let-index="rowIndex">
+            <tr>
+                <td class="center body-uno">
+                   <a (click)="openFile()"> {{anexo.archivo}} </a> 
+                </td>
+                <td class="center body-uno">
+                    {{anexo.descripcion}}
+                </td>
+                <td class="center body-uno">
+                    {{anexo.fecha}}
+                </td>
+                <td class="center body-uno">
+                    <mat-icon class="pointer" 
+                        svgIcon="papelera-positivo" (click)="onEliminarAnexo(anexo)">
+                    </mat-icon>
+                </td>
+                <td class="center body-uno">
+                    
+                    <mat-icon class="pointer" 
+                        svgIcon="descargar" (click)="onDescargarAnexo(anexo)">
+                    </mat-icon>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <!-- <div *ngIf="solicitudes.length==0">
+        <p class="content body-uno">No se encontraron registros coincidentes</p>
+    </div>
+    <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="pagina.registrosTotales"
+        (onPageChange)="onPageChange($event)"></p-paginator> -->
+</div>
