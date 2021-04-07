@@ -99,14 +99,16 @@
 </div>
 <hr />
 
-<div class="p-grid">
-    <div class="p-col">
-        <div class="form-group">
-            <label>Valor total unidad producto (COP):</label>
-            <input placeholder="----.--" type="number" [(ngModel)]="sumaValorPlanta" disabled />
+<form [formGroup]="getChildFormGroup()">
+    <div class="p-grid">
+        <div class="p-col">
+            <div class="form-group">
+                <label>5.6 Valor total unidad producto (COP):</label>
+                <input placeholder="----.--" type="number" formControlName="valorTotalUnidadProducto" disabled />
+            </div>
         </div>
     </div>
-</div>
+</form>
 
 <ng-template #eliminarTemplate let-solicitud>
     <div class="modal warning">

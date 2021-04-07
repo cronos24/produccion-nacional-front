@@ -79,7 +79,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
     }
   }
 
-  public onNewAdjunto(){
+  public onNewAdjunto() {
     this.tablaAnexos.getAnexos();
   }
 
@@ -116,7 +116,18 @@ export class RegistroSolicitudComponent extends FormGeneric {
         criterio: ['', Validators.required],
         origenInsumo: ['']
       }),
-      materialesExtranjerosNacionales: new FormArray([], Validators.required),
+      materialesExtranjerosNacionales: this.formBuilder.group({
+        valorTotalCif: [],
+        valorTotalPlanta: []
+      }),
+      materialesNacionales: this.formBuilder.group({
+        valorTotalUnidadProducto: []
+      }),
+      costosValorFabrica: this.formBuilder.group({
+        valorTotalUnidadProducto: [],
+        costosDirectosFabrica: ['', [Validators.required, Validators.min(1), Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]],
+        valorTransaccion: ['', [Validators.required, Validators.min(1), Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]]
+      }),
       caracteristicasTransformacion: this.formBuilder.group({
         descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
       }),

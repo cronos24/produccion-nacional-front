@@ -1,12 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { saveAs } from 'file-saver';
 import { IPagina } from 'src/app/interfaces/pagina.interface';
-import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
 import { MaterialService } from '../../../services/material.service';
 import { FormGeneric } from '../clases/form-generic';
-import { MaterialesExtranjerosComponent } from '../materiales-extranjeros/materiales-extranjeros.component';
-import { saveAs } from 'file-saver';
 import { MaterialNacionalComponent } from '../material-nacional/material-nacional.component';
 
 @Component({
@@ -73,7 +71,6 @@ export class MaterialesNacionalesComponent extends FormGeneric {
 
   public archivo: any;
   public materiales: any[] = [];
-  public sumaValorPlanta: any = 0;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -130,7 +127,7 @@ export class MaterialesNacionalesComponent extends FormGeneric {
 
   public eliminarMaterial(id, index): void {
     this.materialService.delete(id).subscribe(() => {
-      this.materiales.splice(index, 1);
+      this.getMateriales();
     });
   }
 
@@ -205,7 +202,7 @@ export class MaterialesNacionalesComponent extends FormGeneric {
           sumaValorPlanta += material.valorPlanta;
         }
       })
-      this.sumaValorPlanta = sumaValorPlanta.toFixed(2);
+      this.setChildFormGroupValue('valorTotalUnidadProducto', sumaValorPlanta.toFixed(2));
     });
   }
 

@@ -72,15 +72,15 @@
                 </mat-expansion-panel-header>
                 <app-materiales-nacionales [formGroup]="formGroup"></app-materiales-nacionales>
             </mat-expansion-panel>
-            <!--   <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-costos-valor-fabrica></app-costos-valor-fabrica>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-costos-valor-fabrica [formGroup]="formGroup"></app-costos-valor-fabrica>
+            </mat-expansion-panel>
+            <!--     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)

@@ -1,11 +1,11 @@
-<div class="p-grid" [formGroup]="costosValorFabricaGroup">
+<div class="p-grid" [formGroup]="getChildFormGroup()">
     <div class="p-col">
         <div class="form-group">
             <label>6.1 Total Costos Materiales Nacionales u/comercial (COP):</label>
             <br>
             <div class="icon-group">
-                <input placeholder="0,00" type="number" formControlName="valorTotalUnidadProducto" readonly />
-                <mat-icon svgIcon="informacion-circular-negativo"
+                <input placeholder="0,00" type="number" formControlName="valorTotalUnidadProducto" disabled />
+                <mat-icon class="information" svgIcon="informacion-circular-negativo"
                     matTooltip="Valor perteneciente al numeral 5.6 Valor Total Unidad Producto (COP).">
                 </mat-icon>
             </div>
@@ -15,20 +15,24 @@
         <div class="form-group">
             <label>6.2 Otros Costos Directos de Fábrica u/comercial (No Incluye Materias Primas) (COP):</label>
             <div class="icon-group">
-                <input placeholder="0,00" type="number" formControlName="costosDirectosFabrica"/>
-                <mat-icon svgIcon="informacion-circular-negativo"
+                <input placeholder="0,00" type="number" formControlName="costosDirectosFabrica" />
+                <mat-icon class="information" svgIcon="informacion-circular-negativo"
                     matTooltip="Costos implicados en la produccion del bien que no estan diligenciados.  No incluye materiales nacionales ni extranjeros.">
                 </mat-icon>
             </div>
-            <div class="error-input" *ngIf="(costosValorFabrica.costosDirectosFabrica.errors?.required && 
-                                            costosValorFabrica.costosDirectosFabrica.touched) || 
-                                            costosValorFabrica.costosDirectosFabrica.errors?.pattern">
-                El campo es invalido por las siguientes razones: <br>
-                <span *ngIf="costosValorFabrica.costosDirectosFabrica.errors?.required">
-                    Es vacio o contiene caracteres invalidos.
+            <div
+                *ngIf="getChildFormGroupControl('costosDirectosFabrica').invalid && (getChildFormGroupControl('costosDirectosFabrica').dirty || getChildFormGroupControl('costosDirectosFabrica').touched)">
+                <span *ngIf="getChildFormGroupControl('costosDirectosFabrica').errors?.required"
+                    class="caption ng-invalid">
+                    Campo obligatorio
                 </span>
-                <span *ngIf=" costosValorFabrica.costosDirectosFabrica.errors?.pattern">
-                    Posee mas de 2 decimales.
+                <span *ngIf="getChildFormGroupControl('costosDirectosFabrica').errors?.min"
+                    class="caption ng-invalid">
+                    Debe ser mayor a 0
+                </span>
+                <span *ngIf="getChildFormGroupControl('costosDirectosFabrica').errors?.pattern"
+                    class="caption ng-invalid">
+                    Formato invalido
                 </span>
             </div>
         </div>
@@ -38,21 +42,24 @@
             <label>6.3 VT Valor Transacción (Precios ex Fabrica o ex Planta) (COP):</label>
             <br>
             <div class="icon-group">
-                <input placeholder="0,00" type="number" formControlName="valorTransaccion"/>
-                <mat-icon svgIcon="informacion-circular-negativo"
+                <input placeholder="0,00" type="number" formControlName="valorTransaccion" (change)="onChangeValorTransaccion($event.target.value)" />
+                <mat-icon class="information" svgIcon="informacion-circular-negativo"
                     matTooltip="Debe ser mayor a la sumatoria de 4.9, 6.1, 6.2, ya que este incluye, adicionalmente, los costos indirectos de producción (por ejemplo: impuestos, publicidad, mercadeo, transporte etc.). ">
                 </mat-icon>
             </div>
-            <div class="error-input" *ngIf="costosValorFabrica.valorTransaccion.errors && costosValorFabrica.valorTransaccion.touched ">
-                El campo es invalido por las siguientes razones: 
-                <span *ngIf="costosValorFabrica.valorTransaccion.errors?.required">
-                    <br> Es vacio o contiene caracteres invalidos.
+            <div
+                *ngIf="getChildFormGroupControl('valorTransaccion').invalid && (getChildFormGroupControl('valorTransaccion').dirty || getChildFormGroupControl('valorTransaccion').touched)">
+                <span *ngIf="getChildFormGroupControl('valorTransaccion').errors?.required"
+                    class="caption ng-invalid">
+                    Campo obligatorio
                 </span>
-                <span *ngIf="costosValorFabrica.valorTransaccion.errors?.pattern">
-                    <br> Posee mas de 2 decimales.
+                <span *ngIf="getChildFormGroupControl('valorTransaccion').errors?.min"
+                    class="caption ng-invalid">
+                    Debe ser mayor a 0
                 </span>
-                <span *ngIf="costosValorFabrica.valorTransaccion.errors?.min">
-                    <br> Debe ser mayor a {{valorCalculadoMasCostosProduccion}}
+                <span *ngIf="getChildFormGroupControl('valorTransaccion').errors?.pattern"
+                    class="caption ng-invalid">
+                    Formato invalido
                 </span>
             </div>
         </div>

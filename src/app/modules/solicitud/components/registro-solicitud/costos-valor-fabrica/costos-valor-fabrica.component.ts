@@ -1,37 +1,47 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
+import { FormGeneric } from '../clases/form-generic';
 
 @Component({
   selector: 'app-costos-valor-fabrica',
   templateUrl: './costos-valor-fabrica.component.html',
   styleUrls: ['./costos-valor-fabrica.component.scss']
 })
-export class CostosValorFabricaComponent implements OnInit {
+export class CostosValorFabricaComponent extends FormGeneric implements OnInit {
 
-  @Input() valorTotalUnidadProducto: number = 535987;
-  @Input() valorCalculadoMasCostosProduccion: number = 20000;
+  @Input() protected formGroup: FormGroup;
+  protected formGroupName: string = 'costosValorFabrica';
 
-
-  public costosValorFabricaGroup: FormGroup = this.formBuilder.group({
-    valorTotalUnidadProducto: [, Validators.required],
-    costosDirectosFabrica: [, [Validators.required, Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]],
-    valorTransaccion: [, 
-      [
-        Validators.required,
-        Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/),
-        Validators.min(this.valorCalculadoMasCostosProduccion)]]
-  });
-
-  constructor(
-    public formBuilder: FormBuilder
-  ) { }
-
-  ngOnInit(): void {
-    this.costosValorFabricaGroup.controls.valorTotalUnidadProducto.setValue( this.valorTotalUnidadProducto );
+  constructor(private dialog: MatDialog) {
+    super();
   }
 
-  public get costosValorFabrica() {
-    return this.costosValorFabricaGroup.controls;
+  ngOnInit(): void {
+    (this.getFatherFormGroupControl('materialesNacionales') as FormGroup).controls.valorTotalUnidadProducto.valueChanges.subscribe((valorTotalUnidadProducto: any) => {
+      this.setChildFormGroupValue('valorTotalUnidadProducto', valorTotalUnidadProducto);
+    });
+  }
+
+  public onChangeValorTransaccion(value): void {
+    let suma = +this.getChildFormGroupValue('valorTotalUnidadProducto') +
+      +this.getChildFormGroupValue('costosDirectosFabrica') +
+      +(this.getFatherFormGroupControl('materialesExtranjerosNacionales') as FormGroup).controls.valorTotalPlanta.value;
+    console.log('onChange', value);
+    console.log('suma', suma);
+
+    if (value < suma) {
+      this.dialog.open(AlertComponent, {
+        data: {
+          type: 'warning',
+          title: 'Atención',
+          description: 'Verifique que 6.1 y 6.2 no estan vacios, y que el<br/>valor de 6.3 es mayor a la suma de:<br/>6.1 + 6.2 + 4.10',
+          acceptButton: 'REGRESAR'
+        }
+      });
+      this.setChildFormGroupValue('valorTransaccion', null);
+    }
   }
 
 }

@@ -108,20 +108,22 @@
 </div>
 <hr />
 
-<div class="p-grid">
-    <div class="p-col">
-        <div class="form-group">
-            <label>4.9 Sumatoria de costos de Materiales importados (COP): Valor Total CIF (COP):</label>
-            <input placeholder="----.--" type="number" [(ngModel)]="sumaCif" disabled />
+<form [formGroup]="getChildFormGroup()">
+    <div class="p-grid">
+        <div class="p-col">
+            <div class="form-group">
+                <label>4.9 Sumatoria de costos de Materiales importados (COP): Valor Total CIF (COP):</label>
+                <input placeholder="----.--" type="number" formControlName="valorTotalCif" disabled />
+            </div>
+        </div>
+        <div class="p-col">
+            <div class="form-group">
+                <label>4.10 Valor Total Planta (COP):</label>
+                <input placeholder="----.--" type="number" formControlName="valorTotalPlanta" disabled />
+            </div>
         </div>
     </div>
-    <div class="p-col">
-        <div class="form-group">
-            <label>4.10 Valor Total Planta (COP):</label>
-            <input placeholder="----.--" type="number" [(ngModel)]="sumaValorPlanta" disabled />
-        </div>
-    </div>
-</div>
+</form>
 
 <ng-template #eliminarTemplate let-solicitud>
     <div class="modal warning">

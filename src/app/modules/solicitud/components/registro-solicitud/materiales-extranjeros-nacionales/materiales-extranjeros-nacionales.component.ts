@@ -90,8 +90,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
 
   public archivo: any;
   public materiales: any[] = [];
-  public sumaCif: string;
-  public sumaValorPlanta: any = 0;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -148,7 +146,7 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
 
   public eliminarMaterial(id, index): void {
     this.materialService.delete(id).subscribe(() => {
-      this.materiales.splice(index, 1);
+      this.getMateriales();
     });
   }
 
@@ -224,9 +222,9 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
           sumaCif += material.valorCif;
           sumaValorPlanta += material.valorPlanta;
         }
-      })
-      this.sumaCif = sumaCif.toFixed(2);
-      this.sumaValorPlanta = sumaValorPlanta.toFixed(2);
+      });
+      this.setChildFormGroupValue('valorTotalCif', sumaCif.toFixed(2));
+      this.setChildFormGroupValue('valorTotalPlanta', sumaValorPlanta.toFixed(2));
     });
   }
 
