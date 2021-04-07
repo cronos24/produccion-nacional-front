@@ -72,7 +72,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
     switch (step) {
       case 4:
         return criterio && criterio != 'bienesElaboradosNacionales';
-      case 6:
+      case 7:
         const costosDirectosFabrica = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].value;
         const valorTransaccion = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].value;
 
@@ -229,6 +229,10 @@ export class RegistroSolicitudComponent extends FormGeneric {
         break;
     }
 
+    solicitud.totalOtros = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].value;
+    solicitud.totalTransaccion = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].value;
+
+
     return solicitud;
   }
 
@@ -306,6 +310,9 @@ export class RegistroSolicitudComponent extends FormGeneric {
       default:
         break;
     }
+
+    (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].setValue(solicitud.totalOtros);
+    (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].setValue(solicitud.totalTransaccion);
 
     solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').format('DD/MM/YYYY');
     (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['fecha'].setValue(solicitud.auditoria.fechaCreacionFormateada);

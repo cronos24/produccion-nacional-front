@@ -194,6 +194,33 @@
             font-size: 16px;
         }
 
+        .p-inline-message {
+            margin: 0;
+            width: 100%;
+            .p-inline-message-wrapper {
+                padding: 20px 32px;
+            }
+            .p-inline-message-text {
+                font-family: $font-monserrat;
+                font-weight: 700;
+                font-size: 24px;
+                width: 95%;
+                padding-left: 32px;
+            }
+            &.p-inline-message-error {
+                width: 98%;
+                background: unset;
+                box-shadow: 0 0 0 1px $error-color;
+                color: $error-color;
+                .p-inline-message-icon {
+                    margin: 0px;
+                    width: 42px;
+                    height: 42px;
+                    content: url("./assets/icons/informacion-circular-negativo-fondo-rojo.svg");
+                }
+            }
+        }
+
         .p-message {
             .p-message-wrapper {
                 padding: 10px 32px;

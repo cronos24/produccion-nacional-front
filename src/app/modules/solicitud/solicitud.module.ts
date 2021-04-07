@@ -43,6 +43,7 @@ import { DianService } from './services/dian/dian.service';
 import { DivipolaService } from './services/divipola/divipola.service';
 import { MaterialService } from './services/material.service';
 import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
+import { MaquilaService } from './services/registro-solicitud/maquila/maquila.service';
 import { SolicitudService } from './services/solicitud.service';
 import { SubpartidaPorTipoService } from './services/subpartida/subpartida-por-tipo.service';
 import { SubpartidaService } from './services/subpartida/subpartida.service';
@@ -103,6 +104,7 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     DivipolaService,
     IdentificacionEmpresaService,
     MaterialService,
+    MaquilaService,
     SolicitudService,
     SubpartidaPorTipoService,
     SubpartidaService,
