@@ -150,8 +150,7 @@
                 <label>2.7 Sector Económico:</label>
                 <select formControlName="sectorEconomico" [attr.disabled]="true">
                     <option hidden [value]="null">Sector Económico</option>
-                    <option value="value2">Value 2</option>
-                    <option value="value3">Value 3</option>
+                    <option *ngFor="let item of sectores;" [value]="item.sectorEconomico" >{{item.sectorEconomico}}</option>
                 </select>
             </div>
         </div>
