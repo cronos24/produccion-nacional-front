@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
+import { IRespuesta } from 'src/app/interfaces/respuesta.interface';
+import { DianService } from '../../../services/dian/dian.service';
 import { SubpartidaPorTipoService } from '../../../services/subpartida/subpartida-por-tipo.service';
 import { SubpartidaService } from '../../../services/subpartida/subpartida.service';
 import { FormGeneric } from '../clases/form-generic';
@@ -18,25 +20,32 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
   public subpartidas: any[] = [];
   public totalSubpartidas: any[] = [];
   public subpartidaSeleccionada: any;
+  public unidadesMedidaDian: any = this.dianService.obtenerUnidadesDeMedida();
   public constructor(private subpartidaService: SubpartidaService,
-    private subpartidaPorTipoService: SubpartidaPorTipoService) {
+    private subpartidaPorTipoService: SubpartidaPorTipoService,
+    private dianService: DianService) {
     super();
   }
 
   public messagesSubpartidaArancelaria: Message[] = [
-    { severity: 'info', summary: '000 Descripcion de la subpartida' },
+    {
+      severity: 'info', summary: ''
+    },
   ];
 
   public messagesCodigoNumericoUnico: Message[] = [
     {
       severity: 'info',
-      summary: '000 Descripcion de la Codigo Numerico Unico (CNU)',
+      summary: '',
     },
   ];
 
   ngOnInit(): void {
     this.totalSubpartidas = this.subpartidaService.getSubpartida();
     this.getFatherFormGroupControl('tipoFormulario').valueChanges.subscribe((tipoFormulario: any) => {
+      this.messagesSubpartidaArancelaria = [];
+      this.messagesCodigoNumericoUnico = [];
+      this.getChildFormGroupControl('subpartida')?.setValue(null);
       this.getChildFormGroupControl('descripcionMotoparte').setValidators([]);
       this.getChildFormGroupControl('numeroMotoparte').setValidators([]);
       this.getChildFormGroupControl('codigoNumericoUnico').setValidators([]);
@@ -71,19 +80,46 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
   }
 
   public obtenerSubpartidasFiltradas(tipo: string): void {
-    // this.subpartidaPorTipoService.get({ queryParams: { general: tipo } }).subscribe((data: IRespuesta<any>) => {
-    //   if (data.codigo == 200) {
-    //     this.subpartidas = [];
-    //     data.respuesta.datos.forEach(subpartidaPorTipo => {
-    //       this.totalSubpartidas.forEach(subpartida => {
-    //         if (subpartidaPorTipo.id == subpartida['numero-subpartida']) {
-    //           let temporal: any = subpartida;
-    //           temporal.cnus = subpartidaPorTipo.cnus;
-    //           this.subpartidas.push(temporal);
-    //         }
-    //       });
-    //     });
-    //   }
-    // });
+    this.subpartidaPorTipoService.get({ queryParams: { general: tipo } }).subscribe((data: IRespuesta<any>) => {
+      if (data.codigo == 200) {
+        this.subpartidas = [];
+        data.respuesta.datos.forEach(subpartidaPorTipo => {
+          this.totalSubpartidas.forEach(subpartida => {
+            if (subpartidaPorTipo.id == subpartida['numero-subpartida']) {
+              let temporal: any = subpartida;
+              temporal.cnus = subpartidaPorTipo.cnus;
+              this.subpartidas.push(temporal);
+            }
+          });
+        });
+        console.log(this.subpartidas);
+      }
+    });
+  }
+
+  onChangeSubpartida(): void {
+    let indexSubpartida: number = this.subpartidas.findIndex((val: any) => val['numero-subpartida'] == this.getChildFormGroupControl('subpartida')?.value)
+    this.subpartidaSeleccionada = this.subpartidas[indexSubpartida];
+    console.log(this.subpartidaSeleccionada)
+    this.messagesSubpartidaArancelaria = [
+      {
+        severity: 'info', summary:
+          `${this.subpartidas[indexSubpartida]?.['numero-subpartida']}
+        ${this.subpartidas[indexSubpartida]?.descripcion}`
+      },
+    ];
+    this.messagesCodigoNumericoUnico = [];
+  }
+
+  onChangeCNU(): void {
+    let indexCNU: number = this.subpartidaSeleccionada.cnus.findIndex((val: any) => val['id'] == this.getChildFormGroupControl('codigoNumericoUnico')?.value);
+    this.getChildFormGroupControl('nombreTecnico')?.setValue(this.subpartidaSeleccionada.cnus[indexCNU].nombreTecnico);
+    this.messagesCodigoNumericoUnico = [
+      {
+        severity: 'info', summary:
+          `${this.subpartidaSeleccionada.cnus[indexCNU]?.['id']}
+        ${this.subpartidaSeleccionada.cnus[indexCNU]?.descripcion}`
+      },
+    ];
   }
 }

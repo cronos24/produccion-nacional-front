@@ -39,6 +39,7 @@ import { ProcesoProduccionComponent } from './components/registro-solicitud/proc
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
+import { DianService } from './services/dian/dian.service';
 import { DivipolaService } from './services/divipola/divipola.service';
 import { MaterialService } from './services/material.service';
 import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
@@ -105,6 +106,7 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     SolicitudService,
     SubpartidaPorTipoService,
     SubpartidaService,
+    DianService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -12,11 +12,11 @@
             <div class="form-group">
                 <label>2.1 Subpartida Arancelaria:</label>
                 <div class="icon-group">
-                    <select formControlName="subpartida">
+                    <select formControlName="subpartida" (change)="onChangeSubpartida()">
                         <option hidden [value]="null">Subpartida</option>
-                        <!-- <option [value]="subpartida['numero-subpartida']" *ngFor="let subpartida of subpartidas;"> 
+                        <option [value]="subpartida['numero-subpartida']" *ngFor="let subpartida of subpartidas;"> 
                             {{subpartida['numero-subpartida-nomenclatura']}}
-                        </option> -->
+                        </option>
                     </select>
                     <mat-icon
                         *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' || getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas'"
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="p-col" style="margin: auto;">
+        <div class="p-col" style="margin: auto;" *ngIf="messagesSubpartidaArancelaria[0]?.summary != ''">
             <p-messages [value]="messagesSubpartidaArancelaria" [enableService]="false"></p-messages>
         </div>
     </div>
@@ -42,12 +42,12 @@
             <div class="form-group">
                 <label>2.1.1 Código Numérico Único (CNU):</label>
                 <div class="icon-group">
-                    <select formControlName="codigoNumericoUnico">
+                    <select formControlName="codigoNumericoUnico" (change)="onChangeCNU()" 
+                    [attr.disabled]="getChildFormGroupControl('subpartida')?.value ? null : true">
                         <option hidden [value]="null"></option>
-                        
-                        <!-- <option *ngFor="let subpartida of subpartidas;"> 
-                            {{subpartida.id}}
-                        </option> -->
+                        <option [value]="cnu.id" *ngFor="let cnu of subpartidaSeleccionada?.cnus;"> 
+                            {{cnu.id}}
+                        </option>
                     </select>
                     <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Es el que asigna el Ministerio De Comercio Industria Y Turismo a cada uno de los bienes comprendidos en las subpartidas arancelarias establecidas en el artí­culo 3 del decreto 1567.">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="p-col" style="margin: auto;">
+        <div class="p-col" style="margin: auto;" *ngIf="messagesCodigoNumericoUnico[0]?.summary != ''">
             <p-messages [value]="messagesCodigoNumericoUnico" [enableService]="false"></p-messages>
         </div>
     </div>
@@ -92,8 +92,9 @@
                 <div class="icon-group">
                     <select formControlName="unidadComercial">
                         <option hidden [value]="null">Unidad</option>
-                        <option value="1">Value 2</option>
-                        <option value="2">Value 3</option>
+                        <option *ngFor="let unidadMedida of unidadesMedidaDian;" [value]="unidadMedida.id">
+                            {{unidadMedida.valor}}
+                        </option>
                     </select>
                     <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Se entiende como la medida en la que se comercializa el producto a registrar (unidad, kilo, tonelada, litro, etc.), teniendo en cuenta la presentación del mismo.">
