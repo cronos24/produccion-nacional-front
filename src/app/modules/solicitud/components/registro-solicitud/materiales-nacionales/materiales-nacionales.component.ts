@@ -143,7 +143,7 @@ export class MaterialesNacionalesComponent extends FormGeneric {
   }
 
   public seleccionarArchivo(): void {
-    document.getElementById('input-file-2').click();
+    document.getElementById('input-file-excel').click();
   }
 
   public subirArchivo(event: any): void {

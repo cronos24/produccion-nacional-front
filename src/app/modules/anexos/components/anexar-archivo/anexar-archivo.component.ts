@@ -36,7 +36,7 @@ export class AnexarArchivoComponent {
   public subirArchivo(event: any): void {
     this.errorTipo = false;
     this.errorTamano = false;
-    if (event.target.files[0].type == 'application/pdf') {
+    if (event?.target?.files[0]?.type == 'application/pdf') {
       if (event.target.files[0].size <= 5000000) {
         this.archivoActual = event.target.files[0];
         if (this.anidado) {
@@ -80,7 +80,7 @@ export class AnexarArchivoComponent {
     }
   }
 
-  public seleccionarArchivo(): void {
-    document.getElementById('input-file').click();
+  public seleccionarArchivo(id: string): void {
+    document.getElementById(id).click();
   }
 }

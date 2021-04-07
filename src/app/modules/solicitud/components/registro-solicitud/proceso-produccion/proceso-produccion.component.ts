@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AnexarArchivoComponent } from 'src/app/modules/anexos/components/anexar-archivo/anexar-archivo.component';
 import { IPagina } from '../../../../../interfaces/pagina.interface';
 import { DivipolaService } from '../../../services/divipola/divipola.service';
 import { MaquilaService } from '../../../services/registro-solicitud/maquila/maquila.service';
@@ -44,6 +45,7 @@ export class ProcesoProduccionComponent extends FormGeneric {
 
   public constructor(
     private dialog: MatDialog,
+    public dialogRef: MatDialogRef<any>,
     private maquilaService: MaquilaService,
     private divipolaService: DivipolaService
   ) {
@@ -94,4 +96,19 @@ export class ProcesoProduccionComponent extends FormGeneric {
     });
   }
 
+  public onAdjuntarArchivo(): void {
+    
+    this.dialogRef = this.dialog.open(AnexarArchivoComponent, { data: { incluirDescripcion: true }, width: '350px' });
+    this.dialogRef.afterClosed().subscribe((data: any) => {
+      if (data) {
+        let formData = new FormData();
+        formData.append('nombre', data.archivo.name);
+        formData.append('file', data.archivo);
+        // this.anexoService.post(formData).subscribe(() => {
+          // this.messageService.add({ severity: 'success', summary: 'Anexo subido con éxito' });
+        // });
+      }
+    })
+
+  }
 }

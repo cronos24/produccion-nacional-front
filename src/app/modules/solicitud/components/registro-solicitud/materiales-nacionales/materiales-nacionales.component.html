@@ -89,7 +89,7 @@
     </div>
     <div>
         <button class="outlined" (click)="seleccionarArchivo()">SELECCIONAR ARCHIVO</button>
-        <input style="visibility: hidden; position: absolute;" type="file" id="input-file-2"
+        <input style="visibility: hidden; position: absolute;" type="file" id="input-file-excel"
             (change)="subirArchivo($event)" accept=".csv, text/csv">
         <label>
             {{ archivo ? archivo.name : 'Ningun archivo seleccionado.'}}
