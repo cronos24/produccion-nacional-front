@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TablaAnexosComponent } from '../anexos/components/tabla-anexos/tabla-anexos.component';
 import { FormularioPreSolicitudComponent } from './components/formulario-pre-solicitud/formulario-pre-solicitud.component';
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
 import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestro-solicitud.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'listar', pathMatch: 'full' },
       { path: 'listar', component: ListarSolicitudComponent },
       { path: 'pre-solicitud', component: FormularioPreSolicitudComponent },
-      { path: 'registro/:radicado', component: RegistroSolicitudComponent }
+      { path: 'registro/:radicado', component: RegistroSolicitudComponent },
+      { path: 'anexos/:radicado', component: TablaAnexosComponent }
     ]
   }
 ];

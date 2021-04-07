@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { AdjuntarArchivoComponent } from '../../adjuntar-archivo/adjuntar-archivo.component';
 import { InformativoComponent } from '../../informativo/informativo.component';
 import { IPagina } from '../../../../../interfaces/pagina.interface';
 import { ISolicitud } from '../../../interfaces/solicitud.interface';
@@ -61,9 +60,9 @@ export class ProcesoProduccionComponent implements OnInit  {
     }
 
   public onAdjuntarArchivo(): void {
-    this.dialog.open(AdjuntarArchivoComponent, {
+    /*this.dialog.open(AdjuntarArchivoComponent, {
         width: '450px',
-    });
+    });*/
   }
 
   public onMensajeConfirmacion(): void {

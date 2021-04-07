@@ -55,9 +55,55 @@ export class SubpartidaService extends VuceService {
           "nombre": "REGIMEN ADUANERO"
         }
       }
-    },{
+    }, {
+      "numero-subpartida": "9958322200",
+      "numero-subpartida-nomenclatura": "9958.32.22.00",
+      "codigo-complementario": "0",
+      "codigo-suplementario": "0",
+      "descripcion": "- Con un contenido de materias grasas inferior o igual al 1% en peso",
+      "estado": "ACTIVO",
+      "partidas": [
+        {
+          "codigo": "0401",
+          "descripcion": "Leche y nata (crema), sin concentrar, sin adición de azúcar ni otro edulcorante.",
+          "capitulo": {
+            "codigo": "04",
+            "nombre": "Leche y productos lácteos; huevos de ave; miel natural; productos comestibles de origen animal, no expresados ni comprendidos en otra parte",
+            "tipo": "CAPITULO",
+            "seccion": {
+              "codigo": "I",
+              "nombre": "Animales vivos y productos del reino animal",
+              "tipo": "SECCION"
+            }
+          },
+          "partida-relacionada": null
+        }
+      ],
+      "legislaciones": [
+        {
+          "id": 3,
+          "nombre": "DECRETO 2153 DEL 26-DIC-2016 CONGRESO DE COLOMBIA. DIARIO OFICIAL NO.PÁG.",
+          "tipo": "NOMENCLATURA"
+        },
+        {
+          "id": 4,
+          "nombre": "DECRETO 4589 DEL 27-DIC-2006 MINISTERIO DE COMERCIO, INDUSTRIA y TURISMO.DIARIO OFICIAL NO 46494. PÁG. 193",
+          "tipo": "DESCRIPCION"
+        }
+      ],
+      "unidad-fisica": {
+        "id": 222,
+        "codigo": "l",
+        "nombre": "Litro",
+        "estado": "ACTIVO",
+        "tipo-dato-referencia": {
+          "id": 7,
+          "nombre": "REGIMEN ADUANERO"
+        }
+      }
+    }, {
       "numero-subpartida": "0553322200",
-      "numero-subpartida-nomenclatura": "0401.10.00.00",
+      "numero-subpartida-nomenclatura": "0553.32.22.00",
       "codigo-complementario": "0",
       "codigo-suplementario": "0",
       "descripcion": "- Con un contenido de materias grasas inferior o igual al 1% en peso",

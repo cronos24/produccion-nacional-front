@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
+import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-anexos/tabla-anexos.component';
 import { Estado } from '../../../enums/estado.enum';
 import { SolicitudService } from '../../../services/solicitud.service';
 import { FormGeneric } from '../clases/form-generic';
@@ -12,6 +13,8 @@ import { FormGeneric } from '../clases/form-generic';
   styleUrls: ['./registro-solicitud.component.scss']
 })
 export class RegistroSolicitudComponent extends FormGeneric {
+
+  @ViewChild("tablaAnexos") public tablaAnexos: TablaAnexosComponent;
 
   public formGroup: FormGroup;
   protected formGroupName: string;
@@ -74,6 +77,10 @@ export class RegistroSolicitudComponent extends FormGeneric {
       default:
         return true;
     }
+  }
+
+  public onNewAdjunto(){
+    this.tablaAnexos.getAnexos();
   }
 
   private buildFromGroup(): void {

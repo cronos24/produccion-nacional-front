@@ -161,6 +161,13 @@ label.ng-invalid {
   color: $error-color;
 }
 
+a {
+  font-family: $font-worksans;
+  font-weight: 500;
+  font-size: 16px;
+  color: $primary-color-text;
+}
+
 span.ng-invalid {
   color: $error-color;
 }
@@ -352,48 +359,6 @@ hr {
   height: 1px;
 }
 
-input[type="file"]::-webkit-file-upload-button {
-  font-family: $font-worksans;
-  color: $primary-color;
-  background-color: $tertiary-color-text;
-  border-radius: 30px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: none;
-  border-color: $primary-color;
-  cursor: pointer;
-  padding: 0px 15px 0px;
-  outline: none;
-  text-transform: uppercase;
-}
-
-input[type="file"]::file-selector-button {
-  font-family: $font-worksans;
-  color: $primary-color;
-  background-color: $tertiary-color-text;
-  border-radius: 30px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-decoration: none;
-  border-color: $primary-color;
-  cursor: pointer;
-  padding: 0px 15px 0px;
-  outline: none;
-  text-transform: uppercase;
-}
-
-input[type="file"]::-webkit-file-upload-button:hover {
-  background-color: $dark-primary-color;
-  color: $tertiary-color-text;
-}
-
-input[type="file"]::file-selector-button:hover {
-  background-color: $dark-primary-color;
-  color: $tertiary-color-text;
-}
-
 .p-checkbox .p-checkbox-box {
   border-color: $primary-color;
   border-radius: 5px;
@@ -465,7 +430,7 @@ mat-icon {
   &.pointer {
     cursor: pointer;
   }
-  &:focus{
+  &:focus {
     outline: none;
   }
   > svg {
@@ -493,18 +458,18 @@ mat-icon[disabled="true"] {
 .input-group {
   flex-grow: 0.5;
   > input {
-      border-radius: 25px;
+    border-radius: 25px;
   }
   > mat-icon {
-      vertical-align: middle;
-      margin-left: -37px;
-      margin-bottom: 4px;
-      width: 32px;
-      height: 32px;
+    vertical-align: middle;
+    margin-left: -37px;
+    margin-bottom: 4px;
+    width: 32px;
+    height: 32px;
   }
 }
 
-[disabled="true"]{
+[disabled="true"] {
   mat-icon {
     pointer-events: none;
     > svg {

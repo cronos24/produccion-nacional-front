@@ -40,16 +40,16 @@
                     <p class="body-uno">{{material['nombreTecnico']}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{material['subpartida']}}</p>
+                    <p class="body-uno">{{material['subpartidaId']}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{material['paisOrigen']}}</p>
+                    <p class="body-uno">{{material['paisOrigenId']}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{material['paisProcedencia']}}</p>
+                    <p class="body-uno">{{material['paisProcedenciaId']}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{material['unidadMedida']}}</p>
+                    <p class="body-uno">{{material['unidadId']}}</p>
                 </td>
                 <td>
                     <p class="body-uno">{{material['cantidad']}}</p>
@@ -61,10 +61,10 @@
                     <p class="body-uno">{{material['valorPlanta']}}</p>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="editar-positivo" (click)="mostrarFormaEdicion(material)"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="editar-positivo" (click)="agregarInsumo(material)"></mat-icon>
                 </td>
                 <td class="center">
-                    <mat-icon svgIcon="papelera-positivo" (click)="eliminarMaterial(material, index)"></mat-icon>
+                    <mat-icon class="pointer" svgIcon="papelera-positivo" (click)="eliminarMaterial(material.id, index)"></mat-icon>
                 </td>
             </tr>
         </ng-template>
@@ -73,6 +73,9 @@
         <p class="content body-uno">No se encontraron registros coincidentes</p>
     </div>
 </div>
+
+<br/>
+<br/>
 
 <div class="button-group">
     <span class="spacer"></span>
@@ -89,14 +92,18 @@
 
 <div class="cargue-masivo">
     <div (click)="downloadFormato()">
-        <mat-icon class="pointer" svgIcon="flecha-abajo-positivo"></mat-icon>
+        <mat-icon class="pointer" svgIcon="descargar"></mat-icon>
         <label class="link">DESCARGAR FORMATO EN EXCEL</label>
     </div>
     <div>
-        <button class="outlined">SELECCIONAR ARCHIVO</button>
-        <label>Ningún archivo seleccionado</label>
+        <button class="outlined" (click)="seleccionarArchivo()">SELECCIONAR ARCHIVO</button>
+        <input style="visibility: hidden; position: absolute;" [(ngModel)]="archivo" type="file" id="input-file"
+            (change)="subirArchivo($event)" accept=".csv, text/csv">
+        <label>
+            {{ archivo ? archivo.name : 'Ningun archivo seleccionado.'}}
+        </label>
     </div>
-    <button>CARGA MASIVA</button>
+    <button [disabled]="!archivo" (click)="cargaMasiva()">CARGA MASIVA</button>
 </div>
 <hr />
 

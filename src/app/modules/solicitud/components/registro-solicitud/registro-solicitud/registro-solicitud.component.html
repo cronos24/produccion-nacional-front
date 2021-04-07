@@ -127,14 +127,21 @@
                         13. ANEXOS
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <br>
-                <app-anexar-archivo [anidado]="false" [mostrarDescripcion]="true"></app-anexar-archivo>
+                <div class="p-grid" style="padding-top:20px;" *ngIf="!anexoEmbebido">
+                    <div class="p-col-12">
+                        <p-message severity="info"
+                            text="En esta sección se adjuntan los documentos soporte del REGISTRO DE PRODUCTOR DE BIENES NACIONALES.">
+                        </p-message>
+                    </div>
+                </div>
+                <app-anexar-archivo [anidado]="false" [mostrarDescripcion]="true"
+                    [solicitudId]="getFatherFormGroupValue('id')" (adjunto)="onNewAdjunto()"></app-anexar-archivo>
                 <br>
                 <span class="headline-xs">
                     Antes de anexar algún archivo, por favor guarde sus cambios para no perderlos
                 </span>
                 <br>
-                <app-tabla-anexos [anexoEmbebido]="false"></app-tabla-anexos>
+                <app-tabla-anexos #tablaAnexos [anexoEmbebido]="false"></app-tabla-anexos>
             </mat-expansion-panel>
         </mat-accordion>
         <br />

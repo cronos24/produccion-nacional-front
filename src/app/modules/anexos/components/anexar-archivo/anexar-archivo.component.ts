@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MessageService } from 'primeng/api';
+import { AnexoService } from '../../services/anexo/anexo.service';
 
 @Component({
   selector: 'app-anexar-archivo',
@@ -8,14 +10,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./anexar-archivo.component.scss']
 })
 export class AnexarArchivoComponent {
-
-
   constructor(
     public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private messageService: MessageService,
+    private anexoService: AnexoService,
   ) { }
 
+  @Input() public solicitudId: string;
   @Input() public labelConfirmar: string = 'SUBIR';
   @Input() public anidado: boolean = true;
   @Input() public mostrarErrorDescripcion: boolean = false;
@@ -61,8 +64,18 @@ export class AnexarArchivoComponent {
         archivo: this.archivoActual,
         descripcion: this.adjuntoFormGroup.controls.descripcion.value
       };
-      this.adjunto.emit(datos);
-      this.dialogRef.close(datos);
+      if (this.anidado) {
+        this.dialogRef.close(datos);
+      }else {
+        let formData = new FormData();
+        formData.append('solicitudId', this.solicitudId);
+        formData.append('nombre', datos.archivo.name);
+        formData.append('file', datos.archivo);
+        this.anexoService.post(formData).subscribe(() => {
+          this.adjunto.emit();
+          this.messageService.add({ severity: 'success', summary: 'Anexo subido con éxito' });
+        });
+      }
       this.adjuntoFormGroup.reset();
     }
   }

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
 import { MaterialService } from '../../../services/material.service';
 import { FormGeneric } from '../clases/form-generic';
@@ -28,6 +29,12 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
       pSortableColumn: 'subpartida',
       sortField: 'subpartida',
       valor: 'subpartida',
+    },
+    {
+      titulo: 'País Origen',
+      pSortableColumn: 'paisOrigen',
+      sortField: 'paisOrigen',
+      valor: 'paisOrigen',
     },
     {
       titulo: 'País Procedencia',
@@ -74,9 +81,14 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   ];
 
   public busqueda: string;
+  public pagina: IPagina = {
+    pagina: 0,
+    registrosPorPagina: 1000
+  };
   public sort: { [key: string]: string };
 
-  public materiales: IMatExtranjerosNal[] = [];
+  public archivo: any;
+  public materiales: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -102,7 +114,9 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   }
 
   public downloadFormato(): void {
+
     window.open(this.materialService.formato, "_blank");
+
   }
 
   public agregarInsumo(data?: IMatExtranjerosNal): void {
@@ -114,7 +128,6 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.id) {
-
         } else {
           this.guardarMaterial(result);
         }
@@ -164,6 +177,34 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     });
   }
 
+  public seleccionarArchivo(): void {
+    document.getElementById('input-file').click();
+  }
+
+  public subirArchivo(event: any): void {
+    if (event.target.files[0].type == 'application/vnd.ms-excel') {
+      this.archivo = event.target.files[0];
+    } else {
+
+    }
+  }
+
+  public cargaMasiva(): void {
+    let formData = new FormData();
+    formData.append('nombre', this.archivo.name);
+    formData.append('file', this.archivo);
+    formData.append('solicitudId', this.getFatherFormGroupValue('id'));
+
+    this.materialService.post(formData, {
+      postfix: '/nacionales/masivo'
+    }).subscribe((response) => {
+      console.log(response);
+      this.getMateriales();
+    });
+
+    this.archivo = null;
+  }
+
   private saveAsExcelFile(buffer: any, fileName: string): void {
     import('file-saver').then((FileSaver) => {
       let EXCEL_TYPE =
@@ -182,10 +223,13 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   private getMateriales(): void {
     this.materialService.get({
       queryParams: {
-        solicitudId: this.getFatherFormGroupValue('id')
-      }
+        solicitudId: this.getFatherFormGroupValue('id'),
+        datoBuscado: this.busqueda
+      },
+      pagina: this.pagina,
+      sort: this.sort
     }).subscribe((response) => {
-
+      this.materiales = response.respuesta.datos as any[];
     });
   }
 

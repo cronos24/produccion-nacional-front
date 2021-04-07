@@ -14,8 +14,9 @@
                 <div class="icon-group">
                     <select formControlName="subpartida">
                         <option hidden [value]="null">Subpartida</option>
-                        <option value="1">Value 2</option>
-                        <option value="2">Value 3</option>
+                        <!-- <option [value]="subpartida['numero-subpartida']" *ngFor="let subpartida of subpartidas;"> 
+                            {{subpartida['numero-subpartida-nomenclatura']}}
+                        </option> -->
                     </select>
                     <mat-icon
                         *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' || getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas'"
@@ -43,8 +44,10 @@
                 <div class="icon-group">
                     <select formControlName="codigoNumericoUnico">
                         <option hidden [value]="null"></option>
-                        <option value="value2">Value 2</option>
-                        <option value="value3">Value 3</option>
+                        
+                        <!-- <option *ngFor="let subpartida of subpartidas;"> 
+                            {{subpartida.id}}
+                        </option> -->
                     </select>
                     <mat-icon class="information" svgIcon="informacion-circular-negativo"
                         matTooltip="Es el que asigna el Ministerio De Comercio Industria Y Turismo a cada uno de los bienes comprendidos en las subpartidas arancelarias establecidas en el artí­culo 3 del decreto 1567.">

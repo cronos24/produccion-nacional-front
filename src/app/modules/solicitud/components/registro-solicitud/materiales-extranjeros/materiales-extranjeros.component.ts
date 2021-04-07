@@ -25,6 +25,8 @@ export class MaterialesExtranjerosComponent implements OnInit {
   ngOnInit(): void {
     this.crearFormulario();
     if (this.data) {
+      console.log(this.data);
+      
       this.actulizarFormulario(this.data);
     }
   }
@@ -33,10 +35,10 @@ export class MaterialesExtranjerosComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       id: [''],
       nombreTecnico: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      subpartida: [null, [Validators.required]],
-      paisOrigen: ['', [Validators.required]],
-      paisProcedencia: ['', [Validators.required]],
-      unidadMedida: ['', [Validators.required]],
+      subpartidaId: [null, [Validators.required]],
+      paisOrigenId: ['', [Validators.required]],
+      paisProcedenciaId: ['', [Validators.required]],
+      unidadId: ['', [Validators.required]],
       cantidad: ['', [Validators.required, mayorACeroValidator, decimalValidator(3)]],
       valorCif: ['', [Validators.required, mayorACeroValidator, decimalValidator(2)]],
       valorPlanta: ['', [Validators.required, mayorACeroValidator, decimalValidator(2)]]
