@@ -65,7 +65,7 @@
                 <app-materiales-extranjeros-nacionales [formGroup]="formGroup"></app-materiales-extranjeros-nacionales>
             </mat-expansion-panel>
             <mat-expansion-panel>
-                <mat-expansion-panel-header [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
+                <mat-expansion-panel-header>
                     <mat-panel-title>
                         5. MATERIALES NACIONALES
                     </mat-panel-title>
@@ -80,15 +80,15 @@
                 </mat-expansion-panel-header>
                 <app-costos-valor-fabrica [formGroup]="formGroup"></app-costos-valor-fabrica>
             </mat-expansion-panel>
-            <!--     <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-proceso-produccion></app-proceso-produccion>
-    </mat-expansion-panel>
-        <mat-expansion-panel [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
+            <mat-expansion-panel [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-proceso-produccion></app-proceso-produccion>
+            </mat-expansion-panel>
+            <!--     <mat-expansion-panel [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL

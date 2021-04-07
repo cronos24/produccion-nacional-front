@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
 import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-anexos/tabla-anexos.component';
@@ -72,6 +72,11 @@ export class RegistroSolicitudComponent extends FormGeneric {
     switch (step) {
       case 4:
         return criterio && criterio != 'bienesElaboradosNacionales';
+      case 6:
+        const costosDirectosFabrica = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].value;
+        const valorTransaccion = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].value;
+
+        return costosDirectosFabrica && valorTransaccion;
       case 8:
         return criterio == 'bienesProcesoProductivo';
       default:
