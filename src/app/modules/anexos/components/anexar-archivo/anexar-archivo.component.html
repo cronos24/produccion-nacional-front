@@ -1,10 +1,10 @@
 <div *ngIf="anidado">
     <div class="alert contenedor-adjuntos" [formGroup]="adjuntoFormGroup">
         <div class="seleccionar-archivo">
-            <button class="outlined" (click)="seleccionarArchivo()"
+            <button class="outlined" (click)="seleccionarArchivo('input-file-1')"
                 [disabled]="adjuntoFormGroup.controls.archivo.value != null">
                 SELECCIONAR ARCHIVO</button>
-            <input type="file" id="input-file" formControlName="archivo"
+            <input type="file" id="input-file-1" formControlName="archivo"
                 [disabled]="adjuntoFormGroup.controls.archivo.value != null" (change)="subirArchivo($event)"
                 accept="application/pdf">
         </div>
@@ -33,9 +33,9 @@
         <div class="no-anidado">
             <div class="contenedor-input">
                 <div class="seleccionar-archivo">
-                    <button class="outlined" (click)="seleccionarArchivo()">
+                    <button class="outlined" (click)="seleccionarArchivo('input-file-2')">
                         SELECCIONAR ARCHIVO</button>
-                    <input type="file" id="input-file" formControlName="archivo" (change)="subirArchivo($event)"
+                    <input type="file" id="input-file-2" formControlName="archivo" (change)="subirArchivo($event)"
                         accept="application/pdf">
                 </div>
                 <div class="body-uno">
