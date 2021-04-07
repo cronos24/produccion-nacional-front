@@ -1,11 +1,14 @@
 <div style="padding-top:10px;">
     <label>
         <input type="checkbox" [(ngModel)]="maquila" (ngModelChange)="onMensajeConfirmacion()" />
-        <label class="colortexto">Si
+        <label class="colortexto">
+            Si
         </label> (Marque esta casilla únicamente si realiza proceso de producción bajo un contrato de MAQUILA)
     </label>
     <div *ngIf="!maquila" class="space-textarea">
-        <textarea id="motivo" placeholder="Digitar de Forma completa y detallada por etapas el proceso productivo del bien a registrar." maxlength="32000"></textarea>
+        <textarea id="motivo" class="doble"
+            placeholder="Digitar de Forma completa y detallada por etapas el proceso productivo del bien a registrar. Para el diligenciamiento de este campo no usar comillas dobles ni sencillas"
+            maxlength="32000"></textarea>
     </div>
 
     <div *ngIf="maquila">
@@ -25,7 +28,8 @@
                         <label>Número de Identificación Tributaria N.I.T:</label>
                         <div class="icon-group">
                             <input type="number" />
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar El número de identificación Tributaria N.I.T. de la empresa maquiladora.  No se requiere digito de verificación.">
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar El número de identificación Tributaria N.I.T. de la empresa maquiladora.  No se requiere digito de verificación.">
                             </mat-icon>
                         </div>
                     </div>
@@ -36,9 +40,11 @@
                         <label>Razón social:</label>
                         <div class="icon-group">
                             <input type="text" formControlName="razonSocial" minlength="3" maxlength="300" />
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la razón social de acuerdo al Certificado de Existencia y Representación Legal o Matricula Mercantil registrados en el Registro único Empresarial y social RUES.">
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar la razón social de acuerdo al Certificado de Existencia y Representación Legal o Matricula Mercantil registrados en el Registro único Empresarial y social RUES.">
                             </mat-icon>
-                            <div *ngIf="form.get('razonSocial').invalid && (form.get('razonSocial').dirty || form.get('razonSocial').touched)">
+                            <div
+                                *ngIf="form.get('razonSocial').invalid && (form.get('razonSocial').dirty || form.get('razonSocial').touched)">
                                 <span *ngIf="form.get('razonSocial').errors.minlength" class="caption ng-invalid">
                                     Ingrese una justificación mas completa.
                                 </span>
@@ -53,10 +59,13 @@
                     <div class="form-group">
                         <label>Nombre Contacto de la Empresa:</label>
                         <div class="icon-group">
-                            <input type="text" placeholder="Nombre Contacto" formControlName="nombreContacto" minlength="3" maxlength="6000" />
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar el nombre de la persona que actuará como enlace entre la empresa maquiladora y el Grupo de Registro de Productores de Bienes Nacionales.">
+                            <input type="text" placeholder="Nombre Contacto" formControlName="nombreContacto"
+                                minlength="3" maxlength="6000" />
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar el nombre de la persona que actuará como enlace entre la empresa maquiladora y el Grupo de Registro de Productores de Bienes Nacionales.">
                             </mat-icon>
-                            <div *ngIf="form.get('nombreContacto').invalid && (form.get('nombreContacto').dirty || form.get('nombreContacto').touched)">
+                            <div
+                                *ngIf="form.get('nombreContacto').invalid && (form.get('nombreContacto').dirty || form.get('nombreContacto').touched)">
                                 <span *ngIf="form.get('nombreContacto').errors.minlength" class="caption ng-invalid">
                                     Ingrese una justificación mas completa.
                                 </span>
@@ -69,9 +78,11 @@
                         <label>Correo Electrónico:</label>
                         <div class="icon-group">
                             <input type="email" placeholder="usuario@dominio.com" formControlName="email" />
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar el correo electrónico de la persona indicada como un contacto. Es muy importante que este correo electrónico sea correctamente diligenciado.">
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar el correo electrónico de la persona indicada como un contacto. Es muy importante que este correo electrónico sea correctamente diligenciado.">
                             </mat-icon>
-                            <div *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
+                            <div
+                                *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
                                 <span *ngIf="form.get('email').errors" class="caption ng-invalid">
                                     Ingrese un correo electrónico válido.
                                 </span>
@@ -87,11 +98,12 @@
                         <label>Departamento Planta:</label>
                         <div class="icon-group">
                             <select>
-                            <option value="" selected>Seleccione un departamento</option>
-                            <option value="value2">Value 2</option>
-                            <option value="value3">Value 3</option>
-                        </select>
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar el departamento de ubicación de la planta de maquila del producto a registrar.">
+                                <option value="" selected>Seleccione un departamento</option>
+                                <option value="value2">Value 2</option>
+                                <option value="value3">Value 3</option>
+                            </select>
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar el departamento de ubicación de la planta de maquila del producto a registrar.">
                             </mat-icon>
                         </div>
                     </div>
@@ -101,11 +113,12 @@
                         <label>Ciudad Planta:</label>
                         <div class="icon-group">
                             <select>
-                            <option value="" selected>Seleccione una ciudad</option>
-                            <option value="value2">Value 2</option>
-                            <option value="value3">Value 3</option>
-                        </select>
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la ciudad de ubicación de la planta de producción del producto a registrar.">
+                                <option value="" selected>Seleccione una ciudad</option>
+                                <option value="value2">Value 2</option>
+                                <option value="value3">Value 3</option>
+                            </select>
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar la ciudad de ubicación de la planta de producción del producto a registrar.">
                             </mat-icon>
                         </div>
                     </div>
@@ -117,10 +130,13 @@
                     <div class="form-group">
                         <label>Dirección Planta:</label>
                         <div class="icon-group">
-                            <input type="text" placeholder="Dirección" formControlName="razonSocial" minlength="3" maxlength="300" />
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la dirección de la planta de producción del producto a registrar. Para los procesos de producción bajo contrato de Maquila diligenciar la dirección de ubicación de la planta de producción donde se realiza la maquila.">
+                            <input type="text" placeholder="Dirección" formControlName="razonSocial" minlength="3"
+                                maxlength="300" />
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar la dirección de la planta de producción del producto a registrar. Para los procesos de producción bajo contrato de Maquila diligenciar la dirección de ubicación de la planta de producción donde se realiza la maquila.">
                             </mat-icon>
-                            <div *ngIf="form.get('razonSocial').invalid && (form.get('razonSocial').dirty || form.get('razonSocial').touched)">
+                            <div
+                                *ngIf="form.get('razonSocial').invalid && (form.get('razonSocial').dirty || form.get('razonSocial').touched)">
                                 <span *ngIf="form.get('razonSocial').errors.minlength" class="caption ng-invalid">
                                     Ingrese una dirección mas completa.
                                 </span>
@@ -132,10 +148,13 @@
                     <div class="form-group">
                         <label>Teléfono Planta:</label>
                         <div class="icon-group">
-                            <input type="number" placeholder="Teléfono" formControlName="telefono" minlength="7" maxlength="11" />
-                            <mat-icon svgIcon="informacion-circular-negativo" matTooltip="Diligenciar el número telefónico de la planta de producción del producto a registrar.  Para los procesos de producción bajo contrato de Maquila diligenciar el número telefónico de la planta de producción donde se realiza la maquila.">
+                            <input type="number" placeholder="Teléfono" formControlName="telefono" minlength="7"
+                                maxlength="11" />
+                            <mat-icon svgIcon="informacion-circular-negativo"
+                                matTooltip="Diligenciar el número telefónico de la planta de producción del producto a registrar.  Para los procesos de producción bajo contrato de Maquila diligenciar el número telefónico de la planta de producción donde se realiza la maquila.">
                             </mat-icon>
-                            <div *ngIf="form.get('telefono').invalid && (form.get('telefono').dirty || form.get('telefono').touched)">
+                            <div
+                                *ngIf="form.get('telefono').invalid && (form.get('telefono').dirty || form.get('telefono').touched)">
                                 <span *ngIf="form.get('telefono').errors" class="caption ng-invalid">
                                     Ingrese un número de teléfono válido.
                                 </span>
@@ -149,7 +168,8 @@
             <div style="align-items: center; display: flex;">
                 <mat-icon svgIcon="documento">
                 </mat-icon>
-                <button class="outlined" style="margin-left: 10px" (click)="onAdjuntarArchivo()">ADJUNTAR CONTRATO DE MAQUILA</button>
+                <button class="outlined" style="margin-left: 10px" (click)="onAdjuntarArchivo()">ADJUNTAR CONTRATO DE
+                    MAQUILA</button>
             </div>
             <button>AGREGAR</button>
         </div>
@@ -215,44 +235,45 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-procesoProduccion>
-                  <tr>
-                      <td>
-                          <p class="body-uno">{{procesoProduccion['radicado']}}</p>
-                      </td>
-                      <td>
-                          <p class="body-uno">{{procesoProduccion['fechaCreacion']}}</p>
-                      </td>
-                      <td>
-                          <p class="body-uno">{{procesoProduccion['productoNombreComercial']}}</p>
-                      </td>
-                      <td>
-                          <p class="body-uno">{{procesoProduccion['responsable']}}</p>
-                      </td>
-                      <td>
-                           <p class="body-uno">{{procesoProduccion['programaId']}}</p>
-                      </td>
-                      <td>
-                          <p class="body-uno">{{procesoProduccion['fechaActuacion']}}</p>
-                      </td>
-                      <td>
-                          <p class="body-uno">{{procesoProduccion['estado']}}</p>
-                      </td>
-                      <td>
-                          <p class="body-uno">{{procesoProduccion['correo']}}</p>
-                      </td>
-                      <td class="center">
-                          <mat-icon svgIcon="papelera-positivo"></mat-icon>
-                      </td>
-                      <td class="center">
-                          <mat-icon svgIcon="adjunto-positivo"></mat-icon>
-                      </td>
-                  </tr>
-              </ng-template>
+                    <tr>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['radicado']}}</p>
+                        </td>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['fechaCreacion']}}</p>
+                        </td>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['productoNombreComercial']}}</p>
+                        </td>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['responsable']}}</p>
+                        </td>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['programaId']}}</p>
+                        </td>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['fechaActuacion']}}</p>
+                        </td>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['estado']}}</p>
+                        </td>
+                        <td>
+                            <p class="body-uno">{{procesoProduccion['correo']}}</p>
+                        </td>
+                        <td class="center">
+                            <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                        </td>
+                        <td class="center">
+                            <mat-icon svgIcon="adjunto-positivo"></mat-icon>
+                        </td>
+                    </tr>
+                </ng-template>
             </p-table>
             <div *ngIf="procesoProduccion.length==0">
-              <p class="content body-uno">No se encontraron registros coincidentes</p>
-          </div>
-          <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5" (onPageChange)="onPageChange($event)"></p-paginator>
+                <p class="content body-uno">No se encontraron registros coincidentes</p>
+            </div>
+            <p-paginator [rows]="pagina.registrosPorPagina" [totalRecords]="10" pageLinkSize="5"
+                (onPageChange)="onPageChange($event)"></p-paginator>
         </div>
 
         <div class="align-button space-button">
@@ -260,7 +281,8 @@
         </div>
 
         <div class="align-message">
-            <p-message severity="error" text="Ver numeral 4.2 'Proceso Productivo bajo Contrato de Maquila' de la circular número 019 del 31 de julio de 2015">
+            <p-message severity="error"
+                text="Ver numeral 4.2 'Proceso Productivo bajo Contrato de Maquila' de la circular número 019 del 31 de julio de 2015">
             </p-message>
             <label class="colorTexto"> VER NORMATIVIDAD
             </label>
