@@ -36,7 +36,7 @@ export class ValorAgregadoComponent extends FormGeneric implements OnInit {
 
   public setValor(valorTransaccion: number, valorTotalCif: number): void {
     let valor = ((valorTransaccion - valorTotalCif) / valorTransaccion) * 100;
-    valor.toFixed(2);
+    valor = +valor.toFixed(2);
 
     this.setChildFormGroupValue('valor', '' + valor);
   }
