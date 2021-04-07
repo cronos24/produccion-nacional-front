@@ -30,8 +30,8 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
     registrosPorPagina: 10
   };
   public sort: { [key: string]: string };
-  public departamentos: any;
-  public ciudades: any;
+  public departamentos: any[] = [];
+  public ciudades: any[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -45,7 +45,7 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
       ciudad: [null, Validators.required],
       direccion: ['', [Validators.required, Validators.minLength(5)]]
     });
-    this.departamentos =  this.divipolaService.consultarDepartamentos();
+    this.departamentos = this.divipolaService.consultarDepartamentos();
     this.ciudades = this.divipolaService.consultarCiudades();
   }
 
@@ -102,7 +102,7 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
 
   public eliminarPlanta(id: any, index): void {
     this.identificacionEmpresaService.delete(id).subscribe(() => {
-      this.plantas.splice(index, 1);
+      this.getPlantas();
     });
   }
 
@@ -113,7 +113,8 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
         queryParams: { datoBuscado: this.busqueda },
         sort: this.sort
       }).subscribe((respuesta: any): void => {
-        this.plantas = respuesta.respuesta;
+        this.plantas = respuesta.respuesta.datos;
+        this.pagina = respuesta.respuesta.paginacion;
         this.plantas.map((planta) => {
           planta.departamento = planta.planDepartamentoId;
           planta.ciudad = planta.planMunicipioId;

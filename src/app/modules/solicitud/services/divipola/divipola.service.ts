@@ -12,24 +12,24 @@ export class DivipolaService extends VuceService {
     {
       "codigo": "CO",
       "nombre": "COLOMBIA",
-       "tipos-pais":[
-          {
-             "id":1,
-             "nombre":"FABRICACION"
-          }
-       ]
+      "tipos-pais": [
+        {
+          "id": 1,
+          "nombre": "FABRICACION"
+        }
+      ]
     },
     {
-      "codigo":"BR",
-      "nombre":"BRAZIL",
-      "tipos-pais":[
-         {
-            "id":2,
-            "nombre":"EXPORTACION"
-         }
+      "codigo": "BR",
+      "nombre": "BRAZIL",
+      "tipos-pais": [
+        {
+          "id": 2,
+          "nombre": "EXPORTACION"
+        }
       ]
-   }
- ];
+    }
+  ];
   private departamentos = [
     {
       "codigo": "1",
