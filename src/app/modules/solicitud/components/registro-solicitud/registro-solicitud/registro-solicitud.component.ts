@@ -109,7 +109,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
         unidadComercial: [null, [Validators.required]],
         sectorEconomico: [null, [Validators.required]],
         tamanoEmpresa: [null, [Validators.required]],
-        unipadesProducidas: ['', [Validators.required, Validators.min(0)]],
+        unidadesProducidas: ['', [Validators.required, Validators.min(0)]],
         codigoNumericoUnico: [''],
         tecnologia: [''],
         descripcionMotoparte: [''],
@@ -132,6 +132,10 @@ export class RegistroSolicitudComponent extends FormGeneric {
         valorTotalUnidadProducto: [],
         costosDirectosFabrica: ['', [Validators.required, Validators.min(1), Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]],
         valorTransaccion: ['', [Validators.required, Validators.min(1), Validators.pattern(/^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/)]]
+      }),
+      procesoProduccion: this.formBuilder.group({
+        contratoMaquila: [],
+        procesoProduccion: [],
       }),
       caracteristicasTransformacion: this.formBuilder.group({
         descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
@@ -190,7 +194,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
     solicitud.productoUnidadId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unidadComercial'].value;
     solicitud.productoSectorId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['sectorEconomico'].value;
     solicitud.empresaTamanoId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tamanoEmpresa'].value;
-    solicitud.productoUnidadesProducidas = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unipadesProducidas'].value;
+    solicitud.productoUnidadesProducidas = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unidadesProducidas'].value;
     solicitud.productoCnuId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['codigoNumericoUnico'].value;
     solicitud.productoTecnologia = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tecnologia'].value;
     solicitud.productoMotoparteDescripcion = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['descripcionMotoparte'].value;
@@ -229,9 +233,12 @@ export class RegistroSolicitudComponent extends FormGeneric {
         break;
     }
 
+    solicitud.totalNacionales = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTotalUnidadProducto'].value;
     solicitud.totalOtros = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].value;
     solicitud.totalTransaccion = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].value;
 
+    solicitud.contratoMaquila = (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['contratoMaquila'].value;
+    solicitud.procesoProduccion = (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['procesoProduccion'].value;
 
     return solicitud;
   }
@@ -272,7 +279,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unidadComercial'].setValue(solicitud.productoUnidadId);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['sectorEconomico'].setValue(solicitud.productoSectorId);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tamanoEmpresa'].setValue(solicitud.empresaTamanoId);
-    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unipadesProducidas'].setValue(solicitud.productoUnidadesProducidas);
+    (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['unidadesProducidas'].setValue(solicitud.productoUnidadesProducidas);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['codigoNumericoUnico'].setValue(solicitud.productoCnuId);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['tecnologia'].setValue(solicitud.productoTecnologia);
     (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['descripcionMotoparte'].setValue(solicitud.productoMotoparteDescripcion);
@@ -311,8 +318,12 @@ export class RegistroSolicitudComponent extends FormGeneric {
         break;
     }
 
+    (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTotalUnidadProducto'].setValue(solicitud.totalNacionales);
     (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].setValue(solicitud.totalOtros);
     (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].setValue(solicitud.totalTransaccion);
+
+    (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['contratoMaquila'].setValue(solicitud.contratoMaquila);
+    (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['procesoProduccion'].setValue(solicitud.procesoProduccion);
 
     solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').format('DD/MM/YYYY');
     (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['fecha'].setValue(solicitud.auditoria.fechaCreacionFormateada);
