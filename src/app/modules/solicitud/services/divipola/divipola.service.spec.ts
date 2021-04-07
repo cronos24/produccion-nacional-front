@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CunService } from './cun.service';
+import { DivipolaService } from './divipola.service';
 
-describe('CunService', () => {
-  let service: CunService;
+describe('DivipolaService', () => {
+  let service: DivipolaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CunService);
+    service = TestBed.inject(DivipolaService);
   });
 
   it('should be created', () => {

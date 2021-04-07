@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { saveAs } from 'file-saver';
 import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
 import { MaterialService } from '../../../services/material.service';
 import { FormGeneric } from '../clases/form-generic';
 import { MaterialesExtranjerosComponent } from '../materiales-extranjeros/materiales-extranjeros.component';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-materiales-extranjeros-nacionales',
@@ -115,7 +115,9 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
   }
 
   public downloadFormato(): void {
+
     window.open(this.materialService.formato, "_blank");
+
   }
 
   public agregarInsumo(data?: IMatExtranjerosNal): void {

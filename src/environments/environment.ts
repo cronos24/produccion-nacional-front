@@ -7,5 +7,13 @@ export const environment: any = {
       port: 8080,
       pathName: 'pn/v1'
     }
+  },
+  VUCE_API: {
+    MDM: {
+      protocol: 'http',
+      host: 'mdmqa.vuce.gov.co',
+      port: 80,
+      pathName: 'api'
+    }
   }
 };

@@ -39,9 +39,12 @@ import { ProcesoProduccionComponent } from './components/registro-solicitud/proc
 import { RegistroSolicitudComponent } from './components/registro-solicitud/registro-solicitud/registro-solicitud.component';
 import { ValorAgregadoComponent } from './components/registro-solicitud/valor-agregado/valor-agregado.component';
 import { SolicitudRequerimientoComponent } from './components/solicitud-requerimiento/solicitud-requerimiento.component';
+import { DivipolaService } from './services/divipola/divipola.service';
 import { MaterialService } from './services/material.service';
 import { IdentificacionEmpresaService } from './services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 import { SolicitudService } from './services/solicitud.service';
+import { SubpartidaPorTipoService } from './services/subpartida/subpartida-por-tipo.service';
+import { SubpartidaService } from './services/subpartida/subpartida.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 
 @NgModule({
@@ -62,8 +65,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     MaestroSolicitudComponent,
     MaterialesExtranjerosComponent,
     MaterialesExtranjerosNacionalesComponent,
-    MaterialNacionalComponent,
     MaterialesNacionalesComponent,
+    MaterialNacionalComponent,
     ModalInsumosComponent,
     ProcesoProduccionComponent,
     RegistroSolicitudComponent,
@@ -76,10 +79,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     CardModule,
     CheckboxModule,
     CommonModule,
-    CommonModule,
     DialogModule,
     DropdownModule,
-    FormsModule,
     FormsModule,
     HeaderModule,
     InputNumberModule,
@@ -88,11 +89,8 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     PaginatorModule,
     RadioButtonModule,
     ReactiveFormsModule,
-    ReactiveFormsModule,
     SharedModule,
     SolicitudRoutingModule,
-    SolicitudRoutingModule,
-    TableModule,
     TableModule,
     TooltipModule,
   ],
@@ -101,9 +99,12 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
       provide: MatDialogRef,
       useValue: {}
     },
+    DivipolaService,
     IdentificacionEmpresaService,
     MaterialService,
     SolicitudService,
+    SubpartidaPorTipoService,
+    SubpartidaService,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

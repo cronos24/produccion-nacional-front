@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
+import { SubpartidaPorTipoService } from '../../../services/subpartida/subpartida-por-tipo.service';
+import { SubpartidaService } from '../../../services/subpartida/subpartida.service';
 import { FormGeneric } from '../clases/form-generic';
 
 @Component({
@@ -14,6 +16,12 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
   protected formGroupName: string = 'datosProducto';
 
   public subpartidas: any[] = [];
+  public totalSubpartidas: any[] = [];
+  public subpartidaSeleccionada: any;
+  public constructor(private subpartidaService: SubpartidaService,
+    private subpartidaPorTipoService: SubpartidaPorTipoService) {
+    super();
+  }
 
   public messagesSubpartidaArancelaria: Message[] = [
     { severity: 'info', summary: '000 Descripcion de la subpartida' },
@@ -27,6 +35,7 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.totalSubpartidas = this.subpartidaService.getSubpartida();
     this.getFatherFormGroupControl('tipoFormulario').valueChanges.subscribe((tipoFormulario: any) => {
       this.getChildFormGroupControl('descripcionMotoparte').setValidators([]);
       this.getChildFormGroupControl('numeroMotoparte').setValidators([]);
@@ -38,14 +47,22 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
         case 'produccionNacional':
           this.getChildFormGroupControl('resolucion').setValidators([Validators.required]);
           this.getChildFormGroupControl('programa').setValidators([Validators.required]);
+          this.subpartidas = this.totalSubpartidas;
           break;
-        case ('fomentoIndustriaAutomotriz' || 'fomentoIndustriaAstilleros'):
+        case 'fomentoIndustriaAutomotriz':
           this.getChildFormGroupControl('codigoNumericoUnico').setValidators([Validators.required]);
           this.getChildFormGroupControl('tecnologia').setValidators([Validators.required]);
+          this.obtenerSubpartidasFiltradas(tipoFormulario);
+          break;
+        case 'fomentoIndustriaAstilleros':
+          this.getChildFormGroupControl('codigoNumericoUnico').setValidators([Validators.required]);
+          this.getChildFormGroupControl('tecnologia').setValidators([Validators.required]);
+          this.obtenerSubpartidasFiltradas(tipoFormulario);
           break;
         case 'regimenTransformacionEnsamblePlanillas':
           this.getChildFormGroupControl('descripcionMotoparte').setValidators([Validators.required]);
           this.getChildFormGroupControl('numeroMotoparte').setValidators([Validators.required]);
+          this.subpartidas = this.totalSubpartidas;
           break;
         default:
           break;
@@ -53,4 +70,20 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
     });
   }
 
+  public obtenerSubpartidasFiltradas(tipo: string): void {
+    // this.subpartidaPorTipoService.get({ queryParams: { general: tipo } }).subscribe((data: IRespuesta<any>) => {
+    //   if (data.codigo == 200) {
+    //     this.subpartidas = [];
+    //     data.respuesta.datos.forEach(subpartidaPorTipo => {
+    //       this.totalSubpartidas.forEach(subpartida => {
+    //         if (subpartidaPorTipo.id == subpartida['numero-subpartida']) {
+    //           let temporal: any = subpartida;
+    //           temporal.cnus = subpartidaPorTipo.cnus;
+    //           this.subpartidas.push(temporal);
+    //         }
+    //       });
+    //     });
+    //   }
+    // });
+  }
 }

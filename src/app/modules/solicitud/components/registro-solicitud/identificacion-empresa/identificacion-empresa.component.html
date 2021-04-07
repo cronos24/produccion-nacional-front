@@ -138,10 +138,9 @@
         <div class="icon-group">
           <select formControlName="departamento">
             <option hidden [value]="null">Seleccione un Departamento</option>
-            <option value="1">value 1</option>
-            <option value="2">value 2</option>
-            <option value="3">value 3</option>
-            <option value="4">value 4</option>
+            <option *ngFor="let departamento of departamentos" [value]="departamento.codigo">
+                {{departamento.nombre}}
+            </option>
           </select>
           <mat-icon class="information" svgIcon="informacion-circular-negativo"
             matTooltip="Diligenciar el departamento de ubicación de la planta de producción del producto a registrar.">
@@ -156,10 +155,12 @@
           <select formControlName="ciudad"
             [attr.disabled]="formGroupPlantaProduccion.controls.departamento.value ? null : true">
             <option hidden [value]="null">Seleccione una Ciudad</option>
-            <option value="1">value 1</option>
-            <option value="2">value 2</option>
-            <option value="3">value 3</option>
-            <option value="4">value 4</option>
+            <ng-container *ngFor="let ciudad of ciudades;">
+                <option *ngIf="ciudad.departamento.codigo == formGroupPlantaProduccion.controls.departamento.value"
+                    [value]="ciudad.codigo">
+                    {{ciudad.nombre}}
+                </option>
+            </ng-container>
           </select>
           <mat-icon class="information" svgIcon="informacion-circular-negativo"
             matTooltip="Diligenciar la ciudad de ubicación de la planta de producción del producto a registrar.">
@@ -234,10 +235,10 @@
     <ng-template pTemplate="body" let-planta let-index="rowIndex">
       <tr>
         <td>
-          <p class="body-uno">{{planta.departamento}}</p>
+          <p class="body-uno">{{ divipolaService.consultarDepartamentos(planta.departamento).nombre}}</p>
         </td>
         <td>
-          <p class="body-uno">{{planta.ciudad}}</p>
+          <p class="body-uno">{{divipolaService.consultarCiudades(planta.ciudad).nombre}}</p>
         </td>
         <td>
           <p class="body-uno">{{planta.direccion}}</p>

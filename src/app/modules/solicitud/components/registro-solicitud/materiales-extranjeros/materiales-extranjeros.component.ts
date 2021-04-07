@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   decimalValidator,
-  mayorACeroValidator,
+  mayorACeroValidator
 } from 'src/app/modules/shared/services/validadores';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
 
 @Component({
@@ -25,8 +25,6 @@ export class MaterialesExtranjerosComponent implements OnInit {
   ngOnInit(): void {
     this.crearFormulario();
     if (this.data) {
-      console.log(this.data);
-
       this.actulizarFormulario(this.data);
     }
   }
