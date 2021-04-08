@@ -6,6 +6,7 @@ import {
   mayorACeroValidator
 } from 'src/app/modules/shared/services/validadores';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
+import { SubpartidaService } from '../../../services/subpartida/subpartida.service';
 
 @Component({
   selector: 'app-material-nacional',
@@ -16,10 +17,16 @@ export class MaterialNacionalComponent implements OnInit {
 
   public formGroup: FormGroup;
 
+  public listaSubpartidas: any[];
+  public listaTotalSubpartidas: any[];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IMatExtranjerosNal,
+    private subpartidaService: SubpartidaService,
     private formBuilder: FormBuilder
   ) {
+    this.listaTotalSubpartidas = this.subpartidaService.getSubpartida();
+    this.listaSubpartidas = this.listaTotalSubpartidas;
   }
 
   ngOnInit(): void {
@@ -31,6 +38,14 @@ export class MaterialNacionalComponent implements OnInit {
     }
   }
 
+
+  public filtrarSubpartida(event: any): void {
+    if (event.query.length > 3) {
+      this.listaSubpartidas = this.listaTotalSubpartidas.filter((element: any) => element?.['numero-subpartida'].includes(event.query));
+    } else {
+      this.listaSubpartidas = [];
+    }
+  }
   private crearFormulario(): void {
     this.formGroup = this.formBuilder.group({
       id: [''],

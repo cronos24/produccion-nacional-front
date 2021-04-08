@@ -32,7 +32,8 @@
         <div class="form-group">
           <label>5.2 Subpartida:</label>
           <div class="icon-group">
-            <input placeholder="Subpartida" type="number" formControlName="subpartidaId" />
+            <p-autoComplete formControlName="subpartidaId" [suggestions]="listaSubpartidas" placeholder="Subpartida"
+              field="numero-subpartida" (completeMethod)="filtrarSubpartida($event)"></p-autoComplete>
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Indicar la subpartida arancelaria NANDINA - Colombia a
             diez(10) dígitos, del producto a registrar. Se recomienda consultar las Notas
             Marginales por capítulos y observar las Normas de Clasificación de las

@@ -48,6 +48,8 @@ import { SolicitudService } from './services/solicitud.service';
 import { SubpartidaPorTipoService } from './services/subpartida/subpartida-por-tipo.service';
 import { SubpartidaService } from './services/subpartida/subpartida.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -95,6 +97,7 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
     SolicitudRoutingModule,
     TableModule,
     TooltipModule,
+    AutoCompleteModule
   ],
   providers: [
     {

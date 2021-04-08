@@ -35,7 +35,8 @@
         <div class="form-group">
           <label>4.2 Subpartida:</label>
           <div class="icon-group">
-            <input placeholder="Subpartida" type="number" formControlName="subpartidaId" />
+            <p-autoComplete formControlName="subpartidaId" [suggestions]="listaSubpartidas" placeholder="Subpartida"
+            field="numero-subpartida" (completeMethod)="filtrarSubpartida($event)"></p-autoComplete>
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Diligenciar la subpartida arancelaria por la cual 
                   desea registrar su producto (Decreto 2153 de 2016 Arancel de 
                   Aduanas)">
@@ -56,7 +57,8 @@
         <div class="form-group">
           <label>4.3 País Origen:</label>
           <div class="icon-group">
-            <input placeholder="País Origen" type="text" formControlName="paisOrigenId" />
+            <p-autoComplete formControlName="paisOrigenId" [suggestions]="listaPaises" 
+            field="nombre" (completeMethod)="filtrarPaises($event)" placeholder="País Origen"></p-autoComplete>
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el país donde se producen los materiales 
                   extranjeros.">
             </mat-icon>
@@ -73,7 +75,8 @@
         <div class="form-group">
           <label>4.4 País Procedencia:</label>
           <div class="icon-group">
-            <input placeholder="País Procedencia" type="text" formControlName="paisProcedenciaId" />
+            <p-autoComplete formControlName="paisProcedenciaId" [suggestions]="listaPaises" 
+            field="nombre" (completeMethod)="filtrarPaises($event)" placeholder="País Procedencia"></p-autoComplete>
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el país de embarque del material 
               extranjero. Si el material extranjero es comprado en Colombia, pero de 
               origen extranjero debe indicarse país de procedencia Colombia.">

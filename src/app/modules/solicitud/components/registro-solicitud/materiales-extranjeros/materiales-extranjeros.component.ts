@@ -6,6 +6,8 @@ import {
   mayorACeroValidator
 } from 'src/app/modules/shared/services/validadores';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
+import { DivipolaService } from '../../../services/divipola/divipola.service';
+import { SubpartidaService } from '../../../services/subpartida/subpartida.service';
 
 @Component({
   selector: 'app-materiales-extranjeros',
@@ -15,11 +17,20 @@ import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.n
 export class MaterialesExtranjerosComponent implements OnInit {
 
   public formGroup: FormGroup;
-
+  public listaSubpartidas: any[];
+  public listaTotalSubpartidas: any[];
+  public listaPaises: any[];
+  public listaTotalPaises: any[];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IMatExtranjerosNal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private subpartidaService: SubpartidaService,
+    private divipolaService: DivipolaService
   ) {
+    this.listaTotalSubpartidas = this.subpartidaService.getSubpartida();
+    this.listaSubpartidas = this.listaTotalSubpartidas;
+    this.listaTotalPaises = this.divipolaService.consultarPaises();
+    this.listaPaises = this.listaTotalPaises;
   }
 
   ngOnInit(): void {
@@ -27,6 +38,18 @@ export class MaterialesExtranjerosComponent implements OnInit {
     if (this.data) {
       this.actulizarFormulario(this.data);
     }
+  }
+  
+  public filtrarSubpartida(event: any): void {
+    if (event.query.length > 3) {
+      this.listaSubpartidas = this.listaTotalSubpartidas.filter((element: any) => element?.['numero-subpartida'].includes(event.query));
+    } else {
+      this.listaSubpartidas = [];
+    }
+  }
+
+  public filtrarPaises(event: any): void {
+    this.listaPaises = this.listaTotalPaises.filter((element: any) => element?.['nombre'].toLowerCase().includes(event.query.toLowerCase()));
   }
 
   private crearFormulario(): void {
