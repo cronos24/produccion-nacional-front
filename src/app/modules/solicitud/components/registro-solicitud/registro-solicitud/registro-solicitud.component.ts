@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
 import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-anexos/tabla-anexos.component';
+import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { Estado } from '../../../enums/estado.enum';
 import { SolicitudService } from '../../../services/solicitud.service';
 import { FormGeneric } from '../clases/form-generic';
@@ -31,6 +33,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   }
 
   constructor(
+    private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private solicitudService: SolicitudService,
     private activatedRoute: ActivatedRoute) {
@@ -65,6 +68,19 @@ export class RegistroSolicitudComponent extends FormGeneric {
     this.solicitudService.patch(body).subscribe((respuesta) => {
 
     });
+  }
+
+  public onFirmar(){
+    if(this.formGroup.invalid){
+      this.dialog.open(AlertComponent, {
+        data: {
+          type: 'warning',
+          title: 'Atención',
+          description: 'Para poder generar el archivo PDF, debe primero diligenciar<br/>todo el formulario y guardarlo para validar los campos.',
+          acceptButton: 'REGRESAR'
+        }
+      });
+    }
   }
 
   public isActive(step: number) {
@@ -239,6 +255,19 @@ export class RegistroSolicitudComponent extends FormGeneric {
 
     solicitud.contratoMaquila = (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['contratoMaquila'].value;
     solicitud.procesoProduccion = (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['procesoProduccion'].value;
+
+    /*caracteristicasTransformacion: this.formBuilder.group({
+      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
+    }),
+    caracteristicasTecnicas: this.formBuilder.group({
+      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
+    }),
+    aplicacionesProducto: this.formBuilder.group({
+      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
+    }),
+    valorAgregado: this.formBuilder.group({
+      valor: [0],
+    }),*/
 
     return solicitud;
   }

@@ -1,19 +1,19 @@
 <div style="padding-top:10px;">
-    <label>
-        <input type="checkbox" [(ngModel)]="maquila" (ngModelChange)="onMensajeConfirmacion()" />
+    <form [formGroup]="getChildFormGroup()">
         <label>
-            Si
-        </label> (Marque esta casilla únicamente si realiza proceso de producción bajo un contrato de MAQUILA)
-    </label>
-    <br />
-    <br />
-    <div *ngIf="!maquila" class="space-textarea">
-        <textarea id="motivo" class="doble"
+            <input type="checkbox" formControlName="contratoMaquila" />
+            <label>
+                Si
+            </label> (Marque esta casilla únicamente si realiza proceso de producción bajo un contrato de MAQUILA)
+        </label>
+        <br />
+        <br />
+        <textarea *ngIf="!getChildFormGroupValue('contratoMaquila')" id="motivo" class="doble"
+            formControlName="procesoProduccion"
             placeholder="Digitar de Forma completa y detallada por etapas el proceso productivo del bien a registrar. Para el diligenciamiento de este campo no usar comillas dobles ni sencillas"
             maxlength="32000"></textarea>
-    </div>
-
-    <div *ngIf="maquila">
+    </form>
+    <div *ngIf="getChildFormGroupValue('contratoMaquila')">
         <div>
             <label class="headline-xs">7.1 INFORMACIÓN DEL MAQUILLADOR</label>
         </div>
@@ -182,7 +182,7 @@
                     ADJUNTAR CONTRATO DE MAQUILA
                 </button>
             </div>
-            <button [disabled]="maquilaFormGroup.invalid">AGREGAR</button>
+            <button [disabled]="maquilaFormGroup.invalid" (click)="onAgregar()">AGREGAR</button>
         </div>
 
         <hr />
@@ -248,37 +248,38 @@
                         </th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-procesoProduccion>
+                <ng-template pTemplate="body" let-maquila let-index="rowIndex">
                     <tr>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.radicado}}</p>
+                            <p class="body-uno">{{maquila.nit}}</p>
                         </td>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.fechaCreacion}}</p>
+                            <p class="body-uno">{{maquila.razonSocial}}</p>
                         </td>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.productoNombreComercial}}</p>
+                            <p class="body-uno">{{maquila.contacto}}</p>
                         </td>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.responsable}}</p>
+                            <p class="body-uno">{{maquila.correo}}</p>
                         </td>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.programaId}}</p>
+                            <p class="body-uno">{{maquila.departamento}}</p>
                         </td>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.fechaActuacion}}</p>
+                            <p class="body-uno">{{maquila.ciudad}}</p>
                         </td>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.estado}}</p>
+                            <p class="body-uno">{{maquila.direccion}}</p>
                         </td>
                         <td>
-                            <p class="body-uno">{{procesoProduccion.correo}}</p>
+                            <p class="body-uno">{{maquila.telefono}}</p>
                         </td>
                         <td class="center">
-                            <mat-icon svgIcon="papelera-positivo"></mat-icon>
+                            <p class="link">CONTRATO</p>
                         </td>
                         <td class="center">
-                            <mat-icon svgIcon="adjunto-positivo"></mat-icon>
+                            <mat-icon class="pointer" svgIcon="papelera-positivo" (click)="onEliminar(maquila.id)">
+                            </mat-icon>
                         </td>
                     </tr>
                 </ng-template>
@@ -294,17 +295,45 @@
         <br />
 
         <div style="display: flex;">
-            <button style="margin-left: auto;">ELIMINAR TODOS LOS REGISTROS</button>
+            <button style="margin-left: auto;" [disabled]="maquilas.length == 0"
+                (click)="onEliminarTodasMaquilas()">ELIMINAR TODOS LOS REGISTROS</button>
         </div>
 
-        <br/>
-        <br/>
+        <br />
+        <br />
 
         <div style="display: flex; align-items: center;">
             <p-message severity="error"
                 text="Ver numeral 4.2 'Proceso Productivo bajo Contrato de Maquila' de la circular número 019 del 31 de julio de 2015">
             </p-message>
-            <label class="link">VER NORMATIVIDAD</label>
+            <a class="link" [href]="'http://ori.vuce.gov.co/_documents/pubs/DOC_128_Circular%20019%20de%202015.pdf'"
+                target="_blank">VER NORMATIVIDAD</a>
         </div>
     </div>
 </div>
+
+<ng-template #confirmarEliminarMaquilasTemplate let-solicitud>
+    <div class="modal warning">
+        <div>
+            <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
+            <p class="body-uno">¿Seguro desea borrar las maquilas?</p>
+        </div>
+        <div>
+            <button class="outlined" (click)="dialogRef.close(); continuar = true">CANCELAR</button>
+            <button (click)="dialogRef.close()">CONTINUAR</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #confirmarEliminarTodasMaquilasTemplate let-solicitud>
+    <div class="modal warning">
+        <div>
+            <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
+            <p class="body-uno">¿Seguro desea borrar todas las maquilas?</p>
+        </div>
+        <div>
+            <button class="outlined" (click)="dialogRef.close()">CANCELAR</button>
+            <button (click)="dialogRef.close();eliminarTodasMaquilas()">CONTINUAR</button>
+        </div>
+    </div>
+</ng-template>

@@ -86,7 +86,7 @@
                         7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <app-proceso-produccion></app-proceso-produccion>
+                <app-proceso-produccion [formGroup]="formGroup"></app-proceso-produccion>
             </mat-expansion-panel>
             <mat-expansion-panel [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
                 <mat-expansion-panel-header>
@@ -155,7 +155,8 @@
         <br />
         <div class="header">
             <button (click)="onGuardar()">GUARDAR BORRADOR</button>
-            <button>FIRMAR Y RADICAR SOLICITUD</button>
+            {{formGroup.invalid | json}}
+            <button (click)="onFirmar()">FIRMAR Y RADICAR SOLICITUD</button>
         </div>
         <br />
         <br />

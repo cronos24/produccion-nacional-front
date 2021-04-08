@@ -18,7 +18,6 @@ import { HeaderModule } from '../header/header.module';
 import { SharedModule } from '../shared/shared.module';
 import { CancelarSolicitudComponent } from './components/cancelar-solicitud/cancelar-solicitud.component';
 import { FormularioPreSolicitudComponent } from './components/formulario-pre-solicitud/formulario-pre-solicitud.component';
-import { InformativoComponent } from './components/informativo/informativo.component';
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
 import { MaestroSolicitudComponent } from './components/maestro-solicitud/maestro-solicitud.component';
 import { ModalInsumosComponent } from './components/modal-insumos/modal-insumos.component';
@@ -64,7 +63,6 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     DatosRepresentanteLegalComponent,
     FormularioPreSolicitudComponent,
     IdentificacionEmpresaComponent,
-    InformativoComponent,
     ListarSolicitudComponent,
     MaestroSolicitudComponent,
     MaterialesExtranjerosComponent,

@@ -5,13 +5,17 @@
                 <label>Representante Legal:</label>
                 <div class="icon-group">
                     <input placeholder="Nombre Representante" type="text" formControlName="nombreRepresentante" />
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon svgIcon="informacion-circular-negativo" class="information"
                         matTooltip="Representante legal Es quien se encuentra registrado en el Certificado de Existencia y Representación Legal para persona Jurídica o Registro Mercantil para persona Natural.">
                     </mat-icon>
                 </div>
-                <span class="error small" *ngIf="getChildFormGroup().controls.nombreRepresentante.errors?.required">
-                  Campo Obligatorio
-                </span>
+                <div
+                    *ngIf="getChildFormGroupControl('nombreRepresentante').invalid && (getChildFormGroupControl('nombreRepresentante').dirty || getChildFormGroupControl('nombreRepresentante').touched)">
+                    <span *ngIf="getChildFormGroupControl('nombreRepresentante').errors?.required"
+                        class="caption ng-invalid">
+                        Campo obligatorio
+                    </span>
+                </div>
             </div>
         </div>
         <div class="p-col">
@@ -20,13 +24,17 @@
                 <div class="icon-group">
                     <input placeholder="Ingrese únicamente dígitos" type="text" type="number"
                         formControlName="identificacion" />
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon svgIcon="informacion-circular-negativo" class="information"
                         matTooltip="Documento de identidad del representante legal.">
                     </mat-icon>
                 </div>
-                <span class="error small" *ngIf="getChildFormGroup().controls.identificacion.errors?.required">
-                  Campo Obligatorio
-                </span>
+                <div
+                    *ngIf="getChildFormGroupControl('identificacion').invalid && (getChildFormGroupControl('identificacion').dirty || getChildFormGroupControl('identificacion').touched)">
+                    <span *ngIf="getChildFormGroupControl('identificacion').errors?.required"
+                        class="caption ng-invalid">
+                        Campo obligatorio
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -36,13 +44,16 @@
                 <label>Cargo:</label>
                 <div class="icon-group">
                     <input placeholder="Cargo Representante" type="text" maxlength="3000" formControlName="cargo" />
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon svgIcon="informacion-circular-negativo" class="information"
                         matTooltip="Cargo que ocupa el representante legal en la empresa.">
                     </mat-icon>
                 </div>
-                <span class="error small" *ngIf="getChildFormGroup().controls.cargo.errors?.required">
-                  Campo Obligatorio
-                </span>
+                <div
+                    *ngIf="getChildFormGroupControl('cargo').invalid && (getChildFormGroupControl('cargo').dirty || getChildFormGroupControl('cargo').touched)">
+                    <span *ngIf="getChildFormGroupControl('cargo').errors?.required" class="caption ng-invalid">
+                        Campo obligatorio
+                    </span>
+                </div>
             </div>
         </div>
         <div class="p-col">
@@ -50,7 +61,7 @@
                 <label>Fecha:</label>
                 <div class="icon-group">
                     <input formControlName="fecha" type="text" disabled />
-                    <mat-icon svgIcon="informacion-circular-negativo"
+                    <mat-icon svgIcon="informacion-circular-negativo" class="information"
                         matTooltip="Fecha de presentación de la solicitud.">
                     </mat-icon>
                 </div>
