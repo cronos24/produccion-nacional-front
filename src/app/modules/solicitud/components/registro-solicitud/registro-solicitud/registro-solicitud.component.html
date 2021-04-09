@@ -128,7 +128,8 @@
                 </mat-expansion-panel-header>
                 <app-datos-representante-legal [formGroup]="formGroup"></app-datos-representante-legal>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel
+                [ngClass]="{'excluido': getFatherFormGroupValue('estado') == estado['En requerimiento']}">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         13. ANEXOS
@@ -143,19 +144,36 @@
                 </div>
                 <app-anexar-archivo [anidado]="false" [mostrarDescripcion]="true"
                     [solicitudId]="getFatherFormGroupValue('id')" (adjunto)="onNewAdjunto()"></app-anexar-archivo>
-                <br>
+                <br />
                 <span class="headline-xs">
                     Antes de anexar algún archivo, por favor guarde sus cambios para no perderlos
                 </span>
                 <br>
                 <app-tabla-anexos #tablaAnexos [anexoEmbebido]="false"></app-tabla-anexos>
+                <div *ngIf="getFatherFormGroupValue('estado') == estado['En requerimiento']">
+                    <div class="requerimiento">
+                        <div>
+                            <mat-icon svgIcon="informacion-circular-negativo"> </mat-icon>
+                            <div>
+                                <label class="headline-xs">Requerimientos</label>
+                                <label class="body-uno">{{getFatherFormGroupValue('requerimiento')}}</label>
+                            </div>
+                        </div>
+                        <button (click)="onCerrarRequerimiento()">CERRAR REQUERIMIENTO</button>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="texto-error body-uno" style="text-align: center">
+                        Anter de dar click en el boton CERRAR REQUERIMIENTO asegurese de haber anexado todos los
+                        documentos solicitados.
+                    </div>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
         <br />
         <br />
         <div class="header">
             <button (click)="onGuardar()">GUARDAR BORRADOR</button>
-            {{formGroup.invalid | json}}
             <button (click)="onFirmar()">FIRMAR Y RADICAR SOLICITUD</button>
         </div>
         <br />

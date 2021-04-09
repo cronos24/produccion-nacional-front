@@ -63,8 +63,20 @@ export class ListarSolicitudComponent {
   }
 
   public onVerRequerimientos(): void {
-    this.dialog.open(SolicitudRequerimientoComponent, {
-      width: '40%'
+    this.solicitudService.get({
+      queryParams: {
+        solicitudEstado: this.estado['En requerimiento']
+      }
+    }).subscribe((response) => {
+      let solicitudes = response.respuesta.solicitudes as any[];
+      if (solicitudes.length > 0) {
+        this.dialog.open(SolicitudRequerimientoComponent, {
+          width: '40%',
+          data: {
+            solicitudes
+          }
+        });
+      }
     });
   }
 

@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-anexos/tabla-anexos.component';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { Estado } from '../../../enums/estado.enum';
 import { SolicitudService } from '../../../services/solicitud.service';
+import { SolicitudRequerimientoComponent } from '../../solicitud-requerimiento/solicitud-requerimiento.component';
 import { FormGeneric } from '../clases/form-generic';
 
 @Component({
@@ -36,7 +37,8 @@ export class RegistroSolicitudComponent extends FormGeneric {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private solicitudService: SolicitudService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
     super();
     this.loading = true;
     const radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
@@ -44,6 +46,15 @@ export class RegistroSolicitudComponent extends FormGeneric {
     this.solicitudService.getById(radicado, {
       postfix: '/radicado'
     }).subscribe((response) => {
+      let solicitud = response.respuesta as any;
+      if (solicitud.estado == this.estado['En requerimiento']) {
+        this.dialog.open(SolicitudRequerimientoComponent, {
+          width: '40%',
+          data: {
+            solicitud: solicitud
+          }
+        });
+      }
       this.buildFromGroup();
       this.setFormGroup(response.respuesta);
       this.loading = false;
@@ -70,8 +81,8 @@ export class RegistroSolicitudComponent extends FormGeneric {
     });
   }
 
-  public onFirmar(){
-    if(this.formGroup.invalid){
+  public onFirmar() {
+    if (this.formGroup.invalid) {
       this.dialog.open(AlertComponent, {
         data: {
           type: 'warning',
@@ -104,10 +115,21 @@ export class RegistroSolicitudComponent extends FormGeneric {
     this.tablaAnexos.getAnexos();
   }
 
+  public onCerrarRequerimiento() {
+    let body = {
+      id: this.getFatherFormGroupValue('id'),
+      estado: this.estado['En evaluacion']
+    }
+    this.solicitudService.patch(body).subscribe((respuesta) => {
+      this.router.navigateByUrl('/solicitud/listar');
+    });
+  }
+
   private buildFromGroup(): void {
     this.formGroup = this.formBuilder.group({
       id: [],
       estado: [''],
+      requerimiento: [''],
       tipoFormulario: ['produccionNacional', Validators.required],
       identificacionEmpresa: this.formBuilder.group({
         nit: ['', [Validators.required, Validators.maxLength(255)]],
@@ -275,6 +297,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   private setFormGroup(solicitud) {
     this.setFatherFormGroupValue('id', solicitud.id);
     this.setFatherFormGroupValue('estado', solicitud.estado);
+    this.setFatherFormGroupValue('requerimiento', solicitud.requerimiento);
 
     switch (solicitud.programaId) {
       case 0:
