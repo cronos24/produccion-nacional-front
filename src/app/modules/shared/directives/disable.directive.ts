@@ -29,13 +29,11 @@ export class DisableDirective implements OnChanges, AfterViewInit {
     this.disableElement(this.eleRef.nativeElement);
   }
 
-  private disableElement(element: any) {    
+  private disableElement(element: any) {
     if (element.nodeName != '') {
       this.nodeNames.forEach((node) => {
         if (element.nodeName == node) {
-          
           if (this.appDisable) {
-            
             if (!element.hasAttribute(DISABLED)) {
               this.renderer.setAttribute(element, APP_DISABLED, '');
               this.renderer.setAttribute(element, DISABLED, 'true');
@@ -59,8 +57,10 @@ export class DisableDirective implements OnChanges, AfterViewInit {
       });
     }
     if (element.children) {
-      for (let ele of element.children) {
-        this.disableElement(ele);
+      if (element.className.toString().indexOf('excluido') == -1) {
+        for (let ele of element.children) {
+          this.disableElement(ele);
+        }
       }
     }
   }

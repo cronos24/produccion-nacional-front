@@ -57,3 +57,26 @@ mat-expansion-panel[disabled="true"] {
     cursor: default;
   }
 }
+
+.texto-error {
+  color: #a80521;
+  font-weight: bold;
+}
+
+.requerimiento {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  div {
+    display: flex;
+    mat-icon {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

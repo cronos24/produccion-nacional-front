@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-anexos/tabla-anexos.component';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { Estado } from '../../../enums/estado.enum';
 import { SolicitudService } from '../../../services/solicitud.service';
 import { AlertaLecturaCuidadosaComponent } from '../alerta-lectura-cuidadosa/alerta-lectura-cuidadosa.component';
+import { SolicitudRequerimientoComponent } from '../../solicitud-requerimiento/solicitud-requerimiento.component';
 import { FormGeneric } from '../clases/form-generic';
 import { InicioFirmaComponent } from '../inicio-firma/inicio-firma.component';
 
@@ -38,7 +39,8 @@ export class RegistroSolicitudComponent extends FormGeneric {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private solicitudService: SolicitudService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
     super();
     this.loading = true;
     this.radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
@@ -46,6 +48,15 @@ export class RegistroSolicitudComponent extends FormGeneric {
     this.solicitudService.getById(this.radicado, {
       postfix: '/radicado'
     }).subscribe((response) => {
+      let solicitud = response.respuesta as any;
+      if (solicitud.estado == this.estado['En requerimiento']) {
+        this.dialog.open(SolicitudRequerimientoComponent, {
+          width: '40%',
+          data: {
+            solicitud: solicitud
+          }
+        });
+      }
       this.buildFromGroup();
       this.setFormGroup(response.respuesta);
       this.loading = false;
@@ -83,44 +94,43 @@ export class RegistroSolicitudComponent extends FormGeneric {
   }
 
   public onFirmar() {
-    this.dialog.open(InicioFirmaComponent, {
-      width: '550px'
-    }).afterClosed().subscribe(() => {
-      this.dialog.open(AlertComponent, {
-        width: '510px',
-        data: {
-          type: 'warning',
-          icono: 'informacion',
-          title: `Importante`,
-          description: `El PDF ha sido generado, por favor habilite las ventanas emergentes en el navegador, luego de click en <strong> ACEPTAR </strong> y sigal as indicaciones que se le irán suministrando`,
-          acceptButton: 'ACEPTAR'
-        }
-      }).afterClosed().subscribe(() => {
-        this.dialog.open(AlertaLecturaCuidadosaComponent, {
-          width: '600px'
-        })
-      });
-    });
-    // this.dialog.open(AlertComponent, {
-    //   data: {
-    //     type: '',
-    //     title: `<span class="headline-m"><strong>Radicado creado con éxito.</strong></span>`,
-    //     description: `Número de Radicado asignado: ${this.radicado}`,
-    //     acceptButton: 'CONTINUAR'
-    //   }
-    // });
-    // if (this.formGroup.invalid) {
-    //   this.errorFirmarSolicitud();
-    // } else {
-    //   if (
-    //     ((this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesTotalmenteObtenidos' ||
-    //       (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesPorcentajeMinimoValor') &&
-    //     (this.getFatherFormGroupControl('valorAgregado') as FormGroup).controls.valor.value > 40) {
-    //       this.errorFirmarSolicitud();
-    //   } else {
-    //     // firmar
-    //   }
-    // }
+    if (this.formGroup.invalid) {
+      this.errorFirmarSolicitud();
+    } else {
+      if (
+        ((this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesTotalmenteObtenidos' ||
+          (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesPorcentajeMinimoValor') &&
+        (this.getFatherFormGroupControl('valorAgregado') as FormGroup).controls.valor.value > 40) {
+        this.errorFirmarSolicitud();
+      } else {
+        this.dialog.open(InicioFirmaComponent, {
+          width: '550px'
+        }).afterClosed().subscribe(() => {
+          this.dialog.open(AlertComponent, {
+            width: '510px',
+            data: {
+              type: 'warning',
+              icono: 'informacion',
+              title: `Importante`,
+              description: `El PDF ha sido generado, por favor habilite las ventanas emergentes en el navegador, luego de click en <strong> ACEPTAR </strong> y sigal as indicaciones que se le irán suministrando`,
+              acceptButton: 'ACEPTAR'
+            }
+          }).afterClosed().subscribe(() => {
+            this.dialog.open(AlertaLecturaCuidadosaComponent, {
+              width: '600px'
+            })
+          });
+        });
+        // this.dialog.open(AlertComponent, {
+        //   data: {
+        //     type: '',
+        //     title: `<span class="headline-m"><strong>Radicado creado con éxito.</strong></span>`,
+        //     description: `Número de Radicado asignado: ${this.radicado}`,
+        //     acceptButton: 'CONTINUAR'
+        //   }
+        // });
+      }
+    }
   }
 
   public isActive(step: number) {
@@ -144,10 +154,21 @@ export class RegistroSolicitudComponent extends FormGeneric {
     this.tablaAnexos.getAnexos();
   }
 
+  public onCerrarRequerimiento() {
+    let body = {
+      id: this.getFatherFormGroupValue('id'),
+      estado: this.estado['En evaluacion']
+    }
+    this.solicitudService.patch(body).subscribe((respuesta) => {
+      this.router.navigateByUrl('/solicitud/listar');
+    });
+  }
+
   private buildFromGroup(): void {
     this.formGroup = this.formBuilder.group({
       id: [],
       estado: [''],
+      requerimiento: [''],
       tipoFormulario: ['produccionNacional', Validators.required],
       identificacionEmpresa: this.formBuilder.group({
         nit: ['', [Validators.required, Validators.maxLength(255)]],
@@ -383,6 +404,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   private setFormGroup(solicitud) {
     this.setFatherFormGroupValue('id', solicitud.id);
     this.setFatherFormGroupValue('estado', solicitud.estado);
+    this.setFatherFormGroupValue('requerimiento', solicitud.requerimiento);
 
     switch (solicitud.programaId) {
       case 0:

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { SolicitudRequerimientoComponent } from 'src/app/modules/solicitud/components/solicitud-requerimiento/solicitud-requerimiento.component';
+import { Estado } from 'src/app/modules/solicitud/enums/estado.enum';
+import { SolicitudService } from 'src/app/modules/solicitud/services/solicitud.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,16 @@ import { SolicitudRequerimientoComponent } from 'src/app/modules/solicitud/compo
 })
 export class AppComponent implements OnInit {
 
+  public pagina: IPagina = {
+    pagina: 1,
+    registrosPorPagina: 1000
+  };
+
   public constructor(
     private dialog: MatDialog,
     private domSanitizer: DomSanitizer,
-    private matIconRegistry: MatIconRegistry) {
+    private matIconRegistry: MatIconRegistry,
+    private solicitudService: SolicitudService) {
 
     this.matIconRegistry.addSvgIcon(
       'exito-circular-negativo',
@@ -93,16 +102,27 @@ export class AppComponent implements OnInit {
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/cargando.svg')
     );
   }
-  
-  ngOnInit(): void {
-    this.onVerRequerimientos();
-  }
 
-  public onVerRequerimientos(): void {
-    this.dialog.open(SolicitudRequerimientoComponent, {
-      width: '40%'
+  ngOnInit(): void {
+    this.solicitudService.get({
+      queryParams: {
+        solicitudEstado: this.estado['En requerimiento']
+      }
+    }).subscribe((response) => {
+      let solicitudes = response.respuesta.solicitudes as any[];
+      if (solicitudes.length > 0) {
+        this.dialog.open(SolicitudRequerimientoComponent, {
+          width: '40%',
+          data: {
+            solicitudes: solicitudes
+          }
+        });
+      }
     });
   }
 
+  public get estado(): typeof Estado {
+    return Estado;
+  }
 
 }

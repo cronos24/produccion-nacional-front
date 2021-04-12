@@ -36,7 +36,7 @@ export abstract class ServicioGeneral<T> {
 
   public get(options?: {
     postfix?: string,
-    queryParams?: { [key: string]: string },
+    queryParams?: { [key: string]: any },
     pagina?: IPagina,
     sort?: { [key: string]: string }
   }): Observable<IRespuesta<T[]>> {

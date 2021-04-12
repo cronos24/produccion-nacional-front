@@ -1,4 +1,4 @@
-<div class="alert">
+<div class="alert" *ngIf="!simple">
     <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
 
     <p class="headline-l">Atención</p>
@@ -29,7 +29,38 @@
                     <p class="body-uno">{{solicitud['radicado']}}</p>
                 </td>
                 <td>
-                    <p class="body-uno">{{solicitud['auditoria']['fechaCreacionFormateada']}}</p>
+                    <p class="body-uno">{{solicitud.requerimiento}}</p>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <br />
+    <button (click)="dialogRef.close()">CONTINUAR</button>
+</div>
+
+<div class="alert" *ngIf="simple">
+    <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
+
+    <p class="headline-l">Atención</p>
+    <p class="body-uno --dark-primary-color">
+        El radicado No. {{solicitudes[0].radicado}} se<br />
+        encuentra En Requerimiento.
+    </p>
+
+    <p-table [value]="solicitudes">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <span class="headline-s --dark-primary-color">
+                        Requerimiento
+                    </span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-solicitud>
+            <tr>
+                <td>
+                    <p class="body-uno">{{solicitud.requerimiento}}</p>
                 </td>
             </tr>
         </ng-template>
