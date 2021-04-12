@@ -154,6 +154,7 @@ export class ProcesoProduccionComponent extends FormGeneric implements OnInit {
       sort: this.sort,
     }).subscribe((response) => {
       this.maquilas = response.respuesta.datos as any[];
+      this.setChildFormGroupValue('listaMaquilas', this.maquilas);
       this.pagina = response.respuesta.paginacion as IPagina;
     });
   }

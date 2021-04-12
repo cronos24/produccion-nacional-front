@@ -28,7 +28,7 @@ export abstract class FormGeneric {
         return (this.formGroup.get(this.formGroupName) as FormGroup).controls[control].value;
     }
 
-    public setChildFormGroupValue(control: string, value: string) {
+    public setChildFormGroupValue(control: string, value: any) {
         (this.formGroup.get(this.formGroupName) as FormGroup).controls[control].setValue(value);
     }
 }

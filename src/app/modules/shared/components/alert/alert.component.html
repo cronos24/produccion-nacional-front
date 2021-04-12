@@ -1,9 +1,7 @@
 <div class="alert">
-    <mat-icon *ngIf="icon" [ngClass]="data.type"
-        [svgIcon]="icon"></mat-icon>
-    <p
-        [ngClass]="{'headline-xl': true, '--error-color': data.type == 'error', '--warning-color': data.type == 'warning', '--dark-primary-color': data.type == 'information'}">
-        {{data.title}}
+    <mat-icon *ngIf="icon" [ngClass]="data.type" [svgIcon]="icon"></mat-icon>
+    <p [ngClass]="{'headline-xl': true, '--error-color': data.type == 'error', '--warning-color': data.type == 'warning', '--dark-primary-color': data.type == 'information'}"
+        [innerHTML]="data.title">
     </p>
     <div [ngClass]="{'body-uno': true, '--dark-primary-color': true}" [innerHTML]="data.description">
     </div>

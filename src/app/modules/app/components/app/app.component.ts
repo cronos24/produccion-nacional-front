@@ -88,6 +88,10 @@ export class AppComponent implements OnInit {
       'flecha-abajo-positivo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/flecha-abajo-positivo.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'cargando',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../../../assets/icons/cargando.svg')
+    );
   }
   
   ngOnInit(): void {

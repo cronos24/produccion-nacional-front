@@ -48,6 +48,8 @@ import { SubpartidaPorTipoService } from './services/subpartida/subpartida-por-t
 import { SubpartidaService } from './services/subpartida/subpartida.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InicioFirmaComponent } from './components/registro-solicitud/inicio-firma/inicio-firma.component';
+import { AlertaLecturaCuidadosaComponent } from './components/registro-solicitud/alerta-lectura-cuidadosa/alerta-lectura-cuidadosa.component';
 
 
 @NgModule({
@@ -74,6 +76,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     RegistroSolicitudComponent,
     SolicitudRequerimientoComponent,
     ValorAgregadoComponent,
+    InicioFirmaComponent,
+    AlertaLecturaCuidadosaComponent
   ],
   imports: [
     AccordionModule,

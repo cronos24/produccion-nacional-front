@@ -202,6 +202,7 @@ export class MaterialesNacionalesComponent extends FormGeneric {
           sumaValorPlanta += material.valorPlanta;
         }
       })
+      this.setChildFormGroupValue('listaInsumos', this.materiales);
       this.setChildFormGroupValue('valorTotalUnidadProducto', sumaValorPlanta.toFixed(2));
     });
   }

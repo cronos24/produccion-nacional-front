@@ -7,7 +7,9 @@ import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-an
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { Estado } from '../../../enums/estado.enum';
 import { SolicitudService } from '../../../services/solicitud.service';
+import { AlertaLecturaCuidadosaComponent } from '../alerta-lectura-cuidadosa/alerta-lectura-cuidadosa.component';
 import { FormGeneric } from '../clases/form-generic';
+import { InicioFirmaComponent } from '../inicio-firma/inicio-firma.component';
 
 @Component({
   selector: 'app-registro-solicitud',
@@ -22,7 +24,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   protected formGroupName: string;
 
   public loading: boolean = false;
-
+  public radicado: string;
   public produccionNacional: boolean = true;
   public fomentoIndustriaAutomotriz: boolean = false;
   public regimenTransformacionEnsamblePlanillas: boolean = false;
@@ -39,9 +41,9 @@ export class RegistroSolicitudComponent extends FormGeneric {
     private activatedRoute: ActivatedRoute) {
     super();
     this.loading = true;
-    const radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
+    this.radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
 
-    this.solicitudService.getById(radicado, {
+    this.solicitudService.getById(this.radicado, {
       postfix: '/radicado'
     }).subscribe((response) => {
       this.buildFromGroup();
@@ -65,22 +67,60 @@ export class RegistroSolicitudComponent extends FormGeneric {
 
   public onGuardar() {
     const body = this.getBody();
-    this.solicitudService.patch(body).subscribe((respuesta) => {
 
-    });
+    if (this.formGroup.invalid) {
+      this.errorGuardadoSolicitud();
+    } else {
+      if (
+        ((this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesTotalmenteObtenidos' ||
+          (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesPorcentajeMinimoValor') &&
+        (this.getFatherFormGroupControl('valorAgregado') as FormGroup).controls.valor.value > 40) {
+        this.errorGuardadoSolicitud()
+      }
+    }
+
+    this.solicitudService.patch(body).subscribe();
   }
 
-  public onFirmar(){
-    if(this.formGroup.invalid){
+  public onFirmar() {
+    this.dialog.open(InicioFirmaComponent, {
+      width: '550px'
+    }).afterClosed().subscribe(() => {
       this.dialog.open(AlertComponent, {
+        width: '510px',
         data: {
           type: 'warning',
-          title: 'Atención',
-          description: 'Para poder generar el archivo PDF, debe primero diligenciar<br/>todo el formulario y guardarlo para validar los campos.',
-          acceptButton: 'REGRESAR'
+          icono: 'informacion',
+          title: `Importante`,
+          description: `El PDF ha sido generado, por favor habilite las ventanas emergentes en el navegador, luego de click en <strong> ACEPTAR </strong> y sigal as indicaciones que se le irán suministrando`,
+          acceptButton: 'ACEPTAR'
         }
+      }).afterClosed().subscribe(() => {
+        this.dialog.open(AlertaLecturaCuidadosaComponent, {
+          width: '600px'
+        })
       });
-    }
+    });
+    // this.dialog.open(AlertComponent, {
+    //   data: {
+    //     type: '',
+    //     title: `<span class="headline-m"><strong>Radicado creado con éxito.</strong></span>`,
+    //     description: `Número de Radicado asignado: ${this.radicado}`,
+    //     acceptButton: 'CONTINUAR'
+    //   }
+    // });
+    // if (this.formGroup.invalid) {
+    //   this.errorFirmarSolicitud();
+    // } else {
+    //   if (
+    //     ((this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesTotalmenteObtenidos' ||
+    //       (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesPorcentajeMinimoValor') &&
+    //     (this.getFatherFormGroupControl('valorAgregado') as FormGroup).controls.valor.value > 40) {
+    //       this.errorFirmarSolicitud();
+    //   } else {
+    //     // firmar
+    //   }
+    // }
   }
 
   public isActive(step: number) {
@@ -115,7 +155,8 @@ export class RegistroSolicitudComponent extends FormGeneric {
         nombreContacto: ['', [Validators.required, Validators.maxLength(255)]],
         correo: ['', [Validators.required, Validators.pattern(new RegExp(/^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?;)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$/))]],
         indicativo: ['', [Validators.maxLength(4), Validators.pattern(new RegExp(/^\d{4,4}(-\d{4,4})*$/))]],
-        telefono: ['', [Validators.required, Validators.minLength(7), Validators.pattern(new RegExp(/^\d{7,10}(-\d{7,10})*$/))]]
+        telefono: ['', [Validators.required, Validators.minLength(7), Validators.pattern(new RegExp(/^\d{7,10}(-\d{7,10})*$/))]],
+        plantasProduccion: [null]
       }),
       datosProducto: this.formBuilder.group({
         bienFinal: [false],
@@ -142,6 +183,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
         valorTotalPlanta: []
       }),
       materialesNacionales: this.formBuilder.group({
+        listaInsumos: [],
         valorTotalUnidadProducto: []
       }),
       costosValorFabrica: this.formBuilder.group({
@@ -152,6 +194,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
       procesoProduccion: this.formBuilder.group({
         contratoMaquila: [],
         procesoProduccion: [],
+        listaMaquilas: []
       }),
       caracteristicasTransformacion: this.formBuilder.group({
         descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
@@ -271,7 +314,72 @@ export class RegistroSolicitudComponent extends FormGeneric {
 
     return solicitud;
   }
+  public errorFirmarSolicitud(): void {
+    this.dialog.open(AlertComponent, {
+      data: {
+        type: 'warning',
+        title: 'Atención',
+        description: 'Para poder generar el archivo PDF, debe primero diligenciar<br/>todo el formulario y guardarlo para validar los campos.',
+        acceptButton: 'REGRESAR'
+      }
+    });
+  }
 
+  public errorGuardadoSolicitud(): void {
+    this.dialog.open(AlertComponent, {
+      data: {
+        type: 'warning',
+        title: 'Atención',
+        description: `
+            ${(this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls.plantasProduccion.value.length > 0
+            ? '' : '1.6 1.7 1.8 Debe ingresar al menos una Planta de Producción </br>'}
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.subpartida.value
+            ? '' : '2.1 Ingrese la subpartida arancelaria  </br>'}
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.nombreComercial.value
+            ? '' : '2.2 Ingrese el nombre comercial  </br>'}
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.nombreTecnico.value
+            ? '' : '2.3 Ingrese el nombre técnico  </br>'}
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.unidadComercial.value
+            ? '' : '2.4 Ingrese la unidad comercial  </br>'} 
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.descripcionMotoparte.value
+            ? '' : '2.5 Ingrese la descripcion de la(s) motoparte(s)  </br>'} 
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.numeroMotoparte.value
+            ? '' : '2.6 Ingrese el numero de la motoparte  </br>'} 
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.sectorEconomico.value
+            ? '' : '2.7 Ingrese el sector económico  </br>'} 
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.tamanoEmpresa.value
+            ? '' : '2.8 Ingrese el tamaño de la empresa  </br>'}
+            ${(this.getFatherFormGroupControl('datosProducto') as FormGroup).controls.unidadesProducidas.value
+            ? '' : '2.9 Ingrese las unidades producidas por año  </br>'} 
+            ${(this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value
+            ? '' : '3. Seleccione los criterios para el registro  </br>'} 
+            ${(this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesElaboradosNacionales'
+            ? (this.getFatherFormGroupControl('materialesNacionales') as FormGroup).controls.listaInsumos.value.length > 0 ? '' : '5. Debe agregar al menos un insumo.</br>'
+            : ''} 
+            ${(this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls.costosDirectosFabrica.value
+            ? '' : '6.2. Ingrese los costos directos de fabrica  </br>'} 
+            ${(this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls.valorTransaccion.value
+            ? '' : '6.3. Debe ser mayor a la suma de: 6.1 + 6.2 + 4.10  </br>'} 
+            ${(this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls.contratoMaquila.value
+            ? ((this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls.listaMaquilas.value.length > 0 ? '' : '7. Debe ingresar almenos un contrato de maquila </br>')
+            : ((this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls.procesoProduccion.value ? '' : '7. Debe ingresar las etapas del proceso productivo del bien a registrar </br>')} 
+            ${(this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesProcesoProductivo'
+            ? (this.getFatherFormGroupControl('caracteristicasTransformacion') as FormGroup).controls.descripcion.value ? '' : '8. Debe ingresar las caracteristicas de transformación sustancial</br>'
+            : ''} 
+            ${(this.getFatherFormGroupControl('caracteristicasTecnicas') as FormGroup).controls.descripcion.value
+            ? '' : '9. Ingrese las caracteristicas técnicas del producto  </br>'} 
+            ${(this.getFatherFormGroupControl('aplicacionesProducto') as FormGroup).controls.descripcion.value
+            ? '' : '10. Ingrese las aplicaciónes del producto  </br>'}
+            ${(this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesTotalmenteObtenidos' || (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls.criterio.value == 'bienesPorcentajeMinimoValor'
+            ? (this.getFatherFormGroupControl('valorAgregado') as FormGroup).controls.valor.value > 40 ? '' : '11. El Valor agregado nacional debe ser mayor o igual al 40% Art. 5 del decreto 2680”.</br>'
+            : ''}  
+            ${(this.getFatherFormGroupControl('datosRepresentante') as FormGroup).valid
+            ? '' : '12. Ingrese los datos del representante legal  </br>'} 
+        `,
+        acceptButton: 'REGRESAR'
+      }
+    });
+  }
   private setFormGroup(solicitud) {
     this.setFatherFormGroupValue('id', solicitud.id);
     this.setFatherFormGroupValue('estado', solicitud.estado);

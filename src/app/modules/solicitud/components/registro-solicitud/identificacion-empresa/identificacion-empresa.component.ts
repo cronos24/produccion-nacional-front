@@ -4,8 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
-import { IRespuesta } from '../../../../../interfaces/respuesta.interface';
-import { ISolicitud } from '../../../interfaces/solicitud.interface';
 import { DivipolaService } from '../../../services/divipola/divipola.service';
 import { IdentificacionEmpresaService } from '../../../services/registro-solicitud/identificacion-empresa/identificacion-empresa.service';
 import { FormGeneric } from '../clases/form-generic';
@@ -120,6 +118,7 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
           planta.ciudad = planta.planMunicipioId;
           planta.direccion = planta.planDireccion;
         });
+        this.setChildFormGroupValue('plantasProduccion', this.plantas);
         //this.pagina = respuesta.respuesta.pagina;
       });
   }

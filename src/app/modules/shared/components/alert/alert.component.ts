@@ -17,6 +17,9 @@ export class AlertComponent {
   }
 
   public get icon(): string {
+    if (this.data.icono) {
+      return this.data.icono
+    }
     switch (this.data.type) {
       case 'error':
         return 'error-negativo';
