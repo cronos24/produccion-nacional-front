@@ -11,6 +11,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { BlockUIModule } from 'primeng/blockui';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { AnexosModule } from '../anexos/anexos.module';
@@ -99,7 +100,8 @@ import { AlertaLecturaCuidadosaComponent } from './components/registro-solicitud
     SolicitudRoutingModule,
     TableModule,
     TooltipModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    BlockUIModule
   ],
   providers: [
     {

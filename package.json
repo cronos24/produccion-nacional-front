@@ -29,6 +29,7 @@
     "bignumber": "^1.1.0",
     "bignumber.js": "^9.0.1",
     "file-saver": "^2.0.5",
+    "jspdf": "^1.5.3",
     "moment": "^2.29.1",
     "node-worker-threads-pool": "^1.4.3",
     "primeflex": "^2.0.0",

@@ -33,7 +33,8 @@
           <label>5.2 Subpartida:</label>
           <div class="icon-group">
             <p-autoComplete formControlName="subpartidaId" [suggestions]="listaSubpartidas" placeholder="Subpartida"
-              field="numero-subpartida" [forceSelection]="true" (completeMethod)="filtrarSubpartida($event)"></p-autoComplete>
+              field="numero-subpartida" [forceSelection]="true" (completeMethod)="filtrarSubpartida($event)">
+            </p-autoComplete>
             <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Indicar la subpartida arancelaria NANDINA - Colombia a
             diez(10) dígitos, del producto a registrar. Se recomienda consultar las Notas
             Marginales por capítulos y observar las Normas de Clasificación de las
@@ -56,11 +57,17 @@
         <div class="form-group">
           <label>5.3 Unidad de Medida:</label>
           <div class="icon-group">
-            <input placeholder="Unidad de Medida" type="text" formControlName="unidadId" />
-            <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Debe entenderse como la medida del material
-            nacional. (Ejemplo: Kilo, unidad, Tonelada, litro, etc. Debe ser acorde con el
-            material nacional ejemplo: si es un líquido debe ser kilo o litros, si es un sólido
-            debe ser en kilos o gramos, etc">
+            <select formControlName="unidadId">
+              <option hidden [value]="null">Unidad</option>
+              <option *ngFor="let unidadMedida of unidadesMedidaDian;" [value]="unidadMedida.id">
+                {{unidadMedida.valor}}
+              </option>
+            </select>
+            <mat-icon class="information" svgIcon="informacion-circular-negativo"
+              matTooltip="Debe entenderse como la medida del material
+              nacional. (Ejemplo: Kilo, unidad, Tonelada, litro, etc. Debe ser acorde con el
+              material nacional ejemplo: si es un líquido debe ser kilo o litros, si es un sólido
+              debe ser en kilos o gramos, etc.">
             </mat-icon>
           </div>
           <div

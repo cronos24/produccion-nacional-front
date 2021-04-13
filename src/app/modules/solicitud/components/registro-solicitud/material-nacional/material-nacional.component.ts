@@ -6,6 +6,7 @@ import {
   mayorACeroValidator
 } from 'src/app/modules/shared/services/validadores';
 import { IMatExtranjerosNal } from '../../../interfaces/materiales.extranjeros.nacional.interface';
+import { DianService } from '../../../services/dian/dian.service';
 import { SubpartidaService } from '../../../services/subpartida/subpartida.service';
 
 @Component({
@@ -19,11 +20,13 @@ export class MaterialNacionalComponent implements OnInit {
 
   public listaSubpartidas: any[];
   public listaTotalSubpartidas: any[];
+  public unidadesMedidaDian: any = this.dianService.obtenerUnidadesDeMedida();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IMatExtranjerosNal,
     private subpartidaService: SubpartidaService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dianService: DianService
   ) {
     this.listaTotalSubpartidas = this.subpartidaService.getSubpartida();
     this.listaSubpartidas = this.listaTotalSubpartidas;
@@ -59,7 +62,7 @@ export class MaterialNacionalComponent implements OnInit {
       auditoria: [],
       nombreTecnico: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       subpartidaId: [null, [Validators.required]],
-      unidadId: ['', [Validators.required]],
+      unidadId: [null, [Validators.required]],
       cantidad: ['', [Validators.required, mayorACeroValidator, decimalValidator(3)]],
       valorPlanta: ['', [Validators.required, mayorACeroValidator, decimalValidator(2)]]
     });

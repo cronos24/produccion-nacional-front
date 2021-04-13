@@ -80,3 +80,78 @@ mat-expansion-panel[disabled="true"] {
     }
   }
 }
+
+@mixin casilla-tabla {
+  flex: 1 1 0;
+  width: 0;
+}
+
+.pdf-container {
+  display: none;
+  position: relative;
+  .header {
+    display: flex;
+    img {
+      width: 55%;
+    }
+    div {
+      width: 30%;
+      margin: auto;
+      font-size: 18px;
+    }
+  }
+
+  .content {
+    .seccion {
+      background: #afafaf;
+      .item-valor {
+        div {
+          display: inline-block;
+          padding: 0px 10px;
+          width: 50%;
+          span {
+            float: right;
+          }
+        }
+      }
+
+      .tabla {
+        .header-pdf {
+          display: flex;
+          div {
+            text-align: center;
+            @include casilla-tabla;
+          }
+        }
+        .rows-pdf {
+          div {
+            display: flex;
+            span {
+              text-align: left;
+              @include casilla-tabla;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .marca-agua {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    font-size: 95px;
+    top: 50%;
+    left: -5%;
+    transform: rotate(-38deg);
+    font-weight: bold;
+    opacity: 0.2;
+    font-family: "Roboto";
+    max-height: 180px;
+    width: 110%;
+    span {
+      font-size:0.8em;
+      margin: auto;
+    }
+  }
+}

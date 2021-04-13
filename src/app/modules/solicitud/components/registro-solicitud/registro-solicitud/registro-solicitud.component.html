@@ -174,9 +174,185 @@
         <br />
         <div class="header">
             <button (click)="onGuardar()">GUARDAR BORRADOR</button>
-            <button (click)="onFirmar()">FIRMAR Y RADICAR SOLICITUD</button>
+            <button (click)="generarPdf()">FIRMAR Y RADICAR SOLICITUD</button>
         </div>
         <br />
         <br />
     </div>
 </ng-container>
+
+<div id="pdf" class="pdf-container" *ngIf="!formGroup.valid">
+    <div class="header">
+        <img src="./../../../../../../assets/images/mincit.png">
+        <div>
+            <strong>Formulario 202009020070774</strong><br>
+            REGISTRO DE PRODUCTOR DE BIENES <br> NACIONALES
+        </div>
+    </div>
+    <div class="content">
+        <div>
+            <h2>1. Identificación de la empresa</h2>
+            <div class="seccion">
+                <div class="item-valor">
+                    <div> 1.1 Número de Identificación Tributaria N.I.T:
+                        <span>{{getFatherFormGroupControl('identificacionEmpresa').controls['nit'].value}}</span>
+                    </div>
+                    <div> 1.2 Razón Social:
+                        <span>{{getFatherFormGroupControl('identificacionEmpresa').controls['razonSocial'].value}}</span>
+                    </div>
+                    <div> 1.3 Nombre Contacto de la Empresa:
+                        <span>{{getFatherFormGroupControl('identificacionEmpresa').controls['nombreContacto'].value}}</span>
+                    </div>
+                    <div> 1.4 Correo Electronico:
+                        <span>{{getFatherFormGroupControl('identificacionEmpresa').controls['correo'].value}}</span>
+                    </div>
+                    <div> 1.5 Teléfono de Contacto
+                        <span>{{getFatherFormGroupControl('identificacionEmpresa').controls['telefono'].value}}</span>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: center;">
+                    Plantas de produccion
+                </div>
+                <div class="tabla">
+                    <div class="header-pdf">
+                        <div>
+                            Departamento
+                        </div>
+                        <div>
+                            Ciudad
+                        </div>
+                        <div>
+                            Dirección
+                        </div>
+                    </div>
+                    <div class="rows-pdf">
+                        <ng-container
+                            *ngFor="let item of formGroup.get('identificacionEmpresa').get('plantasProduccion').value">
+                            <div>
+                                <span>
+                                    {{divipolaService.consultarDepartamentos(item.planDepartamentoId).nombre}}
+                                </span>
+                                <span>
+                                    {{divipolaService.consultarCiudades(item.planMunicipioId).nombre}}
+                                </span>
+                                <span>
+                                    {{item.planDireccion}}
+                                </span>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>2. Producto Registrado</h2>
+            <div class="seccion">
+                <div class="item-valor">
+                    <div> 2.1 Subpartida Arancelaria:
+                        <span>{{getFatherFormGroupControl('datosProducto').controls['subpartida'].value}}</span>
+                    </div>
+                    <div> 2.2 Nombre Comercial:
+                        <span>{{getFatherFormGroupControl('datosProducto').controls['nombreComercial'].value}}</span>
+                    </div>
+                    <div> 2.3 Nombre Contacto de la Empresa:
+                        <span>{{getFatherFormGroupControl('datosProducto').controls['nombreTecnico'].value}}</span>
+                    </div>
+                    <div> 2.4 Unidad de Medida:
+                        <span>{{dianService.obtenerUnidadDeMedida(getFatherFormGroupControl('datosProducto').controls['unidadComercial'].value)?.valor}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>3. Criterios para el Registro</h2>
+            <div class="seccion">
+                <div class="item-valor">
+                    <div>
+                        <ng-container
+                            [ngSwitch]="getFatherFormGroupControl('criteriosRegistro').controls['criterio'].value">
+                            <div *ngSwitchCase="'bienesTotalmenteObtenidos'">3.1. Bienes Totalmente Obtenidos</div>
+                            <div *ngSwitchCase="'bienesElaboradosNacionales'">3.2. Bienes Elaborados Exclusivamente Con
+                                Materias Nacionales</div>
+                            <div *ngSwitchCase="'bienesPorcentajeMinimoValor'">3.3. Porcentaje Mínimo Valor Agregado
+                                Nacional</div>
+                            <div *ngSwitchCase="'bienesProcesoProductivo'">3.4. Proceso Productivo Sustancial</div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>6. Costo valor fábrica producto terminado</h2>
+            <div class="seccion">
+                <div class="item-valor">
+                    <div> 6.1 Total Costos Materiales Nacionales u/comercial:
+                        <span>{{getFatherFormGroupControl('costosValorFabrica').controls['valorTotalUnidadProducto'].value}}</span>
+                    </div>
+                    <div> 6.2 Otros Costos Directos de Fabrica u/comercial (No incluye Materias Primas):
+                        <span>{{getFatherFormGroupControl('costosValorFabrica').controls['costosDirectosFabrica'].value}}</span>
+                    </div>
+                    <div> 6.3 VT Valor Transaccion (Precios ex Fabrica o Ex Planta):
+                        <span>{{getFatherFormGroupControl('costosValorFabrica').controls['valorTransaccion'].value}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>7. Proceso de producción</h2>
+            <div class="seccion">
+                {{getFatherFormGroupControl('procesoProduccion').controls['procesoProduccion'].value}}
+            </div>
+        </div>
+        <div>
+            <h2>9. Características Técnicas del producto</h2>
+            <div class="seccion">
+                {{getFatherFormGroupControl('caracteristicasTecnicas').controls['descripcion'].value}}
+            </div>
+        </div>
+        <div>
+            <h2>10. Aplicaciones del Producto</h2>
+            <div class="seccion">
+                {{getFatherFormGroupControl('aplicacionesProducto').controls['descripcion'].value}}
+            </div>
+        </div>
+        <div>
+            <h2>11. VALOR AGREGADO NACIONAL (VAN)</h2>
+            <div class="seccion">
+                <div class="item-valor">
+                    <div>Agregado Nacional:
+                        <span>{{getFatherFormGroupControl('valorAgregado').controls['valor'].value}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Información del Representante Legal</h2>
+            <div class="seccion">
+                <div class="item-valor">
+                    <div>Agregado Nacional:
+                        <span>{{getFatherFormGroupControl('datosRepresentante').controls['nombreRepresentante'].value}}</span>
+                    </div>
+                    <div>Identificación:
+                        <span>{{getFatherFormGroupControl('datosRepresentante').controls['identificacion'].value}}</span>
+                    </div>
+                    <div>Cargo:
+                        <span>{{getFatherFormGroupControl('datosRepresentante').controls['cargo'].value}}</span>
+                    </div>
+                    <div>Fecha:
+                        <span>{{getFatherFormGroupControl('datosRepresentante').controls['fecha'].value}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+    </div>
+    <div class="marca-agua">
+        NO VALIDO PARA TRÁMITES <br>
+        <span>DOCUMENTO EN EVALUACION</span>
+    </div>
+</div>
+
+<ng-template *ngIf="cargando">
+    <p-blockUI [blocked]="cargando"></p-blockUI>
+</ng-template>

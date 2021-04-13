@@ -99,6 +99,7 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
   }
 
   onChangeSubpartida(): void {
+    debugger;
     let indexSubpartida: number = this.subpartidas.findIndex((val: any) => val['numero-subpartida'] == this.getChildFormGroupControl('subpartida')?.value)
     this.subpartidaSeleccionada = this.subpartidas[indexSubpartida];
     this.getChildFormGroupControl('sectorEconomico')?.setValue(this.sectores.find((element: any) => +this.subpartidaSeleccionada.partidas[0].capitulo.codigo >= +element.capitulosDesde && +this.subpartidaSeleccionada.partidas[0].capitulo.codigo <= +element.capitulosHasta).sectorEconomico);

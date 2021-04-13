@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-anexos/tabla-anexos.component';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { Estado } from '../../../enums/estado.enum';
@@ -11,6 +13,8 @@ import { AlertaLecturaCuidadosaComponent } from '../alerta-lectura-cuidadosa/ale
 import { SolicitudRequerimientoComponent } from '../../solicitud-requerimiento/solicitud-requerimiento.component';
 import { FormGeneric } from '../clases/form-generic';
 import { InicioFirmaComponent } from '../inicio-firma/inicio-firma.component';
+import { DivipolaService } from '../../../services/divipola/divipola.service';
+import { DianService } from '../../../services/dian/dian.service';
 
 @Component({
   selector: 'app-registro-solicitud',
@@ -24,7 +28,9 @@ export class RegistroSolicitudComponent extends FormGeneric {
   public formGroup: FormGroup;
   protected formGroupName: string;
 
+  private documento: any;
   public loading: boolean = false;
+  public cargando: boolean = false;
   public radicado: string;
   public produccionNacional: boolean = true;
   public fomentoIndustriaAutomotriz: boolean = false;
@@ -40,11 +46,14 @@ export class RegistroSolicitudComponent extends FormGeneric {
     private formBuilder: FormBuilder,
     private solicitudService: SolicitudService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    public divipolaService: DivipolaService,
+    public dianService: DianService) {
     super();
     this.loading = true;
     this.radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
 
+    this.buildFromGroup();
     this.solicitudService.getById(this.radicado, {
       postfix: '/radicado'
     }).subscribe((response) => {
@@ -57,7 +66,6 @@ export class RegistroSolicitudComponent extends FormGeneric {
           }
         });
       }
-      this.buildFromGroup();
       this.setFormGroup(response.respuesta);
       this.loading = false;
     });
@@ -236,6 +244,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
         fecha: ['']
       })
     });
+    console.log(this.formGroup);
   }
 
   private getBody() {
@@ -488,4 +497,37 @@ export class RegistroSolicitudComponent extends FormGeneric {
     (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['fecha'].setValue(solicitud.auditoria.fechaCreacionFormateada);
   }
 
+  public generarPdf() {
+    this.cargando = true;
+    const doc = new jsPDF('p', 'pt', 'a4');
+    document.getElementById('pdf').style.display = 'block';
+    const DATA = document.getElementById('pdf');
+    html2canvas(DATA).then((canvas) => {
+      const img = canvas.toDataURL('image/PNG');
+      const bufferX = 15;
+      let bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      let pages = Math.ceil(pdfHeight / doc.internal.pageSize.getHeight());
+      for (let i = 1; i < pages; i++) {
+        doc.addPage('a4');
+        bufferY -= doc.internal.pageSize.getHeight();
+        doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      }
+
+      document.getElementById('pdf').style.display = 'none';
+      return doc;
+    }).then((docResult) => {
+      this.documento = docResult;
+      let file = docResult.output('blob', { filename: `solicitud_${this.getFatherFormGroupValue('id')}.pdf` });
+      let formData = new FormData();
+      this.documento.save(`solicitud.pdf`);
+      // formData.append("nit", (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value);
+      // formData.append("nombre", `solicitud_${this.getFatherFormGroupValue('formGroup')}.pdf`);
+      // formData.append("file", file);
+    });
+
+  }
 }
