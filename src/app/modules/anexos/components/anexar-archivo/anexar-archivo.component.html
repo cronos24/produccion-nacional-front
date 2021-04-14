@@ -20,7 +20,7 @@
                 Este campo es requerido
             </span>
         </div>
-        <div *ngIf="anidado == true" class="botones">
+        <div *ngIf="mostrarBotones" class="botones">
             <button class="outlined" (click)="dialogRef.close()">CANCELAR</button>
             <button [disabled]="adjuntoFormGroup.invalid" (click)="adjuntarArchivo();">{{labelConfirmar}}</button>
         </div>

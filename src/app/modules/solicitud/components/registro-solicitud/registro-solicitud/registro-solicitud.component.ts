@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import html2canvas from 'html2canvas';
@@ -15,6 +15,7 @@ import { FormGeneric } from '../clases/form-generic';
 import { InicioFirmaComponent } from '../inicio-firma/inicio-firma.component';
 import { DivipolaService } from '../../../services/divipola/divipola.service';
 import { DianService } from '../../../services/dian/dian.service';
+import { FirmaService } from '../../../services/firma/firma.service';
 
 @Component({
   selector: 'app-registro-solicitud',
@@ -23,12 +24,15 @@ import { DianService } from '../../../services/dian/dian.service';
 })
 export class RegistroSolicitudComponent extends FormGeneric {
 
+  @ViewChild('sinUsuario') public sinUsuarioTemplate: TemplateRef<any>;
+  @ViewChild('firmaDesatendida') public firmaDesatendidaTemplate: TemplateRef<any>;
   @ViewChild("tablaAnexos") public tablaAnexos: TablaAnexosComponent;
 
   public formGroup: FormGroup;
   protected formGroupName: string;
 
   private documento: any;
+  public documentoFinal: any;
   public loading: boolean = false;
   public cargando: boolean = false;
   public radicado: string;
@@ -46,9 +50,13 @@ export class RegistroSolicitudComponent extends FormGeneric {
     private formBuilder: FormBuilder,
     private solicitudService: SolicitudService,
     private activatedRoute: ActivatedRoute,
+    private firmaService: FirmaService,
     private router: Router,
     public divipolaService: DivipolaService,
-    public dianService: DianService) {
+    public dianService: DianService,
+    public matDialog: MatDialog,
+    public dialogRef: MatDialogRef<any>
+  ) {
     super();
     this.loading = true;
     this.radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
@@ -523,11 +531,65 @@ export class RegistroSolicitudComponent extends FormGeneric {
       this.documento = docResult;
       let file = docResult.output('blob', { filename: `solicitud_${this.getFatherFormGroupValue('id')}.pdf` });
       let formData = new FormData();
-      this.documento.save(`solicitud.pdf`);
-      // formData.append("nit", (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value);
-      // formData.append("nombre", `solicitud_${this.getFatherFormGroupValue('formGroup')}.pdf`);
-      // formData.append("file", file);
-    });
+      formData.append("nit", (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value);
+      formData.append("nombre", `solicitud_${this.getFatherFormGroupValue('id')}.pdf`);
+      formData.append("file", file);
+      this.firmaService.post(formData, {
+        postfix: '/initCircuitBySigners'
+      }).subscribe(
+        (initCircuitResponse) => {
+          document.getElementById('pdf').style.display = 'none';
+          this.cargando = false;
+          if (initCircuitResponse.response.code === '000') {
+            (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value;
+            (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['razonSocial'].value;
+            (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nombreContacto'].value;
+            (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['correo'].value;
 
+            this.firmaService.postUrl({
+              documento: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value,
+              nombres: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['razonSocial'].value,
+              apellidos: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['razonSocial'].value,
+              correo: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['correo'].value
+            }, {
+              postfix: `/circuitFrame/${initCircuitResponse.circuitInstance}`
+            }).subscribe((circuitFrameResponse) => {
+              window.open(circuitFrameResponse, "_blank");
+            });
+          } else if (initCircuitResponse.response.code === '38') {
+            this.dialogRef = this.matDialog.open(this.sinUsuarioTemplate, {
+              width: '450px'
+            });
+            this.firmaService.postUrl({
+              documento: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value,
+              nombres: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['razonSocial'].value,
+              apellidos: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['razonSocial'].value,
+              correo: (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['correo'].value
+            }, {
+              postfix: '/newUser'
+            }).subscribe((newUserResponse) => {
+              window.open(newUserResponse, "_blank");
+            });
+          }
+        },
+        () => {
+          this.cargando = false;
+          document.getElementById('pdf').style.display = 'none';
+          this.documentoFinal = null;
+          this.dialogRef = this.matDialog.open(this.firmaDesatendidaTemplate, {
+            width: '450px'
+          });
+          throw new Error('Error al iniciar proceso de porta firmas.');
+        });
+    });
   }
+
+  public descargarFormulario(): void {
+    this.documento.save(`solicitud_${this.getFatherFormGroupValue('id')}.pdf`);
+  }
+
+  public recibirAdjuntoFirmado(event: any): void {
+    this.documentoFinal = event?.archivo ? event : null;
+  }
+
 }

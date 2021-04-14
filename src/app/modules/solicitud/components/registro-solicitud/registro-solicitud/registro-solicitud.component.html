@@ -181,6 +181,46 @@
     </div>
 </ng-container>
 
+
+<ng-template #sinUsuario>
+    <div class="contenido-mensaje-usuario">
+        <div class="header">
+            <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
+            <span class="headline-s"> ACTUALMENTE USTED NO POSEE UN USUARIO, INTENTE NUEVAMENTE</span>
+        </div>
+        <div class="contenido">
+            <span class="body-uno">
+                Usted sera redireccionado para realizar la creacion de su usuario, si no se redirecciona por favor
+                intente nuevamente.
+            </span>
+            <button (click)="dialogRef.close()">CONTINUAR</button>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #firmaDesatendida>
+    <div class="contenido-firma-desatendida">
+        <div class="header">
+            <mat-icon svgIcon="informacion-circular-negativo"></mat-icon>
+            <span class="headline-l"> FIRMAR Y RADICAR SOLICITUD</span>
+        </div>
+        <div class="contenido">
+            <button (click)="descargarFormulario()">Descargar Formulario</button>
+            <span class="headline-xs">Cargue aqui su documento firmado</span>
+            <div class="componente">
+                <app-anexar-archivo [labelConfirmar]="'Confirmar'" [mostrarBotones]="false"
+                    (adjunto)="recibirAdjuntoFirmado($event)">
+                </app-anexar-archivo>
+            </div>
+        </div>
+        <div class="botones">
+            <button class="cancelar" (click)="dialogRef.close(); documentoFinal = null;">CANCELAR</button>
+            <button [disabled]="!documentoFinal" (click)="dialogRef.close();finalizarSolicitud();">Confirmar</button>
+        </div>
+    </div>
+</ng-template>
+
 <div id="pdf" class="pdf-container" *ngIf="!formGroup.valid">
     <div class="header">
         <img src="./../../../../../../assets/images/mincit.png">
@@ -353,6 +393,5 @@
     </div>
 </div>
 
-<ng-template *ngIf="cargando">
-    <p-blockUI [blocked]="cargando"></p-blockUI>
-</ng-template>
+
+<p-blockUI [blocked]="cargando"></p-blockUI>

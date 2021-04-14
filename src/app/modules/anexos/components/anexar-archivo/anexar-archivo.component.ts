@@ -23,6 +23,7 @@ export class AnexarArchivoComponent {
   @Input() public anidado: boolean = true;
   @Input() public mostrarErrorDescripcion: boolean = false;
   @Input() public mostrarDescripcion: boolean = false;
+  @Input() public mostrarBotones: boolean = true;
   @Output() public adjunto: EventEmitter<any> = new EventEmitter<any>();
 
   public errorTipo: boolean = false;

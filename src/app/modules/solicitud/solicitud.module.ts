@@ -51,6 +51,7 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InicioFirmaComponent } from './components/registro-solicitud/inicio-firma/inicio-firma.component';
 import { AlertaLecturaCuidadosaComponent } from './components/registro-solicitud/alerta-lectura-cuidadosa/alerta-lectura-cuidadosa.component';
+import { FirmaService } from './services/firma/firma.service';
 
 
 @NgModule({
@@ -115,7 +116,8 @@ import { AlertaLecturaCuidadosaComponent } from './components/registro-solicitud
     SolicitudService,
     SubpartidaPorTipoService,
     SubpartidaService,
-    DianService
+    DianService,
+    FirmaService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
