@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Message, MessageService } from 'primeng/api';
 import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { SolicitudRequerimientoComponent } from 'src/app/modules/solicitud/components/solicitud-requerimiento/solicitud-requerimiento.component';
 import { Estado } from 'src/app/modules/solicitud/enums/estado.enum';
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
     private dialog: MatDialog,
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry,
+    private messageService: MessageService,
     private solicitudService: SolicitudService) {
 
     this.matIconRegistry.addSvgIcon(
@@ -104,6 +106,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.messageService.messageObserver.subscribe((message: Message) => {
+      setTimeout(() => {
+        this.messageService.clear(message.id);
+      }, 30000);
+    });
+
     this.solicitudService.get({
       queryParams: {
         solicitudEstado: this.estado['En requerimiento']
