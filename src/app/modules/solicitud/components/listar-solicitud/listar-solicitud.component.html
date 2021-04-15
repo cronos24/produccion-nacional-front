@@ -19,9 +19,9 @@
                         Ver Solicitud
                     </span>
                 </th>
-                <th pSortableColumn="fechaCreacion">
+                <th pSortableColumn="firmaFecha">
                     <span class="headline-s --dark-primary-color">
-                        Fecha radicación<p-sortIcon field="fechaCreacion"></p-sortIcon>
+                        Fecha radicación<p-sortIcon field="firmaFecha"></p-sortIcon>
                     </span>
                 </th>
                 <th pSortableColumn="productoNombreComercial">
@@ -73,7 +73,7 @@
                         [routerLink]="'/solicitud/registro/' + solicitud.radicado"></mat-icon>
                 </td>
                 <td>
-                    <p class="body-uno">{{solicitud.auditoria.fechaCreacionFormateada | date: 'dd/MM/YYYY'}}</p>
+                    <p class="body-uno">{{solicitud.firmaFecha | date: 'dd/MM/YYYY'}}</p>
                 </td>
                 <td>
                     <p class="body-uno">{{solicitud.productoNombreComercial}}</p>
@@ -90,7 +90,7 @@
                 <td class="center">
                     <p [ngClass]="{'body-uno': true, 'link': solicitud.estado != estado['Borrador']}"
                         (click)="onDescargarPDF()">
-                        {{solicitud.radicado}}</p>
+                        {{solicitud.firmaRadicado}}</p>
                 </td>
                 <td class="center">
                     <mat-icon
