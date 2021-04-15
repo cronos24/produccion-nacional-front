@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { IPagina } from '../../../../interfaces/pagina.interface';
 import { IRespuesta } from '../../../../interfaces/respuesta.interface';
+import { PROGRAMAS } from '../../consts/programa.const';
 import { Estado } from '../../enums/estado.enum';
 import { ISolicitud } from '../../interfaces/solicitud.interface';
 import { SolicitudService } from '../../services/solicitud.service';
@@ -19,7 +20,7 @@ import { SolicitudRequerimientoComponent } from '../solicitud-requerimiento/soli
 export class ListarSolicitudComponent {
 
   public solicitudes: ISolicitud[] = [];
-
+  public listaProgramas: string[] = PROGRAMAS;
   public busqueda: string;
   public pagina: IPagina = {
     pagina: 1,
@@ -153,7 +154,7 @@ export class ListarSolicitudComponent {
         data: {
           type: 'warning',
           title: 'Atención',
-          description: 'No es posible solicitar cancelacion del registro ya que NO ha sido aprobada',
+          description: 'No es posible solicitar la anulación del registro ya que NO ha sido aprobada',
           acceptButton: 'REGRESAR'
         }
       });

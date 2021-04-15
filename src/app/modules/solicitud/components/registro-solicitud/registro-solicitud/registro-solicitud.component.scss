@@ -25,6 +25,12 @@
   .contenido {
     display: flex;
     justify-content: space-between;
+    label {
+      display: flex;
+      input {
+        margin-right: 10px;
+      }
+    }
   }
 }
 
