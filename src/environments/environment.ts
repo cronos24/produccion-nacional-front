@@ -4,7 +4,7 @@ export const environment: any = {
     'produccion-nacional': {
       protocol: 'http',
       host: '34.71.5.25',
-      port: 8080,
+      port: 3000,
       pathName: 'pn/v1'
     }
   },

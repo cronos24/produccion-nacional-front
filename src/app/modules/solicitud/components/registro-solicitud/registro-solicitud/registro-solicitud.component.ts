@@ -183,7 +183,10 @@ export class RegistroSolicitudComponent extends FormGeneric {
   private buildFromGroup(): void {
     this.formGroup = this.formBuilder.group({
       id: [],
+      fechaModificacion: [],
       estado: [''],
+      firmaRadicado: [''],
+      firmaFecha: [],
       requerimiento: [''],
       tipoFormulario: ['produccionNacional', Validators.required],
       identificacionEmpresa: this.formBuilder.group({
@@ -252,7 +255,6 @@ export class RegistroSolicitudComponent extends FormGeneric {
         fecha: ['']
       })
     });
-    console.log(this.formGroup);
   }
 
   private getBody() {
@@ -420,6 +422,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   }
   private setFormGroup(solicitud) {
     this.setFatherFormGroupValue('id', solicitud.id);
+    this.setFatherFormGroupValue('fechaModificacion', solicitud.auditoria.fechaModificacionFormateada);
     this.setFatherFormGroupValue('estado', solicitud.estado);
     this.setFatherFormGroupValue('requerimiento', solicitud.requerimiento);
 

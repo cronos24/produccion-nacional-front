@@ -29,112 +29,130 @@
                     Programa de Fomento a la<br />Industria Astilleros
                 </label>
             </div>
-        </div>
-        <br />
-        <mat-accordion class="example-headers-align" multi>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        1. IDENTIFICACION DE LA EMPRESA
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-identificacion-empresa [formGroup]="formGroup"></app-identificacion-empresa>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-datos-producto [formGroup]="formGroup"></app-datos-producto>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        3. CRITERIOS PARA EL REGISTRO
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
-                    <mat-panel-title>
-                        4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-materiales-extranjeros-nacionales [formGroup]="formGroup"></app-materiales-extranjeros-nacionales>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        5. MATERIALES NACIONALES
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-materiales-nacionales [formGroup]="formGroup"></app-materiales-nacionales>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-costos-valor-fabrica [formGroup]="formGroup"></app-costos-valor-fabrica>
-            </mat-expansion-panel>
-            <mat-expansion-panel [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-proceso-produccion [formGroup]="formGroup"></app-proceso-produccion>
-            </mat-expansion-panel>
-            <mat-expansion-panel [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-caracteristicas-transformacion [formGroup]="formGroup"></app-caracteristicas-transformacion>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        9. CARACTERÍSTICAS TÉCNICAS DEL PRODUCTO
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-caracteristicas-tecnicas [formGroup]="formGroup"></app-caracteristicas-tecnicas>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        10. APLICACIONES DEL PRODUCTO
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-aplicaciones-producto [formGroup]="formGroup"></app-aplicaciones-producto>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        11. VALOR AGREGADO NACIONAL
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-valor-agregado [formGroup]="formGroup"></app-valor-agregado>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        12. DATOS DEL REPRESENTANTE LEGAL
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+            <div class="estado-registro-actual" [formGroup]="formGroup">
+                <span class="headline-s">Estado del registro actual para el nuevo producto</span>
+                <div class="contenedor-input">
+                    <div class="form-group">
+                        <label>Número de Radicado:</label>
+                        <div class="icon-group">
+                            <input [attr.disabled]="true" placeholder="Número de Radicado" type="text" formControlName="firmaRadicado" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Última actualización:</label>
+                        <div class="icon-group">
+                            <input [attr.disabled]="true" placeholder="Última actualización" type="text" formControlName="fechaModificacion" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado:</label>
+                        <div class="icon-group">
+                            <input [attr.disabled]="true" placeholder="Borrador" type="text" [value]="estado[getFatherFormGroupValue('estado')]" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <mat-accordion class="example-headers-align" multi>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            1. IDENTIFICACION DE LA EMPRESA
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-identificacion-empresa [formGroup]="formGroup"></app-identificacion-empresa>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-datos-producto [formGroup]="formGroup"></app-datos-producto>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            3. CRITERIOS PARA EL REGISTRO
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
+                        <mat-panel-title>
+                            4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-materiales-extranjeros-nacionales [formGroup]="formGroup">
+                    </app-materiales-extranjeros-nacionales>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            5. MATERIALES NACIONALES
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-materiales-nacionales [formGroup]="formGroup"></app-materiales-nacionales>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-costos-valor-fabrica [formGroup]="formGroup"></app-costos-valor-fabrica>
+                </mat-expansion-panel>
+                <mat-expansion-panel [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-proceso-produccion [formGroup]="formGroup"></app-proceso-produccion>
+                </mat-expansion-panel>
+                <mat-expansion-panel [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-caracteristicas-transformacion [formGroup]="formGroup"></app-caracteristicas-transformacion>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            9. CARACTERÍSTICAS TÉCNICAS DEL PRODUCTO
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-caracteristicas-tecnicas [formGroup]="formGroup"></app-caracteristicas-tecnicas>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            10. APLICACIONES DEL PRODUCTO
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-aplicaciones-producto [formGroup]="formGroup"></app-aplicaciones-producto>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            11. VALOR AGREGADO NACIONAL
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <app-valor-agregado [formGroup]="formGroup"></app-valor-agregado>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <br>
+            <div class="contenedor-datos-reprensentante-legal">
+                <span class="headline-m"> 12. DATOS DEL REPRESENTANTE LEGAL</span>
                 <app-datos-representante-legal [formGroup]="formGroup"></app-datos-representante-legal>
-            </mat-expansion-panel>
-            <mat-expansion-panel
+            </div>
+            <br>
+            <div class="contenedor-anexos"
                 [ngClass]="{'excluido': getFatherFormGroupValue('estado') == estado['En requerimiento']}">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        13. ANEXOS
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+                <span class="headline-m"> 13. ANEXOS</span>
                 <div class="p-grid" style="padding-top:20px;" *ngIf="!anexoEmbebido">
                     <div class="p-col-12">
                         <p-message severity="info"
@@ -168,16 +186,17 @@
                         documentos solicitados.
                     </div>
                 </div>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <br />
-        <br />
-        <div class="header">
-            <button (click)="onGuardar()">GUARDAR BORRADOR</button>
-            <button (click)="generarPdf()">FIRMAR Y RADICAR SOLICITUD</button>
+            </div>
+
+            <br />
+            <br />
+            <div class="header">
+                <button (click)="onGuardar()">GUARDAR BORRADOR</button>
+                <button (click)="generarPdf()">FIRMAR Y RADICAR SOLICITUD</button>
+            </div>
+            <br />
+            <br />
         </div>
-        <br />
-        <br />
     </div>
 </ng-container>
 
