@@ -288,7 +288,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
     solicitud.empresaTelefonoIndicativo = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['indicativo'].value;
     solicitud.empresaTelefonoNumero = (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['telefono'].value;
 
-    solicitud.productoBienFinal = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['bienFinal'].value;
+    solicitud.bienFinal = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['bienFinal'].value;
     solicitud.productoSubpartidaId = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['subpartida'].value;
     solicitud.productoNombreComercial = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreComercial'].value;
     solicitud.productoNombreTecnico = (this.getFatherFormGroupControl('datosProducto') as FormGroup).controls['nombreTecnico'].value;

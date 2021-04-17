@@ -46,7 +46,6 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
     this.getFatherFormGroupControl('tipoFormulario').valueChanges.subscribe((tipoFormulario: any) => {
       this.messagesSubpartidaArancelaria = [];
       this.messagesCodigoNumericoUnico = [];
-      this.getChildFormGroupControl('subpartida')?.setValue(null);
       this.getChildFormGroupControl('descripcionMotoparte').setValidators([]);
       this.getChildFormGroupControl('numeroMotoparte').setValidators([]);
       this.getChildFormGroupControl('codigoNumericoUnico').setValidators([]);
