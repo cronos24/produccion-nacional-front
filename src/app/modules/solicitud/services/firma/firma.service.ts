@@ -6,11 +6,11 @@ import { ServicioGeneral } from 'src/app/classes/servicio-general';
 @Injectable()
 export class FirmaService extends ServicioGeneral<any>{
 
-  path: string = 'portafirma';
+  protected path: string = '/pn/api/v1/portafirma';
 
   public constructor(protected httpClient: HttpClient) {
     super(httpClient);
-    this.url = this.buildUrl();
+    this.url = this.buildBaseUrl() + this.path;
   }
 
   public postUrl(body: any, options?: {

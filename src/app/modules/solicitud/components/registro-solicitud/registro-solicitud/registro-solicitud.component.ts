@@ -536,7 +536,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
       this.documento = docResult;
       let file = docResult.output('blob', { filename: `solicitud_${this.getFatherFormGroupValue('id')}.pdf` });
       let formData = new FormData();
-      formData.append("nit", (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value);
+      formData.append("nif", (this.getFatherFormGroupControl('identificacionEmpresa') as FormGroup).controls['nit'].value);
       formData.append("nombre", `solicitud_${this.getFatherFormGroupValue('id')}.pdf`);
       formData.append("file", file);
       this.firmaService.post(formData, {
