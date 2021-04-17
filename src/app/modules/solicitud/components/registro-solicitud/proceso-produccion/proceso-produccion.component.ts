@@ -113,14 +113,12 @@ export class ProcesoProduccionComponent extends FormGeneric implements OnInit {
 
     this.maquilaService.post(body).subscribe((response) => {
       let adjunto = this.maquilaFormGroup.controls.contrato.value;
-      console.log(response);
       let formData = new FormData();
       formData.append('solicitudId', this.getFatherFormGroupValue('id'));
       formData.append('nombre', adjunto.archivo.name);
       formData.append('descripcion', adjunto.descripcion);
       formData.append('file', adjunto.archivo);
       this.anexoService.post(formData).subscribe((responseAdjunto) => {
-        console.log(responseAdjunto);
         this.maquilaFormGroup.reset();
         this.getMaquilas();
       });

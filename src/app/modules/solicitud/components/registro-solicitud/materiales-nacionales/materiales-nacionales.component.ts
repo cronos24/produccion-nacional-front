@@ -161,7 +161,6 @@ export class MaterialesNacionalesComponent extends FormGeneric {
     this.materialService.post(formData, {
       postfix: '/nacionales/masivo'
     }).subscribe((response) => {
-      console.log(response);
       this.getMateriales();
     });
 

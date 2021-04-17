@@ -93,8 +93,6 @@ export class RegistroSolicitudComponent extends FormGeneric {
   }
 
   public onGuardar() {
-    const body = this.getBody();
-
     if (this.formGroup.invalid) {
       this.errorGuardadoSolicitud();
     } else {
@@ -105,7 +103,11 @@ export class RegistroSolicitudComponent extends FormGeneric {
         this.errorGuardadoSolicitud()
       }
     }
+    this.guardarSolicitud();
+  }
 
+  public guardarSolicitud(): void {
+    const body = this.getBody();
     this.solicitudService.patch(body).subscribe();
   }
 

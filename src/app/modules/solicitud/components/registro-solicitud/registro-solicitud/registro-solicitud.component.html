@@ -35,26 +35,26 @@
                     <div class="form-group">
                         <label>Número de Radicado:</label>
                         <div class="icon-group">
-                            <input [attr.disabled]="true" placeholder="Número de Radicado" type="text" formControlName="firmaRadicado" />
+                            <input placeholder="Número de Radicado" type="text" formControlName="firmaRadicado" disabled/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Última actualización:</label>
                         <div class="icon-group">
-                            <input [attr.disabled]="true" placeholder="Última actualización" type="text" formControlName="fechaModificacion" />
+                            <input placeholder="Última actualización" type="text" formControlName="fechaModificacion" disabled/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Estado:</label>
                         <div class="icon-group">
-                            <input [attr.disabled]="true" placeholder="Borrador" type="text" [value]="estado[getFatherFormGroupValue('estado')]" />
+                            <input placeholder="Borrador" type="text" [value]="estado[getFatherFormGroupValue('estado')]" disabled/>
                         </div>
                     </div>
                 </div>
             </div>
             <br />
             <mat-accordion class="example-headers-align" multi>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             1. IDENTIFICACION DE LA EMPRESA
@@ -62,7 +62,7 @@
                     </mat-expansion-panel-header>
                     <app-identificacion-empresa [formGroup]="formGroup"></app-identificacion-empresa>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             2. PRODUCTO REGISTRADO (Diligenciar un Formulario por Cada Producto)
@@ -70,7 +70,7 @@
                     </mat-expansion-panel-header>
                     <app-datos-producto [formGroup]="formGroup"></app-datos-producto>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             3. CRITERIOS PARA EL REGISTRO
@@ -78,7 +78,7 @@
                     </mat-expansion-panel-header>
                     <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
                         <mat-panel-title>
                             4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
@@ -87,7 +87,7 @@
                     <app-materiales-extranjeros-nacionales [formGroup]="formGroup">
                     </app-materiales-extranjeros-nacionales>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             5. MATERIALES NACIONALES
@@ -95,7 +95,7 @@
                     </mat-expansion-panel-header>
                     <app-materiales-nacionales [formGroup]="formGroup"></app-materiales-nacionales>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
@@ -103,7 +103,7 @@
                     </mat-expansion-panel-header>
                     <app-costos-valor-fabrica [formGroup]="formGroup"></app-costos-valor-fabrica>
                 </mat-expansion-panel>
-                <mat-expansion-panel [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
@@ -111,7 +111,7 @@
                     </mat-expansion-panel-header>
                     <app-proceso-produccion [formGroup]="formGroup"></app-proceso-produccion>
                 </mat-expansion-panel>
-                <mat-expansion-panel [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
@@ -119,7 +119,7 @@
                     </mat-expansion-panel-header>
                     <app-caracteristicas-transformacion [formGroup]="formGroup"></app-caracteristicas-transformacion>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             9. CARACTERÍSTICAS TÉCNICAS DEL PRODUCTO
@@ -127,7 +127,7 @@
                     </mat-expansion-panel-header>
                     <app-caracteristicas-tecnicas [formGroup]="formGroup"></app-caracteristicas-tecnicas>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             10. APLICACIONES DEL PRODUCTO
@@ -135,7 +135,7 @@
                     </mat-expansion-panel-header>
                     <app-aplicaciones-producto [formGroup]="formGroup"></app-aplicaciones-producto>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             11. VALOR AGREGADO NACIONAL

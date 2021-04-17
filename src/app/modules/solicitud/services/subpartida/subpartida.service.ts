@@ -297,7 +297,7 @@ export class SubpartidaService extends VuceService {
           "codigo": "0401",
           "descripcion": "Leche y nata (crema), sin concentrar, sin adición de azúcar ni otro edulcorante.",
           "capitulo": {
-            "codigo": "04",
+            "codigo": "55",
             "nombre": "Leche y productos lácteos; huevos de ave; miel natural; productos comestibles de origen animal, no expresados ni comprendidos en otra parte",
             "tipo": "CAPITULO",
             "seccion": {

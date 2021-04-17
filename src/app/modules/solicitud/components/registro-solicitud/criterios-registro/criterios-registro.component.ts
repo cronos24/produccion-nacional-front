@@ -36,7 +36,6 @@ export class CriteriosRegistroComponent extends FormGeneric implements OnInit {
       this.bienesProcesoProductivo = false;
 
       this[criterio] = true;
-
       if (this.getFatherFormGroupValue('tipoFormulario') == 'regimenTransformacionEnsamblePlanillas') {
         this.getChildFormGroupControl('origenInsumo').setValidators([Validators.required]);
         if (criterio == 'bienesElaboradosNacionales') {

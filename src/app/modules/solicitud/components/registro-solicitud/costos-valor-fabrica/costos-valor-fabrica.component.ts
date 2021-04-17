@@ -28,8 +28,6 @@ export class CostosValorFabricaComponent extends FormGeneric implements OnInit {
     let suma = +this.getChildFormGroupValue('valorTotalUnidadProducto') +
       +this.getChildFormGroupValue('costosDirectosFabrica') +
       +(this.getFatherFormGroupControl('materialesExtranjerosNacionales') as FormGroup).controls.valorTotalPlanta.value;
-    console.log('onChange', value);
-    console.log('suma', suma);
 
     if (value < suma) {
       this.dialog.open(AlertComponent, {

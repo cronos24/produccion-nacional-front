@@ -35,7 +35,6 @@ export class MaterialNacionalComponent implements OnInit {
   ngOnInit(): void {
     this.crearFormulario();
     if (this.data) {
-      console.log(this.data);
 
       this.actulizarFormulario(this.data);
     }

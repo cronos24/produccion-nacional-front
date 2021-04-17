@@ -93,16 +93,14 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
             }
           });
         });
-        console.log(this.subpartidas);
       }
     });
   }
 
   onChangeSubpartida(): void {
-    debugger;
     let indexSubpartida: number = this.subpartidas.findIndex((val: any) => val['numero-subpartida'] == this.getChildFormGroupControl('subpartida')?.value)
     this.subpartidaSeleccionada = this.subpartidas[indexSubpartida];
-    this.getChildFormGroupControl('sectorEconomico')?.setValue(this.sectores.find((element: any) => +this.subpartidaSeleccionada.partidas[0].capitulo.codigo >= +element.capitulosDesde && +this.subpartidaSeleccionada.partidas[0].capitulo.codigo <= +element.capitulosHasta).sectorEconomico);
+    this.getChildFormGroupControl('sectorEconomico')?.setValue(this.sectores.findIndex((element: any) => +this.subpartidaSeleccionada.partidas[0].capitulo.codigo >= +element.capitulosDesde && +this.subpartidaSeleccionada.partidas[0].capitulo.codigo <= +element.capitulosHasta));
     this.messagesSubpartidaArancelaria = [
       {
         severity: 'info', summary:
