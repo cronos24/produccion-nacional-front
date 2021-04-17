@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Message } from 'primeng/api';
 import {
   decimalValidator,
   mayorACeroValidator
@@ -21,6 +22,11 @@ export class MaterialesExtranjerosComponent implements OnInit {
   public listaTotalSubpartidas: any[];
   public listaPaises: any[];
   public listaTotalPaises: any[];
+  public messagesSubpartidaArancelaria: Message[] = [
+    {
+      severity: 'info', summary: ''
+    },
+  ];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IMatExtranjerosNal,
     private formBuilder: FormBuilder,
@@ -38,6 +44,20 @@ export class MaterialesExtranjerosComponent implements OnInit {
     if (this.data) {
       this.actulizarFormulario(this.data);
     }
+
+    this.formGroup.get('subpartidaId').valueChanges.subscribe((value: any)=> {
+      if (value) {
+        this.messagesSubpartidaArancelaria = [
+          {
+            severity: 'info', summary:
+              `${value?.['numero-subpartida']}
+            ${value?.descripcion}`
+          },
+        ];
+      } else {
+        this.messagesSubpartidaArancelaria = [];
+      }
+    })
   }
   
   public filtrarSubpartida(event: any): void {

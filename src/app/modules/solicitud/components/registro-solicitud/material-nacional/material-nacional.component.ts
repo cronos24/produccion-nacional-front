@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Message } from 'primeng/api';
 import {
   decimalValidator,
   mayorACeroValidator
@@ -21,7 +22,11 @@ export class MaterialNacionalComponent implements OnInit {
   public listaSubpartidas: any[];
   public listaTotalSubpartidas: any[];
   public unidadesMedidaDian: any = this.dianService.obtenerUnidadesDeMedida();
-
+  public messagesSubpartidaArancelaria: Message[] = [
+    {
+      severity: 'info', summary: ''
+    },
+  ];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IMatExtranjerosNal,
     private subpartidaService: SubpartidaService,
@@ -35,9 +40,21 @@ export class MaterialNacionalComponent implements OnInit {
   ngOnInit(): void {
     this.crearFormulario();
     if (this.data) {
-
       this.actulizarFormulario(this.data);
     }
+    this.formGroup.get('subpartidaId').valueChanges.subscribe((value: any)=> {
+      if (value) {
+        this.messagesSubpartidaArancelaria = [
+          {
+            severity: 'info', summary:
+              `${value?.['numero-subpartida']}
+            ${value?.descripcion}`
+          },
+        ];
+      } else {
+        this.messagesSubpartidaArancelaria = [];
+      }
+    })
   }
 
 

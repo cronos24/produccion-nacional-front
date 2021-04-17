@@ -43,9 +43,9 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
 
   ngOnInit(): void {
     this.totalSubpartidas = this.subpartidaService.getSubpartida();
+    this.subpartidas = this.totalSubpartidas;
+    this.onChangeSubpartida();
     this.getFatherFormGroupControl('tipoFormulario').valueChanges.subscribe((tipoFormulario: any) => {
-      this.messagesSubpartidaArancelaria = [];
-      this.messagesCodigoNumericoUnico = [];
       this.getChildFormGroupControl('descripcionMotoparte').setValidators([]);
       this.getChildFormGroupControl('numeroMotoparte').setValidators([]);
       this.getChildFormGroupControl('codigoNumericoUnico').setValidators([]);
@@ -57,6 +57,7 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
           this.getChildFormGroupControl('resolucion').setValidators([Validators.required]);
           this.getChildFormGroupControl('programa').setValidators([Validators.required]);
           this.subpartidas = this.totalSubpartidas;
+          this.validarLimpiezaSubpartida();
           break;
         case 'fomentoIndustriaAutomotriz':
           this.getChildFormGroupControl('codigoNumericoUnico').setValidators([Validators.required]);
@@ -72,6 +73,7 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
           this.getChildFormGroupControl('descripcionMotoparte').setValidators([Validators.required]);
           this.getChildFormGroupControl('numeroMotoparte').setValidators([Validators.required]);
           this.subpartidas = this.totalSubpartidas;
+          this.validarLimpiezaSubpartida();
           break;
         default:
           break;
@@ -92,7 +94,12 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
             }
           });
         });
+        this.validarLimpiezaSubpartida();
+        if (this.getChildFormGroupControl('codigoNumericoUnico')?.value) {
+          this.onChangeCNU();
+        }
       }
+
     });
   }
 
@@ -103,11 +110,19 @@ export class DatosProductoComponent extends FormGeneric implements OnInit {
     this.messagesSubpartidaArancelaria = [
       {
         severity: 'info', summary:
-          `${this.subpartidas[indexSubpartida]?.['numero-subpartida']}
-        ${this.subpartidas[indexSubpartida]?.descripcion}`
+          `${this.subpartidaSeleccionada?.['numero-subpartida']}
+        ${this.subpartidaSeleccionada?.descripcion}`
       },
     ];
     this.messagesCodigoNumericoUnico = [];
+  }
+
+  validarLimpiezaSubpartida(): void {
+    if (this.subpartidas.findIndex((val: any) => val['numero-subpartida'] == this.getChildFormGroupControl('subpartida')?.value) == -1) {
+      this.messagesSubpartidaArancelaria = [];
+      this.messagesCodigoNumericoUnico = [];
+      this.getChildFormGroupControl('subpartida')?.setValue(null);
+    }
   }
 
   onChangeCNU(): void {

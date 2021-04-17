@@ -50,6 +50,9 @@
           </div>
         </div>
       </div>
+      <div class="p-col-6" style="margin: auto;" *ngIf="messagesSubpartidaArancelaria[0]?.summary != ''">
+        <p-messages [value]="messagesSubpartidaArancelaria" [enableService]="false"></p-messages>
+      </div>
     </div>
 
     <div class="p-grid">
