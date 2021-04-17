@@ -341,18 +341,14 @@ export class RegistroSolicitudComponent extends FormGeneric {
     solicitud.contratoMaquila = (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['contratoMaquila'].value;
     solicitud.procesoProduccion = (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['procesoProduccion'].value;
 
-    /*caracteristicasTransformacion: this.formBuilder.group({
-      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
-    }),
-    caracteristicasTecnicas: this.formBuilder.group({
-      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
-    }),
-    aplicacionesProducto: this.formBuilder.group({
-      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32000)]],
-    }),
-    valorAgregado: this.formBuilder.group({
-      valor: [0],
-    }),*/
+    solicitud.descripcionTransformacionSustancial = (this.getFatherFormGroupControl('caracteristicasTransformacion') as FormGroup).controls['descripcion'].value;
+    solicitud.descripcionCaracteristicasTecnicas = (this.getFatherFormGroupControl('caracteristicasTecnicas') as FormGroup).controls['descripcion'].value;
+    solicitud.descripcionAplicaciones = (this.getFatherFormGroupControl('aplicacionesProducto') as FormGroup).controls['descripcion'].value;
+    solicitud.agregadoNacional = (this.getFatherFormGroupControl('valorAgregado') as FormGroup).controls['valor'].value;
+
+    solicitud.empresaRepresentanteNombre = (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['nombreRepresentante'].value;
+    solicitud.empresaRepresentanteIdentificacion = (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['identificacion'].value;
+    solicitud.empresaRepresentanteCargo = (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['cargo'].value;
 
     return solicitud;
   }
@@ -505,6 +501,15 @@ export class RegistroSolicitudComponent extends FormGeneric {
 
     (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['contratoMaquila'].setValue(solicitud.contratoMaquila);
     (this.getFatherFormGroupControl('procesoProduccion') as FormGroup).controls['procesoProduccion'].setValue(solicitud.procesoProduccion);
+
+    (this.getFatherFormGroupControl('caracteristicasTransformacion') as FormGroup).controls['descripcion'].setValue(solicitud.descripcionTransformacionSustancial);
+    (this.getFatherFormGroupControl('caracteristicasTecnicas') as FormGroup).controls['descripcion'].setValue(solicitud.descripcionCaracteristicasTecnicas);
+    (this.getFatherFormGroupControl('aplicacionesProducto') as FormGroup).controls['descripcion'].setValue(solicitud.descripcionAplicaciones);
+    (this.getFatherFormGroupControl('valorAgregado') as FormGroup).controls['valor'].setValue(solicitud.agregadoNacional);
+
+    (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['nombreRepresentante'].setValue(solicitud.empresaRepresentanteNombre);
+    (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['identificacion'].setValue(solicitud.empresaRepresentanteIdentificacion);
+    (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['cargo'].setValue(solicitud.empresaRepresentanteCargo);
 
     solicitud.auditoria.fechaCreacionFormateada = moment(solicitud.auditoria.fechaCreacionFormateada, 'DD/MM/YYYY').format('DD/MM/YYYY');
     (this.getFatherFormGroupControl('datosRepresentante') as FormGroup).controls['fecha'].setValue(solicitud.auditoria.fechaCreacionFormateada);
