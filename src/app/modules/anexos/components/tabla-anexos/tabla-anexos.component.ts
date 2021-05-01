@@ -84,7 +84,7 @@ export class TablaAnexosComponent {
     this.anexoService.get({
       queryParams: {
         solicitudId: this.solicitud.id,
-        datoBuscado: this.busqueda
+        general: this.busqueda
       },
       sort: this.sort,
       pagina: this.pagina

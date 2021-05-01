@@ -35,19 +35,22 @@
                     <div class="form-group">
                         <label>Número de Radicado:</label>
                         <div class="icon-group">
-                            <input placeholder="Número de Radicado" type="text" formControlName="firmaRadicado" disabled/>
+                            <input placeholder="Número de Radicado" type="text" formControlName="firmaRadicado"
+                                disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Última actualización:</label>
                         <div class="icon-group">
-                            <input placeholder="Última actualización" type="text" formControlName="fechaModificacion" disabled/>
+                            <input placeholder="Última actualización" type="text" formControlName="fechaModificacion"
+                                disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Estado:</label>
                         <div class="icon-group">
-                            <input placeholder="Borrador" type="text" [value]="estado[getFatherFormGroupValue('estado')]" disabled/>
+                            <input placeholder="Borrador" type="text"
+                                [value]="estado[getFatherFormGroupValue('estado')]" disabled />
                         </div>
                     </div>
                 </div>
@@ -78,8 +81,9 @@
                     </mat-expansion-panel-header>
                     <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
-                    <mat-expansion-panel-header [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
+                    [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
+                    <mat-expansion-panel-header>
                         <mat-panel-title>
                             4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
                         </mat-panel-title>
@@ -95,7 +99,8 @@
                     </mat-expansion-panel-header>
                     <app-materiales-nacionales [formGroup]="formGroup"></app-materiales-nacionales>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
+                    [disabled]="!isActive(6)" [attr.disabled]="!isActive(6)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
@@ -103,7 +108,8 @@
                     </mat-expansion-panel-header>
                     <app-costos-valor-fabrica [formGroup]="formGroup"></app-costos-valor-fabrica>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
+                    [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
@@ -111,7 +117,8 @@
                     </mat-expansion-panel-header>
                     <app-proceso-produccion [formGroup]="formGroup"></app-proceso-produccion>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
+                    [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
@@ -174,6 +181,8 @@
                             <mat-icon svgIcon="informacion-circular-negativo"> </mat-icon>
                             <div>
                                 <label class="headline-xs">Requerimientos</label>
+                                <label class="body-uno">Tiene un requerimiento pendiente, por favor tenga en cuenta la
+                                    siguiente observación:</label>
                                 <label class="body-uno">{{getFatherFormGroupValue('requerimiento')}}</label>
                             </div>
                         </div>
@@ -182,7 +191,7 @@
                     <br />
                     <br />
                     <div class="texto-error body-uno" style="text-align: center">
-                        Anter de dar click en el boton CERRAR REQUERIMIENTO asegurese de haber anexado todos los
+                        Antes de dar click en el boton CERRAR REQUERIMIENTO asegurese de haber anexado todos los
                         documentos solicitados.
                     </div>
                 </div>

@@ -208,7 +208,7 @@ export class MaterialesExtranjerosNacionalesComponent extends FormGeneric {
     this.materialService.get({
       queryParams: {
         solicitudId: this.getFatherFormGroupValue('id'),
-        datoBuscado: this.busqueda
+        general: this.busqueda
       },
       pagina: this.pagina,
       sort: this.sort

@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
 import { IPagina } from 'src/app/interfaces/pagina.interface';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { DivipolaService } from '../../../services/divipola/divipola.service';
@@ -41,7 +40,7 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
     this.formGroupPlantaProduccion = this.formBuilder.group({
       departamento: [null, Validators.required],
       ciudad: [null, Validators.required],
-      direccion: ['', [Validators.required, Validators.minLength(5)]]
+      direccion: ['', [Validators.required, Validators.minLength(5), Validators.pattern(new RegExp(/^([0-9a-zA-Z]|#|\-)+$/))]]
     });
     this.departamentos = this.divipolaService.consultarDepartamentos();
     this.ciudades = this.divipolaService.consultarCiudades();
@@ -108,7 +107,7 @@ export class IdentificacionEmpresaComponent extends FormGeneric {
     this.identificacionEmpresaService.get(
       {
         postfix: `/solicitud/${this.getFatherFormGroupControl('id').value}`,
-        queryParams: { datoBuscado: this.busqueda },
+        queryParams: { general: this.busqueda },
         sort: this.sort
       }).subscribe((respuesta: any): void => {
         this.plantas = respuesta.respuesta.datos;

@@ -2,20 +2,21 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import moment from 'moment';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import moment from 'moment';
+import { MessageService } from 'primeng/api';
 import { TablaAnexosComponent } from 'src/app/modules/anexos/components/tabla-anexos/tabla-anexos.component';
 import { AlertComponent } from 'src/app/modules/shared/components/alert/alert.component';
 import { Estado } from '../../../enums/estado.enum';
+import { DianService } from '../../../services/dian/dian.service';
+import { DivipolaService } from '../../../services/divipola/divipola.service';
+import { FirmaService } from '../../../services/firma/firma.service';
 import { SolicitudService } from '../../../services/solicitud.service';
-import { AlertaLecturaCuidadosaComponent } from '../alerta-lectura-cuidadosa/alerta-lectura-cuidadosa.component';
 import { SolicitudRequerimientoComponent } from '../../solicitud-requerimiento/solicitud-requerimiento.component';
+import { AlertaLecturaCuidadosaComponent } from '../alerta-lectura-cuidadosa/alerta-lectura-cuidadosa.component';
 import { FormGeneric } from '../clases/form-generic';
 import { InicioFirmaComponent } from '../inicio-firma/inicio-firma.component';
-import { DivipolaService } from '../../../services/divipola/divipola.service';
-import { DianService } from '../../../services/dian/dian.service';
-import { FirmaService } from '../../../services/firma/firma.service';
 
 @Component({
   selector: 'app-registro-solicitud',
@@ -52,6 +53,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
     private activatedRoute: ActivatedRoute,
     private firmaService: FirmaService,
     private router: Router,
+    private messageService: MessageService,
     public divipolaService: DivipolaService,
     public dianService: DianService,
     public matDialog: MatDialog,
@@ -155,7 +157,9 @@ export class RegistroSolicitudComponent extends FormGeneric {
     const criterio = (this.getFatherFormGroupControl('criteriosRegistro') as FormGroup).controls['criterio'].value;
     switch (step) {
       case 4:
-        return criterio && criterio != 'bienesElaboradosNacionales';
+        return criterio != 'bienesElaboradosNacionales';
+      case 6:
+        return true;
       case 7:
         const costosDirectosFabrica = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].value;
         const valorTransaccion = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].value;
@@ -178,6 +182,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
       estado: this.estado['En evaluacion']
     }
     this.solicitudService.patch(body).subscribe((respuesta) => {
+      this.messageService.add({ severity: 'success', summary: 'Requerimiento cerrado con éxito' });
       this.router.navigateByUrl('/solicitud/listar');
     });
   }

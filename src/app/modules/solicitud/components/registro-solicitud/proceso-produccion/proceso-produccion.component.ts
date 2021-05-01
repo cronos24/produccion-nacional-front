@@ -42,7 +42,7 @@ export class ProcesoProduccionComponent extends FormGeneric implements OnInit {
     departamento: new FormControl(null, [Validators.required]),
     ciudad: new FormControl(null, [Validators.required]),
     direccion: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(300)]),
-    telefono: new FormControl('', [Validators.required, Validators.min(7), Validators.maxLength(11)]),
+    telefono: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(11), Validators.pattern(new RegExp(/^\d{7,10}(-\d{7,10})*$/))]),
     contrato: new FormControl('', [Validators.required]),
   })
 
@@ -146,7 +146,7 @@ export class ProcesoProduccionComponent extends FormGeneric implements OnInit {
   public getMaquilas(): void {
     this.maquilaService.get({
       queryParams: {
-        datoBuscado: this.busqueda
+        general: this.busqueda
       },
       pagina: this.pagina,
       sort: this.sort,

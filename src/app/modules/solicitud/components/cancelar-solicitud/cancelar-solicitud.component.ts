@@ -38,7 +38,7 @@ export class CancelarSolicitudComponent {
 
       this.solicitudService.put(this.data.solicitud).subscribe(
         (): void => {
-          this.messageService.add({ severity: 'success', summary: 'Solicitud de cancelación enviada con éxito' });
+          this.messageService.add({ severity: 'success', summary: 'Solicitud de anulación enviada con éxito' });
         },
         (): void => {
           this.dialog.open(AlertComponent, {

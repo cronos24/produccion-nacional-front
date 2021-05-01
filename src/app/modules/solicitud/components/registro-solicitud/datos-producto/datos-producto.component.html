@@ -14,7 +14,7 @@
                 <div class="icon-group">
                     <select formControlName="subpartida" (change)="onChangeSubpartida()">
                         <option hidden [value]="null">Subpartida</option>
-                        <option [value]="subpartida['numero-subpartida']" *ngFor="let subpartida of subpartidas;"> 
+                        <option [value]="subpartida['numero-subpartida']" *ngFor="let subpartida of subpartidas;">
                             {{subpartida['numero-subpartida-nomenclatura']}}
                         </option>
                     </select>
@@ -42,10 +42,10 @@
             <div class="form-group">
                 <label>2.1.1 Código Numérico Único (CNU):</label>
                 <div class="icon-group">
-                    <select formControlName="codigoNumericoUnico" (change)="onChangeCNU()" 
-                    [attr.disabled]="getChildFormGroupControl('subpartida')?.value ? null : true">
+                    <select formControlName="codigoNumericoUnico" (change)="onChangeCNU()"
+                        [attr.disabled]="getChildFormGroupControl('subpartida')?.value ? null : true">
                         <option hidden [value]="null"></option>
-                        <option [value]="cnu.id" *ngFor="let cnu of subpartidaSeleccionada?.cnus;"> 
+                        <option [value]="cnu.id" *ngFor="let cnu of subpartidaSeleccionada?.cnus;">
                             {{cnu.id}}
                         </option>
                     </select>
@@ -150,7 +150,8 @@
                 <label>2.7 Sector Económico:</label>
                 <select formControlName="sectorEconomico" [attr.disabled]="true">
                     <option hidden [value]="null">Sector Económico</option>
-                    <option *ngFor="let item of sectores; let index = index;" [value]="index" >{{item.sectorEconomico}}</option>
+                    <option *ngFor="let item of sectores; let index = index;" [value]="index">{{item.sectorEconomico}}
+                    </option>
                 </select>
             </div>
         </div>
@@ -183,12 +184,14 @@
                 <div class="icon-group">
                     <input placeholder="Unidades Producidas por Año" min=0 type="number"
                         formControlName="unidadesProducidas" />
-                    <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="">
+                    <mat-icon class="information" svgIcon="informacion-circular-negativo" matTooltip="Es el número de unidades producidas por
+                    una empresa en un año.">
                     </mat-icon>
                 </div>
             </div>
         </div>
-        <div class="p-col-6" *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' && getChildFormGroupValue('bienFinal')">
+        <div class="p-col-6"
+            *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' && getChildFormGroupValue('bienFinal')">
             <div class="form-group">
                 <label>2.10 Resolución:</label>
                 <input placeholder="Resolución" type="text" formControlName="resolucion" />
@@ -196,7 +199,8 @@
         </div>
     </div>
 
-    <div class="p-grid" *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' && getChildFormGroupValue('bienFinal')">
+    <div class="p-grid"
+        *ngIf="getFatherFormGroupValue('tipoFormulario') == 'produccionNacional' && getChildFormGroupValue('bienFinal')">
         <div class="p-col-6">
             <div class="form-group">
                 <label>2.11 Programa:</label>
