@@ -1,36 +1,72 @@
 @import "../../../../../variables.scss";
-
 .header {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 ::ng-deep {
-  label {
-    color: $dark-primary-color;
-  }
+    label {
+        color: $dark-primary-color;
+    }
 }
 
 .p-field {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .margin-top {
-  margin-top: 10px;
-  text-align: center;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .form-warning {
-  display: flex;
-  align-items: center;
-  background-color: rgba(255, 236, 236, 0.877);
-  height: 40px;
-  border-radius: 5px;
-  p {
-    font-weight: 700;
-    padding: 0px 15px 0px;
-  }
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 236, 236, 0.877);
+    height: 40px;
+    border-radius: 5px;
+    p {
+        font-weight: 700;
+        padding: 0px 15px 0px;
+    }
+}
+
+.contenido-renovacion {
+    .header {
+        display: flex;
+        flex-direction: column;
+        mat-icon {
+            width: 40px;
+            height: 40px;
+            margin: 10px auto;
+        }
+        span {
+            margin: auto;
+        }
+    }
+    .contenido {
+        display: flex;
+        flex-direction: column;
+        button {
+            margin: 30px auto;
+        }
+        span {
+            margin: 10px auto 20px;
+        }
+        div.componente {
+            margin: auto;
+            padding: 0 10px;
+            width: 90%;
+        }
+    }
+    .botones {
+        display: flex;
+        justify-content: space-evenly;
+        button {
+            width: 40%;
+        }
+    }
 }

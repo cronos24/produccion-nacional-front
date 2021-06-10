@@ -25,6 +25,8 @@ export class AlertComponent {
         return 'error-negativo';
       case 'warning':
         return 'cara-disgusto-negativo';
+      case 'info':
+          return 'informacion';  
       default:
         return '';
     }

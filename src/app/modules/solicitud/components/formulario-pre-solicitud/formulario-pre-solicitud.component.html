@@ -1,35 +1,48 @@
 <div class="header">
-  <button routerLink="/">SALIDA SEGURA</button>
-  <button routerLink="/solicitud/listar">VER SOLICITUDES</button>
+    <button routerLink="/">SALIDA SEGURA</button>
+    <button routerLink="/solicitud/listar">VER SOLICITUDES</button>
 </div>
 <p-card>
-  <div class="p-grid">
-    <div class="p-col">
-      <p class="body-uno">
-        Indique si esta solicitud es una renovación de un registro vigente:
-        <p-checkbox label="Si" [binary]="true" [(ngModel)]="renovacion"></p-checkbox>
-      </p>
+    <div class="p-grid">
+        <div class="p-col">
+            <p class="body-uno">
+                Indique si esta solicitud es una renovación de un registro vigente:
+                <p-checkbox label="Si" [binary]="true" [(ngModel)]="renovacion"></p-checkbox>
+            </p>
+        </div>
+        <div class="p-col">
+            <div class="p-field">
+                <label for="numberRegistro" class="body-uno">Número de Registro a Renovar:</label>
+                <input type="number" placeholder="Digite el número de registro a renovar (201905010000001)" [(ngModel)]="numberRegistro" [disabled]="!renovacion" />
+            </div>
+        </div>
     </div>
-    <div class="p-col">
-      <div class="p-field">
-        <label for="numberRegistro" class="body-uno">Número de Registro a Renovar:</label>
-        <input type="number" placeholder="Digite el número de registro a renovar (201905010000001)" />
-      </div>
+    <div class="p-grid">
+        <div class="p-col-10 margin-top">
+            <div class="form-warning">
+                <p class="body-uno --error-color">
+                    Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y así generar un número interno consecutivo de control.
+                </p>
+            </div>
+        </div>
+        <div class="p-col-2 margin-top" *ngIf="!loading">
+            <button (click)="crearBorrador()">CREAR BORRADOR</button>
+        </div>
     </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-10 margin-top">
-      <div class="form-warning">
-        <p class="body-uno --error-color">
-          Para diligenciar el formulario primero debe seleccionar la opción "Crear Borrador", y
-          así generar un número
-          interno
-          consecutivo de control.
-        </p>
-      </div>
-    </div>
-    <div class="p-col-2 margin-top">
-      <button (click)="crearBorrador()">CREAR BORRADOR</button>
-    </div>
-  </div>
 </p-card>
+
+
+<ng-template #renovacionModal>
+    <div class="contenido-renovacion">
+        <div class="header">
+            <span class="headline-l"> Renovación </span>
+        </div>
+        <div class="contenido">
+            <span class="headline-xs">¿Es con la misma maquila?</span>
+        </div>
+        <div class="botones">
+            <button class="cancelar" (click)="dialogRef.close(); closeDialog();">NO</button>
+            <button (click)="dialogRef.close();finalizarSolicitud();">SI</button>
+        </div>
+    </div>
+</ng-template>
