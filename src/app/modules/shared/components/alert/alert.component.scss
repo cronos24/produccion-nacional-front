@@ -5,6 +5,11 @@
             fill: $warning-color;
         }
     }
+    .info {
+        >svg {
+            fill: $info-color;
+        }
+    }
     .error {
         >svg {
             fill: $error-color;

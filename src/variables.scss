@@ -1,6 +1,5 @@
 $font-monserrat: "Montserrat";
 $font-worksans: "Work Sans";
-
 $dark-primary-color: #004884;
 $primary-color: #3366cc;
 $light-primary-color: #e6effd;
@@ -9,26 +8,11 @@ $secondary-color-text: #bababa;
 $tertiary-color-text: #ffffff;
 $danger-color-text: #A80521;
 $no-color: #00000000;
-
 $sucess-color: #069169;
 $error-color: #A80521;
 $warning-color: #FFAB00;
-
+$info-color: #FFAB00;
 $primary-color-icon: #3772ff;
 $secondary-color-icon: #bababa;
-
 $background-color: #f2f2f2;
-
-$text-colors: (
-    dark-primary-color: $dark-primary-color,
-    primary-color: $primary-color,
-    light-primary-color: $light-primary-color,
-    primary-color-text: $primary-color-text,
-    secondary-color-text: $secondary-color-text,
-    tertiary-color-text: $tertiary-color-text,
-    danger-color-text: $danger-color-text,
-    no-color: $no-color,
-    sucess-color: $sucess-color,
-    error-color: $error-color,
-    warning-color: $warning-color
-);
+$text-colors: ( dark-primary-color: $dark-primary-color, primary-color: $primary-color, light-primary-color: $light-primary-color, primary-color-text: $primary-color-text, secondary-color-text: $secondary-color-text, tertiary-color-text: $tertiary-color-text, danger-color-text: $danger-color-text, no-color: $no-color, sucess-color: $sucess-color, error-color: $error-color, warning-color: $warning-color, info-color: $info-color);

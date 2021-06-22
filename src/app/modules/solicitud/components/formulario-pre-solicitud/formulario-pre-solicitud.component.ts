@@ -141,7 +141,7 @@ export class FormularioPreSolicitudComponent {
             data: {
               type: 'error',
               title: 'Atención',
-              description: 'El registro <strong>'+this.numberRegistro+'</strong> No arrojo ningun resultado.',
+              description: 'El registro <strong>'+this.numberRegistro+'</strong> no arrojó ningun resultado.',
               acceptButton: 'REGRESAR'
             }
           });
@@ -177,6 +177,12 @@ export class FormularioPreSolicitudComponent {
       }
       
     });
+  }
+
+  public toggleNoReg(e){   
+    if (!e.checked) {
+      this.numberRegistro = null;
+    }   
   }
 
   public closeDialog(){

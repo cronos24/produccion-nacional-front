@@ -13,7 +13,7 @@ export class SolicitudService extends ServicioGeneral<ISolicitud> {
       mensaje: '',
       respuesta: {
         registro:{
-          fechaVencimiento:'2021-07-11',
+          fechaVencimiento:'2021-07-30',
           cantidadRenovaciones:1
         },
         pagina: {
@@ -77,6 +77,8 @@ export class SolicitudService extends ServicioGeneral<ISolicitud> {
   public constructor(protected httpClient: HttpClient) {
     super(httpClient);
     this.url = this.buildUrl();
+    console.log();
+    
   }
 
   public consultarRegistro(codigo: string): any {

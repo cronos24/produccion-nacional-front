@@ -7,7 +7,7 @@
         <div class="p-col">
             <p class="body-uno">
                 Indique si esta solicitud es una renovación de un registro vigente:
-                <p-checkbox label="Si" [binary]="true" [(ngModel)]="renovacion"></p-checkbox>
+                <p-checkbox label="Si" [binary]="true" [(ngModel)]="renovacion" (onChange)="toggleNoReg($event)"></p-checkbox>
             </p>
         </div>
         <div class="p-col">
