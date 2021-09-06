@@ -35,22 +35,19 @@
                     <div class="form-group">
                         <label>Número de Radicado:</label>
                         <div class="icon-group">
-                            <input placeholder="Número de Radicado" type="text" formControlName="firmaRadicado"
-                                disabled />
+                            <input placeholder="Número de Radicado" type="text" formControlName="firmaRadicado" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Última actualización:</label>
                         <div class="icon-group">
-                            <input placeholder="Última actualización" type="text" formControlName="fechaModificacion"
-                                disabled />
+                            <input placeholder="Última actualización" type="text" formControlName="fechaModificacion" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Estado:</label>
                         <div class="icon-group">
-                            <input placeholder="Borrador" type="text"
-                                [value]="estado[getFatherFormGroupValue('estado')]" disabled />
+                            <input placeholder="Borrador" type="text" [value]="estado[getFatherFormGroupValue('estado')]" disabled />
                         </div>
                     </div>
                 </div>
@@ -81,8 +78,7 @@
                     </mat-expansion-panel-header>
                     <app-criterios-registro [formGroup]="formGroup"></app-criterios-registro>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
-                    [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(4)" [attr.disabled]="!isActive(4)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             4. MATERIALES EXTRANJEROS IMPORTADOS DIRECTAMENTE O ADQUIRIDOS EN EL MERCADO NACIONAL
@@ -99,8 +95,7 @@
                     </mat-expansion-panel-header>
                     <app-materiales-nacionales [formGroup]="formGroup"></app-materiales-nacionales>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
-                    [disabled]="!isActive(6)" [attr.disabled]="!isActive(6)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(6)" [attr.disabled]="!isActive(6)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             6. COSTOS Y VALOR EN FABRICA PRODUCTO TERMINADO
@@ -108,8 +103,7 @@
                     </mat-expansion-panel-header>
                     <app-costos-valor-fabrica [formGroup]="formGroup"></app-costos-valor-fabrica>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
-                    [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(7)" [attr.disabled]="!isActive(7)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             7. PROCESO DE PRODUCCIÓN (Completa Descripción por Etapas)
@@ -117,8 +111,7 @@
                     </mat-expansion-panel-header>
                     <app-proceso-produccion [formGroup]="formGroup"></app-proceso-produccion>
                 </mat-expansion-panel>
-                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()"
-                    [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
+                <mat-expansion-panel (closed)="guardarSolicitud()" (opened)="guardarSolicitud()" [disabled]="!isActive(8)" [attr.disabled]="!isActive(8)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             8. CARACTERÍSTICAS DE LA TRANSFORMACIÓN SUSTANCIAL
@@ -157,18 +150,15 @@
                 <app-datos-representante-legal [formGroup]="formGroup"></app-datos-representante-legal>
             </div>
             <br>
-            <div class="contenedor-anexos"
-                [ngClass]="{'excluido': getFatherFormGroupValue('estado') == estado['En requerimiento']}">
+            <div class="contenedor-anexos" [ngClass]="{'excluido': getFatherFormGroupValue('estado') == estado['En requerimiento']}">
                 <span class="headline-m"> 13. ANEXOS</span>
                 <div class="p-grid" style="padding-top:20px;" *ngIf="!anexoEmbebido">
                     <div class="p-col-12">
-                        <p-message severity="info"
-                            text="En esta sección se adjuntan los documentos soporte del REGISTRO DE PRODUCTOR DE BIENES NACIONALES.">
+                        <p-message severity="info" text="En esta sección se adjuntan los documentos soporte del REGISTRO DE PRODUCTOR DE BIENES NACIONALES.">
                         </p-message>
                     </div>
                 </div>
-                <app-anexar-archivo [anidado]="false" [mostrarDescripcion]="true"
-                    [solicitudId]="getFatherFormGroupValue('id')" (adjunto)="onNewAdjunto()"></app-anexar-archivo>
+                <app-anexar-archivo [anidado]="false" [mostrarDescripcion]="true" [solicitudId]="getFatherFormGroupValue('id')" (adjunto)="onNewAdjunto()"></app-anexar-archivo>
                 <br />
                 <span class="headline-xs">
                     Antes de anexar algún archivo, por favor guarde sus cambios para no perderlos
@@ -191,8 +181,7 @@
                     <br />
                     <br />
                     <div class="texto-error body-uno" style="text-align: center">
-                        Antes de dar click en el boton CERRAR REQUERIMIENTO asegurese de haber anexado todos los
-                        documentos solicitados.
+                        Antes de dar click en el boton CERRAR REQUERIMIENTO asegurese de haber anexado todos los documentos solicitados.
                     </div>
                 </div>
             </div>
@@ -237,8 +226,7 @@
             <button (click)="descargarFormulario()">Descargar Formulario</button>
             <span class="headline-xs">Cargue aqui su documento firmado</span>
             <div class="componente">
-                <app-anexar-archivo [labelConfirmar]="'Confirmar'" [mostrarBotones]="false"
-                    (adjunto)="recibirAdjuntoFirmado($event)">
+                <app-anexar-archivo [labelConfirmar]="'Confirmar'" [mostrarBotones]="false" (adjunto)="recibirAdjuntoFirmado($event)">
                 </app-anexar-archivo>
             </div>
         </div>
@@ -253,8 +241,7 @@
     <div class="header">
         <img src="./../../../../../../assets/images/mincit.png">
         <div>
-            <strong>Formulario 202009020070774</strong><br>
-            REGISTRO DE PRODUCTOR DE BIENES <br> NACIONALES
+            <strong>Formulario 202009020070774</strong><br> REGISTRO DE PRODUCTOR DE BIENES <br> NACIONALES
         </div>
     </div>
     <div class="content">
@@ -294,8 +281,7 @@
                         </div>
                     </div>
                     <div class="rows-pdf">
-                        <ng-container
-                            *ngFor="let item of formGroup.get('identificacionEmpresa').get('plantasProduccion').value">
+                        <ng-container *ngFor="let item of formGroup.get('identificacionEmpresa').get('plantasProduccion').value">
                             <div>
                                 <span>
                                     {{divipolaService.consultarDepartamentos(item.planDepartamentoId).nombre}}
@@ -336,13 +322,11 @@
             <div class="seccion">
                 <div class="item-valor">
                     <div>
-                        <ng-container
-                            [ngSwitch]="getFatherFormGroupControl('criteriosRegistro').controls['criterio'].value">
+                        <ng-container [ngSwitch]="getFatherFormGroupControl('criteriosRegistro').controls['criterio'].value">
                             <div *ngSwitchCase="'bienesTotalmenteObtenidos'">3.1. Bienes Totalmente Obtenidos</div>
-                            <div *ngSwitchCase="'bienesElaboradosNacionales'">3.2. Bienes Elaborados Exclusivamente Con
-                                Materias Nacionales</div>
-                            <div *ngSwitchCase="'bienesPorcentajeMinimoValor'">3.3. Porcentaje Mínimo Valor Agregado
-                                Nacional</div>
+                            <div *ngSwitchCase="'bienesElaboradosNacionales'">3.2. Bienes Elaborados Exclusivamente Con Materias Nacionales</div>
+                            <div *ngSwitchCase="'bienesPorcentajeMinimoValor'">3.3. Porcentaje Mínimo Valor Agregado Nacional
+                            </div>
                             <div *ngSwitchCase="'bienesProcesoProductivo'">3.4. Proceso Productivo Sustancial</div>
                         </ng-container>
                     </div>

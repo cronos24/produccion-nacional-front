@@ -14,7 +14,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'listar', pathMatch: 'full' },
       { path: 'listar', component: ListarSolicitudComponent },
       { path: 'pre-solicitud', component: FormularioPreSolicitudComponent },
-      { path: 'registro/:radicado', component: RegistroSolicitudComponent },
+      { path: 'registro/:radicado/:registro', component: RegistroSolicitudComponent },
       { path: 'anexos/:radicado', component: TablaAnexosComponent }
     ]
   }

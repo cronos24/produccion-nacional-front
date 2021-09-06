@@ -19,6 +19,7 @@ export class FormularioPreSolicitudComponent {
   public numberRegistro: string = null;
   public loading: boolean = false;
   public myForm: FormGroup;
+  public document= [];
 
   public constructor(
     private dialog: MatDialog,
@@ -43,7 +44,7 @@ export class FormularioPreSolicitudComponent {
         });
 
         this.dialogRef.afterClosed().subscribe(() => {
-          this.router.navigateByUrl(`/solicitud/registro/${respuesta.respuesta.radicado}`);
+          this.router.navigateByUrl(`/solicitud/registro/${respuesta.respuesta.radicado}/true`);
         });
       });
     }else{
@@ -97,6 +98,8 @@ export class FormularioPreSolicitudComponent {
             const diff = fecha_vencimiento.diff(fecha_actual, 'days');
 
             if (diff >= 30 && diff <= 90) {
+
+              this.document= test;
         
               this.dialogRef = this.dialog.open(this.renovacionModalTemplate, {
                 width: '450px',
@@ -165,16 +168,18 @@ export class FormularioPreSolicitudComponent {
 
     this.dialogRef.afterClosed().subscribe(result  => {
 
-      if (result) {
-        this.dialogRef = this.dialog.open(AlertComponent, {
-          data: {
-            type: 'information',
-            title: 'El borrador ha sido creado con éxito.',
-            description: 'Una vez terminada la actualización de datos, puede<br/> proceder a <strong>generar y firmar su solicitud de renovación.</strong><br/><br/>Tiene Plazo hasta <strong>DD-MM-AA a las 11:59 pm para firmar</strong> el presente formulario, de lo contrario este séra borrado del sistema.',
-            acceptButton: 'CONTINUAR'
-          }
-        });
-      }
+        this.router.navigateByUrl(`/solicitud/registro/${this.numberRegistro}/true`);
+
+      // if (result) {
+      //   this.dialogRef = this.dialog.open(AlertComponent, {
+      //     data: {
+      //       type: 'information',
+      //       title: 'El borrador ha sido creado con éxito.',
+      //       description: 'Una vez terminada la actualización de datos, puede<br/> proceder a <strong>generar y firmar su solicitud de renovación.</strong><br/><br/>Tiene Plazo hasta <strong>DD-MM-AA a las 11:59 pm para firmar</strong> el presente formulario, de lo contrario este séra borrado del sistema.',
+      //       acceptButton: 'CONTINUAR'
+      //     }
+      //   });
+      // }
       
     });
   }
@@ -186,15 +191,22 @@ export class FormularioPreSolicitudComponent {
   }
 
   public closeDialog(){
+    console.log('this.document', this.document);
+    let solicitud_fecha= 'DD-MM-AA';
+
+      solicitud_fecha= this.document['respuesta'].registro.fechaVencimiento;
+    
  
         this.dialogRef = this.dialog.open(AlertComponent, {
           data: {
             type: 'information',
             title: 'El borrador ha sido creado con éxito.',
-            description: 'Puede proceder a <strong>generar y firmar su solicitud de renovación.</strong><br/><br/>Tiene Plazo hasta <strong>DD-MM-AA a las 11:59 pm para firmar</strong><br/> el presente formulario, de lo contrario este<br/> séra borrado del sistema.',
+            description: 'Puede proceder a <strong>generar y firmar su solicitud de renovación.</strong><br/><br/>Tiene Plazo hasta <strong>'+solicitud_fecha+' a las 11:59 pm para firmar</strong><br/> el presente formulario, de lo contrario este<br/> séra borrado del sistema.',
             acceptButton: 'CONTINUAR'
           }
         });      
+
+       
    
   }
 

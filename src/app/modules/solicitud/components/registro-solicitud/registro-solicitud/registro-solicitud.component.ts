@@ -41,6 +41,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
   public fomentoIndustriaAutomotriz: boolean = false;
   public regimenTransformacionEnsamblePlanillas: boolean = false;
   public fomentoIndustriaAstilleros: boolean = false;
+  public registro: boolean;
 
   public get estado(): typeof Estado {
     return Estado;
@@ -62,23 +63,33 @@ export class RegistroSolicitudComponent extends FormGeneric {
     super();
     this.loading = true;
     this.radicado = this.activatedRoute.snapshot.paramMap.get('radicado');
+    this.registro = this.activatedRoute.snapshot.paramMap.get('registro') ? true :false;
+    
+    
 
     this.buildFromGroup();
-    this.solicitudService.getById(this.radicado, {
-      postfix: '/radicado'
-    }).subscribe((response) => {
-      let solicitud = response.respuesta as any;
-      if (solicitud.estado == this.estado['En requerimiento']) {
-        this.dialog.open(SolicitudRequerimientoComponent, {
-          width: '40%',
-          data: {
-            solicitud: solicitud
-          }
-        });
-      }
-      this.setFormGroup(response.respuesta);
-      this.loading = false;
-    });
+    let test = this.solicitudService.consultarRegistro2(this.radicado)
+    this.loading = false;
+
+    this.setFormGroup(test);
+
+    console.log('radicado', test);
+
+    // this.solicitudService.getById(this.radicado, {
+    //   postfix: '/radicado'
+    // }).subscribe((response) => {
+    //   let solicitud = response.respuesta as any;
+    //   if (solicitud.estado == this.estado['En requerimiento']) {
+    //     this.dialog.open(SolicitudRequerimientoComponent, {
+    //       width: '40%',
+    //       data: {
+    //         solicitud: solicitud
+    //       }
+    //     });
+    //   }
+    //   this.setFormGroup(response.respuesta);
+    //   this.loading = false;
+    // });
   }
 
   public onSelectedCheckBox(tipoFormulario: string): void {
@@ -164,7 +175,7 @@ export class RegistroSolicitudComponent extends FormGeneric {
         const costosDirectosFabrica = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['costosDirectosFabrica'].value;
         const valorTransaccion = (this.getFatherFormGroupControl('costosValorFabrica') as FormGroup).controls['valorTransaccion'].value;
 
-        return costosDirectosFabrica && valorTransaccion;
+        return (costosDirectosFabrica && valorTransaccion) || this.registro;
       case 8:
         return criterio == 'bienesProcesoProductivo';
       default:
